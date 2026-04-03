@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HVAC solutions for Utah homes. Air Express serves residential customers with family-focused service and expertise — serving Utah since 1996.">
+    <title>Residential HVAC Services | Air Express HVAC</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #A9432E;
+            --accent: #A65F1A;
+            --dark: #0D1B2A;
+            --light: #FDF8F4;
+            --success: #52B788;
+            --text: #2D3E50;
+            --border: #E0D5C7;
+        }
+
+        body {
+            font-family: 'Poppins', system-ui, sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAV */
+        .top-bar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 20px;
+            font-size: 13px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        header {
+            background: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: Georgia, serif;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav {
+            display: flex;
+            gap: 0;
+            align-items: center;
+            flex: 1;
+        }
+
+        .nav-item {
+            position: relative;
+            color: var(--text);
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            border-bottom: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 280px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            z-index: 1001;
+            border: 2px solid var(--secondary);
+            border-top: 4px solid var(--secondary);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text);
+            padding: 14px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light);
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .phone-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            border: 2px solid var(--secondary);
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .phone-link:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(200, 85, 61, 0.3);
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(200, 85, 61, 0.4);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
+                        url('../images/utah_mountains.png') center/cover no-repeat;
+            background-blend-mode: overlay;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 6px solid var(--accent);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(255,255,255,0.1)" fill="none"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: Georgia, serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-ctas a {
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .hero-ctas .primary {
+            background: var(--accent);
+            color: var(--dark);
+            border-color: var(--accent);
+        }
+
+        .hero-ctas .primary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .hero-ctas .secondary {
+            background: transparent;
+            color: white;
+        }
+
+        .hero-ctas .secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        /* SERVICES SECTION */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            padding: 40px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(13, 27, 42, 0.08);
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 8px 24px rgba(200, 85, 61, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-card i {
+            font-size: 48px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .service-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card a:hover {
+            gap: 12px;
+        }
+
+        /* WHY CHOOSE US */
+        .why-us {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4a75 100%);
+            color: white;
+            padding: 80px 20px;
+            border-top: 6px solid var(--accent);
+            border-bottom: 6px solid var(--accent);
+        }
+
+        .why-us .section-title,
+        .why-us .section-subtitle {
+            color: white;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-item {
+            text-align: center;
+        }
+
+        .why-item i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .why-item h4 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .why-item p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* UTAH WEATHER MESSAGING */
+        .weather-section {
+            background: white;
+            padding: 60px 20px;
+            margin: 60px 0;
+            border-left: 6px solid var(--secondary);
+            border-right: 6px solid var(--secondary);
+        }
+
+        .weather-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .weather-text h3 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .weather-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .weather-icon {
+            text-align: center;
+            font-size: 120px;
+            color: var(--secondary);
+            opacity: 0.8;
+        }
+
+        /* COMMUNITY SECTION */
+        .community {
+            background: linear-gradient(135deg, #FDF8F4 0%, #F5EDE1 100%);
+            padding: 80px 20px;
+            border-bottom: 6px solid var(--secondary);
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .community-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 4px;
+            border-top: 4px solid var(--accent);
+            box-shadow: 0 4px 12px rgba(13, 27, 42, 0.08);
+        }
+
+        .community-card h4 {
+            font-family: Georgia, serif;
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .community-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* SERVICE AREAS PREVIEW */
+        .service-areas-preview {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .area-tag {
+            background: var(--light);
+            border: 2px solid var(--secondary);
+            color: var(--primary);
+            padding: 15px 20px;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .area-tag:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* CTA SECTION */
+        .big-cta {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border: 4px solid var(--accent);
+        }
+
+        .big-cta h2 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .big-cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 50px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-section a,
+        .footer-section p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            margin-bottom: 12px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 2px solid var(--primary);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ACCESSIBILITY */
+        a:focus, button:focus {
+            outline: 2px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--secondary);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+        }
+
+        .skip-nav:focus {
+            top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-item {
+                width: 100%;
+                border-bottom: 2px solid var(--border);
+            }
+
+            .header-actions {
+                width: 100%;
+                flex-direction: column;
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .weather-content {
+                grid-template-columns: 1fr;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                border: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    
+        .text-secondary, [style*="color: #A9432E"], [style*="color:#A9432E"] { color: #A3432F !important; }
+
+        
+        *:focus-visible { outline: 3px solid #A65F1A; outline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 3px solid #A65F1A; outline-offset: 2px; box-shadow: 0 0 0 6px rgba(244,162,97,0.25); }
+
+        
+/* Mobile Navigation */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    background: none;
+    border: none;
+}
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    nav, .nav-menu, .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        z-index: 1000;
+    }
+    nav.active, .nav-menu.active, .nav-links.active {
+        display: flex;
+    }
+    nav a, .nav-menu a, .nav-links a {
+        color: white !important;
+        font-size: 20px;
+        text-decoration: none;
+    }
+    .dropdown-menu, .dropdown-content {
+        position: static !important;
+        display: none;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    .dropdown.open .dropdown-menu,
+    .dropdown.open .dropdown-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+    }
+}
+
+
+        /* PAGE HERO - INTERIOR PAGES */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .page-hero h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 40px 15px;
+            }
+            .page-hero h1 {
+                font-size: 28px;
+            }
+        }
+
+            /* ===== DESIGN SYSTEM IMPROVEMENTS ===== */
+        
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .two-col img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Paragraph and heading spacing */
+        .two-col p, .section p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        
+        .two-col h3, .section h3 {
+            font-family: Georgia, serif;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Service cards grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .service-card i {
+            font-size: 36px;
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+        
+        .service-card h3, .service-card h4 {
+            font-family: Georgia, serif;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        /* Page hero improvements */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 4px solid var(--accent);
+        }
+        
+        .page-hero h1 {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .cta-section h2 {
+            font-family: Georgia, serif;
+            font-size: 36px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        
+        .cta-btn {
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cta-btn.primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+        
+        .cta-btn.primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+        
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-hero h1 {
+                font-size: 32px;
+            }
+            
+            .cta-section h2 {
+                font-size: 28px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+
+
+/* CUSTOM ICON SYSTEM */
+.icon-svg { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon-svg svg { display: block; width: 1em; height: 1em; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Air Express HVAC","telephone":"(801) 893-7084","address":{"@type":"PostalAddress","addressLocality":"Lehi","addressRegion":"UT"},"url":"https://www.airexpresshvac.net","areaServed":["Lehi","Eagle Mountain","Saratoga Springs","Orem","Provo","Sandy","Alpine"]}
+</script>
+    <link rel="canonical" href="https://www.airexpresshvac.net/residential.html">
+    <meta property="og:title" content="Residential HVAC Services | Air Express HVAC">
+    <meta property="og:description" content="HVAC solutions for Utah homes. Air Express serves residential customers with family-focused service and expertise.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.airexpresshvac.net/residential.html">
+    <meta property="og:image" content="https://www.airexpresshvac.net/images/hero_hvac.png">
+    <meta property="og:site_name" content="Air Express HVAC">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Residential HVAC Services | Air Express HVAC">
+    <meta name="twitter:description" content="HVAC solutions for Utah homes. Air Express serves residential customers with family-focused service and expertise.">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WJ42DHD');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJ42DHD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a href="#main" class="skip-nav">Skip to main content</a>
+
+    <div class="top-bar">
+        Proudly Serving Utah County & Salt Lake County Since 1996 | <strong>(801) 893-7084</strong>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">Air <span>Express</span></div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+            <nav>
+                <div class="dropdown">
+                    <span class="nav-item">Services <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></span></span>
+                    <div class="dropdown-content">
+                        <div style="padding: 15px 20px; border-bottom: 1px solid #E0D5C7; font-weight: 700; color: #A3432F;">COOLING SOLUTIONS</div>
+                        <a aria-expanded="false" aria-haspopup="true" href="ac-services.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="4" x2="16" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="4" x2="8" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="8" x2="20" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="8" x2="4" y2="16" stroke="currentColor" stroke-width="1.5"/></svg></span> Air Conditioning</a>
+                        <a href="ac-services.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 0-8.94-8.94l-2.5 2.5a4 4 0 0 0 5.93 5.93l2.64-2.59"/></svg></span> AC Repair & Tune-Up</a>
+                        <a href="emergency.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg></span> Emergency AC</a>
+                        <div style="padding: 15px 20px; border-bottom: 1px solid #E0D5C7; border-top: 1px solid #E0D5C7; font-weight: 700; color: #A3432F; margin-top: 10px;">HEATING SOLUTIONS</div>
+                        <a href="heating-services.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c-1.65 2.77-4 5-6 8 0 3 2.24 5 4 6-1 .5-1 2.5 0 3.5 2-1 4-3 5-5 1 2 3 4 5 5 1-1 1-3 0-3.5 1.76-1 4-3 4-6-2-3-4.35-5.23-6-8-2.65-2.77-4-5-4-8z"/></svg></span> Furnace & Heating</a>
+                        <a href="heating-services.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 2a2 2 0 0 1 2 2v1a2 2 0 0 1-4 0V4a2 2 0 0 1 2-2zM12 17a2 2 0 0 1 2 2v1a2 2 0 0 1-4 0v-1a2 2 0 0 1 2-2zM4 12a2 2 0 0 1 2-2h1a2 2 0 0 1 0 4H6a2 2 0 0 1-2-2zM17 12a2 2 0 0 1 2-2h1a2 2 0 0 1 0 4h-1a2 2 0 0 1-2-2z"/></svg></span> Heat Pumps</a>
+                        <a href="emergency.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M12 21a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2z"/></svg></span> Emergency Heating</a>
+                        <div style="padding: 15px 20px; border-bottom: 1px solid #E0D5C7; border-top: 1px solid #E0D5C7; font-weight: 700; color: #A3432F; margin-top: 10px;">AIR QUALITY</div>
+                        <a href="ventilation.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg></span> Ventilation & ERV</a>
+                        <a href="air-filters.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.92 7.02C18.72 5.42 17.87 3.87 16.12 3.13c-1.75-.74-3.3.09-4.1 1.63-.4 2.79-3.97 8.23-8.52 11.85.48 2.02 2.02 3.29 3.75 3.29 1.38 0 2.66-.55 3.73-1.15 2.96 1.87 6.38 3 10.02 3 3.4 0 6.62-.99 9.31-2.78 1.06.65 2.27 1.06 3.59 1.06 2.31 0 4.18-1.23 4.6-2.78-.48-.01-.96-.04-1.44-.04-4.73 0-8.82-3.14-10.02-7.38z"/></svg></span> Air Filters</a>
+                        <a href="thermostats.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="4" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="10" x2="16" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span> Smart Thermostats</a>
+                        <a href="ductwork.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 6v4M17 6v4M12 13v-2M6 9h12"/></svg></span> Ductwork & Gas Lines</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <span class="nav-item">Your Community <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg></span></span>
+                    <div class="dropdown-content">
+                        <a aria-expanded="false" aria-haspopup="true" href="residential.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span> For Homeowners</a>
+                        <a href="commercial.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18V9l-9-6-9 6v12z"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9 21v-6h6v6M6 15h2M6 11h2M10 15h2M10 11h2M14 15h2M14 11h2M18 15h2M18 11h2"/></svg></span> For Businesses</a>
+                        <a href="multifamily.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 9h2v11H3zM9 3h2v17H9zM15 6h2v14h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 21h20"/></svg></span> For Property Managers</a>
+                        <div style="padding: 15px 20px; border-bottom: 1px solid #E0D5C7; border-top: 1px solid #E0D5C7; font-weight: 700; color: #A3432F; margin-top: 10px;">EXPLORE</div>
+                        <a href="service-areas.html"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 6 13 2 23 6 23 19 13 23 3 19 3 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><polyline points="13 2 13 23" fill="none" stroke="currentColor" stroke-width="1.5"/><polyline points="3 6 13 12 23 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span> Service Areas</a>
+                    </div>
+                </div>
+
+                <a href="about.html" class="nav-item">Our Story</a>
+                <a href="reviews.html" class="nav-item">Reviews</a>
+                <a href="resources.html" class="nav-item">Resources</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:+1(801) 893-7084" class="phone-link"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> (801) 893-7084</a>
+                <a href="contact.html" class="cta-btn">Get Free Estimate</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="page-hero">
+            <h1>HVAC for Utah Homes</h1>
+            <p>Keep Your Utah Home Comfortable Year-Round</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Your Home. Our Priority.</h2>
+            <p class="section-subtitle">For over 25 years, Utah families have trusted Air Express HVAC with their comfort. We treat your home like our own, deliver honest service, and make sure your family stays comfortable through Utah's extreme seasons.</p>
+
+            <div class="two-col">
+                <img src="../images/family_comfort.png" alt="Happy family in their home">
+                <div>
+                    <h3>Neighborhood HVAC Experts</h3>
+                    <p>We're Utah neighbors. We're your neighbors in Utah County. We understand Utah homes, Utah weather, and what Utah families need from their HVAC systems.</p>
+                    <p>Whether you're a young family in a new subdivision, a longtime Lehi resident, or anywhere in our service areas, we're here to help with honest advice, fair pricing, and excellent service.</p>
+                    <p>From new system installations to emergency repairs, routine maintenance to smart thermostat upgrades, we handle everything residential homeowners need.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Services for Every Home</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <h3>New Construction</h3>
+                    <p>Building a new Utah home? We design and install HVAC systems that will keep your family comfortable for decades.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 0-8.94-8.94l-2.5 2.5a4 4 0 0 0 5.93 5.93l2.64-2.59M6.3 9.3l2.5-2.5a4 4 0 0 0-5.93-5.93l-2.64 2.59"/></svg></span>
+                    <h4>System Replacement</h4>
+                    <p>Old, inefficient furnace or AC? We remove the old and install a new system with warranty and confidence.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 0-8.94-8.94l-2.5 2.5a4 4 0 0 0 5.93 5.93l2.64-2.59"/></svg></span>
+                    <h4>Repair & Maintenance</h4>
+                    <p>AC not cooling? Heat stopped working? We provide fast, honest repairs and preventive maintenance year-round.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.92 7.02C18.72 5.42 17.87 3.87 16.12 3.13c-1.75-.74-3.3.09-4.1 1.63-.4 2.79-3.97 8.23-8.52 11.85.48 2.02 2.02 3.29 3.75 3.29 1.38 0 2.66-.55 3.73-1.15 2.96 1.87 6.38 3 10.02 3 3.4 0 6.62-.99 9.31-2.78 1.06.65 2.27 1.06 3.59 1.06 2.31 0 4.18-1.23 4.6-2.78-.48-.01-.96-.04-1.44-.04-4.73 0-8.82-3.14-10.02-7.38z"/></svg></span>
+                    <h4>Air Quality Upgrades</h4>
+                    <p>Allergies? Dust problems? We upgrade your system with air filters, ventilation, and humidity control solutions.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="4" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="10" x2="16" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                    <h4>Smart Thermostats</h4>
+                    <p>Control your comfort from your phone. Save money with smart scheduling. Easy installation and setup.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                    <h4>Emergency Service</h4>
+                    <p>Heat stops in January? AC fails in July? We're available 24/7 for emergency repairs when you need us most.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="two-col">
+                <div>
+                    <h3>Why Utah Homeowners Choose Air Express</h3>
+                    <p><strong>Local expertise:</strong> 25+ years serving Utah County families. We understand Utah's climate, homes, and homeowner needs.</p>
+                    <p><strong>Honest service:</strong> We never recommend unnecessary work. We'll tell you if it's fixable or if replacement is best.</p>
+                    <p><strong>Fair pricing:</strong> Free estimates. Transparent pricing. No surprises. Financing available for large jobs.</p>
+                    <p><strong>Professional technicians:</strong> EPA-certified, well-trained, customer-focused. They care about your comfort.</p>
+                    <p><strong>24/7 emergency service:</strong> Furnace dies in January? AC fails in July? We respond quickly with emergency repairs.</p>
+                    <p><strong>4.9★ reviews from neighbors:</strong> 280+ five-star reviews from Utah families like yours.</p>
+                </div>
+                <img src="../images/residential.png" alt="Residential home with HVAC service">
+            </div>
+        </section>
+
+        <section class="section" style="background: linear-gradient(135deg, #FDF8F4 0%, #F5EDE1 100%); padding: 60px 40px; border-radius: 4px; border-left: 6px solid var(--secondary); border-right: 6px solid var(--secondary);">
+            <h3 style="font-family: Georgia, serif; color: var(--primary); font-size: 28px; margin-bottom: 20px;">Making Comfort Affordable</h3>
+            <p style="margin-bottom: 15px;">We understand that HVAC work can be expensive. That's why we offer multiple ways to make comfort affordable:</p>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>Flexible financing:</strong> Special financing options for qualifying homeowners</li>
+                <li><strong>Seasonal specials:</strong> Lower prices on furnace installs in fall, AC installs in spring</li>
+                <li><strong>Maintenance plans:</strong> Affordable annual plans that bundle tune-ups and service</li>
+                <li><strong>Free estimates:</strong> No obligation. No pressure. Just honest advice.</li>
+            </ul>
+        </section>
+
+        <section class="big-cta">
+            <h2>Your Utah Family Deserves Better Comfort</h2>
+            <p>Let Air Express HVAC help your family stay comfortable year-round.</p>
+            <a href="contact.html" class="cta-btn" style="display: inline-block; background: white; color: var(--secondary); border-color: white; margin-top: 10px;">Schedule Your Get Free Estimate Now</a>
+        </section>
+    </main>
+
+            <div style="background:#FDF0E6;padding:40px;border-radius:4px;text-align:center;margin:40px 0;border:2px solid #A65F1A;">
+  <h3 style="font-family:Georgia,serif;color:#1E3A5F;margin-bottom:12px;">Honest Pricing for Utah Families</h3>
+  <p style="color:#555;max-width:600px;margin:0 auto 20px;">No surprises, no hidden fees. We provide written estimates before work begins. Ask about our 0% APR financing to keep your family comfortable year-round.</p>
+  <a href="financing.html" style="display:inline-block;background:#1E3A5F;color:white;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:600;font-family:Georgia,serif;margin:4px;">Financing Options</a>
+  <a href="contact.html" style="display:inline-block;background:#A65F1A;color:#0D1B2A;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:600;font-family:Georgia,serif;margin:4px;">Get Your Get Free Estimate</a>
+</div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>License #96-324211-550 |  Us</h3>
+                <p><strong>(801) 893-7084</strong></p>
+                <p>Lehi, Utah</p>
+                <p><a href="contact.html">Get a Get Free Estimate</a></p>
+                <p><a href="emergency.html">Emergency Service</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="ac-services.html">Air Conditioning</a>
+                <a href="heating-services.html">Heating & Heat Pumps</a>
+                <a href="ventilation.html">Air Quality</a>
+                <a href="ductwork.html">Ductwork</a>
+                            <a href="gas-lines.html">Gas Lines</a>
+                <a href="thermostats.html">Thermostats</a>
+            </div>
+            <div class="footer-section">
+                <h4>Your Community</h4>
+                <a href="residential.html">Residential</a>
+                <a href="commercial.html">Commercial</a>
+                <a href="multifamily.html">Multifamily</a>
+                <a href="service-areas.html">Service Areas</a>
+                <a href="reviews.html">Reviews</a>
+            </div>
+            <div class="footer-section">
+                <h4>Our Story</h4>
+                <a href="about.html">About Air Express</a>
+                <a href="careers.html">Careers</a>
+                <a href="resources.html">Resources & Tips</a>
+                <a href="specials.html">Seasonal Specials</a>
+                <a href="financing.html">Financing</a>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="https://facebook.com" aria-label="Facebook"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span></a>
+            <a href="https://instagram.com" aria-label="Instagram"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.4" y="2.4" width="19.2" height="19.2" rx="4.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="18.5" cy="5.5" r="1.5" fill="currentColor"/></svg></span></a>
+            <a href="https://twitter.com" aria-label="Twitter"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.953 4.57a10 10 0 002.856 2.905c-.674-.375-1.39-.688-2.129-.906.64.15 1.247.391 1.805.717-.527-1.79-1.56-3.32-3.072-4.555.289.391.635.654 1.1 1.07.03.034.075.076.119.118l2.251-.637zM18.807 9.73c-.553-1.73-2.01-3.164-3.88-3.848.26.17.496.405.709.71-.168.02-.33.061-.49.119 1.563.265 2.863 1.273 3.548 2.679-.5-.263-.968-.504-1.405-.725.03.086.057.172.085.258zM5.697 9.956c.56-.606 1.423-1.002 2.364-1.002.894 0 1.714.323 2.324.847-.656-.211-1.26-.562-1.77-1.032.195.258.435.473.716.636-.283-.084-.544-.213-.776-.377.263.787.775 1.453 1.428 1.967-.44-.129-.856-.338-1.229-.606.398.644.942 1.204 1.573 1.629-.187-.06-.358-.155-.513-.268.515.993 1.423 1.813 2.508 2.306-1.074-.328-2.05-1.027-2.76-1.916.64.625 1.484 1.063 2.422 1.193-.295-.297-.495-.708-.495-1.16 0-.383.098-.746.271-1.06.618.94 1.615 1.612 2.788 1.708-.096-.438-.164-.9-.164-1.378 0-2.106 1.708-3.814 3.814-3.814.5 0 .982.094 1.425.273-.21-1.218-.987-2.308-2.026-2.965.684.2 1.327.541 1.9 1.016-.26-.37-.597-.686-.996-.943.607-.236 1.16-.57 1.656-.994zM12.322 17.78c-1.092 0-2.1-.289-2.977-.776.378.03.758.046 1.143.046 2.916 0 5.494-1.466 7.036-3.694.637.858 1.437 1.567 2.356 2.067-.685.46-1.486.776-2.361.916.37.266.704.589.988.96-.804.118-1.586.184-2.389.184zm6.03-4.06c-1.214 0-2.297.637-2.917 1.59.374-.043.754-.066 1.14-.066 1.72 0 3.307.504 4.656 1.375-.465-1.167-1.54-2.12-2.879-2.9zM3.97 8.963c.82 0 1.571.257 2.197.688-.54-.17-1.108-.265-1.695-.265-.98 0-1.896.24-2.698.66.56-.334 1.218-.545 1.924-.716.11-.02.22-.035.33-.047.016-.001.032-.002.048-.002z" opacity=".3"/><path fill="currentColor" d="M23.953 4.57a10 10 0 002.856 2.905c-.674-.375-1.39-.688-2.129-.906.64.15 1.247.391 1.805.717-.527-1.79-1.56-3.32-3.072-4.555.289.391.635.654 1.1 1.07.03.034.075.076.119.118zm-1.79 10.638c-.067.01-.136.023-.203.039.066-.013.136-.028.203-.039zm4.692-2.142c-.846 2.478-2.837 4.493-5.28 5.047.78-.46 1.487-1.063 2.081-1.784-.563.089-1.131.276-1.675.511l.313-.628c-1.125.687-2.505 1.084-3.99 1.084-4.595 0-8.331-3.736-8.331-8.331 0-.981.169-1.922.485-2.8-3.028 1.658-5.537 4.649-6.164 8.213-.139.787-.213 1.584-.213 2.405C1 21.627 5.373 25 12 25c5.608 0 10.357-3.86 11.605-9.05-.184-.07-.365-.131-.549-.19.666-1.113 1.075-2.408 1.075-3.76 0-.746-.111-1.467-.325-2.157"/></svg></span></a>
+            <a href="https://youtube.com" aria-label="YouTube"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span></a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Air Express HVAC. All rights reserved. | <a href="javascript:void(0)" onclick="alert(\'Privacy Policy: Air Express HVAC respects your privacy. We collect only the information necessary to provide HVAC services. We do not sell your data to third parties. Contact us at (801) 893-7084 for questions.\')" style="color: inherit;">Privacy Policy</a> | <a href="javascript:void(0)" onclick="alert(\'Terms of Service: Services provided by Air Express HVAC are subject to local regulations and licensing requirements. Estimates are free. Pricing confirmed before work begins. Licensed and insured in Utah. Contact (801) 893-7084.\')" style="color: inherit;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+
+    
+
+
+
+<script>
+(function() {
+    // Universal Mobile Navigation Toggle
+    var toggle = document.querySelector('.nav-toggle');
+    // Try multiple selectors for the nav element
+    var nav = document.querySelector('header nav') || 
+              document.querySelector('.nav-menu') || 
+              document.querySelector('.nav-links') ||
+              document.querySelector('nav');
+    
+    if (toggle && nav) {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            nav.classList.toggle('active');
+            var expanded = nav.classList.contains('active');
+            toggle.setAttribute('aria-expanded', String(expanded));
+            if (expanded) {
+                toggle.style.position = 'fixed';
+                toggle.style.top = '20px';
+                toggle.style.right = '20px';
+                toggle.style.zIndex = '1002';
+            } else {
+                toggle.style.position = '';
+                toggle.style.top = '';
+                toggle.style.right = '';
+                toggle.style.zIndex = '';
+            }
+        });
+    }
+
+    // Universal Dropdown Handling
+    var dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(function(dd) {
+        var trigger = dd.querySelector(':scope > a, :scope > button');
+        var menu = dd.querySelector('.dropdown-menu, .dropdown-content');
+        if (!trigger || !menu) return;
+
+        // Set initial ARIA
+        trigger.setAttribute('aria-haspopup', 'true');
+        trigger.setAttribute('aria-expanded', 'false');
+
+        trigger.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 || trigger.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+            var isOpen = dd.classList.contains('open');
+            // Close all other dropdowns
+            dropdowns.forEach(function(d) {
+                d.classList.remove('open');
+                var t = d.querySelector(':scope > a, :scope > button');
+                if (t) t.setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                dd.classList.add('open');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // Keyboard: Enter/Space to toggle, Escape to close
+        trigger.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                trigger.click();
+            }
+            if (e.key === 'Escape') {
+                dd.classList.remove('open');
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.focus();
+            }
+        });
+
+        // Arrow key navigation within dropdown
+        menu.querySelectorAll('a').forEach(function(link, idx, links) {
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (idx < links.length - 1) links[idx + 1].focus();
+                }
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (idx > 0) links[idx - 1].focus();
+                    else trigger.focus();
+                }
+                if (e.key === 'Escape') {
+                    dd.classList.remove('open');
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.focus();
+                }
+            });
+        });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(function(d) {
+                d.classList.remove('open');
+                var t = d.querySelector(':scope > a, :scope > button');
+                if (t) t.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+
+    // Close mobile nav on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            if (toggle) {
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.style.position = '';
+                toggle.focus();
+            }
+        }
+    });
+
+    // Close mobile nav on link click
+    if (nav) {
+        nav.querySelectorAll('a:not(.dropdown > a)').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768 && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        toggle.style.position = '';
+                    }
+                }
+            });
+        });
+    }
+})();
+</script>
+</body>
+</html>
