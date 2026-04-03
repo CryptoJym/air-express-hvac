@@ -291,16 +291,40 @@ nav {
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(200, 85, 61, 0.3);
     border: 2px solid var(--secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.cta-btn:hover::after {
+    left: 120%;
 }
 
 .cta-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(200, 85, 61, 0.4);
+    box-shadow: 0 8px 20px rgba(200, 85, 61, 0.4);
 }
 
 .cta-btn:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(200, 85, 61, 0.4);
+    box-shadow: 0 8px 20px rgba(200, 85, 61, 0.4);
+}
+
+.cta-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(200, 85, 61, 0.3);
 }
 
 /* ============================================================================
@@ -393,10 +417,10 @@ nav {
     background: linear-gradient(to bottom, rgba(13,27,42,0.55) 0%, rgba(30,58,95,0.7) 100%),
                 url('images/hero_utah_mountains.webp') center/cover no-repeat;
     color: white;
-    padding: 120px 20px 100px;
+    padding: 130px 20px 110px;
     text-align: center;
     position: relative;
-    min-height: 520px;
+    min-height: 540px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -508,11 +532,15 @@ nav {
 
 /* ============================================================================
    11. INTERIOR PAGE HERO (FOR NON-INDEX PAGES)
+   — see "Page Hero (Interior)" below
    ========================================================================== */
 
+/* ============================================================================
    12. SECTION CONTAINER & TITLES
+   — see "Section Spacing" and "Section Title" below
    ========================================================================== */
 
+/* ============================================================================
    13. SERVICES GRID & SERVICE CARDS
    ========================================================================== */
 
@@ -764,7 +792,99 @@ nav {
 .areas-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.area-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.area-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--secondary);
+}
+
+.area-card .icon-svg {
+    color: var(--secondary);
+    margin-bottom: 8px;
+}
+
+.area-card h3,
+.area-card h4 {
+    font-family: 'Georgia', serif;
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.area-card p {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* --- Also Serving Section --- */
+.also-serving {
+    background: var(--dark);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    margin: 50px 0;
+    text-align: center;
+}
+
+.also-serving h3 {
+    font-family: 'Georgia', serif;
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: var(--accent);
+}
+
+.also-serving > p {
+    font-size: 16px;
+    opacity: 0.85;
+    margin-bottom: 28px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.also-serving-list {
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
+}
+
+.also-serving-list span {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.also-serving-list span:hover {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .areas-grid {
+        grid-template-columns: 1fr;
+    }
+    .also-serving {
+        padding: 36px 24px;
+    }
 }
 
 .area-tag {
@@ -1173,27 +1293,37 @@ footer {
 .service-item {
     background: white;
     border: 1px solid var(--border);
+    border-top: 3px solid transparent;
     border-radius: var(--radius-md);
     padding: 28px 24px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
 }
 
 .service-item:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-top-color: var(--secondary);
 }
 
 .service-item .icon-svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: var(--light);
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, rgba(30,58,95,0.08) 0%, rgba(169,67,46,0.08) 100%);
     border-radius: var(--radius-sm);
     color: var(--secondary);
     font-size: 22px;
     margin-bottom: 16px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.service-item:hover .icon-svg {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    color: white;
+    transform: scale(1.08);
 }
 
 .service-item .icon-svg svg {
@@ -1219,13 +1349,20 @@ footer {
 
 /* --- Highlight / Info Box --- */
 .highlight-box {
-    background: var(--light);
+    background: linear-gradient(135deg, var(--light) 0%, #F5EDE1 100%);
     border-left: 4px solid var(--secondary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 36px 40px;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease;
+}
+
+.highlight-box:hover {
+    box-shadow: var(--shadow-md);
 }
 
 .highlight-box h3 {
@@ -1251,22 +1388,49 @@ footer {
     background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
     color: white;
     text-align: center;
-    padding: 72px 20px 56px;
+    padding: 80px 20px 64px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(166,95,26,0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(169,67,46,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 50%, var(--secondary) 100%);
 }
 
 .page-hero h1 {
     font-family: 'Georgia', serif;
-    font-size: 40px;
-    margin-bottom: 12px;
+    font-size: 42px;
+    margin-bottom: 14px;
     font-weight: 700;
+    position: relative;
+    letter-spacing: -0.3px;
 }
 
 .page-hero p {
     font-size: 18px;
-    opacity: 0.9;
-    max-width: 560px;
+    opacity: 0.92;
+    max-width: 600px;
     margin: 0 auto;
-    line-height: 1.5;
+    line-height: 1.6;
+    position: relative;
 }
 
 /* --- Big CTA Banner --- */
@@ -1274,22 +1438,49 @@ footer {
     background: linear-gradient(135deg, var(--secondary) 0%, #8B3520 100%);
     color: white;
     text-align: center;
-    padding: 64px 20px;
+    padding: 72px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.big-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.big-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .big-cta h2 {
     font-family: 'Georgia', serif;
-    font-size: 32px;
-    margin-bottom: 12px;
+    font-size: 34px;
+    margin-bottom: 14px;
+    position: relative;
 }
 
 .big-cta p {
     font-size: 17px;
     opacity: 0.92;
-    margin-bottom: 24px;
-    max-width: 500px;
+    margin-bottom: 28px;
+    max-width: 520px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    line-height: 1.6;
 }
 
 .big-cta .cta-btn {
@@ -1297,17 +1488,21 @@ footer {
     background: white;
     color: var(--secondary);
     border: 2px solid white;
-    padding: 14px 32px;
+    padding: 16px 36px;
     border-radius: var(--radius-sm);
     font-weight: 700;
     font-size: 16px;
     text-decoration: none;
     transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
 .big-cta .cta-btn:hover {
     background: transparent;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
 /* --- Section Spacing for Interior Pages --- */
@@ -1319,10 +1514,22 @@ footer {
 
 .section-title {
     font-family: 'Georgia', serif;
-    font-size: 30px;
+    font-size: 32px;
     color: var(--primary);
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    margin: 14px auto 0;
+    border-radius: 2px;
 }
 
 .section-subtitle {
@@ -1331,7 +1538,7 @@ footer {
     font-size: 17px;
     line-height: 1.65;
     max-width: 680px;
-    margin: 0 auto 40px;
+    margin: 8px auto 40px;
 }
 
 /* ============================================================================
@@ -1634,6 +1841,135 @@ footer {
         font-size: 13px;
         flex: 0 0 45%;
     }
+}
+
+/* ============================================================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.section,
+.service-areas-preview,
+.why-us,
+.community,
+.weather-section {
+    animation: fadeIn 0.5s ease-out both;
+}
+
+/* ============================================================================
+   ENHANCED CARD & INTERACTIVE POLISH
+   ========================================================================== */
+
+/* Service card icon hover rotation */
+.service-card:hover i {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Community card subtle lift */
+.community-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Why-item icon bounce on hover */
+.why-item {
+    transition: transform 0.3s ease;
+}
+
+.why-item:hover {
+    transform: translateY(-4px);
+}
+
+.why-item:hover i {
+    transform: scale(1.15);
+    transition: transform 0.3s ease;
+}
+
+/* Trust badge hover highlight */
+.trust-badge {
+    transition: transform 0.2s ease;
+}
+
+.trust-badge:hover {
+    transform: translateY(-2px);
+}
+
+/* Timeline item entrance feel */
+.timeline-item {
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateX(4px);
+}
+
+/* County block hover polish */
+.county-block {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.county-block:hover {
+    transform: translateY(-3px);
+}
+
+/* Form input focus glow */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(169, 67, 46, 0.12);
+}
+
+/* Smooth link underline animations */
+.footer-section a {
+    position: relative;
+}
+
+.footer-section a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.footer-section a:hover::after {
+    width: 100%;
+}
+
+/* Hero stats glass effect */
+.hero-stats {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 /* ============================================================================
