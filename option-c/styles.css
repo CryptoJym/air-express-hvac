@@ -936,9 +936,26 @@ nav {
     color: var(--accent);
 }
 
+.payment-options {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.payment-options span:first-child {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 8px;
+}
+
+.payment-icons {
+    letter-spacing: 0.5px;
+}
+
 .footer-bottom {
     border-top: 2px solid var(--primary);
-    margin-top: 40px;
+    margin-top: 24px;
     padding-top: 24px;
     text-align: center;
     font-size: 13px;
