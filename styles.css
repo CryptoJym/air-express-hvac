@@ -15,6 +15,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --primary: #1E3A5F;
     --secondary: #A9432E;
@@ -24,6 +28,13 @@
     --success: #2D8659;
     --text: #2D3E50;
     --border: #E0D5C7;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(13,27,42,0.08);
+    --shadow-md: 0 4px 16px rgba(13,27,42,0.1);
+    --shadow-lg: 0 8px 32px rgba(13,27,42,0.12);
+    --shadow-hover: 0 12px 40px rgba(13,27,42,0.16);
 }
 
 /* ============================================================================
@@ -32,9 +43,10 @@
 
 body {
     font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 16px;
     color: var(--text);
     background-color: var(--light);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* ============================================================================
@@ -42,16 +54,50 @@ body {
    ========================================================================== */
 
 .top-bar {
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-    color: white;
-    padding: 12px 20px;
+    background: var(--dark);
+    color: rgba(255,255,255,0.9);
+    padding: 10px 20px;
     font-size: 13px;
     text-align: center;
-    border-bottom: 3px solid var(--accent);
+    letter-spacing: 0.3px;
 }
 
 /* ============================================================================
-   4. HEADER & NAVIGATION
+   4. REVIEW BAR
+   ========================================================================== */
+
+.review-bar {
+    background: var(--light);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+.review-bar a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.review-bar a:hover {
+    color: var(--secondary);
+}
+
+.review-bar .stars {
+    color: #F59E0B;
+    font-size: 14px;
+}
+
+/* ============================================================================
+   5. HEADER & NAVIGATION
    ========================================================================== */
 
 header {
@@ -109,7 +155,7 @@ nav {
 }
 
 /* ============================================================================
-   5. DROPDOWN MENUS (UPGRADED WITH KEYBOARD ACCESSIBILITY)
+   6. DROPDOWN MENUS (UPGRADED WITH KEYBOARD ACCESSIBILITY)
    ========================================================================== */
 
 .dropdown {
@@ -126,7 +172,9 @@ nav {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     z-index: 1001;
     border: 2px solid var(--secondary);
-    border-top: 4px solid var(--secondary);
+    border-top: 3px solid var(--secondary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
 /* Show dropdown on hover */
@@ -171,7 +219,7 @@ nav {
 }
 
 /* ============================================================================
-   6. HEADER ACTIONS
+   7. HEADER ACTIONS
    ========================================================================== */
 
 .header-actions {
@@ -203,18 +251,19 @@ nav {
 }
 
 /* ============================================================================
-   7. CALL TO ACTION BUTTONS
+   8. CALL TO ACTION BUTTONS
    ========================================================================== */
 
 .cta-btn {
     background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
     color: white;
-    padding: 12px 24px;
+    padding: 14px 28px;
     text-decoration: none;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(200, 85, 61, 0.3);
@@ -232,7 +281,7 @@ nav {
 }
 
 /* ============================================================================
-   8. MOBILE NAVIGATION (HAMBURGER MENU)
+   9. MOBILE NAVIGATION (HAMBURGER MENU)
    ========================================================================== */
 
 .nav-toggle {
@@ -314,26 +363,20 @@ nav {
 }
 
 /* ============================================================================
-   9. HERO SECTION (INDEX PAGE)
+   10. HERO SECTION (INDEX PAGE)
    ========================================================================== */
 
 .hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
-                url('images/utah_mountains.png') center/cover no-repeat;
-    background-blend-mode: overlay;
+    background: linear-gradient(to bottom, rgba(13,27,42,0.55) 0%, rgba(30,58,95,0.7) 100%),
+                url('images/hero_utah_mountains.webp') center/cover no-repeat;
     color: white;
-    padding: 100px 20px;
+    padding: 120px 20px 100px;
     text-align: center;
     position: relative;
-    border-bottom: 6px solid var(--accent);
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(255,255,255,0.1)" fill="none"/></svg>');
-    pointer-events: none;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-content {
@@ -357,6 +400,15 @@ nav {
     margin-bottom: 30px;
     opacity: 0.95;
     font-weight: 300;
+}
+
+.hero .tagline, .hero .subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 16px;
 }
 
 .hero-ctas {
@@ -408,21 +460,22 @@ nav {
 }
 
 /* ============================================================================
-   10. INTERIOR PAGE HERO (FOR NON-INDEX PAGES)
+   11. INTERIOR PAGE HERO (FOR NON-INDEX PAGES)
    ========================================================================== */
 
 .page-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, rgba(30,58,95,0.95) 100%),
+                url('images/about-us-bg.webp') center/cover no-repeat;
     color: white;
-    padding: 60px 20px;
+    padding: 72px 20px 64px;
     text-align: center;
-    border-bottom: 6px solid var(--accent);
 }
 
 .page-hero h1 {
     font-family: Georgia, serif;
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 40px;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
 }
 
 .page-hero p {
@@ -433,7 +486,7 @@ nav {
 }
 
 /* ============================================================================
-   11. SECTION CONTAINER & TITLES
+   12. SECTION CONTAINER & TITLES
    ========================================================================== */
 
 .section {
@@ -444,25 +497,27 @@ nav {
 
 .section-title {
     font-family: Georgia, serif;
-    font-size: 42px;
+    font-size: 36px;
     color: var(--primary);
     margin-bottom: 15px;
     text-align: center;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .section-subtitle {
     text-align: center;
-    font-size: 16px;
-    color: var(--text);
+    font-size: 17px;
+    line-height: 1.6;
+    color: #5A6B7D;
     margin-bottom: 50px;
-    max-width: 600px;
+    max-width: 640px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* ============================================================================
-   12. SERVICES GRID & SERVICE CARDS
+   13. SERVICES GRID & SERVICE CARDS
    ========================================================================== */
 
 .services-grid {
@@ -474,18 +529,18 @@ nav {
 
 .service-card {
     background: white;
-    border: 2px solid var(--border);
-    border-radius: 4px;
-    padding: 40px 25px;
+    border: 1px solid rgba(224,213,199,0.5);
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
     text-align: center;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(13, 27, 42, 0.08);
+    box-shadow: var(--shadow-sm);
 }
 
 .service-card:hover {
     border-color: var(--secondary);
-    box-shadow: 0 8px 24px rgba(200, 85, 61, 0.15);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-6px);
 }
 
 .service-card:focus-within {
@@ -533,11 +588,11 @@ nav {
 }
 
 /* ============================================================================
-   13. WHY CHOOSE US SECTION
+   14. WHY CHOOSE US SECTION
    ========================================================================== */
 
 .why-us {
-    background: linear-gradient(135deg, var(--primary) 0%, #2a4a75 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3050 100%);
     color: white;
     padding: 80px 20px;
     border-top: 6px solid var(--accent);
@@ -580,15 +635,15 @@ nav {
 }
 
 /* ============================================================================
-   14. WEATHER SECTION
+   15. WEATHER SECTION
    ========================================================================== */
 
 .weather-section {
     background: white;
     padding: 60px 20px;
     margin: 60px 0;
-    border-left: 6px solid var(--secondary);
-    border-right: 6px solid var(--secondary);
+    border-left: 4px solid var(--secondary);
+    border-radius: var(--radius-md);
 }
 
 .weather-content {
@@ -621,7 +676,7 @@ nav {
 }
 
 /* ============================================================================
-   15. SERVICE AREAS PREVIEW SECTION
+   16. SERVICE AREAS PREVIEW SECTION
    ========================================================================== */
 
 .service-areas-preview {
@@ -651,7 +706,7 @@ nav {
 
 .county-block {
     background: var(--light);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 35px 30px 30px;
     position: relative;
     border: 1px solid var(--border);
@@ -722,7 +777,7 @@ nav {
     color: var(--primary);
     padding: 10px 14px;
     text-align: center;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-weight: 600;
     font-size: 13px;
     transition: all 0.25s ease;
@@ -809,7 +864,7 @@ nav {
 }
 
 /* ============================================================================
-   16. COMMUNITY SECTION
+   17. COMMUNITY SECTION
    ========================================================================== */
 
 .community {
@@ -829,8 +884,8 @@ nav {
 .community-card {
     background: white;
     padding: 35px 25px;
-    border-radius: 4px;
-    border-top: 4px solid var(--accent);
+    border-radius: var(--radius-md);
+    border-top: 3px solid var(--accent);
     box-shadow: 0 4px 12px rgba(13, 27, 42, 0.08);
 }
 
@@ -848,7 +903,7 @@ nav {
 }
 
 /* ============================================================================
-   17. BIG CTA SECTION
+   18. BIG CTA SECTION
    ========================================================================== */
 
 .big-cta {
@@ -856,7 +911,8 @@ nav {
     color: white;
     padding: 60px 20px;
     text-align: center;
-    border: 4px solid var(--accent);
+    border-radius: 0;
+    border: none;
 }
 
 .big-cta h2 {
@@ -872,13 +928,13 @@ nav {
 }
 
 /* ============================================================================
-   18. FOOTER
+   19. FOOTER
    ========================================================================== */
 
 footer {
     background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
     color: white;
-    padding: 50px 20px 20px;
+    padding: 64px 20px 24px;
 }
 
 .footer-content {
@@ -902,6 +958,7 @@ footer {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
+    padding: 4px 0;
     margin-bottom: 12px;
     display: block;
     transition: color 0.3s ease;
@@ -917,7 +974,8 @@ footer {
 
 .footer-bottom {
     border-top: 2px solid var(--primary);
-    padding-top: 20px;
+    margin-top: 40px;
+    padding-top: 24px;
     text-align: center;
     font-size: 13px;
     color: rgba(255, 255, 255, 0.7);
@@ -932,13 +990,13 @@ footer {
 
 .social-icons a {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     background: var(--secondary);
     color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -954,7 +1012,7 @@ footer {
 }
 
 /* ============================================================================
-   19. ICON SYSTEM
+   20. ICON SYSTEM
    ========================================================================== */
 
 .icon-svg {
@@ -971,7 +1029,7 @@ footer {
 }
 
 /* ============================================================================
-   20. TEXT UTILITIES
+   21. TEXT UTILITIES
    ========================================================================== */
 
 .text-secondary,
@@ -981,7 +1039,7 @@ footer {
 }
 
 /* ============================================================================
-   21. ACCESSIBILITY STYLES (CONSOLIDATED)
+   22. ACCESSIBILITY STYLES (CONSOLIDATED)
    ========================================================================== */
 
 /* Universal focus styling for keyboard navigation */
@@ -1016,7 +1074,7 @@ footer {
 }
 
 /* ============================================================================
-   22. TWO-COLUMN CONTENT LAYOUT
+   23. TWO-COLUMN CONTENT LAYOUT
    ========================================================================== */
 
 .content-grid {
@@ -1036,7 +1094,7 @@ footer {
 }
 
 /* ============================================================================
-   23. FORM STYLES (FOR CONTACT PAGE)
+   24. FORM STYLES (FOR CONTACT PAGE)
    ========================================================================== */
 
 .form-group {
@@ -1057,7 +1115,7 @@ footer {
     width: 100%;
     padding: 12px 16px;
     border: 2px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     transition: border-color 0.3s;
@@ -1100,7 +1158,7 @@ footer {
 }
 
 /* ============================================================================
-   24. TABLET BREAKPOINT (769px - 1024px)
+   25. TABLET BREAKPOINT (769px - 1024px)
    ========================================================================== */
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -1135,7 +1193,7 @@ footer {
 }
 
 /* ============================================================================
-   24. BACK TO TOP BUTTON
+   26. BACK TO TOP BUTTON
    ========================================================================== */
 
 .back-to-top {
@@ -1174,7 +1232,7 @@ footer {
 }
 
 /* ============================================================================
-   25. SITE SEARCH
+   27. SITE SEARCH
    ========================================================================== */
 
 .nav-search {
@@ -1205,7 +1263,7 @@ footer {
 }
 
 /* ============================================================================
-   26. MOBILE BREAKPOINT (768px AND BELOW)
+   28. MOBILE BREAKPOINT (768px AND BELOW)
    ========================================================================== */
 
 @media (max-width: 768px) {
