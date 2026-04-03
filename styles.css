@@ -319,7 +319,7 @@ nav {
 
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%),
-                url('../images/utah_mountains.png') center/cover no-repeat;
+                url('images/utah_mountains.png') center/cover no-repeat;
     background-blend-mode: overlay;
     color: white;
     padding: 100px 20px;
