@@ -1196,6 +1196,22 @@ footer {
     margin-bottom: 0;
 }
 
+.partner-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 280px;
+    padding: 18px 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: white;
+    color: var(--primary);
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+}
+
 /* --- Page Hero (Interior) --- */
 .page-hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
@@ -1560,5 +1576,4 @@ footer {
 /* ============================================================================
    28. MOBILE BREAKPOINT (768px AND BELOW)
    ========================================================================== */
-
 

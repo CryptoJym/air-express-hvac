@@ -1,0 +1,6 @@
+severity,category,file,issue,evidence,recommended_fix,status
+P1,truth,https://www.airexpresshvac.net/,Address differs between live page and launch candidate,"8711 Burnet Rd Suite B32, Austin, TX 78757, Austin, TX vs 628 E State St, Ste 1, Lehi, UT",Verify the correct business address and align schema/content before launch,open
+P1,truth,https://www.airexpresshvac.net/about-us/privacy-policy/,Address differs between live page and launch candidate,"628 E State St Ste 1, Lehi, UT 84043 vs 628 E State St, Ste 1, Lehi, UT",Verify the correct business address and align schema/content before launch,open
+P1,truth,https://www.airexpresshvac.net/contact/,Address differs between live page and launch candidate,"8711 Burnet Rd Suite B32, Austin, TX 78757, Austin, TX vs Lehi, UT",Verify the correct business address and align schema/content before launch,open
+P2,parity,https://www.airexpresshvac.net/hvac-replacement-signs/,Live page does not have a confident option-c replacement,Best candidate ac-replacement.html scored 0.469,Create or explicitly map a launch-candidate replacement page for this live URL,open
+P2,parity,https://www.airexpresshvac.net/spring-hvac-maintenance-tips/,Live page does not have a confident option-c replacement,Best candidate ac-maintenance.html scored 0.517,Create or explicitly map a launch-candidate replacement page for this live URL,open

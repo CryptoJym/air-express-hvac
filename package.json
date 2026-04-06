@@ -1,0 +1,17 @@
+{
+  "name": "air-express-option-c-audit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve:option-c": "node scripts/audit/serve-option-c.mjs",
+    "audit:repair": "node scripts/audit/remediate-option-c.mjs",
+    "audit:artifacts": "node scripts/audit/generate-artifacts.mjs",
+    "audit:redirects": "node scripts/audit/sync-route-redirects.mjs",
+    "audit:lighthouse": "node scripts/audit/run-lighthouse.mjs",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "lighthouse": "^12.2.1"
+  }
+}

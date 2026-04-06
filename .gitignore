@@ -1,3 +1,6 @@
 .backup/
 TECHNICAL_SEO_AUDIT_REPORT.txt
 .vercel
+node_modules/
+playwright-report/
+test-results/

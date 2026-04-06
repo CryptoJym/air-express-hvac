@@ -105,11 +105,8 @@
             }
         ]
     }
-    </script>    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    </script>
+<link rel="preload" as="image" href="images/air-logo.webp" type="image/webp" fetchpriority="high">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
@@ -150,7 +147,7 @@
 
     <header>
         <div class="header-content">
-            <a href="index.html" class="logo" aria-label="Air Express HVAC - Home"><img src="images/air-logo.webp" alt="Air Express HVAC" width="295" height="182"></a>
+            <a href="index.html" class="logo" aria-label="Air Express HVAC - Home"><img src="images/air-logo.webp" alt="Air Express HVAC" width="295" height="182" fetchpriority="high" loading="eager" decoding="async" fetchpriority="high" loading="eager" decoding="async" fetchpriority="high" loading="eager" decoding="async"></a>
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav aria-label="Main navigation">
                 <div class="dropdown">
@@ -199,7 +196,7 @@
         </div>
     </header>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
         <section class="breadcrumb-section">
             <div class="breadcrumb-container">
                 <a href="index.html">Home</a> > <a href="ac-services.html">Services</a> > <span>AC Repair</span> > <span>Saratoga Springs, UT</span>
@@ -297,60 +294,6 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Services</h3>
-                <a role="menuitem" href="ac-services.html">Air Conditioning</a>
-                <a role="menuitem" href="heating-services.html">Furnace & Heating</a>
-                <a role="menuitem" href="heating-services.html">Heat Pumps</a>
-                <a role="menuitem" href="ventilation.html">Ventilation</a>
-                <a role="menuitem" href="air-filters.html">Air Filters</a>
-                <a role="menuitem" href="thermostats.html">Thermostats</a>
-            </div>
-            <div class="footer-section">
-                <h4>Community</h4>
-                <a role="menuitem" href="residential.html">Residential</a>
-                <a role="menuitem" href="commercial.html">Commercial</a>
-                <a role="menuitem" href="multifamily.html">Multifamily</a>
-                <a role="menuitem" href="service-areas.html">Service Areas</a>
-                <a role="menuitem" href="reviews.html">Reviews</a>
-            </div>
-            <div class="footer-section">
-                <h4>Company</h4>
-                <a role="menuitem" href="about.html">About Us</a>
-                <a role="menuitem" href="careers.html">Careers</a>
-                <a role="menuitem" href="resources.html">Resources</a>
-                <a role="menuitem" href="specials.html">Specials</a>
-                <a role="menuitem" href="financing.html">Financing</a><a role="menuitem" href="faq.html">FAQ</a><a role="menuitem" href="hvac-buying-guide.html">HVAC Buying Guide</a><a role="menuitem" href="hvac-cost-guide.html">Cost Guide</a>
-            </div>
-        </div>
-        <div class="social-icons">
-            <a role="menuitem" href="https://www.facebook.com/airexpresshvac/" target="_blank" rel="noopener" aria-label="Facebook"></a>
-            <a role="menuitem" href="https://www.instagram.com/airexpresshvac/" target="_blank" rel="noopener" aria-label="Instagram"></a>
-            <a role="menuitem" href="https://g.page/r/CYZKv5H3bwNzEBM/review" target="_blank" rel="noopener" aria-label="Google Reviews"></a>
-            <a role="menuitem" href="https://youtube.com" aria-label="YouTube"></a>
-        </div>
-        <div class="payment-options">
-            <span>Payment Options:</span>
-            <span class="payment-icons">Visa | Mastercard | Discover | Amex | Check | Cash</span>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Air Express Heating & Air Conditioning. All rights reserved.</p>
-        </div>
-<script>
-    (function() {
-        var toggle = document.querySelector('.nav-toggle');
-        var nav = document.querySelector('header nav');
-        if (toggle && nav) {
-            toggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                nav.classList.toggle('active');
-                toggle.setAttribute('aria-expanded', nav.classList.contains('active'));
-            });
-        }
-    })();
-    </script>
     <footer role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">

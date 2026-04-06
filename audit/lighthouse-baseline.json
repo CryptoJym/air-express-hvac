@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-04-06T16:41:34.455Z",
+  "status": "complete",
+  "pages": [
+    {
+      "file": "index.html",
+      "url": "http://127.0.0.1:4173/",
+      "status": "measured",
+      "metrics": {
+        "performance": 99,
+        "accessibility": 96,
+        "seo": 100,
+        "lcp": 2102.285,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "contact.html",
+      "url": "http://127.0.0.1:4173/contact.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1350.8839,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "request-estimate.html",
+      "url": "http://127.0.0.1:4173/request-estimate.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1351.3458,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "schedule-service.html",
+      "url": "http://127.0.0.1:4173/schedule-service.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1275.7874,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "reviews.html",
+      "url": "http://127.0.0.1:4173/reviews.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1350.861,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "financing.html",
+      "url": "http://127.0.0.1:4173/financing.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 99,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1350.8012,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "privacy-policy.html",
+      "url": "http://127.0.0.1:4173/privacy-policy.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1350.9697,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "terms-of-service.html",
+      "url": "http://127.0.0.1:4173/terms-of-service.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 100,
+        "accessibility": 100,
+        "seo": 100,
+        "lcp": 1200.6334,
+        "cls": 0,
+        "inp": null
+      }
+    },
+    {
+      "file": "404.html",
+      "url": "http://127.0.0.1:4173/404.html",
+      "status": "measured",
+      "metrics": {
+        "performance": 99,
+        "accessibility": 96,
+        "seo": 63,
+        "lcp": 1051.1621,
+        "cls": 0.000073,
+        "inp": null
+      }
+    }
+  ]
+}
