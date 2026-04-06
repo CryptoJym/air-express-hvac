@@ -128,6 +128,32 @@ test('core conversion CTAs are reachable and forms expose required fields', asyn
   await expect(page.locator('form#schedule-form')).toBeVisible();
 });
 
+test('homepage keeps the canonical phone number without loading swap scripts', async ({ page }) => {
+  const thirdPartyRequests = [];
+
+  page.on('request', (request) => {
+    const url = request.url();
+    if (url.includes('googletagmanager.com') || url.includes('ksrndkehqnwntyxlhgto.com')) {
+      thirdPartyRequests.push(url);
+    }
+  });
+
+  await page.goto('/');
+
+  const phoneLinks = await page.locator('a[href^="tel:"]').evaluateAll((links) =>
+    links.map((link) => ({
+      href: link.getAttribute('href'),
+      text: link.textContent.trim()
+    }))
+  );
+
+  expect(phoneLinks).toEqual([
+    { href: 'tel:+18017668585', text: '(801) 766-8585' },
+    { href: 'tel:+18017668585', text: 'Call Now: (801) 766-8585' }
+  ]);
+  expect(thirdPartyRequests).toEqual([]);
+});
+
 test('legacy live routes redirect to launch-candidate pages', async ({ page }) => {
   for (const route of legacyRedirectChecks) {
     await page.goto(route.from);

@@ -40,6 +40,26 @@ function normalizeHeadAssets(html) {
   return normalized;
 }
 
+function stripGoogleTagManager(html) {
+  return html
+    .replace(
+      /\s*<!-- Google Tag Manager -->[\s\S]*?<!-- End Google Tag Manager -->\s*/gi,
+      '\n'
+    )
+    .replace(
+      /\s*<!-- Google Tag Manager \(noscript\) -->[\s\S]*?<!-- End Google Tag Manager \(noscript\) -->\s*/gi,
+      '\n'
+    )
+    .replace(
+      /\s*<script>\s*\(function\(w,d,s,l,i\)\{w\[l\]=w\[l\]\|\|\[\];w\[l\]\.push\(\{'gtm\.start'[\s\S]*?GTM-WJ42DHD['"]\);<\/script>\s*/gi,
+      '\n'
+    )
+    .replace(
+      /\s*<noscript><iframe[^>]*src=["']https:\/\/www\.googletagmanager\.com\/ns\.html\?id=GTM-WJ42DHD["'][\s\S]*?<\/iframe><\/noscript>\s*/gi,
+      '\n'
+    );
+}
+
 const donorHtml = normalizeLogoMarkup(await fs.readFile(donorPath, 'utf8'));
 const standardHeader = donorHtml.match(/<header>[\s\S]*?<\/header>/i)?.[0];
 const standardFooter = donorHtml.match(/<footer>[\s\S]*?<\/footer>/i)?.[0];
@@ -103,6 +123,7 @@ for (const file of files) {
   );
 
   html = normalizeHeadAssets(html);
+  html = stripGoogleTagManager(html);
   html = normalizeLogoMarkup(html);
 
   if (html !== original) {
