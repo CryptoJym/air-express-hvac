@@ -5,6 +5,30 @@
    Includes all component styles, accessibility features, and responsive layouts.
    ========================================================================== */
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/poppins-400-latin.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/poppins-600-latin.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/poppins-700-latin.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ============================================================================
    1. RESET & ROOT VARIABLES
    ========================================================================== */
@@ -1576,4 +1600,3 @@ footer {
 /* ============================================================================
    28. MOBILE BREAKPOINT (768px AND BELOW)
    ========================================================================== */
-
