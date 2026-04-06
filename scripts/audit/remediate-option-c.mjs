@@ -51,11 +51,11 @@ function stripGoogleTagManager(html) {
       '\n'
     )
     .replace(
-      /\s*<script>\s*\(function\(w,d,s,l,i\)\{w\[l\]=w\[l\]\|\|\[\];w\[l\]\.push\(\{'gtm\.start'[\s\S]*?GTM-WJ42DHD['"]\);<\/script>\s*/gi,
+      /\s*<script\b[^>]*>[\s\S]*?googletagmanager\.com\/gtm\.js\?id=[\s\S]*?<\/script>\s*/gi,
       '\n'
     )
     .replace(
-      /\s*<noscript><iframe[^>]*src=["']https:\/\/www\.googletagmanager\.com\/ns\.html\?id=GTM-WJ42DHD["'][\s\S]*?<\/iframe><\/noscript>\s*/gi,
+      /\s*<noscript>\s*<iframe[^>]*googletagmanager\.com\/ns\.html\?id=GTM-WJ42DHD[^>]*>[\s\S]*?<\/iframe>\s*<\/noscript>\s*/gi,
       '\n'
     );
 }
@@ -69,8 +69,10 @@ if (!standardHeader || !standardFooter) {
 }
 
 const files = (await fs.readdir(targetRoot)).filter((file) => file.endsWith('.html')).sort();
+const rootFiles = (await fs.readdir(repoRoot)).filter((file) => file.endsWith('.html')).sort();
 
 let updatedCount = 0;
+let rootUpdatedCount = 0;
 
 for (const file of files) {
   const fullPath = path.join(targetRoot, file);
@@ -132,4 +134,15 @@ for (const file of files) {
   }
 }
 
-console.log(`Remediated ${updatedCount} option-c pages`);
+for (const file of rootFiles) {
+  const fullPath = path.join(repoRoot, file);
+  const original = await fs.readFile(fullPath, 'utf8');
+  const html = stripGoogleTagManager(original);
+
+  if (html !== original) {
+    await fs.writeFile(fullPath, html);
+    rootUpdatedCount += 1;
+  }
+}
+
+console.log(`Remediated ${updatedCount} option-c pages and stripped GTM from ${rootUpdatedCount} root pages`);
