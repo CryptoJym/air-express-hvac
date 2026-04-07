@@ -21,6 +21,96 @@
   ],
   "redirects": [
     {
+      "source": "/fall-furnace-maintenance.html",
+      "destination": "/blog/fall-furnace-prep.html",
+      "permanent": true
+    },
+    {
+      "source": "/fall-furnace-maintenance",
+      "destination": "/blog/fall-furnace-prep.html",
+      "permanent": true
+    },
+    {
+      "source": "/spring-ac-maintenance.html",
+      "destination": "/blog/spring-ac-prep.html",
+      "permanent": true
+    },
+    {
+      "source": "/spring-ac-maintenance",
+      "destination": "/blog/spring-ac-prep.html",
+      "permanent": true
+    },
+    {
+      "source": "/summer-energy-efficiency.html",
+      "destination": "/blog/summer-energy-efficiency.html",
+      "permanent": true
+    },
+    {
+      "source": "/summer-energy-efficiency",
+      "destination": "/blog/summer-energy-efficiency.html",
+      "permanent": true
+    },
+    {
+      "source": "/heat-pump-vs-furnace.html",
+      "destination": "/blog/heat-pump-vs-furnace-utah.html",
+      "permanent": true
+    },
+    {
+      "source": "/heat-pump-vs-furnace",
+      "destination": "/blog/heat-pump-vs-furnace-utah.html",
+      "permanent": true
+    },
+    {
+      "source": "/winter-heating-troubleshooting.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
+      "permanent": true
+    },
+    {
+      "source": "/winter-heating-troubleshooting",
+      "destination": "/blog/winter-heating-troubleshooting.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-buying-guide.html",
+      "destination": "/blog/hvac-buying-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-buying-guide",
+      "destination": "/blog/hvac-buying-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/geothermal-guide.html",
+      "destination": "/blog/geothermal-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/geothermal-guide",
+      "destination": "/blog/geothermal-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-cost-guide.html",
+      "destination": "/blog/hvac-cost-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-cost-guide",
+      "destination": "/blog/hvac-cost-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-troubleshooter",
+      "destination": "/blog/winter-heating-troubleshooting.html",
+      "permanent": true
+    },
+    {
       "source": "/404",
       "destination": "/404.html",
       "permanent": true
