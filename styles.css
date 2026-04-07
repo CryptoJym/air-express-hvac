@@ -426,120 +426,202 @@ nav {
 
 
 /* ============================================================================
-   10. HERO SECTION (INDEX PAGE)
+   10. HERO SECTION (INDEX PAGE) — editorial treatment matching contact page.
+   Full-bleed dark image, left-aligned eyebrow + serif headline + subhead,
+   bottom-aligned 4-stat trust strip with vertical dividers.
    ========================================================================== */
 
 .hero {
-    background: linear-gradient(to bottom, rgba(13,27,42,0.65) 0%, rgba(30,58,95,0.55) 50%, rgba(13,27,42,0.75) 100%),
-                url('images/about-hero-utah.webp') center/cover no-repeat;
-    color: white;
-    padding: 120px 20px 100px;
-    text-align: center;
     position: relative;
-    min-height: 600px;
+    background:
+        linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+        url('images/about-hero-utah.webp') center 35% / cover no-repeat;
+    color: white;
+    padding: 120px 24px 0;
+    min-height: 640px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, rgba(166, 95, 26, 0.22) 0%, transparent 55%);
+    pointer-events: none;
 }
 
 .hero-content {
-    max-width: 900px;
+    max-width: 1180px;
+    width: 100%;
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    padding-bottom: 56px;
+}
+
+.hero-eyebrow {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #F4C078;
+    margin: 0 0 18px;
+    text-transform: uppercase;
 }
 
 .hero h1 {
     font-family: Georgia, serif;
-    font-size: 56px;
+    font-size: clamp(38px, 5.4vw, 72px);
     font-weight: 700;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.05;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+    color: white;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    max-width: 18ch;
 }
 
 .hero p {
-    font-size: 20px;
-    margin-bottom: 30px;
-    opacity: 0.95;
-    font-weight: 300;
-}
-
-.hero .tagline, .hero .subtitle {
-    font-size: 18px;
+    font-size: clamp(16px, 1.4vw, 19px);
     font-weight: 400;
-    letter-spacing: 2px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 56ch;
+    margin: 0 0 28px;
+}
+
+/* Legacy tagline/subtitle classes retained for pages that might use them,
+   but re-styled to sit in the new left-aligned editorial flow. */
+.hero .tagline,
+.hero .subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 16px;
+    color: #F4C078;
+    opacity: 1;
+    margin: 0 0 18px;
+    text-align: left;
 }
 
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.hero-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.hero-stat .icon-svg {
-    color: #F59E0B;
-}
-
+/* Primary CTA styled as a solid rust pill sitting below the subhead */
 .hero-ctas {
     display: flex;
-    gap: 15px;
-    justify-content: center;
+    gap: 14px;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0;
 }
 
 .hero-ctas a {
-    padding: 14px 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 17px 36px;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 700;
+    letter-spacing: 0.3px;
     text-decoration: none;
-    border-radius: 4px;
-    border: 2px solid white;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-sm);
+    transition: transform 0.18s ease, background 0.22s ease, box-shadow 0.22s ease;
 }
 
 .hero-ctas .primary {
-    background: var(--accent);
-    color: var(--dark);
-    border-color: var(--accent);
+    background: var(--secondary);
+    color: white;
+    border: 1.5px solid var(--secondary);
+    box-shadow: 0 12px 28px -10px rgba(169, 67, 46, 0.55);
 }
 
-.hero-ctas .primary:hover {
-    background: white;
-    color: var(--secondary);
-}
-
+.hero-ctas .primary:hover,
 .hero-ctas .primary:focus-visible {
-    background: white;
-    color: var(--secondary);
+    background: #8B3520;
+    border-color: #8B3520;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -10px rgba(169, 67, 46, 0.65);
+}
+
+.hero-ctas .primary::after {
+    content: '→';
+    font-size: 22px;
+    transition: transform 0.22s ease;
+}
+
+.hero-ctas .primary:hover::after {
+    transform: translateX(4px);
 }
 
 .hero-ctas .secondary {
     background: transparent;
     color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
 }
 
-.hero-ctas .secondary:hover {
-    background: white;
-    color: var(--secondary);
-}
-
+.hero-ctas .secondary:hover,
 .hero-ctas .secondary:focus-visible {
     background: white;
-    color: var(--secondary);
+    color: var(--primary);
+    border-color: white;
+}
+
+/* Bottom-aligned 4-stat trust strip — matches contact page exactly */
+.hero-stats {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 24px 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-stat:last-child {
+    border-right: none;
+}
+
+.hero-stat-num {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 6px;
+}
+
+/* Legacy hero-stat-divider class from the old centered layout — hide */
+.hero-stat-divider {
+    display: none;
 }
 
 /* ============================================================================
@@ -1972,44 +2054,75 @@ footer {
     }
 
     /* ==========================================================================
-       MOBILE: HERO SECTION
+       MOBILE: HERO SECTION — editorial layout stays left-aligned but compacts
        ========================================================================== */
 
     .hero {
-        padding: 60px 16px 50px;
-        min-height: auto;
+        padding: 88px 18px 0;
+        min-height: 540px;
+    }
+
+    .hero-content {
+        padding-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 14px;
     }
 
     .hero h1 {
-        font-size: 28px;
-        line-height: 1.25;
-        margin-bottom: 12px;
+        font-size: 36px;
+        line-height: 1.08;
+        margin-bottom: 14px;
+        max-width: 100%;
     }
 
     .hero p {
         font-size: 15px;
-        margin-bottom: 20px;
+        line-height: 1.55;
+        margin-bottom: 22px;
     }
 
     .hero .tagline,
     .hero .subtitle {
-        font-size: 13px;
-        letter-spacing: 1.5px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        margin-bottom: 14px;
     }
 
-    /* Hero stats stack cleanly */
+    /* Stats become a 2x2 grid on mobile */
     .hero-stats {
-        flex-direction: column;
-        gap: 6px;
-        margin-bottom: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+        padding: 18px 0;
     }
 
-    .hero-stat,
-    .hero-stat-divider {
-        font-size: 14px;
+    .hero-stat {
+        padding: 14px 16px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Hero CTAs stack vertically, full width */
+    .hero-stat:nth-child(odd) {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stat:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+
+    .hero-stat-num {
+        font-size: 26px;
+    }
+
+    .hero-stat-label {
+        font-size: 11px;
+    }
+
+    /* CTAs — inline rust button stays its shape; no full-width stretch */
     .hero-ctas {
         flex-direction: column;
         align-items: stretch;
@@ -2018,13 +2131,10 @@ footer {
 
     .hero-ctas a {
         width: 100%;
-        text-align: center;
-        padding: 14px 20px;
+        justify-content: center;
+        padding: 16px 24px;
         font-size: 15px;
         min-height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     /* ==========================================================================
