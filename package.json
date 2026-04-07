@@ -8,10 +8,14 @@
     "audit:artifacts": "node scripts/audit/generate-artifacts.mjs",
     "audit:redirects": "node scripts/audit/sync-route-redirects.mjs",
     "audit:lighthouse": "node scripts/audit/run-lighthouse.mjs",
+    "build:blog": "node scripts/build-blog.mjs",
+    "vercel-build": "node scripts/build-blog.mjs",
     "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "lighthouse": "^12.2.1"
+    "gray-matter": "^4.0.3",
+    "lighthouse": "^12.2.1",
+    "marked": "^18.0.0"
   }
 }

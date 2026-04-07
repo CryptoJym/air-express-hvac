@@ -1,0 +1,74 @@
+# Decap CMS configuration — Air Express HVAC blog
+#
+# Content authors log in with GitHub (OAuth) and edit markdown files
+# directly in the repository. Saved changes commit to the target branch
+# and Vercel rebuilds the site automatically.
+#
+# NOTE: To enable GitHub auth you must run a small OAuth proxy. The
+# simplest path is Netlify's free hosted git-gateway at
+# https://api.netlify.com/auth — wire this up once in the Netlify
+# identity dashboard and point the `base_url` below at it. Alternative:
+# self-host a tiny OAuth proxy on Vercel (see scripts/oauth-proxy
+# for a template when we get to it).
+
+backend:
+  name: github
+  repo: CryptoJym/air-express-hvac
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# While auth is being wired up, uncomment this to test locally with
+# `npx decap-server` and the `local_backend` running on port 8081:
+# local_backend: true
+
+media_folder: "images"
+public_folder: "/images"
+
+publish_mode: editorial_workflow
+
+site_url: https://www.airexpresshvac.net
+display_url: https://www.airexpresshvac.net
+logo_url: https://www.airexpresshvac.net/images/air-logo.webp
+
+collections:
+  - name: "blog"
+    label: "Field Notes (Blog Posts)"
+    label_singular: "Field Note"
+    folder: "content/blog"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "slug"
+    summary: "{{title}} — {{date | date('MMM D, YYYY')}}"
+    sortable_fields: ["date", "title"]
+    view_filters:
+      - label: "Drafts"
+        field: "draft"
+        pattern: true
+      - label: "Published"
+        field: "draft"
+        pattern: false
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "The post headline. Keep it under 65 characters for SEO." }
+      - { label: "Slug (URL-safe)", name: "slug", widget: "string", hint: "Lowercase kebab-case. This becomes /blog/your-slug.html" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Author", name: "author", widget: "string", default: "The Air Express Team" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Seasonal Maintenance"
+          - "Energy Efficiency"
+          - "Buying Guides"
+          - "Troubleshooting"
+          - "Indoor Air Quality"
+          - "Field Notes"
+        default: "Field Notes"
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "~160 characters. Used as SEO description and card preview.", pattern: ['.{40,200}', 'Excerpt should be between 40 and 200 characters.'] }
+      - { label: "Hero Image", name: "image", widget: "image", hint: "The featured image for this post. Uploaded to /images/ automatically." }
+      - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Comma-separated tags for internal linking." }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, hint: "Uncheck to publish this post. Drafts do not appear on the site." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "The main article content. Supports headings, bold, italics, links, lists, blockquotes, and images." }

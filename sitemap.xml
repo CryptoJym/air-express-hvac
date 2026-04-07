@@ -726,4 +726,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- BLOG_POSTS_START -->
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/fall-furnace-prep.html</loc>
+    <lastmod>Wed Sep 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- BLOG_POSTS_END -->
 </urlset>
