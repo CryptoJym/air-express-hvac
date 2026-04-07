@@ -13,10 +13,37 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(169, 67, 46, 0.15);
 }
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Responsive images by default — never overflow their container on mobile */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mobile nav CTA clone is created by nav.js — hide globally so it never
+   appears on desktop. Only the mobile media query reveals it when nav is open. */
+.mobile-nav-cta {
+    display: none;
+}
+
+/* Faster tap response on touch devices for interactive elements */
+a,
+button,
+.cta-btn,
+.nav-item,
+.nav-toggle,
+.dropdown,
+input[type="submit"],
+input[type="button"] {
+    touch-action: manipulation;
 }
 
 :root {
@@ -47,6 +74,8 @@ body {
     color: var(--text);
     background-color: var(--light);
     line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* ============================================================================
@@ -60,6 +89,13 @@ body {
     font-size: 13px;
     text-align: center;
     letter-spacing: 0.3px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.top-bar strong {
+    white-space: nowrap;
 }
 
 /* ============================================================================
@@ -102,20 +138,23 @@ body {
 
 header {
     background: white;
-    padding: 15px 20px;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(30, 58, 95, 0.1);
+    width: 100%;
 }
 
 .header-content {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+    padding: 0 24px;
 }
 
 .logo {
@@ -124,6 +163,12 @@ header {
     color: var(--primary);
     font-family: Georgia, serif;
     letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: auto;
+    display: block;
 }
 
 .logo span {
@@ -135,18 +180,20 @@ nav {
     gap: 0;
     align-items: center;
     flex: 1;
+    justify-content: center;
 }
 
 .nav-item {
     position: relative;
     color: var(--text);
     text-decoration: none;
-    padding: 12px 18px;
+    padding: 12px 14px;
     font-size: 14px;
     font-weight: 600;
     border: 2px solid transparent;
     transition: all 0.3s ease;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -166,10 +213,11 @@ nav {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: white;
     min-width: 280px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 1001;
     border: 2px solid var(--secondary);
     border-top: 3px solid var(--secondary);
@@ -218,26 +266,48 @@ nav {
     color: var(--secondary);
 }
 
+.dropdown-header {
+    padding: 10px 20px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    text-transform: uppercase;
+    border-bottom: none;
+    opacity: 0.6;
+}
+
+.dropdown-header:not(:first-child) {
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+}
+
 /* ============================================================================
    7. HEADER ACTIONS
    ========================================================================== */
 
 .header-actions {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     align-items: center;
     margin-left: auto;
+    flex-shrink: 0;
 }
 
 .phone-link {
     color: var(--secondary);
     text-decoration: none;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     border: 2px solid var(--secondary);
     padding: 8px 12px;
     border-radius: 4px;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .phone-link:hover {
@@ -357,6 +427,26 @@ nav {
     text-transform: uppercase;
     opacity: 0.85;
     margin-bottom: 16px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.hero-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hero-stat .icon-svg {
+    color: #F59E0B;
 }
 
 .hero-ctas {
@@ -1046,7 +1136,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    align-items: center;
+    align-items: start;
     max-width: 1100px;
     margin: 0 auto;
 }
@@ -1349,17 +1439,142 @@ footer {
 }
 
 /* ============================================================================
+   24b. TRUST BADGES (below hero)
+   ========================================================================== */
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 8px 16px;
+    background: var(--light);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+.trust-badge .icon-svg {
+    color: var(--secondary);
+    font-size: 18px;
+}
+
+/* ============================================================================
+   24c. REVIEWS PAGE
+   ========================================================================== */
+
+.rating-summary {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3050 100%);
+    border-radius: var(--radius-md);
+    color: white;
+    margin-bottom: 40px;
+}
+
+.rating-number {
+    font-family: Georgia, serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.rating-summary .stars {
+    color: #F59E0B;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.rating-summary .review-count {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.review-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.review-stars {
+    color: #F59E0B;
+    font-size: 18px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
+
+.review-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    flex: 1;
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.review-author {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* ============================================================================
    25. TABLET BREAKPOINT (769px - 1024px)
    ========================================================================== */
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .header-content {
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .logo img {
+        width: 130px;
     }
 
     .nav-item {
-        padding: 10px 12px;
-        font-size: 13px;
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+
+    .phone-link {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .cta-btn {
+        font-size: 12px;
+        padding: 10px 16px;
     }
 
     .hero h1 {
@@ -1453,13 +1668,151 @@ footer {
 
 
 @media (max-width: 768px) {
-    .content-grid {
-        grid-template-columns: 1fr;
+
+    /* ==========================================================================
+       MOBILE: HIDE CLUTTER
+       ========================================================================== */
+
+    /* Hide top-bar on mobile — phone number is in nav overlay, location is noise */
+    .top-bar {
+        display: none;
     }
 
-    .counties-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    /* Hide review-bar on mobile — it's noise that pushes content down */
+    .review-bar {
+        display: none;
+    }
+
+    /* Hide search bar on mobile */
+    .nav-search {
+        display: none;
+    }
+
+    /* ==========================================================================
+       MOBILE: CLEAN HEADER — logo left, hamburger right, nothing else
+       ========================================================================== */
+
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 0;
+        padding: 8px 16px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    /* Show hamburger toggle */
+    .nav-toggle {
+        display: flex;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hide header-actions in the header bar — they appear inside nav overlay */
+    .header-actions {
+        display: none;
+    }
+
+    /* ==========================================================================
+       MOBILE: HAMBURGER → X ANIMATION
+       The toggle has 3 <span> children. When nav.active, the middle span
+       fades out and the top/bottom rotate to form an X.
+       ========================================================================== */
+
+    .nav-toggle span {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: center;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Reset when closed */
+    .nav-toggle[aria-expanded="false"] span:nth-child(1),
+    .nav-toggle[aria-expanded="false"] span:nth-child(3) {
+        transform: none;
+    }
+
+    .nav-toggle[aria-expanded="false"] span:nth-child(2) {
+        opacity: 1;
+    }
+
+    /* ==========================================================================
+       MOBILE: FULLSCREEN NAV OVERLAY
+       ========================================================================== */
+
+    nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh; /* dynamic viewport height for mobile browsers */
+        background: rgba(13, 27, 42, 0.97);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        z-index: 1000;
+        padding: 80px 20px 40px;
+        padding-top: max(80px, calc(env(safe-area-inset-top) + 60px));
+        padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 20px));
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    /* --- Nav items: white, centered, vertical --- */
+    .nav-item {
+        color: white;
+        font-size: 18px;
+        padding: 14px 20px;
+        width: 100%;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-item:hover,
+    .nav-item:active {
+        border-bottom-color: var(--accent);
+        color: var(--accent);
+    }
+
+    /* ==========================================================================
+       MOBILE: DROPDOWN MENUS — expand inline on tap, not hover
+       ========================================================================== */
+
+    .dropdown {
+        width: 100%;
+        text-align: center;
     }
 
     .dropdown-content {
@@ -1467,98 +1820,572 @@ footer {
         display: none;
         box-shadow: none;
         border: none;
+        border-top: none;
+        transform: none;
+        left: auto;
+        background: rgba(255,255,255,0.05);
+        border-radius: 0;
+        min-width: 100%;
     }
 
-    .dropdown.active .dropdown-content {
-        display: block;
+    /* Only open via JS .open class on mobile — disable hover */
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+        display: none;
     }
 
     .dropdown.open .dropdown-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 12px;
-        padding: 12px 0;
+        gap: 0;
+        padding: 8px 0;
+        transform: none;
     }
 
-    .dropdown:hover .dropdown-content {
+    .dropdown-content a {
+        color: rgba(255,255,255,0.85);
+        padding: 12px 20px;
+        justify-content: center;
+        border-bottom: none;
+        min-height: 44px;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content a:active {
+        background: rgba(255,255,255,0.1);
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .dropdown-header {
+        color: var(--accent);
+        opacity: 0.8;
+        padding: 10px 20px 4px;
+    }
+
+    .dropdown-header:not(:first-child) {
+        border-top-color: rgba(255,255,255,0.1);
+    }
+
+    /* Rotate chevron when dropdown is open */
+    .dropdown.open > .nav-item .icon-svg svg {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+
+    /* ==========================================================================
+       MOBILE: CTA BLOCK INSIDE NAV OVERLAY (phone + Free Estimate)
+       Cloned into nav by nav.js — sits at bottom of overlay
+       ========================================================================== */
+
+    .mobile-nav-cta {
         display: none;
-    }
-
-    .header-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
         width: 100%;
-        flex-direction: column;
-        margin-left: 0;
+        max-width: 300px;
+        margin-top: auto; /* push to bottom of overlay */
+        padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.15);
     }
 
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
+    nav.active .mobile-nav-cta {
+        display: flex;
+    }
+
+    .mobile-nav-cta .phone-link {
+        color: white;
+        border-color: rgba(255,255,255,0.4);
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 12px 16px;
+    }
+
+    .mobile-nav-cta .phone-link:hover,
+    .mobile-nav-cta .phone-link:active {
+        background: white;
+        color: var(--secondary);
+    }
+
+    .mobile-nav-cta .cta-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ==========================================================================
+       MOBILE: HERO SECTION
+       ========================================================================== */
+
+    .hero {
+        padding: 60px 16px 50px;
+        min-height: auto;
     }
 
     .hero h1 {
-        font-size: 36px;
+        font-size: 28px;
+        line-height: 1.25;
+        margin-bottom: 12px;
     }
 
     .hero p {
-        font-size: 16px;
+        font-size: 15px;
+        margin-bottom: 20px;
     }
 
-    .nav-item {
-        width: 100%;
-        border-bottom: 2px solid var(--border);
+    .hero .tagline,
+    .hero .subtitle {
+        font-size: 13px;
+        letter-spacing: 1.5px;
     }
 
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.95);
+    /* Hero stats stack cleanly */
+    .hero-stats {
         flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .hero-stat,
+    .hero-stat-divider {
+        font-size: 14px;
+    }
+
+    /* Hero CTAs stack vertically, full width */
+    .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .hero-ctas a {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+        font-size: 15px;
+        min-height: 48px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        gap: 24px;
-        z-index: 1000;
     }
 
-    .nav-links a {
-        color: white !important;
-        font-size: 20px;
-        text-decoration: none;
+    /* ==========================================================================
+       MOBILE: TRUST BADGES — 2-column grid
+       ========================================================================== */
+
+    .trust-badges {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 16px;
     }
 
-    .nav-links.active {
-        display: flex;
+    .trust-badge {
+        font-size: 12px;
+        padding: 10px 8px;
+        text-align: center;
     }
 
-    .nav-toggle {
-        display: flex;
+    /* ==========================================================================
+       MOBILE: INTERIOR PAGE HERO
+       ========================================================================== */
+
+    .page-hero {
+        padding: 40px 16px 32px;
     }
 
     .page-hero h1 {
-        font-size: 32px;
+        font-size: 26px;
     }
+
+    .page-hero p {
+        font-size: 15px;
+    }
+
+    /* ==========================================================================
+       MOBILE: SECTION SPACING & LAYOUT
+       ========================================================================== */
+
+    .section {
+        padding: 40px 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-subtitle {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ==========================================================================
+       MOBILE: TWO-COLUMN LAYOUT → SINGLE COLUMN
+       ========================================================================== */
 
     .two-col {
         grid-template-columns: 1fr;
         gap: 28px;
     }
 
+    /* ==========================================================================
+       MOBILE: FORM STYLES — full-width inputs, good tap targets
+       ========================================================================== */
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        font-size: 16px; /* prevents iOS zoom on focus */
+        padding: 14px 16px;
+        min-height: 48px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    /* Full-width submit button with proper tap target */
+    .form-group + .cta-btn,
+    form .cta-btn,
+    button.cta-btn {
+        width: 100%;
+        min-height: 48px;
+        font-size: 16px;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ==========================================================================
+       MOBILE: WEATHER SECTION
+       ========================================================================== */
+
     .weather-content {
         grid-template-columns: 1fr;
     }
 
-    nav {
-        flex-direction: column;
-        width: 100%;
+    .weather-text h3 {
+        font-size: 24px;
     }
 
+    .weather-icon {
+        font-size: 80px;
+    }
+
+    /* ==========================================================================
+       MOBILE: COUNTIES / SERVICE AREAS
+       ========================================================================== */
+
+    .counties-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .county-block {
+        padding: 24px 16px 20px;
+    }
+
+    .county-name {
+        font-size: 18px;
+    }
+
+    .areas-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .area-tag {
+        font-size: 12px;
+        padding: 8px 6px;
+    }
+
+    /* ==========================================================================
+       MOBILE: WHY-US SECTION
+       ========================================================================== */
+
+    .why-us {
+        padding: 50px 16px;
+    }
+
+    .why-us-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .why-us .section-title {
+        font-size: 24px;
+    }
+
+    /* ==========================================================================
+       MOBILE: SERVICES GRID
+       ========================================================================== */
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 18px;
+    }
+
+    /* ==========================================================================
+       MOBILE: COMMUNITY SECTION
+       ========================================================================== */
+
+    .community-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .community {
+        padding: 50px 16px;
+    }
+
+    /* ==========================================================================
+       MOBILE: BIG CTA SECTION
+       ========================================================================== */
+
+    .big-cta {
+        padding: 40px 16px;
+    }
+
+    .big-cta h2 {
+        font-size: 24px;
+    }
+
+    .big-cta p {
+        font-size: 15px;
+    }
+
+    .big-cta .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ==========================================================================
+       MOBILE: FOOTER
+       ========================================================================== */
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    footer {
+        padding: 40px 16px 20px;
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+    }
+
+    /* ==========================================================================
+       MOBILE: HIGHLIGHT BOX
+       ========================================================================== */
+
+    .highlight-box {
+        padding: 24px 20px;
+    }
+
+    /* ==========================================================================
+       MOBILE: REVIEWS PAGE
+       ========================================================================== */
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .rating-summary {
+        padding: 32px 16px;
+    }
+
+    .rating-number {
+        font-size: 48px;
+    }
+
+    .review-card {
+        padding: 24px 20px;
+    }
+
+    /* ==========================================================================
+       MOBILE: PREVENT HORIZONTAL SCROLL
+       ========================================================================== */
+
+    html, body {
+        overflow-x: hidden;
+    }
 }
+
 /* ============================================================================
-   28. MOBILE BREAKPOINT (768px AND BELOW)
+   26b. FULL-WIDTH IMAGE BANNER
+   Used for hero/feature images that span the viewport edge-to-edge,
+   sandwiched between text sections.
    ========================================================================== */
 
+.full-width-image {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--dark);
+}
+
+.full-width-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 768px) {
+    .full-width-image img {
+        max-height: 320px;
+    }
+}
+
+/* ============================================================================
+   27. TINY SCREEN BREAKPOINT (≤ 480px) — iPhone SE, small Androids
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+    /* Tighter header padding on tiny screens */
+    .header-content {
+        padding: 6px 12px;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    /* Hero — slightly smaller type, tighter spacing */
+    .hero {
+        padding: 48px 14px 40px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+        line-height: 1.22;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero .tagline,
+    .hero .subtitle {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    /* Page hero on interior pages */
+    .page-hero {
+        padding: 32px 14px 26px;
+    }
+
+    .page-hero h1 {
+        font-size: 22px;
+        line-height: 1.25;
+    }
+
+    .page-hero p {
+        font-size: 14px;
+    }
+
+    /* Section heads scale down */
+    .section {
+        padding: 32px 14px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    /* Trust badges — single column avoids cramped 2-col on tiny screens */
+    .trust-badges {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    /* Why-us also goes single col */
+    .why-us-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    /* Big CTA */
+    .big-cta {
+        padding: 32px 14px;
+    }
+
+    .big-cta h2 {
+        font-size: 22px;
+    }
+
+    .big-cta p {
+        font-size: 14px;
+    }
+
+    /* Service area tags — single column on the smallest screens */
+    .areas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reviews — full single column */
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .rating-number {
+        font-size: 44px;
+    }
+
+    .rating-summary {
+        padding: 28px 14px;
+    }
+
+    /* Form labels and inputs more compact */
+    .form-group {
+        margin-bottom: 16px;
+    }
+}
 
