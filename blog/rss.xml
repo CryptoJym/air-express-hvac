@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Air Express HVAC — Field Notes</title>
+    <link>https://www.airexpresshvac.net/resources.html</link>
+    <description>Utah-specific heating and cooling advice from the Air Express HVAC team in Lehi.</description>
+    <language>en-us</language>
+    <atom:link href="https://www.airexpresshvac.net/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Tue, 07 Apr 2026 21:43:08 GMT</lastBuildDate>
+    <item>
+      <title><![CDATA[The Fall Furnace Checklist We Actually Do Before Utah Winter Hits]]></title>
+      <link>https://www.airexpresshvac.net/blog/fall-furnace-prep.html</link>
+      <guid>https://www.airexpresshvac.net/blog/fall-furnace-prep.html</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Every October we get the same panicked call: 'The heat just stopped.' Here's what our technicians check in September that keeps those calls from happening.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Seasonal Maintenance</category>
+    </item>
+    <item>
+      <title><![CDATA[Heat Pump vs. Furnace in Utah: The Honest Comparison]]></title>
+      <link>https://www.airexpresshvac.net/blog/heat-pump-vs-furnace-utah.html</link>
+      <guid>https://www.airexpresshvac.net/blog/heat-pump-vs-furnace-utah.html</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Utility ads say heat pumps. Old-school HVAC guys say furnaces. Here's what actually makes sense for a Utah house — with the math, the tradeoffs, and the honest answer.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Buying Guides</category>
+    </item>
+    <item>
+      <title><![CDATA[Why Your Utah AC Runs All Day in July (and What Actually Helps)]]></title>
+      <link>https://www.airexpresshvac.net/blog/summer-energy-efficiency.html</link>
+      <guid>https://www.airexpresshvac.net/blog/summer-energy-efficiency.html</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Your July power bill isn't your AC's fault — it's usually three things in your attic, your ducts, and your windows. Here's how we actually diagnose it.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Energy Efficiency</category>
+    </item>
+    <item>
+      <title><![CDATA[What Indoor Air Quality Actually Means at 4,500 Feet]]></title>
+      <link>https://www.airexpresshvac.net/blog/indoor-air-quality-utah.html</link>
+      <guid>https://www.airexpresshvac.net/blog/indoor-air-quality-utah.html</guid>
+      <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Utah's inversion winters and dry summers make indoor air a different problem than anywhere else. Here's what actually works — and what doesn't — at Wasatch Front altitude.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Indoor Air Quality</category>
+    </item>
+    <item>
+      <title><![CDATA[Spring AC Prep: What We Actually Check Before Utah Hits 100°F]]></title>
+      <link>https://www.airexpresshvac.net/blog/spring-ac-prep.html</link>
+      <guid>https://www.airexpresshvac.net/blog/spring-ac-prep.html</guid>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[The Utah Valley goes from cold mornings to 100-degree afternoons in about six weeks. Here's what we walk through every April so your AC is ready when the switch flips.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Seasonal Maintenance</category>
+    </item>
+  </channel>
+</rss>

@@ -8,6 +8,14 @@
               document.querySelector('nav');
 
     if (toggle && nav) {
+        // Create mobile CTA block inside nav (phone + estimate button)
+        var headerActions = document.querySelector('.header-actions');
+        if (headerActions) {
+            var mobileCta = headerActions.cloneNode(true);
+            mobileCta.classList.add('mobile-nav-cta');
+            nav.appendChild(mobileCta);
+        }
+
         toggle.addEventListener('click', function(e) {
             e.stopPropagation();
             nav.classList.toggle('active');
@@ -18,11 +26,13 @@
                 toggle.style.top = '20px';
                 toggle.style.right = '20px';
                 toggle.style.zIndex = '1002';
+                document.body.style.overflow = 'hidden';
             } else {
                 toggle.style.position = '';
                 toggle.style.top = '';
                 toggle.style.right = '';
                 toggle.style.zIndex = '';
+                document.body.style.overflow = '';
             }
         });
     }
@@ -104,9 +114,13 @@
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && nav && nav.classList.contains('active')) {
             nav.classList.remove('active');
+            document.body.style.overflow = '';
             if (toggle) {
                 toggle.setAttribute('aria-expanded', 'false');
                 toggle.style.position = '';
+                toggle.style.top = '';
+                toggle.style.right = '';
+                toggle.style.zIndex = '';
                 toggle.focus();
             }
         }
@@ -118,9 +132,13 @@
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 768 && nav.classList.contains('active')) {
                     nav.classList.remove('active');
+                    document.body.style.overflow = '';
                     if (toggle) {
                         toggle.setAttribute('aria-expanded', 'false');
                         toggle.style.position = '';
+                        toggle.style.top = '';
+                        toggle.style.right = '';
+                        toggle.style.zIndex = '';
                     }
                 }
             });
