@@ -6,7 +6,7 @@
     <description>Utah-specific heating and cooling advice from the Air Express HVAC team in Lehi.</description>
     <language>en-us</language>
     <atom:link href="https://www.airexpresshvac.net/blog/rss.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Tue, 07 Apr 2026 21:43:08 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2026 22:22:07 GMT</lastBuildDate>
     <item>
       <title><![CDATA[The Fall Furnace Checklist We Actually Do Before Utah Winter Hits]]></title>
       <link>https://www.airexpresshvac.net/blog/fall-furnace-prep.html</link>
@@ -44,6 +44,24 @@
       <category>Indoor Air Quality</category>
     </item>
     <item>
+      <title><![CDATA[Geothermal in Utah: Brutally Honest About When It Makes Sense]]></title>
+      <link>https://www.airexpresshvac.net/blog/geothermal-guide.html</link>
+      <guid>https://www.airexpresshvac.net/blog/geothermal-guide.html</guid>
+      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Geothermal heat pumps are a real thing, they work in Utah, and they're almost always the wrong answer for the house you're in right now. Here's why.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Buying Guides</category>
+    </item>
+    <item>
+      <title><![CDATA[What HVAC Actually Costs in Utah (Real Numbers, No Games)]]></title>
+      <link>https://www.airexpresshvac.net/blog/hvac-cost-guide.html</link>
+      <guid>https://www.airexpresshvac.net/blog/hvac-cost-guide.html</guid>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Every HVAC cost article online hides behind 'prices vary.' Here are the real numbers we quote in Lehi, Eagle Mountain, and Saratoga Springs in 2026. Ranges included.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Buying Guides</category>
+    </item>
+    <item>
       <title><![CDATA[Spring AC Prep: What We Actually Check Before Utah Hits 100°F]]></title>
       <link>https://www.airexpresshvac.net/blog/spring-ac-prep.html</link>
       <guid>https://www.airexpresshvac.net/blog/spring-ac-prep.html</guid>
@@ -51,6 +69,24 @@
       <description><![CDATA[The Utah Valley goes from cold mornings to 100-degree afternoons in about six weeks. Here's what we walk through every April so your AC is ready when the switch flips.]]></description>
       <author>noreply@airexpresshvac.net (The Air Express Team)</author>
       <category>Seasonal Maintenance</category>
+    </item>
+    <item>
+      <title><![CDATA[The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)]]></title>
+      <link>https://www.airexpresshvac.net/blog/hvac-buying-guide.html</link>
+      <guid>https://www.airexpresshvac.net/blog/hvac-buying-guide.html</guid>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Most HVAC buying guides are written by marketing departments. This one's written by the people who actually install the systems — and see which ones fail after five years.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Buying Guides</category>
+    </item>
+    <item>
+      <title><![CDATA[Furnace Not Heating? Ten Things to Check Before You Call Us]]></title>
+      <link>https://www.airexpresshvac.net/blog/winter-heating-troubleshooting.html</link>
+      <guid>https://www.airexpresshvac.net/blog/winter-heating-troubleshooting.html</guid>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Half the emergency furnace calls we get in January are problems the homeowner could have fixed in three minutes. Here's the checklist we walk through before we drive out.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Troubleshooting</category>
     </item>
   </channel>
 </rss>

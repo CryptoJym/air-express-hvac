@@ -753,8 +753,32 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.airexpresshvac.net/blog/geothermal-guide.html</loc>
+    <lastmod>Thu Apr 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/hvac-cost-guide.html</loc>
+    <lastmod>Sun Apr 19 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.airexpresshvac.net/blog/spring-ac-prep.html</loc>
     <lastmod>Tue Apr 14 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/hvac-buying-guide.html</loc>
+    <lastmod>Sat Feb 28 2026 17:00:00 GMT-0700 (Mountain Standard Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/winter-heating-troubleshooting.html</loc>
+    <lastmod>Wed Jan 14 2026 17:00:00 GMT-0700 (Mountain Standard Time)</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

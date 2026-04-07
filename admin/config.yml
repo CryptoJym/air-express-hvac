@@ -4,22 +4,22 @@
 # directly in the repository. Saved changes commit to the target branch
 # and Vercel rebuilds the site automatically.
 #
-# NOTE: To enable GitHub auth you must run a small OAuth proxy. The
-# simplest path is Netlify's free hosted git-gateway at
-# https://api.netlify.com/auth — wire this up once in the Netlify
-# identity dashboard and point the `base_url` below at it. Alternative:
-# self-host a tiny OAuth proxy on Vercel (see scripts/oauth-proxy
-# for a template when we get to it).
+# Authentication runs entirely on Vercel — no Netlify, no third-party
+# service. The OAuth proxy lives in api/auth.js and api/callback.js.
+# Setup instructions: see admin/OAUTH_SETUP.md.
 
 backend:
   name: github
   repo: CryptoJym/air-express-hvac
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  # Point at our own Vercel serverless OAuth proxy. The host is empty
+  # on purpose so Decap uses the same origin as the /admin/ page is
+  # served from (works for both production and preview deploys).
+  base_url: ""
+  auth_endpoint: api/auth
 
-# While auth is being wired up, uncomment this to test locally with
-# `npx decap-server` and the `local_backend` running on port 8081:
+# While developing locally, set local_backend: true and run
+# `npx decap-server` in a second terminal to bypass GitHub auth.
 # local_backend: true
 
 media_folder: "images"
