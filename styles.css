@@ -29,8 +29,13 @@ img {
 }
 
 /* Mobile nav CTA clone is created by nav.js — hide globally so it never
-   appears on desktop. Only the mobile media query reveals it when nav is open. */
-.mobile-nav-cta {
+   appears on desktop. The compound selector is required because the clone
+   also carries the .header-actions class (which is set to display: flex
+   later in the file); the compound selector raises specificity above
+   .header-actions so source order doesn't matter. The mobile reveal rule
+   inside @media (max-width: 768px) uses `nav.active .mobile-nav-cta` which
+   has equal specificity but comes later in source, so it wins on mobile. */
+.header-actions.mobile-nav-cta {
     display: none;
 }
 
