@@ -82,106 +82,189 @@
     </header>
 
     <main id="main">
-        <section class="page-hero">
-            <h1>Get Your Free Estimate</h1>
-            <p>Contact Your Local Utah HVAC Family Today</p>
-        </section>
-
-        <section class="section">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Get in Touch</h2>
-
-                    <div class="contact-method">
-                        <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-                        <div>
-                            <p>Call Us Anytime</p>
-                            <a href="tel:+18017668585">(801) 766-8585</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12c0 5.33 3.95 9.75 9 10.92V22h2v-2.08c5.05-1.17 9-5.59 9-10.92 0-5.52-4.48-10-10-10zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg></span>
-                        <div>
-                            <p>Service Area</p>
-                            <p>Lehi, Utah County & Salt Lake County</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg></span>
-                        <div>
-                            <p>Hours</p>
-                            <p>Mon-Fri: 7am-6pm<br>Sat: 8am-2pm<br>24/7 Emergency Service</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <div>
-                            <p>Customer Reviews</p>
-                            <p>4.9 Stars • 280+ Reviews</p>
-                        </div>
-                    </div>
-
-                    <div class="service-areas">
-                        <h3>We Serve These Communities</h3>
-                        <p>Lehi • Eagle Mountain • Saratoga Springs • Orem • Provo • Sandy • Alpine • Draper • Highland • Bluffdale • West Jordan • South Jordan • Pleasant Grove</p>
-                    </div>
+        <!-- ============ HERO ============ -->
+        <section class="contact-hero">
+            <div class="contact-hero-inner">
+                <p class="contact-hero-eyebrow">FREE ESTIMATE · NO PRESSURE · NO SCRIPTS</p>
+                <h1>Tell us what's wrong.<br>We'll come look.</h1>
+                <p class="contact-hero-sub">A real Air Express technician calls you back within the hour. No call centers. Lehi-local since 1996.</p>
+            </div>
+            <div class="contact-hero-stats" aria-label="Trust signals">
+                <div class="contact-stat">
+                    <span class="contact-stat-num">4.9★</span>
+                    <span class="contact-stat-label">280+ reviews</span>
                 </div>
-
-                <div class="contact-info">
-                    <h3>Request Your Free Estimate</h3>
-                    <form method="POST" action="https://formspree.io/f/xcontact" id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Your Name*</label>
-                            <input type="text" id="name" name="name" required aria-required="true">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address*</label>
-                            <input type="email" id="email" name="email" required aria-required="true">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number*</label>
-                            <input type="tel" id="phone" name="phone" required aria-required="true">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Your Address</label>
-                            <input type="text" id="address" name="address" placeholder="Lehi, Eagle Mountain, etc.">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="service">Service Type*</label>
-                            <select id="service" name="service" required>
-                                <option value="">-- Select Service --</option>
-                                <option value="ac">Air Conditioning</option>
-                                <option value="heating">Heating & Furnace</option>
-                                <option value="heat-pump">Heat Pumps</option>
-                                <option value="ventilation">Air Quality & Ventilation</option>
-                                <option value="maintenance">Maintenance & Tune-Up</option>
-                                <option value="emergency">Emergency Repair</option>
-                                <option value="other">Other Service</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Tell Us About Your Needs</label>
-                            <textarea id="message" name="message" placeholder="Describe your HVAC needs or concerns..."></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">Request Get Free Estimate</button>
-                    </form>
+                <div class="contact-stat">
+                    <span class="contact-stat-num">&lt;1hr</span>
+                    <span class="contact-stat-label">callback</span>
+                </div>
+                <div class="contact-stat">
+                    <span class="contact-stat-num">30 yr</span>
+                    <span class="contact-stat-label">family-owned</span>
+                </div>
+                <div class="contact-stat">
+                    <span class="contact-stat-num">24/7</span>
+                    <span class="contact-stat-label">emergency</span>
                 </div>
             </div>
         </section>
 
-        <section class="section" style="background: linear-gradient(135deg, #FDF8F4 0%, #F5EDE1 100%); padding: 60px 40px; border-radius: 4px; text-align: center; border: 2px solid var(--border);">
-            <h2 style="font-family: Georgia, serif; color: var(--primary); font-size: 32px; margin-bottom: 20px;">Need Immediate Help?</h2>
-            <p style="font-size: 18px; margin-bottom: 25px;">If your heat or AC isn't working, don't wait. Call us right now for emergency service.</p>
-            <a href="tel:+18017668585" style="display: inline-block; background: var(--secondary); color: white; padding: 16px 40px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 16px;">Call (801) 766-8585 Now</a>
+        <!-- ============ FORM + INFO ============ -->
+        <section class="contact-main">
+            <div class="contact-main-inner">
+
+                <article class="contact-form-card">
+                    <header class="contact-form-header">
+                        <h2>Start your free estimate</h2>
+                        <p>A few details so we can show up prepared. Takes about 90 seconds.</p>
+                    </header>
+
+                    <form method="POST" action="https://formspree.io/f/xcontact" id="contact-form" class="contact-form">
+                        <div class="contact-form-row">
+                            <div class="form-group">
+                                <label for="name">Your name<span class="req">*</span></label>
+                                <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email<span class="req">*</span></label>
+                                <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="contact-form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone<span class="req">*</span></label>
+                                <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" placeholder="(801) 555-0100">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">City</label>
+                                <input type="text" id="address" name="address" autocomplete="address-level2" placeholder="Lehi, Eagle Mountain, etc.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">What do you need help with?<span class="req">*</span></label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service…</option>
+                                <option value="ac">Air Conditioning</option>
+                                <option value="heating">Heating &amp; Furnace</option>
+                                <option value="heat-pump">Heat Pump</option>
+                                <option value="ventilation">Air Quality &amp; Ventilation</option>
+                                <option value="maintenance">Maintenance / Tune-Up</option>
+                                <option value="emergency">Emergency Repair</option>
+                                <option value="other">Something Else</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tell us what's going on</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Furnace makes a clicking noise. AC stopped cooling last week. Just bought a new home and want it tuned up. Anything is helpful."></textarea>
+                        </div>
+
+                        <button type="submit" class="contact-submit">
+                            Send My Free Estimate Request
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+
+                        <p class="contact-form-reassurance">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                            We respond same-day. No spam. No pressure.
+                        </p>
+                    </form>
+                </article>
+
+                <aside class="contact-info-stack">
+
+                    <div class="contact-info-block contact-info-phone">
+                        <span class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                        <div>
+                            <p class="contact-info-label">Talk to a real person</p>
+                            <a class="contact-info-phone-num" href="tel:+18017668585">(801) 766-8585</a>
+                            <p class="contact-info-detail">Answered by an actual technician, not a script.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block">
+                        <span class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                        <div>
+                            <p class="contact-info-label">Built for Utah hours</p>
+                            <p class="contact-info-detail">Mon–Fri 7a–6p · Sat 8a–2p<br>24/7 emergency line, every day of the year.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block">
+                        <span class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                        <div>
+                            <p class="contact-info-label">Where we show up</p>
+                            <ul class="contact-areas">
+                                <li>Lehi</li>
+                                <li>Eagle Mountain</li>
+                                <li>Saratoga Springs</li>
+                                <li>Orem</li>
+                                <li>Provo</li>
+                                <li>Sandy</li>
+                                <li>Alpine</li>
+                                <li>Draper</li>
+                                <li>Highland</li>
+                                <li>Bluffdale</li>
+                                <li>West Jordan</li>
+                                <li>South Jordan</li>
+                                <li>Pleasant Grove</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </aside>
+            </div>
+        </section>
+
+        <!-- ============ WHAT HAPPENS NEXT ============ -->
+        <section class="contact-steps">
+            <div class="contact-steps-inner">
+                <h2>What happens after you hit send</h2>
+                <ol class="contact-steps-list">
+                    <li>
+                        <span class="contact-step-num">1</span>
+                        <h3>We call you back</h3>
+                        <p>A real Air Express technician — not a dispatcher — calls within the hour during business hours, or first thing the next morning if it's late.</p>
+                    </li>
+                    <li>
+                        <span class="contact-step-num">2</span>
+                        <h3>We come look in person</h3>
+                        <p>Free, no-pressure on-site walkthrough. We size the job, explain the options in plain English, and write up an honest estimate.</p>
+                    </li>
+                    <li>
+                        <span class="contact-step-num">3</span>
+                        <h3>You decide</h3>
+                        <p>No high-pressure close. No "today only" pricing. You take the estimate, talk it over, and call us when you're ready.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ TRUST IMAGE BAND ============ -->
+        <section class="contact-band" aria-label="Why we're different">
+            <div class="contact-band-inner">
+                <p class="contact-band-quote">
+                    “We answer the phone. We show up when we say.<br>We don't sell you what you don't need.”
+                </p>
+                <p class="contact-band-attrib">— The Air Express family, Lehi · since 1996</p>
+            </div>
+        </section>
+
+        <!-- ============ EMERGENCY STRIP ============ -->
+        <section class="contact-emergency">
+            <div class="contact-emergency-inner">
+                <span class="contact-emergency-pulse" aria-hidden="true"></span>
+                <div>
+                    <h2>No heat at midnight? No AC in July?</h2>
+                    <p>Don't fill out a form. Pick up the phone — we pick up.</p>
+                </div>
+                <a href="tel:+18017668585" class="contact-emergency-cta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    (801) 766-8585
+                </a>
+            </div>
         </section>
     </main>
 
