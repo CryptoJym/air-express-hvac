@@ -111,6 +111,16 @@
       "permanent": true
     },
     {
+      "source": "/hvac-terminology.html",
+      "destination": "/blog/hvac-glossary.html",
+      "permanent": true
+    },
+    {
+      "source": "/hvac-terminology",
+      "destination": "/blog/hvac-glossary.html",
+      "permanent": true
+    },
+    {
       "source": "/404",
       "destination": "/404.html",
       "permanent": true
