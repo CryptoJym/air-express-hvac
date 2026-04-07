@@ -734,5 +734,29 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/heat-pump-vs-furnace-utah.html</loc>
+    <lastmod>Tue Jun 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/summer-energy-efficiency.html</loc>
+    <lastmod>Tue Jun 09 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/indoor-air-quality-utah.html</loc>
+    <lastmod>Tue May 19 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.airexpresshvac.net/blog/spring-ac-prep.html</loc>
+    <lastmod>Tue Apr 14 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- BLOG_POSTS_END -->
 </urlset>
