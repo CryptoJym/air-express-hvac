@@ -227,7 +227,47 @@ nav {
     border: 2px solid var(--secondary);
     border-top: 3px solid var(--secondary);
     border-radius: var(--radius-md);
-    overflow: hidden;
+    /* Capacity-aware scrolling: when the menu is taller than the available
+       viewport space (laptops in landscape, half-screen windows, zoomed
+       browsers), the user can scroll within the menu instead of items
+       being clipped offscreen. The scrollbar is intentionally minimal and
+       only appears when needed — capacity over decoration. */
+    max-height: calc(100vh - 140px);
+    max-height: calc(100dvh - 140px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(169, 67, 46, 0.35) transparent;
+    scroll-behavior: smooth;
+}
+
+/* WebKit (Chrome, Safari, Edge) — refined thin scrollbar that fades in
+   only on hover, so the menu reads as clean by default and only reveals
+   the affordance when the user is actually engaging. */
+.dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 999px;
+    transition: background 0.3s ease;
+}
+
+.dropdown-content:hover::-webkit-scrollbar-thumb,
+.dropdown-content:focus-within::-webkit-scrollbar-thumb {
+    background: rgba(169, 67, 46, 0.4);
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(169, 67, 46, 0.7);
 }
 
 /* Show dropdown on hover */
@@ -1831,6 +1871,10 @@ footer {
         background: rgba(255,255,255,0.05);
         border-radius: 0;
         min-width: 100%;
+        /* Mobile: dropdown is inline inside the fullscreen nav overlay,
+           which already handles scrolling. Reset desktop max-height. */
+        max-height: none;
+        overflow: visible;
     }
 
     /* Only open via JS .open class on mobile — disable hover */
