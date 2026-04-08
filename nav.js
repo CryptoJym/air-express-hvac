@@ -8,6 +8,13 @@
               document.querySelector('nav');
 
     if (toggle && nav) {
+        // Mark the nav as a modal dialog for assistive tech.
+        // role="dialog" + aria-modal="true" tells screen readers it's a
+        // modal context; aria-label gives it an accessible name.
+        nav.setAttribute('role', 'dialog');
+        nav.setAttribute('aria-modal', 'true');
+        nav.setAttribute('aria-label', 'Site navigation');
+
         // Create mobile CTA block inside nav (phone + estimate button)
         var headerActions = document.querySelector('.header-actions');
         if (headerActions) {
@@ -16,23 +23,122 @@
             nav.appendChild(mobileCta);
         }
 
-        toggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            nav.classList.toggle('active');
-            var expanded = nav.classList.contains('active');
-            toggle.setAttribute('aria-expanded', String(expanded));
-            if (expanded) {
-                toggle.style.position = 'fixed';
-                toggle.style.top = '20px';
-                toggle.style.right = '20px';
-                toggle.style.zIndex = '1002';
-                document.body.style.overflow = 'hidden';
+        // Track elements we mark inert when the overlay opens, so we can
+        // restore them on close. We use the inert attribute (now baseline
+        // supported) to remove background content from the focus order.
+        var inertedSiblings = [];
+        var lastFocusedBeforeOpen = null;
+
+        var setBackgroundInert = function (inert) {
+            // Mark every direct child of <body> EXCEPT the header (which
+            // contains the nav itself) as inert. This is the simplest
+            // way to fully isolate the modal from the rest of the page.
+            if (inert) {
+                inertedSiblings = [];
+                var bodyChildren = document.body.children;
+                for (var i = 0; i < bodyChildren.length; i++) {
+                    var el = bodyChildren[i];
+                    if (el.contains(nav)) continue;
+                    if (el.tagName === 'SCRIPT' || el.tagName === 'NOSCRIPT') continue;
+                    if (el.hasAttribute('inert')) continue;
+                    el.setAttribute('inert', '');
+                    el.setAttribute('aria-hidden', 'true');
+                    inertedSiblings.push(el);
+                }
             } else {
-                toggle.style.position = '';
-                toggle.style.top = '';
-                toggle.style.right = '';
-                toggle.style.zIndex = '';
-                document.body.style.overflow = '';
+                inertedSiblings.forEach(function (el) {
+                    el.removeAttribute('inert');
+                    el.removeAttribute('aria-hidden');
+                });
+                inertedSiblings = [];
+            }
+        };
+
+        var moveFocusIntoNav = function () {
+            // Move focus to the first focusable inside the nav so keyboard
+            // users land in the menu, not somewhere offscreen.
+            var firstFocusable = nav.querySelector(
+                'a, button, [tabindex]:not([tabindex="-1"])'
+            );
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
+        };
+
+        var openNav = function () {
+            lastFocusedBeforeOpen = document.activeElement;
+            nav.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.style.position = 'fixed';
+            toggle.style.top = '20px';
+            toggle.style.right = '20px';
+            toggle.style.zIndex = '1002';
+            document.body.style.overflow = 'hidden';
+            setBackgroundInert(true);
+            // Defer focus to next frame so the overlay is paint-ready
+            window.requestAnimationFrame(moveFocusIntoNav);
+        };
+
+        var closeNav = function () {
+            nav.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.style.position = '';
+            toggle.style.top = '';
+            toggle.style.right = '';
+            toggle.style.zIndex = '';
+            document.body.style.overflow = '';
+            setBackgroundInert(false);
+            // Restore focus to whatever the user was on before opening
+            if (lastFocusedBeforeOpen && typeof lastFocusedBeforeOpen.focus === 'function') {
+                lastFocusedBeforeOpen.focus();
+            } else {
+                toggle.focus();
+            }
+            lastFocusedBeforeOpen = null;
+        };
+
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (nav.classList.contains('active')) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        });
+
+        // Trap Tab key inside the overlay so keyboard users can't escape
+        // back to the inert background.
+        nav.addEventListener('keydown', function (e) {
+            if (e.key !== 'Tab' || !nav.classList.contains('active')) return;
+            var focusables = nav.querySelectorAll(
+                'a, button, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusables.length === 0) return;
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
+
+        // Escape closes the overlay
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && nav.classList.contains('active')) {
+                closeNav();
+            }
+        });
+
+        // Tapping a link inside the overlay closes it (mobile only).
+        // We listen on nav itself with delegation to catch clones too.
+        nav.addEventListener('click', function (e) {
+            var link = e.target.closest('a');
+            if (!link) return;
+            if (window.innerWidth <= 768 && nav.classList.contains('active')) {
+                closeNav();
             }
         });
     }
@@ -110,58 +216,33 @@
         }
     });
 
-    // Close mobile nav on Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && nav && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            document.body.style.overflow = '';
-            if (toggle) {
-                toggle.setAttribute('aria-expanded', 'false');
-                toggle.style.position = '';
-                toggle.style.top = '';
-                toggle.style.right = '';
-                toggle.style.zIndex = '';
-                toggle.focus();
-            }
-        }
-    });
+    // (mobile nav Escape + link-click handlers are inside the if (toggle && nav)
+    // block above, where they have access to the closeNav function that handles
+    // inert background restoration and focus return)
 
-    // Close mobile nav on link click
-    if (nav) {
-        nav.querySelectorAll('a:not(.dropdown > a)').forEach(function(link) {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768 && nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    document.body.style.overflow = '';
-                    if (toggle) {
-                        toggle.setAttribute('aria-expanded', 'false');
-                        toggle.style.position = '';
-                        toggle.style.top = '';
-                        toggle.style.right = '';
-                        toggle.style.zIndex = '';
-                    }
-                }
-            });
-        });
-    }
-
-    // Back-to-top button functionality
+    // Back-to-top button — uses the .visible class that styles.css already
+    // defines (opacity + visibility transition). The previous implementation
+    // set style.display directly, which never overrode the CSS visibility:hidden
+    // base state, so the button was invisible on every page.
     var backToTopBtn = document.querySelector('.back-to-top');
     if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-        });
+        var rafScheduled = false;
+        var updateVisibility = function () {
+            rafScheduled = false;
+            var scrolled = document.body.scrollTop > 300 || document.documentElement.scrollTop > 300;
+            backToTopBtn.classList.toggle('visible', scrolled);
+        };
+        window.addEventListener('scroll', function () {
+            if (rafScheduled) return;
+            rafScheduled = true;
+            window.requestAnimationFrame(updateVisibility);
+        }, { passive: true });
+        // Run once on load in case the page is already scrolled
+        updateVisibility();
 
-        backToTopBtn.addEventListener('click', function(e) {
+        backToTopBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 })();

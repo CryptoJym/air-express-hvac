@@ -17,6 +17,33 @@
           "value": "text/plain"
         }
       ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(webp|png|jpg|jpeg|svg|ico|woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(styles|nav)\\.(css|js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -1722,12 +1749,12 @@
     },
     {
       "source": "/fall-furnace-maintenance",
-      "destination": "/fall-furnace-maintenance.html",
+      "destination": "/blog/fall-furnace-prep.html",
       "permanent": true
     },
     {
       "source": "/fall-furnace-maintenance/",
-      "destination": "/fall-furnace-maintenance.html",
+      "destination": "/blog/fall-furnace-prep.html",
       "permanent": true
     },
     {
@@ -1792,12 +1819,12 @@
     },
     {
       "source": "/fix-hvac-system-when-it-stops-working",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/fix-hvac-system-when-it-stops-working/",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
@@ -2012,12 +2039,12 @@
     },
     {
       "source": "/geothermal-guide",
-      "destination": "/geothermal-guide.html",
+      "destination": "/blog/geothermal-guide.html",
       "permanent": true
     },
     {
       "source": "/geothermal-guide/",
-      "destination": "/geothermal-guide.html",
+      "destination": "/blog/geothermal-guide.html",
       "permanent": true
     },
     {
@@ -2127,12 +2154,12 @@
     },
     {
       "source": "/heat-pump-vs-furnace",
-      "destination": "/heat-pump-vs-furnace.html",
+      "destination": "/blog/heat-pump-vs-furnace-utah.html",
       "permanent": true
     },
     {
       "source": "/heat-pump-vs-furnace/",
-      "destination": "/heat-pump-vs-furnace.html",
+      "destination": "/blog/heat-pump-vs-furnace-utah.html",
       "permanent": true
     },
     {
@@ -2432,12 +2459,12 @@
     },
     {
       "source": "/hvac-buying-guide",
-      "destination": "/hvac-buying-guide.html",
+      "destination": "/blog/hvac-buying-guide.html",
       "permanent": true
     },
     {
       "source": "/hvac-buying-guide/",
-      "destination": "/hvac-buying-guide.html",
+      "destination": "/blog/hvac-buying-guide.html",
       "permanent": true
     },
     {
@@ -2452,12 +2479,12 @@
     },
     {
       "source": "/hvac-cost-guide",
-      "destination": "/hvac-cost-guide.html",
+      "destination": "/blog/hvac-cost-guide.html",
       "permanent": true
     },
     {
       "source": "/hvac-cost-guide/",
-      "destination": "/hvac-cost-guide.html",
+      "destination": "/blog/hvac-cost-guide.html",
       "permanent": true
     },
     {
@@ -2552,42 +2579,42 @@
     },
     {
       "source": "/hvac-system-short-cycling-causes",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/hvac-system-short-cycling-causes/",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/hvac-terminology",
-      "destination": "/hvac-terminology.html",
+      "destination": "/blog/hvac-glossary.html",
       "permanent": true
     },
     {
       "source": "/hvac-terminology/",
-      "destination": "/hvac-terminology.html",
+      "destination": "/blog/hvac-glossary.html",
       "permanent": true
     },
     {
       "source": "/hvac-troubleshooter",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/hvac-troubleshooter/",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/identifying-strange-hvac-odors",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/identifying-strange-hvac-odors/",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
@@ -2612,12 +2639,12 @@
     },
     {
       "source": "/incorrect-hvac-sizing-solutions",
-      "destination": "/hvac-buying-guide.html",
+      "destination": "/blog/hvac-buying-guide.html",
       "permanent": true
     },
     {
       "source": "/incorrect-hvac-sizing-solutions/",
-      "destination": "/hvac-buying-guide.html",
+      "destination": "/blog/hvac-buying-guide.html",
       "permanent": true
     },
     {
@@ -3442,22 +3469,22 @@
     },
     {
       "source": "/spring-ac-maintenance",
-      "destination": "/spring-ac-maintenance.html",
+      "destination": "/blog/spring-ac-prep.html",
       "permanent": true
     },
     {
       "source": "/spring-ac-maintenance/",
-      "destination": "/spring-ac-maintenance.html",
+      "destination": "/blog/spring-ac-prep.html",
       "permanent": true
     },
     {
       "source": "/summer-energy-efficiency",
-      "destination": "/summer-energy-efficiency.html",
+      "destination": "/blog/summer-energy-efficiency.html",
       "permanent": true
     },
     {
       "source": "/summer-energy-efficiency/",
-      "destination": "/summer-energy-efficiency.html",
+      "destination": "/blog/summer-energy-efficiency.html",
       "permanent": true
     },
     {
@@ -3522,12 +3549,12 @@
     },
     {
       "source": "/understanding-hvac-system-clicking-noises",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/understanding-hvac-system-clicking-noises/",
-      "destination": "/hvac-troubleshooter.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
@@ -3862,22 +3889,22 @@
     },
     {
       "source": "/winter-heating-troubleshooting",
-      "destination": "/winter-heating-troubleshooting.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/winter-heating-troubleshooting/",
-      "destination": "/winter-heating-troubleshooting.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/winter-is-coming-10-tips-to-winterize-your-home",
-      "destination": "/winter-heating-troubleshooting.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
       "source": "/winter-is-coming-10-tips-to-winterize-your-home/",
-      "destination": "/winter-heating-troubleshooting.html",
+      "destination": "/blog/winter-heating-troubleshooting.html",
       "permanent": true
     },
     {
