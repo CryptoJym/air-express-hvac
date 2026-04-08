@@ -48,12 +48,15 @@ const FEED_TITLE = "Air Express HVAC — Field Notes";
 const FEED_DESCRIPTION =
   "Utah-specific heating and cooling advice from the Air Express HVAC team in Lehi.";
 
-// Configure marked for plain, semantic HTML output
+// Configure marked for plain, semantic HTML output.
+// `headerIds` and `mangle` were removed in marked v5+; we now use the
+// gfmHeadingId extension to keep slug-style header IDs without warnings.
+import { gfmHeadingId } from "marked-gfm-heading-id";
+
+marked.use(gfmHeadingId());
 marked.setOptions({
   gfm: true,
   breaks: false,
-  headerIds: true,
-  mangle: false,
 });
 
 /**
@@ -79,6 +82,16 @@ function readPost(filePath) {
         )}`
       );
     }
+  }
+
+  // Validate slug — prevents path traversal via filesystem write later.
+  // Must be lowercase alphanumeric + hyphen, 1-80 chars, starting with
+  // a letter or digit. Rejects "../foo", "/etc/passwd", spaces, etc.
+  if (!/^[a-z0-9][a-z0-9-]{0,80}$/.test(fm.slug)) {
+    throw new Error(
+      `Invalid slug "${fm.slug}" in ${path.basename(filePath)} — ` +
+      `must match /^[a-z0-9][a-z0-9-]{0,80}$/`
+    );
   }
 
   const bodyHtml = marked.parse(parsed.content);

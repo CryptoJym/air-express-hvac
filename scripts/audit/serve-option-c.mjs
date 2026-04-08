@@ -12,7 +12,10 @@ const args = new Map(
 );
 
 const PORT = Number(args.get('port') || process.env.PORT || 4173);
-const root = path.resolve(process.cwd(), 'option-c');
+// Production deploys serve the repo root, not option-c/. This script
+// previously rooted at option-c/ which meant local tests ran against
+// stale files. Switch to serving the repo root so tests match production.
+const root = process.cwd();
 const vercelConfigPath = path.join(root, 'vercel.json');
 
 const contentTypes = new Map([
@@ -45,8 +48,18 @@ function resolveRequestPath(requestUrl) {
   const normalized = path.normalize(rawPath).replace(/^(\.\.[/\\])+/, '');
   const candidate = path.join(root, normalized);
 
-  if (existsSync(candidate) && statSync(candidate).isFile()) {
-    return candidate;
+  if (existsSync(candidate)) {
+    const stat = statSync(candidate);
+    if (stat.isFile()) {
+      return candidate;
+    }
+    // Directory request — look for an index.html inside (mirrors Vercel)
+    if (stat.isDirectory()) {
+      const indexCandidate = path.join(candidate, 'index.html');
+      if (existsSync(indexCandidate) && statSync(indexCandidate).isFile()) {
+        return indexCandidate;
+      }
+    }
   }
 
   if (!path.extname(candidate)) {
@@ -81,5 +94,5 @@ createServer((req, res) => {
 
   createReadStream(filePath).pipe(res);
 }).listen(PORT, '127.0.0.1', () => {
-  console.log(`Serving option-c from ${root} on http://127.0.0.1:${PORT}`);
+  console.log(`Serving repo root from ${root} on http://127.0.0.1:${PORT}`);
 });
