@@ -6,7 +6,7 @@
     <description>Utah-specific heating and cooling advice from the Air Express HVAC team in Lehi.</description>
     <language>en-us</language>
     <atom:link href="https://www.airexpresshvac.net/blog/rss.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Tue, 07 Apr 2026 22:22:07 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2026 22:41:52 GMT</lastBuildDate>
     <item>
       <title><![CDATA[The Fall Furnace Checklist We Actually Do Before Utah Winter Hits]]></title>
       <link>https://www.airexpresshvac.net/blog/fall-furnace-prep.html</link>
@@ -15,6 +15,15 @@
       <description><![CDATA[Every October we get the same panicked call: 'The heat just stopped.' Here's what our technicians check in September that keeps those calls from happening.]]></description>
       <author>noreply@airexpresshvac.net (The Air Express Team)</author>
       <category>Seasonal Maintenance</category>
+    </item>
+    <item>
+      <title><![CDATA[The Plain-English HVAC Glossary for Utah Homeowners]]></title>
+      <link>https://www.airexpresshvac.net/blog/hvac-glossary.html</link>
+      <guid>https://www.airexpresshvac.net/blog/hvac-glossary.html</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Every HVAC term you'll see on a quote, an inspection report, or a sales pitch — defined in plain English by the people who actually install the equipment.]]></description>
+      <author>noreply@airexpresshvac.net (The Air Express Team)</author>
+      <category>Reference</category>
     </item>
     <item>
       <title><![CDATA[Heat Pump vs. Furnace in Utah: The Honest Comparison]]></title>
