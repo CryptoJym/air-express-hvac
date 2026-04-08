@@ -5031,3 +5031,27 @@ footer {
         justify-content: center;
     }
 }
+
+/* ============================================================================
+   33. SERVICE HERO MODIFIERS — Phase 5B service detail pages
+   Uses CSS custom properties so each page just sets --hero-bg-mobile and
+   --hero-bg-desktop in an inline style, no per-page CSS class explosion.
+   ========================================================================== */
+
+.service-hero[style*="--hero-bg-mobile"] {
+    background-image: linear-gradient(180deg,
+        rgba(13, 27, 42, 0.82) 0%,
+        rgba(13, 27, 42, 0.55) 45%,
+        rgba(13, 27, 42, 0.92) 100%),
+        var(--hero-bg-mobile);
+}
+
+@media (min-width: 901px) {
+    .service-hero[style*="--hero-bg-desktop"] {
+        background-image: linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+            var(--hero-bg-desktop);
+    }
+}
