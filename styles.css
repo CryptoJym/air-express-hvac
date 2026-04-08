@@ -4670,3 +4670,364 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 6px 14px -4px rgba(169, 67, 46, 0.4);
 }
+
+/* ============================================================================
+   32. SERVICE PAGE EDITORIAL HERO + TRUST CARD COMPONENT
+   Used by heating-services.html, ac-services.html, and other pillar pages
+   that have moved off the old .page-hero centered text-only treatment.
+   ========================================================================== */
+
+/* ── SERVICE HERO ─────────────────────────────────────────────────────────── */
+.service-hero {
+    position: relative;
+    color: white;
+    padding: 120px 24px 0;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+        rgba(13, 27, 42, 0.82) 0%,
+        rgba(13, 27, 42, 0.55) 45%,
+        rgba(13, 27, 42, 0.92) 100%) center / cover no-repeat;
+}
+
+.service-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, rgba(166, 95, 26, 0.22) 0%, transparent 55%);
+    pointer-events: none;
+}
+
+/* Per-page background images, with responsive variants */
+.service-hero--heating {
+    background-image: linear-gradient(180deg,
+        rgba(13, 27, 42, 0.82) 0%,
+        rgba(13, 27, 42, 0.55) 45%,
+        rgba(13, 27, 42, 0.92) 100%),
+        url('/images/winter-heating-troubleshooting-1200.webp');
+}
+
+.service-hero--cooling {
+    background-image: linear-gradient(180deg,
+        rgba(13, 27, 42, 0.82) 0%,
+        rgba(13, 27, 42, 0.55) 45%,
+        rgba(13, 27, 42, 0.92) 100%),
+        url('/images/ac-service-action-utah-1200.webp');
+}
+
+@media (min-width: 901px) {
+    .service-hero--heating {
+        background-image: linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+            url('/images/winter-heating-troubleshooting-1800.webp');
+    }
+    .service-hero--cooling {
+        background-image: linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+            url('/images/ac-service-action-utah-1800.webp');
+    }
+}
+
+@media (min-width: 1900px) {
+    .service-hero--heating {
+        background-image: linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+            url('/images/winter-heating-troubleshooting.webp');
+    }
+    .service-hero--cooling {
+        background-image: linear-gradient(180deg,
+            rgba(13, 27, 42, 0.82) 0%,
+            rgba(13, 27, 42, 0.55) 45%,
+            rgba(13, 27, 42, 0.92) 100%),
+            url('/images/ac-service-action-utah.webp');
+    }
+}
+
+.service-hero-inner {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 56px;
+}
+
+.service-hero-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #F4C078;
+    margin: 0 0 18px;
+    text-transform: uppercase;
+}
+
+.service-hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+    color: white;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    max-width: 22ch;
+}
+
+.service-hero-sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 56ch;
+    margin: 0 0 28px;
+}
+
+.service-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--secondary);
+    color: white;
+    text-decoration: none;
+    padding: 17px 36px;
+    border-radius: var(--radius-sm);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 12px 28px -10px rgba(169, 67, 46, 0.55);
+    transition: transform 0.18s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.service-hero-cta:hover {
+    background: #8B3520;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -10px rgba(169, 67, 46, 0.65);
+}
+
+.service-hero-cta svg {
+    transition: transform 0.22s ease;
+}
+
+.service-hero-cta:hover svg {
+    transform: translateX(4px);
+}
+
+.service-hero-stats {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 24px 0;
+}
+
+.service-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.service-stat:last-child {
+    border-right: none;
+}
+
+.service-stat-num {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+
+.service-stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 6px;
+}
+
+/* ── TRUST CARD ───────────────────────────────────────────────────────────── */
+/* Replaces the inline-styled "Honest Pricing for Utah Families" block that
+   used to live OUTSIDE <main> on heating-services, ac-services, residential. */
+.trust-card {
+    background: var(--light);
+    padding: 80px 24px;
+}
+
+.trust-card-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 56px 48px;
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px -20px rgba(13, 27, 42, 0.18);
+    text-align: center;
+}
+
+.trust-card-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--secondary);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+}
+
+.trust-card h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(26px, 3vw, 36px);
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 0 0 18px;
+    letter-spacing: -0.005em;
+}
+
+.trust-card p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    max-width: 56ch;
+    margin: 0 auto 28px;
+}
+
+.trust-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+}
+
+.trust-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: var(--radius-sm);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    transition: transform 0.18s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.trust-card-btn--primary {
+    background: var(--secondary);
+    color: white;
+    border: 1.5px solid var(--secondary);
+    box-shadow: 0 8px 20px -8px rgba(169, 67, 46, 0.4);
+}
+
+.trust-card-btn--primary:hover {
+    background: #8B3520;
+    border-color: #8B3520;
+    transform: translateY(-2px);
+}
+
+.trust-card-btn--primary svg {
+    transition: transform 0.22s ease;
+}
+
+.trust-card-btn--primary:hover svg {
+    transform: translateX(4px);
+}
+
+.trust-card-btn--secondary {
+    background: white;
+    color: var(--primary);
+    border: 1.5px solid var(--border);
+}
+
+.trust-card-btn--secondary:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ── MOBILE — service hero + trust card ───────────────────────────────────── */
+@media (max-width: 768px) {
+    .service-hero {
+        padding: 88px 18px 0;
+        min-height: 520px;
+    }
+
+    .service-hero-inner {
+        padding-bottom: 36px;
+    }
+
+    .service-hero h1 {
+        font-size: 34px;
+        line-height: 1.08;
+        max-width: 100%;
+    }
+
+    .service-hero-sub {
+        font-size: 15px;
+    }
+
+    .service-hero-cta {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+    }
+
+    .service-hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 18px 0;
+    }
+
+    .service-stat {
+        padding: 14px 16px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-stat:nth-child(odd) {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-stat:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+
+    .service-stat-num {
+        font-size: 26px;
+    }
+
+    .trust-card {
+        padding: 56px 18px;
+    }
+
+    .trust-card-inner {
+        padding: 36px 24px;
+    }
+
+    .trust-card-actions {
+        flex-direction: column;
+    }
+
+    .trust-card-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
