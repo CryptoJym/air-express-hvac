@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /.backup/
-
-Sitemap: https://option-c-nine.vercel.app/sitemap.xml
