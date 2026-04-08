@@ -5229,3 +5229,266 @@ footer {
     }
 }
 
+/* ==========================================================================
+   35. Geo Pages — Breadcrumb, Long-form body, City Facts, FAQ
+   --------------------------------------------------------------------------
+   The 20 fat geo pages (ac-repair-*-ut.html etc.) use a distinct set of
+   body classes (.breadcrumb-section, .geo-content, .city-facts-box,
+   .faq-section) that never had CSS. Everything rendered with browser
+   defaults, which was the user-visible "poorly formatted" problem.
+
+   This section establishes the editorial typography rhythm those pages
+   were missing.
+   ========================================================================== */
+
+/* --- Breadcrumb --- */
+.breadcrumb-section {
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+}
+
+.breadcrumb-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.2px;
+}
+
+.breadcrumb-container a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.breadcrumb-container a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.breadcrumb-container .breadcrumb-sep {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--border);
+    font-weight: 400;
+}
+
+/* --- Long-form geo content --- */
+.geo-content {
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.geo-content h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 3vw, 38px);
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+}
+
+.geo-content h3 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: var(--primary);
+    line-height: 1.25;
+    margin: 48px 0 16px;
+    letter-spacing: -0.005em;
+}
+
+.geo-content p {
+    margin: 0 0 18px;
+}
+
+.geo-content > ul,
+.geo-content > ol {
+    margin: 0 0 24px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.geo-content > ul > li,
+.geo-content > ol > li {
+    position: relative;
+    padding: 10px 0 10px 32px;
+    line-height: 1.65;
+    border-bottom: 1px solid rgba(224, 213, 199, 0.45);
+}
+
+.geo-content > ul > li:last-child,
+.geo-content > ol > li:last-child {
+    border-bottom: none;
+}
+
+.geo-content > ul > li::before {
+    content: "✓";
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    color: var(--success);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.geo-content > ol {
+    counter-reset: geo-step;
+}
+
+.geo-content > ol > li {
+    counter-increment: geo-step;
+    padding-left: 44px;
+}
+
+.geo-content > ol > li::before {
+    content: counter(geo-step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* --- City Facts Box --- */
+.city-facts-box {
+    background: var(--light);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 32px 36px;
+    margin: 36px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.city-facts-box h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 18px;
+    line-height: 1.25;
+}
+
+.city-facts-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.city-facts-box > ul > li {
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid rgba(166, 95, 26, 0.18);
+    line-height: 1.65;
+    font-size: 16px;
+}
+
+.city-facts-box > ul > li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.city-facts-box > ul > li:first-child {
+    padding-top: 0;
+}
+
+.city-facts-box strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* --- FAQ Section (native <details> accordion) --- */
+.faq-section {
+    margin: 24px 0 32px;
+    border-top: 1px solid var(--border);
+}
+
+.faq-section details {
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+}
+
+.faq-section summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 48px 22px 0;
+    position: relative;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: var(--primary);
+    line-height: 1.35;
+    transition: color 0.18s ease;
+}
+
+.faq-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-section summary strong {
+    font-weight: 700;
+}
+
+.faq-section summary:hover {
+    color: var(--secondary);
+}
+
+.faq-section summary::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.22s ease;
+}
+
+.faq-section details[open] summary::after {
+    transform: translateY(-30%) rotate(-135deg);
+}
+
+.faq-section details p {
+    padding: 0 0 22px;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    max-width: 68ch;
+}
+
+@media (max-width: 700px) {
+    .geo-content {
+        font-size: 16px;
+    }
+    .geo-content h2 {
+        font-size: 26px;
+    }
+    .geo-content h3 {
+        font-size: 21px;
+        margin-top: 36px;
+    }
+    .city-facts-box {
+        padding: 24px 22px;
+    }
+    .faq-section summary {
+        font-size: 16px;
+        padding-right: 40px;
+    }
+}
+
+
