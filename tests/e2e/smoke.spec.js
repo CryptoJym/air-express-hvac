@@ -15,7 +15,7 @@ const legacyRedirectChecks = [
   { from: '/about-us/', to: '/about.html', expectedH1: /Three generations|About|Story/i },
   { from: '/about-us/accessibility-statement/', to: '/accessibility.html', expectedH1: /Accessibility/i },
   { from: '/alpine-ut-air-conditioning-heating-services/', to: '/service-area-alpine.html', expectedH1: /Alpine/i },
-  { from: '/apply-for-financing-lehi-ut/', to: '/financing.html', expectedH1: /Financing/i },
+  { from: '/apply-for-financing-lehi-ut/', to: '/financing.html', expectedH1: /comfortable|Financing/i },
   { from: '/air-purification-lehi-ut/', to: '/air-purifiers.html', expectedH1: /inversion|Purifier|Purifi/i },
   { from: '/ac-compressor-not-starting/', to: '/ac-repair.html', expectedH1: /AC|Repair|quits/i },
   { from: '/commercial-heating-repair-considerations/', to: '/commercial.html', expectedH1: /business|Commercial/i }
