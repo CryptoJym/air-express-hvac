@@ -5060,10 +5060,13 @@ footer {
    34. Heat Pump Math Block + Brand Strip
    ========================================================================== */
 
+/* Full-bleed light section. Padding lives here (not on `.section`) so the
+   background color extends to the viewport edges on wide screens. */
 .heat-pump-math {
     background: var(--light);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    padding: 72px 24px;
 }
 
 .heat-pump-math-inner {
@@ -5147,6 +5150,9 @@ footer {
 }
 
 @media (max-width: 900px) {
+    .heat-pump-math {
+        padding: 56px 20px;
+    }
     .heat-pump-math-inner {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -5159,8 +5165,9 @@ footer {
 /* --- Brand strip --- */
 .brand-strip {
     text-align: center;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding: 56px 24px;
+    max-width: 1180px;
+    margin: 0 auto;
 }
 
 .brand-strip-label {
