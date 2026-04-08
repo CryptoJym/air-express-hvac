@@ -4,10 +4,6 @@
   "type": "module",
   "scripts": {
     "serve:option-c": "node scripts/audit/serve-option-c.mjs",
-    "audit:repair": "node scripts/audit/remediate-option-c.mjs",
-    "audit:artifacts": "node scripts/audit/generate-artifacts.mjs",
-    "audit:redirects": "node scripts/audit/sync-route-redirects.mjs",
-    "audit:lighthouse": "node scripts/audit/run-lighthouse.mjs",
     "build:blog": "node scripts/build-blog.mjs",
     "vercel-build": "node scripts/build-blog.mjs",
     "test:e2e": "playwright test"

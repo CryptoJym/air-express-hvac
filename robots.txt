@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /.backup/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /option-c/
 
-Sitemap: https://option-c-nine.vercel.app/sitemap.xml
+Sitemap: https://www.airexpresshvac.net/sitemap.xml
