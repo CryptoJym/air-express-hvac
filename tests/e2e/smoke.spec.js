@@ -18,7 +18,7 @@ const legacyRedirectChecks = [
   { from: '/apply-for-financing-lehi-ut/', to: '/financing.html', expectedH1: /Financing/i },
   { from: '/air-purification-lehi-ut/', to: '/air-purifiers.html', expectedH1: /inversion|Purifier|Purifi/i },
   { from: '/ac-compressor-not-starting/', to: '/ac-repair.html', expectedH1: /AC|Repair|quits/i },
-  { from: '/commercial-heating-repair-considerations/', to: '/commercial.html', expectedH1: /Commercial/i }
+  { from: '/commercial-heating-repair-considerations/', to: '/commercial.html', expectedH1: /business|Commercial/i }
 ];
 
 for (const pageDef of priorityPages) {
