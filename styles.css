@@ -122,6 +122,7 @@ header {
 
 .logo img {
     height: auto;
+    width: 205px;
     display: block;
 }
 
@@ -1624,7 +1625,7 @@ footer {
     }
 
     .logo img {
-        width: 130px;
+        width: 175px;
     }
 
     .nav-item {
@@ -1763,7 +1764,7 @@ footer {
     }
 
     .logo img {
-        width: 120px;
+        width: 165px;
     }
 
     /* Show hamburger toggle */
@@ -1992,6 +1993,16 @@ footer {
     .hero {
         padding: 88px 18px 0;
         min-height: 540px;
+        /* Mobile gradient is darker in the lower third so the CTA button
+           never competes with the subjects (tech + homeowner) in the
+           background image. Also push background-position up so faces
+           land in the already-dark top gradient zone. */
+        background:
+            linear-gradient(180deg,
+                rgba(13, 27, 42, 0.88) 0%,
+                rgba(13, 27, 42, 0.72) 40%,
+                rgba(13, 27, 42, 0.97) 100%),
+            url('images/about-hero-utah-1200.webp') 50% 20% / cover no-repeat;
     }
 
     .hero-content {
@@ -2380,7 +2391,7 @@ footer {
     }
 
     .logo img {
-        width: 100px;
+        width: 140px;
     }
 
     /* Hero — slightly smaller type, tighter spacing */

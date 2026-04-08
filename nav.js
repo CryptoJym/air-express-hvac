@@ -8,11 +8,13 @@
               document.querySelector('nav');
 
     if (toggle && nav) {
-        // Mark the nav as a modal dialog for assistive tech.
-        // role="dialog" + aria-modal="true" tells screen readers it's a
-        // modal context; aria-label gives it an accessible name.
-        nav.setAttribute('role', 'dialog');
-        nav.setAttribute('aria-modal', 'true');
+        // NOTE: We USED to set role="dialog" + aria-modal="true" here on
+        // every page load. That caused iOS Safari to render the desktop
+        // header nav with popover-like decorations on blog pages (the
+        // client-reported "odd pop over, over the content"). The nav is
+        // only a modal overlay on mobile when .active is set — so we
+        // now apply those attributes in openNav() and strip them in
+        // closeNav() instead of on initialization.
         nav.setAttribute('aria-label', 'Site navigation');
 
         // Create mobile CTA block inside nav (phone + estimate button)
@@ -68,6 +70,11 @@
         var openNav = function () {
             lastFocusedBeforeOpen = document.activeElement;
             nav.classList.add('active');
+            // Only now does the nav become a modal dialog context. Screen
+            // readers and iOS Safari will treat it as a modal only while
+            // it's visibly an overlay.
+            nav.setAttribute('role', 'dialog');
+            nav.setAttribute('aria-modal', 'true');
             toggle.setAttribute('aria-expanded', 'true');
             toggle.style.position = 'fixed';
             toggle.style.top = '20px';
@@ -81,6 +88,8 @@
 
         var closeNav = function () {
             nav.classList.remove('active');
+            nav.removeAttribute('role');
+            nav.removeAttribute('aria-modal');
             toggle.setAttribute('aria-expanded', 'false');
             toggle.style.position = '';
             toggle.style.top = '';
