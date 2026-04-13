@@ -27,9 +27,9 @@ public_folder: "/images"
 
 publish_mode: editorial_workflow
 
-site_url: https://www.airexpresshvac.net
-display_url: https://www.airexpresshvac.net
-logo_url: https://www.airexpresshvac.net/images/air-logo.webp
+site_url: https://airexpressutah.com
+display_url: https://airexpressutah.com
+logo_url: https://airexpressutah.com/images/air-logo.webp
 
 collections:
   - name: "blog"

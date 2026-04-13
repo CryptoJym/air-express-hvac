@@ -5,4 +5,4 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /option-c/
 
-Sitemap: https://www.airexpresshvac.net/sitemap.xml
+Sitemap: https://airexpressutah.com/sitemap.xml

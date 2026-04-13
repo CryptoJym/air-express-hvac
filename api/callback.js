@@ -82,7 +82,19 @@ function parseCookie(header, name) {
   return null;
 }
 
-export async function GET(request) {
+export const config = { runtime: "edge" };
+
+export default async function callbackHandler(request) {
+  if (request.method !== "GET") {
+    return new Response("Method Not Allowed", {
+      status: 405,
+      headers: {
+        Allow: "GET",
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+    });
+  }
+
   const clientId = process.env.OAUTH_GITHUB_CLIENT_ID;
   const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET;
 
@@ -136,18 +148,21 @@ export async function GET(request) {
   // Exchange the short-lived code for an access token
   let tokenResponse;
   try {
+    const tokenParams = new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      code,
+      redirect_uri: `${url.origin}/api/callback`,
+    });
+
     tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
         "User-Agent": "Air-Express-HVAC-Decap-OAuth",
       },
-      body: JSON.stringify({
-        client_id: clientId,
-        client_secret: clientSecret,
-        code,
-      }),
+      body: tokenParams.toString(),
     });
   } catch (err) {
     console.error(`[decap-oauth] token exchange network error: ${err.message}`);

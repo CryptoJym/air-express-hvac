@@ -8,7 +8,7 @@
     <meta name="description" content="Schedule your HVAC service appointment with Air Express HVAC in Lehi, UT. Call (801) 766-8585.">
     <meta name="keywords" content="HVAC, air conditioning, heating, furnace, Lehi UT, Utah County">
 <title>Schedule HVAC Service | Air Express HVAC</title>
-    <link rel="canonical" href="https://option-c-nine.vercel.app/schedule-service.html">
+    <link rel="canonical" href="https://airexpressutah.com/schedule-service.html">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -16,7 +16,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Air Express HVAC",
-        "image": "https://airexpresshvac.com/logo.webp",
+        "image": "https://airexpressutah.com/logo.webp",
         "telephone": "(801) 766-8585",
         "address": {
             "@type": "PostalAddress",
@@ -44,7 +44,7 @@
         <meta property="og:title" content="Schedule HVAC Service | Air Express HVAC">
     <meta property="og:description" content="Schedule your HVAC service appointment with Air Express HVAC in Lehi, UT. Call (801) 766-8585.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://option-c-nine.vercel.app/schedule-service.html">
+    <meta property="og:url" content="https://airexpressutah.com/schedule-service.html">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -146,7 +146,10 @@
                     <p><strong>Need it now?</strong> Call <a href="tel:+18017668585">(801) 766-8585</a> for same-day service.</p>
                 </div>
                 <div>
-                    <form method="POST" action="https://formspree.io/f/xcontact" id="schedule-form">
+                    <div class="intake-status" id="schedule-form-status" aria-live="polite" role="status" hidden></div>
+                    <form method="POST" action="/api/intake/schedule" id="schedule-form" data-intake-form="schedule" data-intake-return="/schedule-service.html">
+                        <input type="hidden" name="return_to" value="/schedule-service.html">
+                        <input type="hidden" name="source_path" value="/schedule-service.html">
                         <div class="form-group">
                             <label for="name">Your Name*</label>
                             <input type="text" id="name" name="name" required aria-required="true">
@@ -163,13 +166,13 @@
                             <label for="service">Service Type*</label>
                             <select id="service" name="service" required aria-required="true">
                                 <option value="">-- Select Service --</option>
-                                <option value="AC Repair">AC Repair</option>
-                                <option value="Heating Repair">Heating / Furnace Repair</option>
-                                <option value="Maintenance">Maintenance / Tune-Up</option>
-                                <option value="Installation">New Installation</option>
-                                <option value="Air Quality">Air Quality / Filters</option>
-                                <option value="Emergency">Emergency Service</option>
-                                <option value="Other">Other</option>
+                                <option value="air-conditioning-repair">AC Repair</option>
+                                <option value="heating-repair">Heating / Furnace Repair</option>
+                                <option value="maintenance-tune-up">Maintenance / Tune-Up</option>
+                                <option value="new-installation">New Installation</option>
+                                <option value="air-quality">Air Quality / Filters</option>
+                                <option value="emergency-service">Emergency Service</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -190,7 +193,6 @@
                             <label for="notes">Additional Notes</label>
                             <textarea id="notes" name="notes" rows="3" placeholder="Anything we should know..."></textarea>
                         </div>
-                        <input type="hidden" name="_subject" value="New Service Appointment — Air Express HVAC">
                         <button type="submit" class="cta-btn" style="width: 100%; text-align: center;">Schedule Service</button>
                     </form>
                 </div>
@@ -252,6 +254,7 @@
     <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
+    <script src="intake-form.js" defer></script>
     <script src="nav.js" defer></script>
 </body>
 </html>

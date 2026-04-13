@@ -42,7 +42,7 @@ const TEMPLATE_INDEX = path.join(ROOT, "templates", "blog-index.html");
 const RESOURCES_HTML = path.join(ROOT, "resources.html");
 const SITEMAP_XML = path.join(ROOT, "sitemap.xml");
 
-const SITE_URL = "https://www.airexpresshvac.net";
+const SITE_URL = "https://airexpressutah.com";
 const SITE_NAME = "Air Express HVAC";
 const FEED_TITLE = "Air Express HVAC — Field Notes";
 const FEED_DESCRIPTION =

@@ -8,7 +8,7 @@
     <meta name="description" content="Get a free HVAC estimate from Air Express HVAC in Lehi, UT. No obligation. Call (801) 766-8585.">
     <meta name="keywords" content="HVAC, air conditioning, heating, furnace, Lehi UT, Utah County">
 <title>Request a Free Estimate | Air Express HVAC</title>
-    <link rel="canonical" href="https://option-c-nine.vercel.app/request-estimate.html">
+    <link rel="canonical" href="https://airexpressutah.com/request-estimate.html">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -16,7 +16,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Air Express HVAC",
-        "image": "https://airexpresshvac.com/logo.webp",
+        "image": "https://airexpressutah.com/logo.webp",
         "telephone": "(801) 766-8585",
         "address": {
             "@type": "PostalAddress",
@@ -44,7 +44,7 @@
         <meta property="og:title" content="Request a Free Estimate | Air Express HVAC">
     <meta property="og:description" content="Get a free HVAC estimate from Air Express HVAC in Lehi, UT. No obligation. Call (801) 766-8585.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://option-c-nine.vercel.app/request-estimate.html">
+    <meta property="og:url" content="https://airexpressutah.com/request-estimate.html">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -146,7 +146,10 @@
                     <p><strong>Prefer to call?</strong> <a href="tel:+18017668585">(801) 766-8585</a></p>
                 </div>
                 <div>
-                    <form method="POST" action="https://formspree.io/f/xcontact" id="estimate-form">
+                    <div class="intake-status" id="estimate-form-status" aria-live="polite" role="status" hidden></div>
+                    <form method="POST" action="/api/intake/estimate" id="estimate-form" data-intake-form="estimate" data-intake-return="/request-estimate.html">
+                        <input type="hidden" name="return_to" value="/request-estimate.html">
+                        <input type="hidden" name="source_path" value="/request-estimate.html">
                         <div class="form-group">
                             <label for="name">Your Name*</label>
                             <input type="text" id="name" name="name" required aria-required="true">
@@ -167,22 +170,21 @@
                             <label for="service">Service Needed*</label>
                             <select id="service" name="service" required aria-required="true">
                                 <option value="">-- Select Service --</option>
-                                <option value="AC Repair">AC Repair</option>
-                                <option value="AC Installation">AC Installation</option>
-                                <option value="Heating Repair">Heating Repair</option>
-                                <option value="Furnace Installation">Furnace Installation</option>
-                                <option value="Heat Pump">Heat Pump</option>
-                                <option value="Air Quality">Air Quality / Filtration</option>
-                                <option value="Maintenance Plan">Maintenance Plan</option>
-                                <option value="New Construction">New Construction HVAC</option>
-                                <option value="Other">Other</option>
+                                <option value="air-conditioning-repair">AC Repair</option>
+                                <option value="air-conditioning-installation">AC Installation</option>
+                                <option value="heating-repair">Heating Repair</option>
+                                <option value="furnace-installation">Furnace Installation</option>
+                                <option value="heat-pump">Heat Pump</option>
+                                <option value="air-quality">Air Quality / Filtration</option>
+                                <option value="maintenance-tune-up">Maintenance Plan</option>
+                                <option value="new-construction">New Construction HVAC</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Tell Us More</label>
                             <textarea id="message" name="message" rows="4" placeholder="Describe what's going on or what you need..."></textarea>
                         </div>
-                        <input type="hidden" name="_subject" value="New Estimate Request — Air Express HVAC">
                         <button type="submit" class="cta-btn" style="width: 100%; text-align: center;">Request Free Estimate</button>
                     </form>
                 </div>
@@ -244,6 +246,7 @@
     <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
+    <script src="intake-form.js" defer></script>
     <script src="nav.js" defer></script>
 </body>
 </html>

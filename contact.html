@@ -12,14 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Air Express HVAC","telephone":"(801) 766-8585","address":{"@type":"PostalAddress","addressLocality":"Lehi","addressRegion":"UT"},"url":"https://www.airexpresshvac.net","areaServed":["Lehi","Eagle Mountain","Saratoga Springs","Orem","Provo","Sandy","Alpine"]}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Air Express HVAC","telephone":"(801) 766-8585","address":{"@type":"PostalAddress","addressLocality":"Lehi","addressRegion":"UT"},"url":"https://airexpressutah.com","areaServed":["Lehi","Eagle Mountain","Saratoga Springs","Orem","Provo","Sandy","Alpine"]}
 </script>
-    <link rel="canonical" href="https://www.airexpresshvac.net/contact.html">
+    <link rel="canonical" href="https://airexpressutah.com/contact.html">
     <meta property="og:title" content="Contact Air Express HVAC | Get Free Estimate">
     <meta property="og:description" content="Contact Air Express HVAC. Get a free estimate or call for emergency heating and cooling service in Utah County.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.airexpresshvac.net/contact.html">
-    <meta property="og:image" content="https://www.airexpresshvac.net/images/og-card-utah.webp">
+    <meta property="og:url" content="https://airexpressutah.com/contact.html">
+    <meta property="og:image" content="https://airexpressutah.com/images/og-card-utah.webp">
     <meta property="og:site_name" content="Air Express HVAC">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
@@ -121,7 +121,10 @@
                         <p>A few details so we can show up prepared. Takes about 90 seconds.</p>
                     </header>
 
-                    <form method="POST" action="https://formspree.io/f/xcontact" id="contact-form" class="contact-form">
+                    <div class="intake-status" id="contact-form-status" aria-live="polite" role="status" hidden></div>
+                    <form method="POST" action="/api/intake/contact" id="contact-form" class="contact-form" data-intake-form="contact" data-intake-return="/contact.html">
+                        <input type="hidden" name="return_to" value="/contact.html">
+                        <input type="hidden" name="source_path" value="/contact.html">
                         <div class="contact-form-row">
                             <div class="form-group">
                                 <label for="name">Your name<span class="req">*</span></label>
@@ -144,16 +147,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="service">What do you need help with?<span class="req">*</span></label>
-                            <select id="service" name="service" required>
-                                <option value="">Select a service…</option>
-                                <option value="ac">Air Conditioning</option>
-                                <option value="heating">Heating &amp; Furnace</option>
+                            <div class="form-group">
+                                <label for="service">What do you need help with?<span class="req">*</span></label>
+                                <select id="service" name="service" required>
+                                    <option value="">Select a service…</option>
+                                <option value="air-conditioning-repair">Air Conditioning</option>
+                                <option value="heating-repair">Heating &amp; Furnace</option>
                                 <option value="heat-pump">Heat Pump</option>
-                                <option value="ventilation">Air Quality &amp; Ventilation</option>
-                                <option value="maintenance">Maintenance / Tune-Up</option>
-                                <option value="emergency">Emergency Repair</option>
+                                <option value="air-quality">Air Quality &amp; Ventilation</option>
+                                <option value="maintenance-tune-up">Maintenance / Tune-Up</option>
+                                <option value="emergency-service">Emergency Repair</option>
                                 <option value="other">Something Else</option>
                             </select>
                         </div>
@@ -329,6 +332,7 @@
     <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
+    <script src="intake-form.js" defer></script>
     <script src="nav.js" defer></script>
 </body>
 </html>

@@ -8,6 +8,9 @@ in `/api/` and handle the GitHub OAuth flow:
 - `api/callback.js` — receives the GitHub callback, exchanges the code
   for an access token, posts it back to the Decap popup opener
 
+Both handlers are implemented as root `/api` Vercel Edge functions
+(`export const config = { runtime: "edge" }` with `export default`).
+
 To enable `/admin/` for real content editors, you need to do three
 one-time things.
 
@@ -17,11 +20,11 @@ one-time things.
    **New OAuth App**
 2. Fill in:
    - **Application name:** `Air Express HVAC CMS`
-   - **Homepage URL:** `https://www.airexpresshvac.net` (or your
+   - **Homepage URL:** `https://airexpressutah.com` (or your
      production domain, whichever is canonical)
    - **Application description:** `Internal content editor for the
      Air Express HVAC website`
-   - **Authorization callback URL:** `https://www.airexpresshvac.net/api/callback`
+   - **Authorization callback URL:** `https://airexpressutah.com/api/callback`
 3. Click **Register application**
 4. On the next screen, click **Generate a new client secret**
 5. Copy the **Client ID** and the **Client Secret** — you will not see
@@ -29,7 +32,7 @@ one-time things.
 
 > **Preview deploys:** The callback URL on the OAuth app must exactly
 > match the host that hits it. If you want to use `/admin/` on Vercel
-> preview deploys (like `option-c-nine.vercel.app`), create a **second**
+> preview deploys (like `your-preview-deploy.vercel.app`), create a **second**
 > GitHub OAuth App with that as its callback URL, or add multiple
 > callback URLs to the same app (GitHub allows this on OAuth apps
 > created after early 2024).
@@ -65,7 +68,7 @@ the authenticated user can already touch. So:
 
 ## How the flow works end-to-end
 
-1. Editor visits `https://www.airexpresshvac.net/admin/`
+1. Editor visits `https://airexpressutah.com/admin/`
 2. Decap CMS loads, shows a "Login with GitHub" button
 3. Editor clicks it → Decap opens a popup to `/api/auth`
 4. `api/auth.js` generates a CSRF state token, stashes it in an
