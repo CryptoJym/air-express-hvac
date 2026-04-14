@@ -6,7 +6,11 @@ import path from "node:path";
 const rootDir = process.cwd();
 const runbookPath = "docs/air-express-launch-runbook.md";
 const selfPath = "scripts/verify-host-normalization.mjs";
-const allowedRunbookTokens = new Set(["https://airexpresshvac.net"]);
+const allowedTokenByFile = new Map([
+  [runbookPath, new Set(["https://airexpresshvac.net"])],
+  ["scripts/verify-cutover.mjs", new Set(["https://airexpresshvac.net"])],
+  ["tests/unit/cutover-verification.test.js", new Set(["https://airexpresshvac.net"])],
+]);
 const blockedHostPattern =
   /https:\/\/(?:www\.)?airexpresshvac\.net|https:\/\/option-c-nine\.vercel\.app|https:\/\/airexpresshvac\.com/g;
 const excludedDirectories = new Set([
@@ -84,10 +88,10 @@ function collectOffenders(relativeFilePath) {
     }
 
     matches.forEach((token) => {
-      const isAllowedRunbookToken =
-        relativeFilePath === runbookPath && allowedRunbookTokens.has(token);
+      const allowedTokens = allowedTokenByFile.get(relativeFilePath);
+      const isAllowedToken = allowedTokens?.has(token) ?? false;
 
-      if (!isAllowedRunbookToken) {
+      if (!isAllowedToken) {
         offenders.push(`${relativeFilePath}:${index + 1}:${token}`);
       }
     });

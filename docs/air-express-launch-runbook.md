@@ -7,12 +7,13 @@ Verified status in this repo as of 2026-04-13:
 - Production ServiceTitan auth is working for tenant `4378713196`
 - The Vercel intake handlers are deployed and production-smoked successfully
 - `airexpressutah.com` and `www.airexpressutah.com` are attached to the Vercel project
-- The active production deployment is `dpl_CH8VJbHzJSuMniGeQi3kEhegKRbo`
+- The latest verified production deployment URL is `https://option-77ete12ih-vuplicity.vercel.app`
 - Vercel project protection mode is `all_except_custom_domains`
 - The `.vercel.app` deployment URL requires Vercel auth, but the custom domains will be public after DNS cutover
 - Production ServiceTitan env vars are present in Vercel
-- Decap CMS OAuth env vars are still missing in Vercel
+- Decap CMS OAuth env vars are present in Vercel and `/api/auth` has been verified against the canonical `airexpressutah.com` host header
 - DNS has not been cut over yet
+- Public nameservers for `airexpressutah.com` are still GoDaddy (`ns27.domaincontrol.com`, `ns28.domaincontrol.com`)
 
 Non-negotiables:
 
@@ -47,7 +48,7 @@ Phase 3:
 Operate in this order:
 
 1. Keep the current Vercel production deployment as the release candidate
-2. If `/admin` needs to work at launch, add `OAUTH_GITHUB_CLIENT_ID` and `OAUTH_GITHUB_CLIENT_SECRET` in Vercel and redeploy once
+2. `/admin` is already wired in Vercel; include it in the public post-cutover smoke once DNS is live
 3. Copy the current `airexpressutah.com` DNS zone into Cloudflare without changing any mail/auth records
 4. Verify every MX, SPF, DKIM, and verification TXT record in Cloudflare against the pre-cutover source
 5. Point only the website hostnames for `airexpressutah.com` to Vercel
@@ -93,7 +94,7 @@ Current blockers to clear before public cutover:
 
 - Real ServiceTitan integration auth still returns `invalid_client`, so sandbox parity is not available
 - DNS for `airexpressutah.com` still points to the registrar-managed zone, not Vercel
-- Decap CMS OAuth is not launch-ready until `OAUTH_GITHUB_CLIENT_ID` and `OAUTH_GITHUB_CLIENT_SECRET` are added in Vercel
+- The Cloudflare zone copy and nameserver cutover still need to be done outside this repo
 
 ## Phase 2 Vercel Domain Readiness
 
@@ -176,6 +177,23 @@ dig mx airexpresshvac.net
 curl -I https://airexpressutah.com
 curl -I https://airexpresshvac.net
 ```
+
+Automated check from this repo:
+
+```bash
+npm run verify:cutover
+```
+
+What the verifier checks:
+
+- apex site responds on `https://airexpressutah.com`
+- `www` responds on `https://www.airexpressutah.com`
+- `contact.html` loads
+- `/admin/` loads
+- `/api/auth` returns the expected GitHub OAuth redirect with callback `https://airexpressutah.com/api/callback`
+- `airexpresshvac.net` web traffic redirects to `https://airexpressutah.com`
+- MX records still exist on both domains
+- nameservers are queryable for `airexpressutah.com`
 
 ## Phase 3 New Reward Worker Rollout
 

@@ -8,10 +8,12 @@
     "prevercel-build": "npm run test:intake && npm run test:decap-oauth && npm run test:host-normalization",
     "vercel-build": "node scripts/build-blog.mjs",
     "test:host-normalization": "node scripts/verify-host-normalization.mjs",
+    "verify:cutover": "node scripts/verify-cutover.mjs",
     "test:e2e": "playwright test",
     "test:servicetitan": "node --test tests/unit/servicetitan-client.test.js",
     "test:intake": "node --test tests/unit/intake.test.js",
-    "test:decap-oauth": "node --test tests/unit/decap-oauth.test.js"
+    "test:decap-oauth": "node --test tests/unit/decap-oauth.test.js",
+    "test:cutover-verification": "node --test tests/unit/cutover-verification.test.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
