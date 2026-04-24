@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+const GA4_MEASUREMENT_ID = 'G-JZ7PY32EVX';
+
 const priorityPages = [
   // The homepage h1 was rewritten in the editorial refactor to "Your neighbors in heating & cooling."
   { path: '/', expectedTitle: /Air Express HVAC/i, expectedH1: /Neighbors|Heating|Cooling/i },
@@ -22,7 +24,7 @@ const legacyRedirectChecks = [
 ];
 
 for (const pageDef of priorityPages) {
-  test(`page shell renders for ${pageDef.path}`, async ({ page }) => {
+  test(`page shell renders for ${pageDef.path}`, async ({ page, isMobile }) => {
     const errors = [];
     const baseOrigin = 'http://127.0.0.1:4173';
 
@@ -51,7 +53,11 @@ for (const pageDef of priorityPages) {
     // cards (HTML5 allows this), so we use the body > header selector for the
     // top-level site banner instead of asserting a global count of 1.
     await expect(page.locator('body > header').first()).toBeVisible();
-    await expect(page.locator('body > header nav').first()).toBeVisible();
+    if (isMobile) {
+      await expect(page.locator('.nav-toggle').first()).toBeVisible();
+    } else {
+      await expect(page.locator('body > header nav').first()).toBeVisible();
+    }
 
     // Filter out errors that aren't actionable in the local serve environment.
     // For example, the local server doesn't apply vercel.json headers, so
@@ -142,13 +148,17 @@ test('core conversion CTAs are reachable and forms expose required fields', asyn
   await expect(page.locator('form#schedule-form')).toBeVisible();
 });
 
-test('homepage keeps the canonical phone number without loading swap scripts', async ({ page }) => {
-  const thirdPartyRequests = [];
+test('homepage keeps the canonical phone number, loads GA4, and avoids swap scripts', async ({ page }) => {
+  const analyticsRequests = [];
+  const swapScriptRequests = [];
 
   page.on('request', (request) => {
     const url = request.url();
-    if (url.includes('googletagmanager.com') || url.includes('ksrndkehqnwntyxlhgto.com')) {
-      thirdPartyRequests.push(url);
+    if (url.includes('googletagmanager.com/gtag/js')) {
+      analyticsRequests.push(url);
+    }
+    if (url.includes('ksrndkehqnwntyxlhgto.com')) {
+      swapScriptRequests.push(url);
     }
   });
 
@@ -170,7 +180,10 @@ test('homepage keeps the canonical phone number without loading swap scripts', a
     expect(link.href).toBe('tel:+18017668585');
     expect(link.text).toContain('(801) 766-8585');
   }
-  expect(thirdPartyRequests).toEqual([]);
+  expect(
+    analyticsRequests.some((url) => url.includes(`id=${GA4_MEASUREMENT_ID}`))
+  ).toBeTruthy();
+  expect(swapScriptRequests).toEqual([]);
 });
 
 test('legacy live routes redirect to launch-candidate pages', async ({ page }) => {
