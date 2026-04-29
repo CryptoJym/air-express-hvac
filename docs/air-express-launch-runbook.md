@@ -92,6 +92,12 @@ Optional notification-email env vars:
 - `INTAKE_NOTIFICATION_CC`
 - `INTAKE_NOTIFICATION_BCC`
 
+Confirmed Air Express notification identity:
+
+- Keep ServiceTitan as the primary lead system.
+- Use `Air Express <office@airexpresshvac.net>` for `INTAKE_NOTIFICATION_FROM` once the sender domain is verified in Resend.
+- Use `office@airexpresshvac.net` for `INTAKE_NOTIFICATION_TO` unless Air Express supplies a separate dispatch inbox.
+
 Operational note:
 
 - The live CRM lead-create endpoint requires `campaignId` and either `callReasonId` or `followUpDate`.
