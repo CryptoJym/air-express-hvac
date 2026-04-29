@@ -1504,6 +1504,47 @@ footer {
     color: var(--secondary);
 }
 
+.intake-status {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    font-size: 14px;
+    line-height: 1.55;
+    box-shadow: var(--shadow-sm);
+}
+
+.intake-status strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.intake-status--success {
+    background: #eef8f2;
+    border-color: rgba(45, 134, 89, 0.18);
+    color: #215c3d;
+}
+
+.intake-status--validation {
+    background: #fffaf1;
+    border-color: rgba(166, 95, 26, 0.2);
+    color: #7a4b11;
+}
+
+.intake-status--error {
+    background: #fff4f1;
+    border-color: rgba(169, 67, 46, 0.2);
+    color: #8b3520;
+}
+
+.intake-status a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 /* ============================================================================
    24b. TRUST BADGES (below hero)
    ========================================================================== */
@@ -5501,5 +5542,4 @@ footer {
         padding-right: 40px;
     }
 }
-
 

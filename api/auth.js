@@ -17,7 +17,19 @@
  * Setup instructions live in admin/OAUTH_SETUP.md.
  */
 
-export async function GET(request) {
+export const config = { runtime: "edge" };
+
+export default async function authHandler(request) {
+  if (request.method !== "GET") {
+    return new Response("Method Not Allowed", {
+      status: 405,
+      headers: {
+        Allow: "GET",
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+    });
+  }
+
   const clientId = process.env.OAUTH_GITHUB_CLIENT_ID;
 
   if (!clientId) {

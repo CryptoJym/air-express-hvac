@@ -4,3 +4,4 @@ TECHNICAL_SEO_AUDIT_REPORT.txt
 node_modules/
 playwright-report/
 test-results/
+.env*.local
