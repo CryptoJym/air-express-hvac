@@ -84,11 +84,20 @@ Optional lead-routing overrides:
 - `SERVICETITAN_LEAD_BUSINESS_UNIT_ID`
 - `SERVICETITAN_LEAD_JOB_TYPE_ID`
 
+Optional notification-email env vars:
+
+- `RESEND_API_KEY`
+- `INTAKE_NOTIFICATION_FROM`
+- `INTAKE_NOTIFICATION_TO`
+- `INTAKE_NOTIFICATION_CC`
+- `INTAKE_NOTIFICATION_BCC`
+
 Operational note:
 
 - The live CRM lead-create endpoint requires `campaignId` and either `callReasonId` or `followUpDate`.
 - This implementation always supplies `SERVICETITAN_LEAD_CAMPAIGN_ID`.
 - If `SERVICETITAN_LEAD_CALL_REASON_ID` is not configured, the intake layer defaults the lead follow-up date to 24 hours after submission.
+- If the Resend notification env vars are present, the intake layer also sends a non-blocking email notification after ServiceTitan accepts the lead.
 
 Current blockers to clear before public cutover:
 
@@ -270,6 +279,9 @@ dig txt airexpressutah.com
 dig txt selector1._domainkey.airexpressutah.com
 dig txt selector2._domainkey.airexpressutah.com
 dig txt airexpresshvac.net
+dig txt _dmarc.airexpresshvac.net
+dig txt google._domainkey.airexpresshvac.net
+npm run verify:email-auth -- --host airexpresshvac.net
 ```
 
 Use the record names that actually exist in the pre-cutover zone if the DKIM selectors or verification TXT hostnames differ. The goal is an exact record-by-record comparison, not just a working MX lookup.

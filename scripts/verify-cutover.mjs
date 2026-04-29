@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-import { resolveMx, resolveNs } from "node:dns/promises";
+import { resolveMx, resolveNs, resolveTxt } from "node:dns/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+
+import { runEmailAuthVerification } from "./verify-email-auth.mjs";
 
 const DEFAULTS = {
   siteOrigin: "https://airexpressutah.com",
@@ -12,6 +14,8 @@ const DEFAULTS = {
   siteHost: "airexpressutah.com",
   legacyHost: "airexpresshvac.net",
   requireLegacyRedirect: true,
+  requireLegacyEmailAuth: true,
+  legacyDkimSelectors: [],
 };
 
 const LEGACY_PROBE_PATH = "/contact.html?utm_source=cutover-test";
@@ -175,10 +179,11 @@ async function checkMxRecords(dnsImpl, host) {
 
 export async function runCutoverVerification(options = {}) {
   const fetchImpl = options.fetchImpl ?? globalThis.fetch;
-  const dnsImpl = options.dnsImpl ?? { resolveNs, resolveMx };
+  const dnsImpl = options.dnsImpl ?? { resolveNs, resolveMx, resolveTxt };
   const config = {
     ...DEFAULTS,
     ...options,
+    legacyDkimSelectors: options.legacyDkimSelectors ? [...options.legacyDkimSelectors] : [...DEFAULTS.legacyDkimSelectors],
   };
 
   const results = [];
@@ -186,6 +191,18 @@ export async function runCutoverVerification(options = {}) {
   results.push(await checkNameservers(dnsImpl, config.siteHost));
   results.push(await checkMxRecords(dnsImpl, config.siteHost));
   results.push(await checkMxRecords(dnsImpl, config.legacyHost));
+
+  if (config.requireLegacyEmailAuth) {
+    results.push(
+      ...(await runEmailAuthVerification({
+        dnsImpl,
+        host: config.legacyHost,
+        includeMx: false,
+        dkimSelectors: config.legacyDkimSelectors.length ? config.legacyDkimSelectors : undefined,
+      }))
+    );
+  }
+
   results.push(await checkPage(fetchImpl, `Homepage ${config.siteOrigin}`, `${config.siteOrigin}/`));
   results.push(await checkPage(fetchImpl, `Homepage ${config.wwwOrigin}`, `${config.wwwOrigin}/`, [200, 301, 302, 307, 308]));
   results.push(await checkPage(fetchImpl, "Contact page", `${config.siteOrigin}/contact.html`));
@@ -232,7 +249,10 @@ export async function runCutoverVerification(options = {}) {
 }
 
 function parseArgs(argv) {
-  const config = { ...DEFAULTS };
+  const config = {
+    ...DEFAULTS,
+    legacyDkimSelectors: [...DEFAULTS.legacyDkimSelectors],
+  };
 
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -273,6 +293,17 @@ function parseArgs(argv) {
       continue;
     }
 
+    if (arg === "--skip-legacy-email-auth") {
+      config.requireLegacyEmailAuth = false;
+      continue;
+    }
+
+    if (arg === "--legacy-dkim-selector" && next) {
+      config.legacyDkimSelectors.push(next);
+      index += 1;
+      continue;
+    }
+
     if (arg === "--help") {
       config.help = true;
     }
@@ -290,6 +321,8 @@ Options:
   --legacy-origin <url>       Legacy web origin to verify redirect from (default: ${DEFAULTS.legacyOrigin})
   --site-host <hostname>      Hostname for NS/MX lookups (default: ${DEFAULTS.siteHost})
   --legacy-host <hostname>    Legacy hostname for MX lookups (default: ${DEFAULTS.legacyHost})
+  --legacy-dkim-selector <s>  DKIM selector for legacy email auth. Repeat to override common defaults.
+  --skip-legacy-email-auth    Skip SPF, DMARC, and DKIM verification for the legacy domain
   --skip-legacy-redirect      Skip the legacy domain redirect probe
 `);
 }

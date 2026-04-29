@@ -3,6 +3,8 @@ import test from "node:test";
 
 import {
   buildIntakeLeadPayload,
+  buildIntakeNotificationEmailPayload,
+  loadIntakeNotificationConfig,
   normalizeIntakeSubmission,
   sanitizeRelativeReturnPath,
 } from "../../api/_lib/intake.js";
@@ -63,6 +65,8 @@ const serviceTitanMockState = {
   calls: [],
   leadRequests: [],
   leadStatus: 200,
+  resendRequests: [],
+  resendStatus: 202,
 };
 
 const originalFetch = globalThis.fetch;
@@ -79,6 +83,24 @@ globalThis.fetch = async (input, init = {}) => {
     return new Response(
       serviceTitanMockState.leadStatus >= 400 ? "ServiceTitan unavailable" : "",
       { status: serviceTitanMockState.leadStatus }
+    );
+  }
+
+  if (url === "https://api.resend.com/emails") {
+    serviceTitanMockState.resendRequests.push({
+      headers: init.headers,
+      body: JSON.parse(init.body),
+    });
+    return new Response(
+      serviceTitanMockState.resendStatus >= 400
+        ? JSON.stringify({ message: "Resend unavailable" })
+        : JSON.stringify({ id: "email_123" }),
+      {
+        status: serviceTitanMockState.resendStatus,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
   }
 
@@ -118,6 +140,8 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
   serviceTitanMockState.calls.length = 0;
   serviceTitanMockState.leadRequests.length = 0;
   serviceTitanMockState.leadStatus = 200;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 202;
   const restoreEnv = setProcessEnv({
     SERVICETITAN_ENV: "integration",
     SERVICETITAN_TENANT_ID: "4378713196",
@@ -127,6 +151,11 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
       SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
       SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
       SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+      RESEND_API_KEY: undefined,
+      INTAKE_NOTIFICATION_FROM: undefined,
+      INTAKE_NOTIFICATION_TO: undefined,
+      INTAKE_NOTIFICATION_CC: undefined,
+      INTAKE_NOTIFICATION_BCC: undefined,
     });
 
   try {
@@ -149,6 +178,7 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
     assert.equal(response.status, 303);
     assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
+    assert.equal(serviceTitanMockState.resendRequests.length, 0);
     assert.equal(serviceTitanMockState.leadRequests[0].campaignId, 80365413);
     assert.equal(serviceTitanMockState.leadRequests[0].leadCustomerName, "Jordan Example");
     assert.equal(serviceTitanMockState.leadRequests[0].leadPhone, "(801) 555-0100");
@@ -169,6 +199,8 @@ test("estimate wrapper redirects deterministically on validation failure", async
   serviceTitanMockState.calls.length = 0;
   serviceTitanMockState.leadRequests.length = 0;
   serviceTitanMockState.leadStatus = 200;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 202;
   const { default: estimateHandler } = await import(ESTIMATE_MODULE_URL);
   const response = await estimateHandler(
     buildRequest(
@@ -194,6 +226,8 @@ test("schedule wrapper includes preferred date and redirects on upstream error",
   serviceTitanMockState.calls.length = 0;
   serviceTitanMockState.leadRequests.length = 0;
   serviceTitanMockState.leadStatus = 500;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 202;
   const restoreEnv = setProcessEnv({
     SERVICETITAN_ENV: "integration",
     SERVICETITAN_TENANT_ID: "4378713196",
@@ -223,6 +257,7 @@ test("schedule wrapper includes preferred date and redirects on upstream error",
     );
 
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
+    assert.equal(serviceTitanMockState.resendRequests.length, 0);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Preferred Date: 2026-04-20/);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Preferred Time: Morning \(8am-12pm\)/);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Notes:\nPlease call before arrival\./);
@@ -355,4 +390,147 @@ test("buildIntakeLeadPayload prefers call reason over default follow-up date whe
   assert.equal(payload.businessUnitId, 11);
   assert.equal(payload.jobTypeId, 22);
   assert.equal("followUpDate" in payload, false);
+});
+
+test("loadIntakeNotificationConfig returns null until all required email env vars exist", () => {
+  assert.equal(loadIntakeNotificationConfig({}), null);
+  assert.equal(
+    loadIntakeNotificationConfig({
+      RESEND_API_KEY: "re_123",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    }),
+    null
+  );
+});
+
+test("buildIntakeNotificationEmailPayload includes reply-to and recipient lists", () => {
+  const submission = normalizeIntakeSubmission(
+    "contact",
+    buildFormData({
+      name: "Jordan Example",
+      email: "jordan@example.com",
+      phone: "(801) 555-0100",
+      service: "maintenance-tune-up",
+      message: "Please call back soon.",
+    }),
+    {
+      now: () => new Date("2026-04-13T20:15:30.000Z"),
+    }
+  );
+
+  const payload = buildIntakeNotificationEmailPayload(submission, {
+    RESEND_API_KEY: "re_123",
+    INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+    INTAKE_NOTIFICATION_TO: "office@example.com,dispatch@example.com",
+    INTAKE_NOTIFICATION_CC: "manager@example.com",
+    INTAKE_NOTIFICATION_BCC: "audit@example.com",
+  });
+
+  assert.deepEqual(payload.to, ["office@example.com", "dispatch@example.com"]);
+  assert.deepEqual(payload.cc, ["manager@example.com"]);
+  assert.deepEqual(payload.bcc, ["audit@example.com"]);
+  assert.deepEqual(payload.reply_to, ["jordan@example.com"]);
+  assert.equal(payload.subject, "Air Express Website Lead - Maintenance / Tune-Up");
+  assert.match(payload.text, /Requested Service: Maintenance \/ Tune-Up/);
+});
+
+test("contact wrapper sends a notification email after a successful ServiceTitan lead", async () => {
+  serviceTitanMockState.calls.length = 0;
+  serviceTitanMockState.leadRequests.length = 0;
+  serviceTitanMockState.leadStatus = 200;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 202;
+  const restoreEnv = setProcessEnv({
+    SERVICETITAN_ENV: "integration",
+    SERVICETITAN_TENANT_ID: "4378713196",
+    SERVICETITAN_APP_KEY: "app-key",
+    SERVICETITAN_CLIENT_ID: "client-id",
+    SERVICETITAN_CLIENT_SECRET: "client-secret",
+    SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
+    SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
+    SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+    RESEND_API_KEY: "re_123",
+    INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+    INTAKE_NOTIFICATION_TO: "office@example.com",
+  });
+
+  try {
+    const { default: contactHandler } = await import(CONTACT_MODULE_URL);
+    const response = await contactHandler(
+      buildRequest(
+        "/api/intake/contact",
+        buildFormData({
+          name: "Jordan Example",
+          email: "jordan@example.com",
+          phone: "(801) 555-0100",
+          service: "maintenance-tune-up",
+          message: "Please call back soon.",
+        })
+      )
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
+    assert.equal(serviceTitanMockState.leadRequests.length, 1);
+    assert.equal(serviceTitanMockState.resendRequests.length, 1);
+    assert.equal(
+      serviceTitanMockState.resendRequests[0].headers.Authorization,
+      "Bearer re_123"
+    );
+    assert.deepEqual(serviceTitanMockState.resendRequests[0].body.to, ["office@example.com"]);
+    assert.deepEqual(
+      serviceTitanMockState.resendRequests[0].body.reply_to,
+      ["jordan@example.com"]
+    );
+    assert.match(
+      serviceTitanMockState.resendRequests[0].body.text,
+      /Message:\nPlease call back soon\./
+    );
+  } finally {
+    restoreEnv();
+  }
+});
+
+test("contact wrapper still succeeds when the notification email provider fails", async () => {
+  serviceTitanMockState.calls.length = 0;
+  serviceTitanMockState.leadRequests.length = 0;
+  serviceTitanMockState.leadStatus = 200;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 503;
+  const restoreEnv = setProcessEnv({
+    SERVICETITAN_ENV: "integration",
+    SERVICETITAN_TENANT_ID: "4378713196",
+    SERVICETITAN_APP_KEY: "app-key",
+    SERVICETITAN_CLIENT_ID: "client-id",
+    SERVICETITAN_CLIENT_SECRET: "client-secret",
+    SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
+    SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
+    SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+    RESEND_API_KEY: "re_123",
+    INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+    INTAKE_NOTIFICATION_TO: "office@example.com",
+  });
+
+  try {
+    const { default: contactHandler } = await import(CONTACT_MODULE_URL);
+    const response = await contactHandler(
+      buildRequest(
+        "/api/intake/contact",
+        buildFormData({
+          name: "Jordan Example",
+          email: "jordan@example.com",
+          phone: "(801) 555-0100",
+          service: "maintenance-tune-up",
+        })
+      )
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
+    assert.equal(serviceTitanMockState.leadRequests.length, 1);
+    assert.equal(serviceTitanMockState.resendRequests.length, 1);
+  } finally {
+    restoreEnv();
+    serviceTitanMockState.resendStatus = 202;
+  }
 });

@@ -5,9 +5,11 @@ import path from "node:path";
 
 const rootDir = process.cwd();
 const runbookPath = "docs/air-express-launch-runbook.md";
+const tomorrowChecklistPath = "docs/air-express-tomorrow-checklist.md";
 const selfPath = "scripts/verify-host-normalization.mjs";
 const allowedTokenByFile = new Map([
   [runbookPath, new Set(["https://airexpresshvac.net"])],
+  [tomorrowChecklistPath, new Set(["https://airexpresshvac.net", "https://www.airexpresshvac.net"])],
   ["scripts/verify-cutover.mjs", new Set(["https://airexpresshvac.net"])],
   ["tests/unit/cutover-verification.test.js", new Set(["https://airexpresshvac.net"])],
 ]);

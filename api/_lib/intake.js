@@ -87,6 +87,15 @@ const OPTIONAL_LEAD_ENV_KEYS = Object.freeze({
   jobTypeId: "SERVICETITAN_LEAD_JOB_TYPE_ID",
 });
 
+const RESEND_EMAILS_API_URL = "https://api.resend.com/emails";
+const INTAKE_NOTIFICATION_ENV_KEYS = Object.freeze({
+  resendApiKey: "RESEND_API_KEY",
+  from: "INTAKE_NOTIFICATION_FROM",
+  to: "INTAKE_NOTIFICATION_TO",
+  cc: "INTAKE_NOTIFICATION_CC",
+  bcc: "INTAKE_NOTIFICATION_BCC",
+});
+
 const DEFAULT_LEAD_FOLLOW_UP_DELAY_MS = 24 * 60 * 60 * 1000;
 
 function readStringField(formData, name) {
@@ -212,6 +221,42 @@ function parsePositiveIntegerEnv(value, envName, { required = false } = {}) {
   return numberValue;
 }
 
+function parseEmailListEnv(value) {
+  if (typeof value !== "string") {
+    return [];
+  }
+
+  return value
+    .split(/[,\n;]/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
+export function loadIntakeNotificationConfig(env = process.env) {
+  const resendApiKey = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey].trim()
+    : "";
+  const from = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.from] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.from].trim()
+    : "";
+  const to = parseEmailListEnv(env?.[INTAKE_NOTIFICATION_ENV_KEYS.to]);
+
+  if (!resendApiKey || !from || to.length === 0) {
+    return null;
+  }
+
+  const cc = parseEmailListEnv(env?.[INTAKE_NOTIFICATION_ENV_KEYS.cc]);
+  const bcc = parseEmailListEnv(env?.[INTAKE_NOTIFICATION_ENV_KEYS.bcc]);
+
+  return Object.freeze({
+    resendApiKey,
+    from,
+    to,
+    cc,
+    bcc,
+  });
+}
+
 function buildLeadMetadataFromEnv(env = process.env) {
   const metadata = {
     campaignId: parsePositiveIntegerEnv(env?.[REQUIRED_LEAD_ENV_KEYS.campaignId], REQUIRED_LEAD_ENV_KEYS.campaignId, {
@@ -304,6 +349,32 @@ export function buildLeadPayload(submission, env = process.env) {
   return payload;
 }
 
+export function buildIntakeNotificationEmailPayload(submission, env = process.env) {
+  const notificationConfig = loadIntakeNotificationConfig(env);
+  if (!notificationConfig) {
+    return null;
+  }
+
+  const payload = {
+    from: notificationConfig.from,
+    to: notificationConfig.to,
+    subject: buildLeadSummary(submission),
+    text: buildSummaryLines(submission),
+  };
+
+  if (notificationConfig.cc.length > 0) {
+    payload.cc = notificationConfig.cc;
+  }
+  if (notificationConfig.bcc.length > 0) {
+    payload.bcc = notificationConfig.bcc;
+  }
+  if (submission.email) {
+    payload.reply_to = [submission.email];
+  }
+
+  return payload;
+}
+
 function buildRelativeRedirect(path, searchParams = {}) {
   const url = new URL(path, "https://air-express.local");
   for (const [key, value] of Object.entries(searchParams)) {
@@ -353,10 +424,51 @@ async function defaultSubmitLead(submission, env = process.env) {
   return response;
 }
 
+export async function sendIntakeNotificationEmail(
+  submission,
+  { env = process.env, fetchImpl = globalThis.fetch } = {}
+) {
+  const notificationConfig = loadIntakeNotificationConfig(env);
+  if (!notificationConfig) {
+    return { skipped: true, reason: "not_configured" };
+  }
+  if (typeof fetchImpl !== "function") {
+    throw new Error("A fetch implementation is required to send intake notification email.");
+  }
+
+  const response = await fetchImpl(RESEND_EMAILS_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${notificationConfig.resendApiKey}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(buildIntakeNotificationEmailPayload(submission, env)),
+  });
+
+  if (!response.ok) {
+    let errorDetail = `HTTP ${response.status}`;
+
+    try {
+      const responseText = await response.text();
+      if (responseText) {
+        errorDetail = responseText;
+      }
+    } catch {
+      // Ignore response parsing failures and preserve the status-based fallback.
+    }
+
+    throw new Error(`Notification email request failed: ${errorDetail}`);
+  }
+
+  return { skipped: false };
+}
+
 export function createIntakeHandler({
   formType,
   defaultReturnTo = INTAKE_FORMS[formType]?.defaultReturnTo,
   submitLead = defaultSubmitLead,
+  notifySubmission = sendIntakeNotificationEmail,
   now = () => new Date(),
 } = {}) {
   if (!INTAKE_FORMS[formType]) {
@@ -394,6 +506,17 @@ export function createIntakeHandler({
       return redirectResponse(submission.returnTo || defaultReturnTo, {
         intake: RESULT_QUERY_VALUES.upstreamError,
       });
+    }
+
+    try {
+      const notificationResult = await notifySubmission(submission);
+      if (notificationResult?.skipped) {
+        console.warn(`[intake:${formType}] Intake notification skipped: ${notificationResult.reason}`);
+      } else {
+        console.info(`[intake:${formType}] Intake notification sent`);
+      }
+    } catch (error) {
+      console.error(`[intake:${formType}] Intake notification failed`, error);
     }
 
     return redirectResponse(submission.returnTo || defaultReturnTo, {

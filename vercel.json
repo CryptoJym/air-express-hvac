@@ -48,6 +48,54 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "airexpresshvac.net"
+        }
+      ],
+      "destination": "https://airexpressutah.com/",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "www.airexpresshvac.net"
+        }
+      ],
+      "destination": "https://airexpressutah.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "airexpresshvac.net"
+        }
+      ],
+      "destination": "https://airexpressutah.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "www.airexpresshvac.net"
+        }
+      ],
+      "destination": "https://airexpressutah.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/fall-furnace-maintenance.html",
       "destination": "/blog/fall-furnace-prep.html",
       "permanent": true
