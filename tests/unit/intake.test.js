@@ -4,8 +4,10 @@ import test from "node:test";
 import {
   buildIntakeLeadPayload,
   buildIntakeNotificationEmailPayload,
+  inspectIntakeNotificationConfig,
   loadIntakeNotificationConfig,
   normalizeIntakeSubmission,
+  sendIntakeNotificationEmail,
   sanitizeRelativeReturnPath,
 } from "../../api/_lib/intake.js";
 
@@ -401,6 +403,70 @@ test("loadIntakeNotificationConfig returns null until all required email env var
     }),
     null
   );
+});
+
+test("inspectIntakeNotificationConfig reports the missing notification env keys", () => {
+  assert.deepEqual(inspectIntakeNotificationConfig({}), {
+    configured: false,
+    missingKeys: [
+      "RESEND_API_KEY",
+      "INTAKE_NOTIFICATION_FROM",
+      "INTAKE_NOTIFICATION_TO",
+    ],
+  });
+  assert.deepEqual(
+    inspectIntakeNotificationConfig({
+      RESEND_API_KEY: "",
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    }),
+    {
+      configured: false,
+      missingKeys: ["RESEND_API_KEY"],
+    }
+  );
+  assert.deepEqual(
+    inspectIntakeNotificationConfig({
+      RESEND_API_KEY: "re_123",
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    }),
+    {
+      configured: true,
+      missingKeys: [],
+    }
+  );
+});
+
+test("sendIntakeNotificationEmail explains why notification delivery is skipped", async () => {
+  const submission = normalizeIntakeSubmission(
+    "contact",
+    buildFormData({
+      name: "Jordan Example",
+      email: "jordan@example.com",
+      phone: "(801) 555-0100",
+      service: "maintenance-tune-up",
+    }),
+    {
+      now: () => new Date("2026-04-13T20:15:30.000Z"),
+    }
+  );
+
+  const result = await sendIntakeNotificationEmail(submission, {
+    env: {
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    },
+    fetchImpl: () => {
+      throw new Error("fetch should not be called when notification config is incomplete");
+    },
+  });
+
+  assert.deepEqual(result, {
+    skipped: true,
+    reason: "not_configured",
+    missingKeys: ["RESEND_API_KEY"],
+  });
 });
 
 test("buildIntakeNotificationEmailPayload includes reply-to and recipient lists", () => {

@@ -232,6 +232,32 @@ function parseEmailListEnv(value) {
     .filter(Boolean);
 }
 
+export function inspectIntakeNotificationConfig(env = process.env) {
+  const resendApiKey = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey].trim()
+    : "";
+  const from = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.from] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.from].trim()
+    : "";
+  const to = parseEmailListEnv(env?.[INTAKE_NOTIFICATION_ENV_KEYS.to]);
+  const missingKeys = [];
+
+  if (!resendApiKey) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey);
+  }
+  if (!from) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.from);
+  }
+  if (to.length === 0) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.to);
+  }
+
+  return Object.freeze({
+    configured: missingKeys.length === 0,
+    missingKeys: Object.freeze(missingKeys),
+  });
+}
+
 export function loadIntakeNotificationConfig(env = process.env) {
   const resendApiKey = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey] === "string"
     ? env[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey].trim()
@@ -430,7 +456,12 @@ export async function sendIntakeNotificationEmail(
 ) {
   const notificationConfig = loadIntakeNotificationConfig(env);
   if (!notificationConfig) {
-    return { skipped: true, reason: "not_configured" };
+    const diagnostics = inspectIntakeNotificationConfig(env);
+    return {
+      skipped: true,
+      reason: "not_configured",
+      missingKeys: diagnostics.missingKeys,
+    };
   }
   if (typeof fetchImpl !== "function") {
     throw new Error("A fetch implementation is required to send intake notification email.");
@@ -511,7 +542,10 @@ export function createIntakeHandler({
     try {
       const notificationResult = await notifySubmission(submission);
       if (notificationResult?.skipped) {
-        console.warn(`[intake:${formType}] Intake notification skipped: ${notificationResult.reason}`);
+        const missingKeys = Array.isArray(notificationResult.missingKeys)
+          ? ` missing_keys=${notificationResult.missingKeys.join(",")}`
+          : "";
+        console.warn(`[intake:${formType}] Intake notification skipped: ${notificationResult.reason}${missingKeys}`);
       } else {
         console.info(`[intake:${formType}] Intake notification sent`);
       }
