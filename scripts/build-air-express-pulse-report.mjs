@@ -136,6 +136,7 @@ const hypotheses = parseCsv(read("data/air-express-visibility-revenue-hypotheses
 const weeklyMetrics = parseCsv(read("data/air-express-weekly-pulse-metrics.csv"));
 const competitors = parseCsv(read("data/air-express-competitor-baseline-ledger.csv"));
 const contentBriefs = parseCsv(read("data/content-briefs.csv"));
+const issueMap = parseCsv(read("data/air-express-next-action-issue-map.csv"));
 
 const latestGsc = snapshotHistory.gscSnapshotSummary?.latest || {};
 const aiByEngine = Array.isArray(snapshotHistory.aiByEngine) ? snapshotHistory.aiByEngine : [];
@@ -331,6 +332,16 @@ const html = `<!doctype html>
       <td>${statePill(row.status)}</td>
       <td>${escapeHtml(row.evidence)}</td>
       <td>${escapeHtml(row.nextAction)}</td>
+    </tr>`))}
+
+    <h2>Issue Map And Closeout State</h2>
+    ${table(["Issue", "Lane", "Status", "Private Evidence", "Blocker", "Next Action"], issueMap.map((row) => `<tr>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/${escapeHtml(row.issue_number)}">#${escapeHtml(row.issue_number)}</a><br>${escapeHtml(row.title)}</td>
+      <td>${escapeHtml(row.lane)}</td>
+      <td>${statePill(row.status)}<br>${escapeHtml(row.completion_state)}</td>
+      <td>${escapeHtml(row.private_pages_evidence)}</td>
+      <td>${escapeHtml(row.current_blocker)}</td>
+      <td>${escapeHtml(row.next_action)}</td>
     </tr>`))}
 
     <h2>Proof Gates Before Public Claims</h2>
