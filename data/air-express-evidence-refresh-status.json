@@ -1,0 +1,259 @@
+{
+  "generatedAt": "2026-06-03T18:40:14.248Z",
+  "evidenceClass": "air_express_onboarding_evidence_refresh",
+  "status": "refreshed_with_recorded_blockers",
+  "scope": "Repo-local evidence refresh only. No DNS, Vercel, Cloudflare, Turnstile, ServiceTitan, Google OAuth consent/provider reconnect, GTM publish, New Reward provider mutation, public send, public post, or production deploy.",
+  "secretHandling": "Stores command names, statuses, timings, sanitized output tails, and existing diagnostic statuses only. No access tokens, refresh tokens, provider credentials, database URLs, passwords, login codes, cookies, customer PII, or raw provider payloads are stored.",
+  "commands": [
+    {
+      "script": "build:blog",
+      "purpose": "Regenerate local blog artifacts before site-file and claim checks.",
+      "startedAt": "2026-06-03T18:40:05.193Z",
+      "completedAt": "2026-06-03T18:40:05.405Z",
+      "durationMs": 212,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "[build-blog] ✓ blog/rss.xml",
+        "[build-blog] ✓ sitemap.xml updated",
+        "[build-blog] Done."
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:site-file-manifest",
+      "purpose": "Verify local publish artifact completeness and draft exclusion.",
+      "startedAt": "2026-06-03T18:40:05.406Z",
+      "completedAt": "2026-06-03T18:40:05.559Z",
+      "durationMs": 153,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-site-file-manifest.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/site-file-manifest.json",
+        "Status: passed"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:public-claims",
+      "purpose": "Verify proof-gated public marketing claims.",
+      "startedAt": "2026-06-03T18:40:05.560Z",
+      "completedAt": "2026-06-03T18:40:05.706Z",
+      "durationMs": 146,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-public-claims.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/public-claim-register.json",
+        "Status: passed"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:live-measurement",
+      "purpose": "Check local GA4 coverage and live homepage/analytics marker state.",
+      "startedAt": "2026-06-03T18:40:05.706Z",
+      "completedAt": "2026-06-03T18:40:06.147Z",
+      "durationMs": 441,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-live-measurement-path.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/live-measurement-path-check.json",
+        "Status: fixed_locally_pending_live"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:owned-site-delivery-sync",
+      "purpose": "Compare local owned-site artifacts against the live New Reward edge.",
+      "startedAt": "2026-06-03T18:40:06.147Z",
+      "completedAt": "2026-06-03T18:40:06.629Z",
+      "durationMs": 482,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-owned-site-delivery-sync.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/owned-site-delivery-sync-check.json",
+        "Status: pending_delivery_sync"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "prepare:delivery-sync-packet",
+      "purpose": "Refresh the owned-site delivery handoff packet.",
+      "startedAt": "2026-06-03T18:40:06.629Z",
+      "completedAt": "2026-06-03T18:40:06.749Z",
+      "durationMs": 120,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> prepare:delivery-sync-packet",
+        "> node scripts/build-owned-site-delivery-sync-packet.mjs",
+        "Wrote docs/air-express-owned-site-delivery-sync-packet.md"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:newreward-mapping",
+      "purpose": "Run the sanitized read-only New Reward source-mapping recheck.",
+      "startedAt": "2026-06-03T18:40:06.749Z",
+      "completedAt": "2026-06-03T18:40:09.069Z",
+      "durationMs": 2320,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-newreward-air-express-mapping.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/newreward-air-express-provider-readonly-recheck.json",
+        "Status: rows_found"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "pull:gsc-ga4-history",
+      "purpose": "Refresh Google history pull state and impact report.",
+      "startedAt": "2026-06-03T18:40:09.069Z",
+      "completedAt": "2026-06-03T18:40:10.481Z",
+      "durationMs": 1412,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "\"outDir\": \"/Users/jamesbrady/Projects/air-express-hvac/data/google-history\",",
+        "\"reportPath\": \"/Users/jamesbrady/Projects/air-express-hvac/pages/new-reward-impact-report.html\"",
+        "}"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:servicetitan-export",
+      "purpose": "Refresh ServiceTitan export/API readiness without provider mutation.",
+      "startedAt": "2026-06-03T18:40:10.481Z",
+      "completedAt": "2026-06-03T18:40:10.693Z",
+      "durationMs": 212,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-servicetitan-export-access.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/servicetitan-export-access-check.json",
+        "Status: blocked_env"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "build:content-readiness-report",
+      "purpose": "Refresh the separate #31 content readiness report.",
+      "startedAt": "2026-06-03T18:40:10.693Z",
+      "completedAt": "2026-06-03T18:40:10.807Z",
+      "durationMs": 114,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> build:content-readiness-report",
+        "> node scripts/build-content-readiness-report.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/pages/content-readiness-report.html"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:issue-evidence-alignment",
+      "purpose": "Verify issue #24-#30 matrix alignment with current evidence JSON.",
+      "startedAt": "2026-06-03T18:40:10.807Z",
+      "completedAt": "2026-06-03T18:40:10.922Z",
+      "durationMs": 115,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> node scripts/verify-issue-evidence-alignment.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/data/issue-evidence-alignment-check.json",
+        "Status: passed"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "build:issue-blocker-report",
+      "purpose": "Refresh the GitHub Pages blocker report.",
+      "startedAt": "2026-06-03T18:40:10.922Z",
+      "completedAt": "2026-06-03T18:40:11.034Z",
+      "durationMs": 112,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> build:issue-blocker-report",
+        "> node scripts/build-issue-blocker-report.mjs",
+        "Wrote /Users/jamesbrady/Projects/air-express-hvac/pages/issue-24-30-blocker-report.html"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "audit:seo-geo-attribution",
+      "purpose": "Refresh SEO/GEO/messaging/attribution scores.",
+      "startedAt": "2026-06-03T18:40:11.034Z",
+      "completedAt": "2026-06-03T18:40:14.124Z",
+      "durationMs": 3090,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "Wrote pages/seo-geo-attribution-report.html",
+        "Scores: technical=100, geo=90, messaging=100, attribution=25",
+        "Open issues: critical=1, high=5, medium=1"
+      ],
+      "stderrTail": []
+    },
+    {
+      "script": "verify:onboarding-evidence",
+      "purpose": "Run the final onboarding evidence gate.",
+      "startedAt": "2026-06-03T18:40:14.124Z",
+      "completedAt": "2026-06-03T18:40:14.247Z",
+      "durationMs": 123,
+      "exitCode": 0,
+      "signal": "",
+      "status": "passed",
+      "stdoutTail": [
+        "> verify:onboarding-evidence",
+        "> node scripts/verify-onboarding-evidence.mjs",
+        "Onboarding evidence verification passed."
+      ],
+      "stderrTail": []
+    }
+  ],
+  "summary": {
+    "totalCommands": 14,
+    "failedCommands": 0,
+    "failedCommandNames": []
+  },
+  "observed": {
+    "liveMeasurementStatus": "fixed_locally_pending_live",
+    "deliverySyncStatus": "pending_delivery_sync",
+    "googleHistoryStatus": "blocked",
+    "gscStatus": "blocked_scope",
+    "ga4Status": "blocked_scope",
+    "gbpStatus": "blocked_scope",
+    "newRewardMappingStatus": "rows_found",
+    "serviceTitanStatus": "blocked_env",
+    "siteFileManifestStatus": "passed",
+    "publicClaimsStatus": "passed",
+    "issueEvidenceAlignmentStatus": "passed",
+    "seoScores": {
+      "technical": 100,
+      "geo": 90,
+      "messaging": 100,
+      "attribution": 25,
+      "accessibility": 100
+    }
+  },
+  "nextAction": "Use the observed statuses to update #24-#30. Current expected blockers are expired New Reward Google provider rows plus Google read scopes/property visibility, live owned-site delivery sync, and ServiceTitan export proof."
+}

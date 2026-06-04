@@ -1,0 +1,2 @@
+zone_name,metric_source,snapshots,total_requests,allowed_requests,successful_requests,unsuccessful_requests,total_data_transfer_bytes,first_window_start,last_window_end
+airexpressutah.com,cloudflare_graphql_ai_traffic_v1,32,2419,2275,2275,58,53620556,2026-05-27T12:00:00,2026-06-04T12:00:00

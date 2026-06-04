@@ -1,0 +1,13 @@
+query,engine_or_surface,location_context,intent,expected_air_express_signal,baseline_status,next_action,last_checked
+air express hvac,Google,Lehi UT,brand,official site GBP and reviews,not_attempted,run in clean browser with location context,not_attempted
+air express heating and air conditioning lehi,Google,Lehi UT,brand,NAP and canonical URL,not_attempted,run and capture top results,not_attempted
+hvac repair lehi ut,Google,Lehi UT,local service,Air Express local pack or organic mention,not_attempted,baseline ranking and competitors,not_attempted
+ac repair lehi ut,Google,Lehi UT,local service,Air Express local pack or organic mention,not_attempted,baseline ranking and competitors,not_attempted
+furnace repair lehi ut,Google,Lehi UT,local service,Air Express local pack or organic mention,not_attempted,baseline ranking and competitors,not_attempted
+hvac company near me,Google Maps,Lehi UT,local maps,Air Express profile visibility,not_attempted,baseline maps position and NAP,not_attempted
+air express hvac,Apple Maps,Lehi UT,brand,correct Apple place card,not_attempted,search before claim/create,not_attempted
+air express hvac,Bing,Lehi UT,brand,correct Bing/Places listing,not_attempted,search before claim/create,not_attempted
+air express hvac,MapQuest,Lehi UT,brand,correct Utah listing and phone,prepared,verify phone/NAP drift,2026-06-01
+air express hvac reviews,Google,Lehi UT,reputation,Google and major review surfaces,not_attempted,capture review surface mix,not_attempted
+best hvac company lehi,ChatGPT or AI search,Lehi UT,AI discovery,Air Express mention and citations,not_attempted,capture answer and cited sources,not_attempted
+air conditioning repair eagle mountain ut,Google,Eagle Mountain UT,service area,Air Express service-area page,not_attempted,baseline ranking and competitors,not_attempted

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express SEO/GEO Attribution Audit</title>
+  <style>
+    :root {
+      --ink: #15202b;
+      --muted: #5f6d7a;
+      --line: #dce4ec;
+      --panel: #f6f9fb;
+      --good: #27764a;
+      --warn: #a45d00;
+      --bad: #b52f2f;
+      --blue: #0b68a6;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.45; }
+    header { padding: 34px clamp(18px, 5vw, 58px) 24px; background: #eef6fb; border-bottom: 1px solid var(--line); }
+    main { padding: 24px clamp(18px, 5vw, 58px) 56px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+    .meta, .grid { display: grid; gap: 12px; }
+    .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
+    .blocked { background: #fff1f1; border-left: 4px solid var(--bad); padding: 12px 14px; color: var(--ink); max-width: 980px; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { background: var(--panel); font-size: 13px; }
+    .scroll { overflow-x: auto; }
+    canvas { width: 100%; height: 280px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    a { color: var(--blue); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express SEO/GEO Attribution Audit</h1>
+    <p>Technical SEO, AI/GEO readiness, implementation completeness, messaging consistency, and attribution traceability for <code>airexpressutah.com</code>.</p>
+    <div class="meta">
+      <span class="pill">Generated 2026-06-04T18:37:36.118Z</span>
+      <span class="pill">119 public HTML files audited</span>
+      <span class="pill">118/119 sitemap URLs live</span>
+      <span class="pill">A11y: 0 findings</span>
+      <span class="pill">GSC: blocked</span>
+      <span class="pill">GA4: blocked</span>
+      <span class="pill">GBP: blocked</span>
+    </div>
+  </header>
+  <main>
+    <section class="grid">
+      <article class="card"><h3>Technical SEO</h3><div class="metric good">100</div><p>Metadata, canonicals, sitemap, links, live statuses, and crawl basics.</p></article>
+      <article class="card"><h3>GEO Readiness</h3><div class="metric good">90</div><p>AI crawler access, llms.txt, schema, extractability, and authority signals.</p></article>
+      <article class="card"><h3>Messaging Consistency</h3><div class="metric good">100</div><p>Brand, domain, phone, local-service message, and legacy references.</p></article>
+      <article class="card"><h3>Attribution Readiness</h3><div class="metric bad">25</div><p>GSC, GA4, on-site tags, conversion events, and source-to-lead traceability.</p></article>
+      <article class="card"><h3>Accessibility</h3><div class="metric good">100</div><p>Automated checks for page language, landmarks, labels, headings, links, buttons, and image alternatives.</p></article>
+    </section>
+
+    <h2>Attribution Pull Blocked</h2><div class="blocked"><strong>GSC/GA4/GBP data was not pulled.</strong> Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist. Resolve the listed source/access gap, then rerun <code>npm run audit:seo-geo-attribution</code> to populate this report with time-series data.</div>
+
+    <h2>Top Fixes</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Priority</th><th>Issue</th><th>Evidence</th><th>Fix</th></tr></thead>
+        <tbody><tr><td><strong>Critical</strong></td><td>Air Express GSC/GA4/GBP attribution source not found in reachable New Reward systems</td><td>Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.</td><td>Use the New Reward app session under james@jamesbrady.org, repair the Air Express client/tenant/website credential mapping, connect the Google provider as newrewardplatform@gmail.com, then rerun this audit from that source.</td></tr><tr><td><strong>High</strong></td><td>GA4 tag restored locally but not verified live</td><td>measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8</td><td>Deploy or sync the approved source path, then rerun npm run verify:live-measurement and verify GA4 Realtime/debug evidence.</td></tr><tr><td><strong>High</strong></td><td>Owned-site delivery sync is pending for critical measurement artifacts</td><td>delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json</td><td>Approve the Air Express deploy, New Reward edge sync, or manual artifact sync; then rerun npm run verify:owned-site-delivery-sync and npm run verify:live-measurement.</td></tr><tr><td><strong>High</strong></td><td>Prepared sitemap URLs are not live yet</td><td>1 sitemap URLs have matching local public HTML files but currently return non-2xx on production.</td><td>Deploy or sync the prepared Air Express source, then recheck the live sitemap URLs.</td></tr><tr><td><strong>High</strong></td><td>Live sitemap contains non-ISO lastmod values</td><td>10 production sitemap lastmod values are still invalid.</td><td>Deploy or sync the regenerated sitemap after review, then verify live sitemap.xml.</td></tr><tr><td><strong>High</strong></td><td>Live llms.txt differs from repo-local llms.txt</td><td>Production /llms.txt is served from a New Reward edge managed path and does not match the repo artifact.</td><td>Sync the prepared repo llms.txt through the New Reward edge source or make the repo file the production source of truth.</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>True Blocker Root Causes</h2>
+    <p>Statuses distinguish verified, prepared, fixed in source, blocked by access, blocked by policy, and not attempted. Provider mutations, production deploys, DNS changes, and public sends were not attempted.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Severity</th><th>Area</th><th>Status</th><th>Issue</th><th>Root cause</th><th>Workaround used</th><th>Next action</th></tr></thead>
+        <tbody><tr><td><strong>Critical</strong></td><td>Attribution / New Reward</td><td>blocked</td><td>Air Express GSC/GA4/GBP source cannot be pulled through New Reward</td><td>There are now six separate breaks. First, prior UI evidence showed the Air Express setup page falling back to a local setup snapshot after GSC/GA4/GBP load failures. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, the SEO workspace previously reported Client not found and must be rechecked against the now-proven production source mapping. Fourth, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fifth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Sixth, no approved Air Express GTM container id has been found.</td><td>Checks used the authenticated Air Express New Reward setup, settings, and SEO workspace pages; repo-local source; prior reachable credential metadata; and public live-edge artifact checks. No provider connection, deploy, DNS, CRM, OAuth, or public mutation was completed.</td><td>Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4/GBP read access only within the approved stop gates. After read scopes and property/location visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path.</td></tr><tr><td><strong>High</strong></td><td>Attribution / Website</td><td>fixed_locally_pending_live</td><td>GA4 tag is restored in repo-local source but not detected on the live homepage</td><td>The current repo source contains the approved Air Express GA4 measurement ID, but production is served through the existing deployment/New Reward edge path and has not been synced or redeployed from this lane.</td><td>Ran the dedicated live measurement diagnostic with public HTTP fetches and local source inspection only. No raw HTML, cookies, tokens, provider credentials, form submissions, or customer data were stored.</td><td>Approve the Air Express deploy, New Reward edge sync, or manual delivery path; then rerun npm run verify:live-measurement and confirm exactly one approved GA4/GTM source.</td></tr><tr><td><strong>High</strong></td><td>GEO / AI artifacts</td><td>blocked_by_source_split</td><td>Live /llms.txt does not match the repo-local llms.txt</td><td>Production /llms.txt is served by the New Reward edge managed path, so the local repo artifact is prepared but not the live source of truth.</td><td>Fetched live /llms.txt and compared content hashes without changing the edge artifact.</td><td>Sync the Air Express llms.txt through the New Reward edge source or route production to the repo artifact.</td></tr><tr><td><strong>Medium</strong></td><td>GEO / Robots</td><td>prepared_with_live_difference</td><td>Live robots.txt differs from repo-local robots.txt</td><td>Production robots.txt appears to be managed by the New Reward edge/workspace platform while the repo has a simpler local file.</td><td>Fetched live robots.txt read-only and compared content hashes.</td><td>Decide whether the edge robots policy or repo robots file is canonical, then document/sync the chosen source.</td></tr><tr><td><strong>High</strong></td><td>Technical SEO / Live sitemap</td><td>fixed_locally_pending_deploy</td><td>Live sitemap still contains non-ISO blog lastmod values</td><td>Production is serving a previously generated sitemap; local generator fixes do not affect production until an approved deploy or edge sync.</td><td>Verified live sitemap read-only and left production unchanged.</td><td>After review, deploy/sync the regenerated sitemap through the approved launch path and recheck live sitemap.xml.</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>Attribution Traceability</h2>
+    <canvas id="timeline" width="1100" height="280" aria-label="GSC, GA4, and GBP timeline"></canvas>
+    <p>Traceability should connect Search Console impressions/clicks, GA4 landing-page sessions and conversion events, and Google Business Profile location activity to ServiceTitan lead IDs/campaign notes. The approved GA4 measurement ID G-JZ7PY32EVX is restored in repo-local source, but the dedicated live measurement diagnostic still shows no approved GA4/GTM source on the live homepage and live /analytics.js is not available. New Reward attribution remains blocked until the New Reward app session under james@jamesbrady.org can connect or verify the Air Express Google provider records using newrewardplatform@gmail.com.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Layer</th><th>Status</th><th>Evidence</th><th>Next action</th></tr></thead>
+        <tbody>
+          <tr><td>New Reward control plane</td><td>blocked</td><td>Authenticated New Reward admin access still reaches the Air Express setup record, and PR #3834 is merged/deployed. The latest read-only configured NewRewards production env lookup now finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. The blocker has shifted: GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly, analytics.readonly, and business.manage; the live homepage still lacks the GA4/GTM marker and /analytics.js is 404; the SEO workspace UI needs a fresh read-only recheck after earlier Client not found evidence.</td><td>Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4/GBP read access only within the approved stop gates. After read scopes and property/location visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path.</td></tr>
+          <tr><td>Search Console</td><td>blocked</td><td>Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.</td><td>Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, then connect/select the Air Express Search Console property.</td></tr>
+          <tr><td>GA4</td><td>blocked</td><td>Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.</td><td>Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, verify measurement ID G-JZ7PY32EVX, then connect/select the property.</td></tr>
+          <tr><td>Google Business Profile</td><td>blocked</td><td>Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.</td><td>Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, then confirm the Air Express Business Profile location before pulling performance history.</td></tr>
+          <tr><td>Live measurement diagnostic</td><td>fixed_locally_pending_live</td><td>measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8</td><td>Rerun npm run verify:live-measurement after any approved deploy or New Reward edge sync.</td></tr>
+          <tr><td>Owned-site delivery sync</td><td>pending_delivery_sync</td><td>delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json</td><td>Rerun npm run verify:owned-site-delivery-sync after approved deploy, edge sync, or manual artifact sync.</td></tr>
+          <tr><td>On-site tag</td><td>fixed_locally_pending_live</td><td>measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8</td><td>Deploy/sync the approved GA4 source and verify the live homepage without duplicating events.</td></tr>
+          <tr><td>Lead conversion event</td><td>prepared_source_pending_live</td><td>intake-form.js:generate_lead, contact.html:analytics+intake, request-estimate.html:analytics+intake, schedule-service.html:analytics+intake; emits GA4 generate_lead only when window.gtag is available and guards repeat firing with sessionStorage.</td><td>After deploy/sync, submit only an approved test lead or use GA4 DebugView/Realtime evidence to verify generate_lead without duplicating ServiceTitan records.</td></tr>
+          <tr><td>CRM lead</td><td>partial_prior_proof</td><td>ServiceTitan guide has April 24 lead IDs; current dashboard access unknown. Local intake source now passes Trace ID and UTM fields into ServiceTitan notes.</td><td>After deploy/sync, verify Trace ID and UTM fields in an approved test lead or redacted export, then join safe lead fields to the impact periods.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Accessibility Blocker Report</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Severity</th><th>Finding</th><th>Count</th><th>Sample pages</th><th>Evidence</th><th>Fix</th></tr></thead>
+        <tbody><tr><td>verified</td><td>No automated accessibility findings</td><td>0</td><td>-</td><td>-</td><td>-</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>File Completeness</h2>
+    <div class="grid">
+      <article class="card"><h3>Sitemap URLs</h3><div class="metric">119</div><p>0 sitemap URLs missing local files.</p></article>
+      <article class="card"><h3>Public HTML Files</h3><div class="metric">119</div><p>0 local public HTML files are not in the sitemap.</p></article>
+      <article class="card"><h3>Broken Internal Links</h3><div class="metric good">0</div><p>Checked local internal HTML and asset href targets.</p></article>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Type</th><th>Path</th><th>Note</th></tr></thead>
+        <tbody><tr><td>verified</td><td>Sitemap/local file map</td><td>No sample gaps found</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>Live Artifact Source Map</h2>
+    <p>This compares repo-local artifacts with live production artifacts that may be served by the New Reward edge.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Artifact</th><th>Status</th><th>HTTP</th><th>Content type</th><th>Repo match</th><th>Live parse</th><th>Edge evidence</th></tr></thead>
+        <tbody><tr><td>robots.txt</td><td>live</td><td>200</td><td>text/plain; charset=utf-8</td><td>differs_from_repo</td><td>-</td><td>edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/robots.txt; websiteId=cmorqbs9j001r5nr1h25vosp8</td></tr><tr><td>llms.txt</td><td>live</td><td>200</td><td>text/plain; charset=utf-8</td><td>differs_from_repo</td><td>-</td><td>edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/llms.txt; websiteId=cmorqbs9j001r5nr1h25vosp8</td></tr><tr><td>sitemap.xml</td><td>live</td><td>200</td><td>application/xml</td><td>differs_from_repo</td><td>10 invalid lastmods</td><td>edge=v20260601032350-675731b8-57d4bf; servedBy=origin; managedPath=none; websiteId=cmorqbs9j001r5nr1h25vosp8</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>Metadata And Schema Issues</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Page</th><th>Issues</th><th>Title</th></tr></thead>
+        <tbody><tr><td>-</td><td>No page-level metadata issues found</td><td>-</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>GEO Notes</h2>
+    <div class="grid">
+      <article class="card"><h3>Robots</h3><p>Important content is allowed via User-agent: *, while admin and API paths are blocked. No explicit AI crawler allow/block policy is present.</p></article>
+      <article class="card"><h3>llms.txt</h3><p>Present.</p></article>
+      <article class="card"><h3>Schema</h3><p>117/119 public HTML files include JSON-LD. Types seen: BlogPosting, BreadcrumbList, FAQPage, LocalBusiness.</p></article>
+      <article class="card"><h3>Content Extractability</h3><p>The site has broad service and service-area coverage. GEO improvements should focus on llms.txt, clearer answer blocks, stronger proof/authority signals, and measurement links.</p></article>
+    </div>
+
+    <h2>Source Files</h2>
+    <p>Raw audit JSON: <a href="../data/seo-geo-attribution-audit.json">data/seo-geo-attribution-audit.json</a>. Local ledgers: <a href="../data/channel-access-status.csv">channel access</a>, <a href="../data/distribution-ledger.csv">distribution</a>, <a href="../data/benchmark-queries.csv">benchmark queries</a>, and <a href="../data/public-claim-register.json">public claim register</a>.</p>
+  </main>
+  <script>
+    const points = [];
+    const canvas = document.getElementById("timeline");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#5f6d7a";
+    ctx.font = "16px system-ui, sans-serif";
+    if (!points.length) {
+      ctx.fillText("No GSC/GA4/GBP time-series data available yet. Connect the Air Express New Reward Google provider records and rerun.", 32, 140);
+    } else {
+      const pad = 38;
+      const max = Math.max(...points.map(p => Math.max(p.clicks, p.sessions, 1)));
+      const x = i => pad + (i / Math.max(points.length - 1, 1)) * (canvas.width - pad * 2);
+      const y = v => canvas.height - pad - (v / max) * (canvas.height - pad * 2);
+      function line(key, color) {
+        ctx.beginPath();
+        points.forEach((p, i) => {
+          const px = x(i), py = y(p[key] || 0);
+          if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        });
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      line("clicks", "#0b68a6");
+      line("sessions", "#27764a");
+      ctx.fillStyle = "#0b68a6"; ctx.fillText("GSC clicks", pad, 24);
+      ctx.fillStyle = "#27764a"; ctx.fillText("GA4 sessions", pad + 110, 24);
+    }
+  </script>
+</body>
+</html>

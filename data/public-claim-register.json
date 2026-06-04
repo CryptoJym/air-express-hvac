@@ -1,0 +1,1556 @@
+{
+  "generatedAt": "2026-06-04T21:21:14.125Z",
+  "status": "passed",
+  "scope": "Local public HTML claim scan. No provider mutation, public profile edit, external send, deploy, token use, or customer data access.",
+  "sourceNote": "Public sources are recorded as proof references, but this command does not fetch or mutate external providers.",
+  "summary": {
+    "scannedHtmlFiles": 119,
+    "registeredClaimTypes": 13,
+    "forbiddenClaimFailures": 0,
+    "proofGatedClaimTypes": 8
+  },
+  "claims": [
+    {
+      "id": "bbb_accredited",
+      "label": "BBB Accredited",
+      "status": "forbidden_until_public_status_changes",
+      "occurrenceCount": 0,
+      "failIfPresent": true,
+      "proof": "Current BBB public profile for Air Express says the business is not BBB accredited and not rated.",
+      "source": "https://www.bbb.org/us/ut/lehi/profile/residential-air-conditioning-contractors/air-express-heating-and-air-conditioning-inc-1166-22004264",
+      "occurrences": []
+    },
+    {
+      "id": "bbb_business_profile",
+      "label": "BBB Business Profile",
+      "status": "allowed_public_profile_reference",
+      "occurrenceCount": 2,
+      "failIfPresent": false,
+      "proof": "Current BBB public profile exists; accreditation is not claimed.",
+      "source": "https://www.bbb.org/us/ut/lehi/profile/residential-air-conditioning-contractors/air-express-heating-and-air-conditioning-inc-1166-22004264",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 303,
+          "snippet": "<li>NATE Certified Technicians</li> <li>BBB Business Profile</li> <li>Authorized Goodman Dealer</li>"
+        },
+        {
+          "file": "index.html",
+          "line": 165,
+          "snippet": ".806-1.946 3.42 3.42 0 013.138-3.138z\"/></svg></span> BBB Business Profile </div> <div class=\"trust-badge\">"
+        }
+      ]
+    },
+    {
+      "id": "google_rating_4_9",
+      "label": "4.9 review rating",
+      "status": "proof_gated_registered",
+      "occurrenceCount": 209,
+      "failIfPresent": false,
+      "proof": "Needs current GBP/review-source proof before owner-facing claim closeout.",
+      "source": "https://g.page/r/CYZKv5H3bwNzEBM/review",
+      "occurrences": [
+        {
+          "file": "ac-inspection.html",
+          "line": 33,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <"
+        },
+        {
+          "file": "ac-inspection.html",
+          "line": 119,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 30,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 198,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 105,
+          "snippet": "hirty years serving Lehi and Utah County. NATE-certified technicians. 4.9-star reviews from 280+ local families. Emergency availability. No-sur"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 246,
+          "snippet": "with deep heating and cooling expertise</li> <li>4.9-star rating from 280+ satisfied Lehi neighbors</li>"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 286,
+          "snippet": "ears in Utah, just up the road from Lehi. NATE-certified technicians. 4.9-star reviews from local families. Emergency availability. Transparent"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 105,
+          "snippet": "hirty years serving Orem and Utah County. NATE-certified technicians. 4.9-star reviews from 280+ local families. Emergency availability. No-sur"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 246,
+          "snippet": "with deep heating and cooling expertise</li> <li>4.9-star rating from 280+ satisfied Orem neighbors</li>"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 286,
+          "snippet": "ears in Utah, just up the road from Orem. NATE-certified technicians. 4.9-star reviews from local families. Emergency availability. Transparent"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 105,
+          "snippet": "irty years serving Sandy and Utah County. NATE-certified technicians. 4.9-star reviews from 280+ local families. Emergency availability. No-sur"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 246,
+          "snippet": "with deep heating and cooling expertise</li> <li>4.9-star rating from 280+ satisfied Sandy neighbors</li>"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 286,
+          "snippet": "ars in Utah, just up the road from Sandy. NATE-certified technicians. 4.9-star reviews from local families. Emergency availability. Transparent"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 11,
+          "snippet": "\"$$\", \"aggregateRating\": {\"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\"}} </script> <script type=\"application/ld+j"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 130,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 33,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 119,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 33,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 119,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 105,
+          "snippet": "munities. NATE-certified technicians with new-construction expertise. 4.9-star reviews. We understand Eagle Mountain's unique elevation (~4,800"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 247,
+          "snippet": "onstruction and high-elevation expertise</li> <li>4.9-star rating from 280+ satisfied Eagle Mountain neighbors</li>"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 289,
+          "snippet": "que environment. thirty years experience. NATE-certified technicians. 4.9-star reviews. 20-minute response time. Transparent pricing. We're you"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 105,
+          "snippet": "hirty years serving Lehi and Utah County. NATE-certified technicians. 4.9-star reviews from 280+ local families. Emergency availability. No-sur"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 246,
+          "snippet": "with deep heating and cooling expertise</li> <li>4.9-star rating from 280+ satisfied Lehi neighbors</li>"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 286,
+          "snippet": "ears in Utah, just up the road from Lehi. NATE-certified technicians. 4.9-star reviews from local families. Emergency availability. Transparent"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 31,
+          "snippet": "{ \"@type\": \"AggregateRating\", \"ratingValue\": \"4.9\", \"reviewCount\": \"280\" } } </script> <scr"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 105,
+          "snippet": "hirty years serving Orem and Utah County. NATE-certified technicians. 4.9-star reviews from 280+ local families. Emergency availability. No-sur"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 209,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 246,
+          "snippet": "with deep heating and cooling expertise</li> <li>4.9-star rating from 280+ satisfied Orem neighbors</li>"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 286,
+          "snippet": "ears in Utah, just up the road from Orem. NATE-certified technicians. 4.9-star reviews from local families. Emergency availability. Transparent"
+        }
+      ]
+    },
+    {
+      "id": "review_count_280",
+      "label": "280+ reviews",
+      "status": "proof_gated_registered",
+      "occurrenceCount": 88,
+      "failIfPresent": false,
+      "proof": "Needs current GBP/review-source proof before owner-facing claim closeout.",
+      "source": "https://g.page/r/CYZKv5H3bwNzEBM/review",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 249,
+          "snippet": ".</h3> <p>Thirteen Wasatch Front communities. 280+ five-star reviews. Three generations of the same family answering the phone. The next c"
+        },
+        {
+          "file": "ac-inspection.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 199,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 131,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 199,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-repair.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-replacement.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 101,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ac-tune-up.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "air-duct-cleaning.html",
+          "line": 125,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "air-filters.html",
+          "line": 100,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "air-purifiers.html",
+          "line": 125,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "all-services.html",
+          "line": 119,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "careers.html",
+          "line": 99,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "commercial.html",
+          "line": 99,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "contact.html",
+          "line": 98,
+          "snippet": "num\">4.9★</span> <span class=\"contact-stat-label\">280+ reviews</span> </div> <div class=\"contact-sta"
+        },
+        {
+          "file": "ductless.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "ductwork.html",
+          "line": 100,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "emergency.html",
+          "line": 111,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> </div> </section>"
+        },
+        {
+          "file": "faq.html",
+          "line": 361,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "financing.html",
+          "line": 99,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "fireplace.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-installation.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-maintenance.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair-eagle-mountain-ut.html",
+          "line": 203,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair-lehi-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair-orem-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair-sandy-ut.html",
+          "line": 210,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair-saratoga-springs-ut.html",
+          "line": 151,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace-repair.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        },
+        {
+          "file": "furnace.html",
+          "line": 120,
+          "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
+        }
+      ]
+    },
+    {
+      "id": "business_started_1996",
+      "label": "Since 1996",
+      "status": "public_source_supported",
+      "occurrenceCount": 206,
+      "failIfPresent": false,
+      "proof": "BBB profile records Business Started and Business Started Locally as 6/12/1996.",
+      "source": "https://www.bbb.org/us/ut/lehi/profile/residential-air-conditioning-contractors/air-express-heating-and-air-conditioning-inc-1166-22004264",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 7,
+          "snippet": "mily business dedicated to community, expertise, and honest service — serving Utah since 1996.\"> <title>About Air Express HVAC | Our Utah Story</title> <s"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 190,
+          "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 201,
+          "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — our hometown since 1996. We show up when we say w"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 201,
+          "snippet": "ce-hero-sub\">Family-owned since 1996 and based in Lehi — our hometown since 1996. We show up when we say we will, run the load calc the right way, and"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 244,
+          "snippet": "nstallation in Lehi</h3> <ul> <li>Serving Lehi and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 201,
+          "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 20 minutes south on I-15. We show up when we say"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 244,
+          "snippet": "nstallation in Orem</h3> <ul> <li>Serving Orem and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 201,
+          "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 35 minutes up I-15. We show up when we say we wil"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 244,
+          "snippet": "stallation in Sandy</h3> <ul> <li>Serving Sandy and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 122,
+          "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 201,
+          "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 245,
+          "snippet": "untain</h3> <ul> <li>thirty years serving Utah Valley and growing communities since 1996</li> <li>NATE-certified technicians with new-cons"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 201,
+          "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — our hometown since 1996. We show up when we say w"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 201,
+          "snippet": "ce-hero-sub\">Family-owned since 1996 and based in Lehi — our hometown since 1996. We show up when we say we will, explain what's going on, and fix it"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 244,
+          "snippet": "r AC Repair in Lehi</h3> <ul> <li>Serving Lehi and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 201,
+          "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 20 minutes south on I-15. We show up when we say"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 244,
+          "snippet": "r AC Repair in Orem</h3> <ul> <li>Serving Orem and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 201,
+          "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 35 minutes up I-15. We show up when we say we wil"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 244,
+          "snippet": "AC Repair in Sandy</h3> <ul> <li>Serving Sandy and surrounding communities since 1996</li> <li>NATE-certified technicians with deep hea"
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 190,
+          "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 233,
+          "snippet": "prings</h3> <ul> <li>thirty years serving Saratoga Springs and Utah Valley since 1996</li> <li>NATE-certified technicians with humidity"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 7,
+          "snippet": "Beat Utah's hot summers with professional air conditioning service — serving Utah since 1996.\"> <title>Air Conditioning Services | Air Express HVAC</title>"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 92,
+          "snippet": "lled by the same family company that's been doing this in Utah County since 1996.</p> <a href=\"contact.html\" class=\"service-hero-cta\">"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 125,
+          "snippet": "stems start failing.</p> <p>We've been doing this since 1996. We know which compressors die first in Utah's heat, which condensers"
+        },
+        {
+          "file": "air-conditioner.html",
+          "line": 6,
+          "snippet": "ir, installation, and maintenance in Lehi, UT from Air Express HVAC — serving Utah since 1996.\"> <title>Air Conditioner Services | Air Express HVAC</title>"
+        },
+        {
+          "file": "air-conditioner.html",
+          "line": 17,
+          "snippet": "ir, installation, and maintenance in Lehi, UT from Air Express HVAC — serving Utah since 1996.\"> <meta property=\"og:type\" content=\"website\"> <meta property"
+        },
+        {
+          "file": "air-conditioner.html",
+          "line": 25,
+          "snippet": "ir, installation, and maintenance in Lehi, UT from Air Express HVAC — serving Utah since 1996.\"> <link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">"
+        },
+        {
+          "file": "air-conditioning.html",
+          "line": 17,
+          "snippet": "UT. AC repair, installation, and maintenance from Air Express HVAC — serving Utah since 1996.\"> <meta property=\"og:type\" content=\"website\"> <meta property"
+        },
+        {
+          "file": "air-conditioning.html",
+          "line": 25,
+          "snippet": "UT. AC repair, installation, and maintenance from Air Express HVAC — serving Utah since 1996.\"> <link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">"
+        },
+        {
+          "file": "air-filters.html",
+          "line": 7,
+          "snippet": "clean with quality filters and maintenance for Utah dust and pollen — serving Utah since 1996.\"> <title>Air Filters & Maintenance | Air Express HVAC</title>"
+        },
+        {
+          "file": "air-filters.html",
+          "line": 202,
+          "snippet": "<h2>Breathe Easier</h2> <p>Clean filters. Honest advice. Serving Utah since 1996.</p> <a href=\"contact.html\" class=\"cta-btn\">Schedule Filt"
+        },
+        {
+          "file": "all-services.html",
+          "line": 108,
+          "snippet": "<p class=\"service-hero-eyebrow\">EVERYTHING WE DO · UTAH · SINCE 1996</p> <h1>Everything we do,<br>under one roof.</h1>"
+        },
+        {
+          "file": "all-services.html",
+          "line": 110,
+          "snippet": "One crew, one phone number, one family name that's been on the truck since 1996.</p> <a href=\"contact.html\" class=\"service-hero-cta\">"
+        },
+        {
+          "file": "blog/indoor-air-quality-utah.html",
+          "line": 145,
+          "snippet": "Chicago.</p> <p>We&#39;ve been servicing HVAC systems in Utah County since 1996. The indoor air issues we actually see in Lehi, Eagle Mountain, and S"
+        },
+        {
+          "file": "careers.html",
+          "line": 7,
+          "snippet": "Utah team. Apprenticeships. Training. Family business opportunities — serving Utah since 1996.\"> <title>Careers | Join Air Express HVAC</title> <link rel=\"p"
+        },
+        {
+          "file": "central-hvac-services.html",
+          "line": 6,
+          "snippet": "l HVAC repair, installation &amp; maintenance from Air Express HVAC — serving Utah since 1996.\"> <title>Central HVAC Services | Air Express HVAC</title> <l"
+        },
+        {
+          "file": "central-hvac-services.html",
+          "line": 17,
+          "snippet": "l HVAC repair, installation &amp; maintenance from Air Express HVAC — serving Utah since 1996.\"> <meta property=\"og:type\" content=\"website\"> <meta property"
+        },
+        {
+          "file": "central-hvac-services.html",
+          "line": 25,
+          "snippet": "l HVAC repair, installation &amp; maintenance from Air Express HVAC — serving Utah since 1996.\"> <link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">"
+        },
+        {
+          "file": "central-hvac-systems.html",
+          "line": 6,
+          "snippet": "C system installation and service in Lehi, UT from Air Express HVAC — serving Utah since 1996.\"> <title>Central HVAC Systems | Air Express HVAC</title> <li"
+        },
+        {
+          "file": "central-hvac-systems.html",
+          "line": 17,
+          "snippet": "C system installation and service in Lehi, UT from Air Express HVAC — serving Utah since 1996.\"> <meta property=\"og:type\" content=\"website\"> <meta property"
+        }
+      ]
+    },
+    {
+      "id": "years_30",
+      "label": "30 years / 30 yr",
+      "status": "public_source_supported",
+      "occurrenceCount": 102,
+      "failIfPresent": false,
+      "proof": "BBB profile records years in business as 29 as of the current public profile; 30-year copy is directionally tied to 1996 but should be date-reviewed.",
+      "source": "https://www.bbb.org/us/ut/lehi/profile/residential-air-conditioning-contractors/air-express-heating-and-air-conditioning-inc-1166-22004264",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 7,
+          "snippet": ".0\"> <meta name=\"description\" content=\"About Air Express HVAC - A nearly 30-year Utah family business dedicated to community, expertise, and honest se"
+        },
+        {
+          "file": "about.html",
+          "line": 15,
+          "snippet": "usiness\", \"name\": \"Air Express HVAC\", \"description\": \"nearly 30-year family HVAC business in Lehi, Utah\", \"foundingDate\": \"1996\","
+        },
+        {
+          "file": "about.html",
+          "line": 36,
+          "snippet": "<meta property=\"og:description\" content=\"About Air Express HVAC - A nearly 30-year Utah family business dedicated to community, expertise, and honest se"
+        },
+        {
+          "file": "about.html",
+          "line": 44,
+          "snippet": "<meta name=\"twitter:description\" content=\"About Air Express HVAC - A nearly 30-year Utah family business dedicated to community, expertise, and honest se"
+        },
+        {
+          "file": "ac-inspection.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 206,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 138,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 217,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 206,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-repair.html",
+          "line": 194,
+          "snippet": "one; padding: 0;\"> <li style=\"margin: 12px 0;\">nearly 30 years fixing Utah HVAC systems</li> <li style=\"margin: 12px"
+        },
+        {
+          "file": "ac-replacement.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 108,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ac-tune-up.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "air-duct-cleaning.html",
+          "line": 132,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "air-filters.html",
+          "line": 107,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "air-purifiers.html",
+          "line": 132,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "air-purifiers.html",
+          "line": 191,
+          "snippet": "<h3>The Air Express Difference</h3> <p>nearly 30 years installing air quality solutions across Utah County. We test every sy"
+        },
+        {
+          "file": "all-services.html",
+          "line": 126,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "all-services.html",
+          "line": 197,
+          "snippet": "tified</h3> <p>License #96-324211-550. EPA certified. 30 years serving Utah County.</p> </div> </section>"
+        },
+        {
+          "file": "blog/geothermal-guide.html",
+          "line": 165,
+          "snippet": "ce. But with a $15,000-25,000 price premium, the payback period is 15-30 years.</p> <p>That&#39;s longer than a lot of homeowners plan to stay in a"
+        },
+        {
+          "file": "careers.html",
+          "line": 106,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "careers.html",
+          "line": 159,
+          "snippet": "<h3>Stability & Growth</h3> <p>30 years in business. Steady work. Room to advance.</p> </div>"
+        },
+        {
+          "file": "commercial.html",
+          "line": 106,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "contact.html",
+          "line": 105,
+          "snippet": "ss=\"contact-stat\"> <span class=\"contact-stat-num\">30 yr</span> <span class=\"contact-stat-label\">family-ow"
+        },
+        {
+          "file": "ductless.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "ductwork.html",
+          "line": 107,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "emergency.html",
+          "line": 106,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "faq.html",
+          "line": 368,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "financing.html",
+          "line": 106,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "fireplace.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        },
+        {
+          "file": "furnace-installation.html",
+          "line": 127,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
+        }
+      ]
+    },
+    {
+      "id": "emergency_24_7",
+      "label": "24/7 emergency service",
+      "status": "owner_proof_gated_registered",
+      "occurrenceCount": 206,
+      "failIfPresent": false,
+      "proof": "Needs owner approval/dispatch policy proof before final claim closeout.",
+      "source": "owner proof required",
+      "occurrences": [
+        {
+          "file": "ac-inspection.html",
+          "line": 131,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 210,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 297,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Installation for Lehi residents. Whether it's a winter f"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 248,
+          "snippet": "minutes away from Lehi</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 322,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Installation for Orem residents. Whether it's a winter f"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 248,
+          "snippet": "minutes away from Orem</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 322,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Installation for Sandy residents. Whether it's a winter"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 248,
+          "snippet": "inutes away from Sandy</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 322,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 142,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 225,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 131,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 131,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 105,
+          "snippet": "tion (~4,800 ft) and construction environment. Emergency availability 24/7. Transparent pricing.\" } } ]"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 250,
+          "snippet": "lable for most repairs</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 273,
+          "snippet": "gle Mountain homes within 20 minutes. Emergency calls are prioritized 24/7. Call (801) 766-8585 anytime.</p> </details>"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 325,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Repair for Lehi residents. Whether it's a winter furnace"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 248,
+          "snippet": "minutes away from Lehi</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 322,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Repair for Orem residents. Whether it's a winter furnace"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 248,
+          "snippet": "minutes away from Orem</li> <li>Emergency service 24/7, 365 days a year</li> <li>Free estimates with no"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 322,
+          "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 81,
+          "snippet": "\"@type\": \"Answer\", \"text\": \"Yes, we provide 24/7 emergency AC Repair for Sandy residents. Whether it's a winter furnac"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 221,
+          "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 237,
+          "snippet": "<li><strong>Emergency availability:</strong> We're available 24/7 for furnace failures and AC breakdowns. From our Lehi headquarters, w"
+        }
+      ]
+    },
+    {
+      "id": "callback_under_1hr",
+      "label": "Under 1 hour callback",
+      "status": "owner_proof_gated_registered",
+      "occurrenceCount": 0,
+      "failIfPresent": false,
+      "proof": "Needs owner-approved response-time proof or should stay out of final proof claims.",
+      "source": "owner proof required",
+      "occurrences": []
+    },
+    {
+      "id": "financing_0_apr",
+      "label": "0% APR financing",
+      "status": "provider_offer_proof_gated_registered",
+      "occurrenceCount": 32,
+      "failIfPresent": false,
+      "proof": "Needs current financing offer proof and terms before owner-facing claim closeout.",
+      "source": "Momnt/provider offer proof required",
+      "occurrences": [
+        {
+          "file": "ac-inspection.html",
+          "line": 226,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 216,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 216,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-repair.html",
+          "line": 212,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-replacement.html",
+          "line": 216,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 198,
+          "snippet": "'t do. If financing helps your family stay cool this summer, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ac-tune-up.html",
+          "line": 216,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "air-duct-cleaning.html",
+          "line": 206,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "air-filters.html",
+          "line": 211,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "air-purifiers.html",
+          "line": 206,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ductless.html",
+          "line": 200,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ductwork.html",
+          "line": 212,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "financing.html",
+          "line": 88,
+          "snippet": "o-inner\"> <p class=\"service-hero-eyebrow\">FINANCING · 0% APR AVAILABLE · LEHI</p> <h1>Keep the house<br>comfortabl"
+        },
+        {
+          "file": "financing.html",
+          "line": 90,
+          "snippet": "lass=\"service-hero-sub\">Flexible financing for qualifying homeowners. 0% APR options on new systems, fair monthly payments, and no pressure to pic"
+        },
+        {
+          "file": "fireplace.html",
+          "line": 200,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "furnace-installation.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "furnace-maintenance.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "furnace-repair.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "furnace.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "gas-lines.html",
+          "line": 211,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heat-pump.html",
+          "line": 236,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-installation.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-maintenance.html",
+          "line": 199,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-repair.html",
+          "line": 219,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-replacement.html",
+          "line": 200,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-services.html",
+          "line": 215,
+          "snippet": "'t do. If financing helps your family stay warm this winter, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "heating-tune-up.html",
+          "line": 200,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "indoor-air-quality.html",
+          "line": 206,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "residential.html",
+          "line": 214,
+          "snippet": "l come take a look. Written estimate before any work starts, flexible 0% APR financing on the bigger jobs, and the same phone number we've had sin"
+        },
+        {
+          "file": "thermostats.html",
+          "line": 209,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "ventilation.html",
+          "line": 210,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        },
+        {
+          "file": "water-heater.html",
+          "line": 206,
+          "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
+        }
+      ]
+    },
+    {
+      "id": "license_number",
+      "label": "Utah license number",
+      "status": "public_or_owner_proof_registered",
+      "occurrenceCount": 160,
+      "failIfPresent": false,
+      "proof": "Needs current Utah DOPL/owner proof before final claim closeout.",
+      "source": "https://dopl.utah.gov/licenses/",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 305,
+          "snippet": "<li>Authorized Goodman Dealer</li> <li>Utah License #96-324211-550</li> </ul> </div> </section>"
+        },
+        {
+          "file": "about.html",
+          "line": 327,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-inspection.html",
+          "line": 242,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation-eagle-mountain-ut.html",
+          "line": 293,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Lehi job.\""
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Lehi job.</p>"
+        },
+        {
+          "file": "ac-installation-lehi-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Orem job.\""
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Orem job.</p>"
+        },
+        {
+          "file": "ac-installation-orem-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Sandy job.\""
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Sandy job.</p>"
+        },
+        {
+          "file": "ac-installation-sandy-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation-saratoga-springs-ut.html",
+          "line": 221,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-installation.html",
+          "line": 232,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-maintenance.html",
+          "line": 232,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 97,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We specialize in servicing both new and established HVAC systems acr"
+        },
+        {
+          "file": "ac-repair-eagle-mountain-ut.html",
+          "line": 321,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Lehi job.\""
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Lehi job.</p>"
+        },
+        {
+          "file": "ac-repair-lehi-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Orem job.\""
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Orem job.</p>"
+        },
+        {
+          "file": "ac-repair-orem-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 89,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Sandy job.\""
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 238,
+          "snippet": "Our technicians are NATE-certified, EPA-certified, and hold Utah HVAC license #96-324211-550. We maintain the highest standards on every job.</li>"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 274,
+          "snippet": "ely. All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Sandy job.</p>"
+        },
+        {
+          "file": "ac-repair-sandy-ut.html",
+          "line": 318,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 95,
+          "snippet": "t\": \"All technicians are NATE-certified, EPA-certified, and hold Utah license #96-324211-550. We maintain the highest standards for every Saratoga Springs repair."
+        },
+        {
+          "file": "ac-repair-saratoga-springs-ut.html",
+          "line": 306,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-repair.html",
+          "line": 228,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-replacement.html",
+          "line": 232,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-services.html",
+          "line": 228,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "ac-tune-up.html",
+          "line": 232,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        },
+        {
+          "file": "accessibility.html",
+          "line": 123,
+          "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
+        }
+      ]
+    },
+    {
+      "id": "nate_certified",
+      "label": "NATE certified",
+      "status": "owner_proof_gated_registered",
+      "occurrenceCount": 2,
+      "failIfPresent": false,
+      "proof": "Needs owner/team certification proof before final claim closeout.",
+      "source": "owner proof required",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 302,
+          "snippet": "<li>EPA 608 Certified</li> <li>NATE Certified Technicians</li> <li>BBB Business Profile</li>"
+        },
+        {
+          "file": "index.html",
+          "line": 161,
+          "snippet": "8 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\"/></svg></span> NATE Certified </div> <div class=\"trust-badge\">"
+        }
+      ]
+    },
+    {
+      "id": "epa_608",
+      "label": "EPA 608 certified",
+      "status": "owner_proof_gated_registered",
+      "occurrenceCount": 2,
+      "failIfPresent": false,
+      "proof": "Needs owner/team certification proof before final claim closeout.",
+      "source": "owner proof required",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 301,
+          "snippet": "<ul class=\"about-credentials-list\"> <li>EPA 608 Certified</li> <li>NATE Certified Technicians</li>"
+        },
+        {
+          "file": "index.html",
+          "line": 157,
+          "snippet": "oke-linejoin=\"round\" d=\"M9 12l2 2 4-4\"/></svg></span> EPA 608 Certified </div> <div class=\"trust-badge\">"
+        }
+      ]
+    },
+    {
+      "id": "authorized_goodman",
+      "label": "Authorized Goodman dealer",
+      "status": "owner_or_manufacturer_proof_gated_registered",
+      "occurrenceCount": 2,
+      "failIfPresent": false,
+      "proof": "Needs owner/manufacturer listing proof before final claim closeout.",
+      "source": "owner or Goodman proof required",
+      "occurrences": [
+        {
+          "file": "about.html",
+          "line": 304,
+          "snippet": "<li>BBB Business Profile</li> <li>Authorized Goodman Dealer</li> <li>Utah License #96-324211-550</li>"
+        },
+        {
+          "file": "index.html",
+          "line": 169,
+          "snippet": "roke=\"currentColor\" stroke-width=\"1.5\"/></svg></span> Authorized Goodman Dealer </div> </div> <!-- SERVICES -->"
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

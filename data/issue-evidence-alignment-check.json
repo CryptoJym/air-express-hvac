@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-06-04T21:21:14.108Z",
+  "status": "passed",
+  "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
+  "observed": {
+    "liveMeasurementStatus": "fixed_locally_pending_live",
+    "deliverySyncStatus": "pending_delivery_sync",
+    "googleHistoryStatus": "blocked",
+    "gscStatus": "blocked_scope",
+    "ga4Status": "blocked_scope",
+    "gbpStatus": "blocked_scope",
+    "newRewardMappingStatus": "rows_found",
+    "serviceTitanStatus": "blocked_env"
+  },
+  "summary": {
+    "checks": 19,
+    "failures": 0,
+    "openIssuesWithExternalGates": [
+      "#24",
+      "#26",
+      "#27",
+      "#28",
+      "#29",
+      "#30"
+    ],
+    "completedIssue": "#25"
+  },
+  "checks": [
+    {
+      "id": "#24-completion-state",
+      "status": "passed",
+      "evidence": "#24 row status=open, completion_state=parent_incomplete; expected open/parent_incomplete.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #24."
+    },
+    {
+      "id": "#25-completion-state",
+      "status": "passed",
+      "evidence": "#25 row status=closed, completion_state=completed_verified; expected closed/completed_verified.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #25."
+    },
+    {
+      "id": "#26-completion-state",
+      "status": "passed",
+      "evidence": "#26 row status=open, completion_state=partial_mapping_found_provider_mixed; expected open/partial_mapping_found_provider_mixed.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #26."
+    },
+    {
+      "id": "#27-completion-state",
+      "status": "passed",
+      "evidence": "#27 row status=open, completion_state=blocked_scope; expected open/blocked_scope.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #27."
+    },
+    {
+      "id": "#28-completion-state",
+      "status": "passed",
+      "evidence": "#28 row status=open, completion_state=fixed_locally_pending_live; expected open/fixed_locally_pending_live.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #28."
+    },
+    {
+      "id": "#29-completion-state",
+      "status": "passed",
+      "evidence": "#29 row status=open, completion_state=prepared_blocked_by_data_access; expected open/prepared_blocked_by_data_access.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #29."
+    },
+    {
+      "id": "#30-completion-state",
+      "status": "passed",
+      "evidence": "#30 row status=open, completion_state=partial_prior_proof; expected open/partial_prior_proof.",
+      "nextAction": "Update data/issue-24-30-completion-audit.csv for #30."
+    },
+    {
+      "id": "#26-mapping-json-alignment",
+      "status": "passed",
+      "evidence": "mappingStatus.status=rows_found; #26 evidence=npm run verify:newreward-mapping now writes rows_found in data/newreward-air-express-provider-readonly-recheck.json; the configured NewRewards production env source found Air Express client cmmwe8so000077kqptwysqaem, tenant cmmwe8ri500007kqpd05kb4e5, and primary website cmorqbs9j001r5nr1h25vosp8, matching the live edge website id. The same read-only result found the legacy/non-primary website ids cmokaztm100065nqotpggbvwp and cmnfh6pi9000dj47kvq1rhqo8. After the reconnect attempt, GSC provider credential cmovx4dgo000o5nlkvdn9wd79 for sc-domain:airexpressutah.com has validationStatus revoked, the current GSC connection cmpymwqgm00xv5mo5h3spvjfg has connectionStatus error, GA4 provider credential cmovx4t46000q5nlkn8ix3aup has validationStatus valid, and GA4 connection cmovx4t7n000s5nlki14jmb69 has status CONNECTED but propertyId null. No database URL, token, encrypted credential blob, provider token, raw row payload, or customer data is stored.",
+      "nextAction": "Refresh the mapping verifier and #26 matrix row together."
+    },
+    {
+      "id": "#27-google-scope-alignment",
+      "status": "passed",
+      "evidence": "history status=blocked; gsc=blocked_scope; ga4=blocked_scope; gbp=blocked_scope",
+      "nextAction": "Refresh the Google history pull and #27 matrix row together."
+    },
+    {
+      "id": "#28-live-delivery-alignment",
+      "status": "passed",
+      "evidence": "liveMeasurement.status=fixed_locally_pending_live; deliverySync.status=pending_delivery_sync",
+      "nextAction": "Refresh live measurement, delivery sync, and #28 matrix row together."
+    },
+    {
+      "id": "#29-impact-report-alignment",
+      "status": "passed",
+      "evidence": "historyStatus.status=blocked; #29 evidence=pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, and saved New Reward snapshot evidence; direct GSC GA4 and GBP histories are not pulled due missing local read scopes, but saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.",
+      "nextAction": "Refresh the history pull/report and #29 matrix row together."
+    },
+    {
+      "id": "#30-servicetitan-alignment",
+      "status": "passed",
+      "evidence": "serviceTitanStatus.status=blocked_env; #30 evidence=data/servicetitan-lead-history.csv records two April 24 ServiceTitan lead IDs; data/servicetitan-prior-proof-summary.csv records the prior five-lead count; pages/new-reward-impact-report.html now includes Lead Proof Status with partial_prior_proof plus blocked_env export state and redacted export import lane; Gmail evidence also records an April 29 ServiceTitan email-notification fallback setup note and a May 1 tracked lead-visibility investigation; npm run verify:servicetitan-export writes data/servicetitan-export-access-check.json with status blocked_env after checking Air Express, global New Reward, home, and NewRewards local/Vercel env sources; npm run import:servicetitan-redacted-export now prepares a derived new_reward_impact_period output field for before_new_reward_target_brief, target_brief_to_ga4_lead_proof, and after_ga4_lead_proof",
+      "nextAction": "Refresh ServiceTitan export/import evidence and #30 matrix row together."
+    },
+    {
+      "id": "#25-acceptance-closure",
+      "status": "passed",
+      "evidence": "#25 acceptance rows must all remain closure_ready=true.",
+      "nextAction": "Do not reopen #25 unless new resolver-code evidence appears."
+    },
+    {
+      "id": "#24-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#24 acceptance rows=6; non-closure-ready rows=5.",
+      "nextAction": "Keep #24 open until every criterion has direct proof."
+    },
+    {
+      "id": "#26-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#26 acceptance rows=4; non-closure-ready rows=3.",
+      "nextAction": "Keep #26 open until every criterion has direct proof."
+    },
+    {
+      "id": "#27-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#27 acceptance rows=5; non-closure-ready rows=4.",
+      "nextAction": "Keep #27 open until every criterion has direct proof."
+    },
+    {
+      "id": "#28-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#28 acceptance rows=4; non-closure-ready rows=3.",
+      "nextAction": "Keep #28 open until every criterion has direct proof."
+    },
+    {
+      "id": "#29-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#29 acceptance rows=5; non-closure-ready rows=4.",
+      "nextAction": "Keep #29 open until every criterion has direct proof."
+    },
+    {
+      "id": "#30-acceptance-open-gate",
+      "status": "passed",
+      "evidence": "#30 acceptance rows=4; non-closure-ready rows=2.",
+      "nextAction": "Keep #30 open until every criterion has direct proof."
+    }
+  ]
+}

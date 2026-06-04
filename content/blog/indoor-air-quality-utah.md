@@ -1,9 +1,11 @@
 ---
 title: "What Indoor Air Quality Actually Means at 4,500 Feet"
+seoTitle: "Indoor Air Quality at Utah Altitude | Air Express HVAC"
 slug: indoor-air-quality-utah
 date: 2026-05-20
 author: The Air Express Team
 category: "Indoor Air Quality"
+seoDescription: "Utah's inversion winters and dry summers make indoor air different. Learn what filtration and whole-home air quality upgrades actually help."
 excerpt: "Utah's inversion winters and dry summers make indoor air a different problem than anywhere else. Here's what actually works — and what doesn't — at Wasatch Front altitude."
 image: /images/filtration-utah.webp
 tags:

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "newreward.public-scan-agent-audit.v1",
+  "source": "air-express-onboarding",
+  "runMode": "read_only_research",
+  "target": {
+    "inputUrl": "https://airexpressutah.com",
+    "canonicalUrl": "https://airexpressutah.com",
+    "canonicalOrigin": "https://airexpressutah.com",
+    "domain": "airexpressutah.com"
+  },
+  "accessModel": {
+    "newRewardAppIdentity": "james@jamesbrady.org",
+    "googleProviderIdentity": "newrewardplatform@gmail.com",
+    "note": "Use the app identity for New Reward control-plane access; use the Google provider identity only inside approved Google OAuth/provider connection flows. Do not treat the Google account as the New Reward app login identity."
+  },
+  "skillStack": [
+    "newreward-client-onboarding",
+    "client-seo-geo-evidence",
+    "seo-audit",
+    "ai-seo",
+    "analytics",
+    "competitor-profiling",
+    "competitors",
+    "product-marketing",
+    "content-strategy",
+    "marketing-ideas",
+    "marketing-psychology"
+  ],
+  "marketingLens": {
+    "name": "proof-led local-service visibility readout",
+    "source": "Corey Haynes-style proof-led free-tool and competitor-positioning analysis",
+    "principles": [
+      "free tool as lead magnet",
+      "customer-language first positioning",
+      "honest competitor contrast",
+      "jobs-to-be-done framing",
+      "proof before claims",
+      "specific next action over generic audit language"
+    ]
+  },
+  "competitorPlan": {
+    "mode": "hybrid",
+    "providedCompetitors": [],
+    "autoSelectCompetitors": true,
+    "maxAutoSelected": 5,
+    "comparisonDimensions": [
+      "AI answer visibility",
+      "technical SEO readiness",
+      "local/entity clarity",
+      "message specificity",
+      "proof density",
+      "conversion path clarity",
+      "review and authority signals",
+      "service-area coverage",
+      "local profile/NAP consistency"
+    ]
+  },
+  "lanes": [
+    {
+      "id": "seo_geo_evidence",
+      "objective": "Verify current production SEO/GEO readiness, AI artifacts, sitemap, robots, schema, accessibility, file completeness, and messaging consistency without changing production.",
+      "expectedEvidence": [
+        "HTTP status and final URL behavior",
+        "robots, sitemap, llms.txt, and agent-readable artifact status",
+        "schema/entity signals",
+        "metadata/canonical/OG/H1 findings",
+        "accessibility and internal-link findings",
+        "live-vs-repo artifact differences"
+      ]
+    },
+    {
+      "id": "competitor_comparison",
+      "objective": "Auto-select relevant Utah HVAC/local-service competitors and compare Air Express against them using public, cited evidence only.",
+      "expectedEvidence": [
+        "auto-selected competitor rationale",
+        "side-by-side strengths and gaps",
+        "local pack/map/search evidence when safely available",
+        "claim-safe contrast language"
+      ]
+    },
+    {
+      "id": "attribution_traceability",
+      "objective": "Determine whether New Reward can pull GSC, GA4, GBP, live tag, and ServiceTitan traceability evidence; if not, record the true source blocker.",
+      "expectedEvidence": [
+        "New Reward source mapping status",
+        "GSC/GA4/GBP provider status",
+        "live GA4/GTM marker status",
+        "ServiceTitan proof state",
+        "blocker root cause and next action"
+      ]
+    },
+    {
+      "id": "marketing_positioning",
+      "objective": "Turn evidence into a proof-led visibility and trust readout for James/New Reward and Air Express follow-up.",
+      "expectedEvidence": [
+        "audience and JTBD assumptions",
+        "message consistency gaps",
+        "offer and CTA clarity",
+        "recommended next action",
+        "blocked claims and proof needed"
+      ]
+    }
+  ],
+  "safety": {
+    "providerMutationsAllowed": false,
+    "deploysAllowed": false,
+    "publicPostsAllowed": false,
+    "externalSendsAllowed": false,
+    "secretsAllowedInOutput": false
+  },
+  "outputs": [
+    "audit-manifest.json",
+    "seo-geo-evidence-report.md",
+    "competitor-comparison.md",
+    "visibility-and-trust-readout.md",
+    "blockers-and-next-actions.md"
+  ]
+}

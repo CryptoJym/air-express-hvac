@@ -1,0 +1,11 @@
+category,prompt,purpose
+Emergency near-me,"Who offers same-day AC repair near me in Lehi, Utah?",Tests urgent local homeowner intent.
+Repair symptom,"Why is my AC running but not cooling my house in Lehi, Utah, and who should I call?",Tests symptom-to-provider recommendations.
+Cost,How much does AC repair usually cost in Utah County?,Tests price-sensitive research and citation opportunities.
+Replacement,"Should I repair or replace an old air conditioner in Lehi, Utah?",Tests high-value replacement decision support.
+Reviews,Which HVAC companies in Lehi have strong reviews for honest service?,Tests reputation and trust positioning.
+Brand,Is Air Express Heating and Air Conditioning a good HVAC company in Lehi?,Tests direct brand/entity confidence.
+Competitor,How does Air Express compare with other HVAC companies in Lehi and Utah County?,Tests competitive contrast and answer-share.
+Indoor air quality,Who can help improve indoor air quality and filtration for a home in Lehi?,Tests non-breakfix service expansion.
+Seasonal,What HVAC maintenance should I do before the first hot week in Utah County?,Tests blog/newsfeed content impact.
+Proof,What proof should I ask for before hiring an HVAC contractor in Utah County?,"Tests licensed, local, family-owned, and trust proof without awkward phrasing."

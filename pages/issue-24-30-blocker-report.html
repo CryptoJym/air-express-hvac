@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express Issue 24-30 Blocker Report</title>
+  <style>
+    :root {
+      --ink: #162231;
+      --muted: #5e6b78;
+      --line: #d9e2ea;
+      --panel: #f6f9fb;
+      --good: #287549;
+      --warn: #9f5d00;
+      --bad: #b33434;
+      --blue: #0d66a2;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.45; }
+    header { padding: 34px clamp(18px, 5vw, 58px) 24px; background: #eef6fb; border-bottom: 1px solid var(--line); }
+    main { padding: 24px clamp(18px, 5vw, 58px) 56px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+    a { color: var(--blue); }
+    .meta, .grid { display: grid; gap: 12px; }
+    .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
+    .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .blocked { padding: 12px 14px; border-left: 4px solid var(--bad); background: #fff1f1; color: var(--ink); max-width: 980px; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { background: var(--panel); font-size: 13px; }
+    .state { display: inline-block; border-radius: 999px; padding: 4px 8px; color: var(--white); font-size: 12px; font-weight: 750; white-space: nowrap; }
+    .complete { background: var(--good); }
+    .prepared { background: var(--blue); }
+    .blocked-state { background: var(--bad); }
+    .partial { background: var(--warn); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express Issue 24-30 Blocker Report</h1>
+    <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
+    <div class="meta">
+      <span class="pill">Generated 2026-06-04T03:54:53.766Z</span>
+      <span class="pill">Repo: CryptoJym/air-express-hvac</span>
+      <span class="pill">No provider mutations attempted</span>
+      <span class="pill">No Air Express production deploy attempted</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="blocked">
+      <strong>Goal state is not complete.</strong>
+      Issue #25 is complete, and local source/report fixes are prepared, but #24 and #26-#30 still require external access, mapping, live sync, or ServiceTitan proof before they can close.
+    </section>
+
+    <h2>Issue Summary</h2>
+    <section class="grid">
+      <article class="card"><h3>Closed</h3><div class="metric good">1</div><p>#25 NewRewards provider resolver repair.</p></article>
+      <article class="card"><h3>Open</h3><div class="metric bad">6</div><p>#24 and #26-#30 remain open with documented blockers.</p></article>
+      <article class="card"><h3>Technical SEO</h3><div class="metric good">100</div><p>Current local SEO/GEO attribution audit.</p></article>
+      <article class="card"><h3>Attribution</h3><div class="metric bad">25</div><p>Blocked by Google scopes, New Reward mapping, live tag sync, and ServiceTitan export proof.</p></article>
+    </section>
+
+    <h2>Current Diagnostics</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Surface</th><th>Status</th><th>Evidence File</th></tr></thead>
+        <tbody>
+          <tr><td>Live Measurement</td><td><span class="state prepared">fixed locally pending live</span></td><td><code>data/live-measurement-path-check.json</code></td></tr>
+          <tr><td>Delivery Sync</td><td><span class="state prepared">pending delivery sync</span></td><td><code>data/owned-site-delivery-sync-check.json</code></td></tr>
+          <tr><td>Google History</td><td><span class="state blocked-state">blocked</span></td><td><code>data/google-history/history-pull-status.json</code></td></tr>
+          <tr><td>New Reward Mapping</td><td><span class="state blocked-state">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
+          <tr><td>ServiceTitan Export</td><td><span class="state blocked-state">blocked env</span></td><td><code>data/servicetitan-export-access-check.json</code></td></tr>
+          <tr><td>Site Manifest</td><td><span class="state blocked-state">passed</span></td><td><code>data/site-file-manifest.json</code></td></tr>
+          <tr><td>Public Claims</td><td><span class="state blocked-state">passed</span></td><td><code>data/public-claim-register.json</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Issue 24-30 Matrix</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th><th>State</th><th>Completion State</th><th>Current Evidence</th><th>Safe Workaround Attempted</th><th>Remaining Blocker</th><th>Done Proof</th><th>Next Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/24">#24</a></td>
+            <td>open</td>
+            <td><span class="state blocked-state">parent incomplete</span></td>
+            <td>Issue comments updated; pages/new-reward-impact-report.html and pages/seo-geo-attribution-report.html regenerated; data/attribution-email-evidence.csv now preserves Gmail and Outlook root-cause evidence; data/public-claim-register.json records clean public-claim state; child issues #26-#30 remain open</td>
+            <td>Local reports, source evidence map, history pull status, saved New Reward snapshot history, mailbox evidence ledger, public claim register, and blocker comments were refreshed without provider or production mutations</td>
+            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google read scopes/property or location proof, live sync, and ServiceTitan export proof</td>
+            <td>All child issues are closed or explicitly blocked with exact evidence; live report shows pulled history or narrowed provider-specific blockers</td>
+            <td>Resolve #26, #27, #28, #29, and #30 in sequence</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/25">#25</a></td>
+            <td>closed</td>
+            <td><span class="state complete">completed verified</span></td>
+            <td>h3ro-dev/NewRewards PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f on 2026-06-03T13:33:04Z; targeted QA and production-preview gates were green; post-merge Air Express read-only provider recheck now returns rows_found for the canonical live website id cmorqbs9j001r5nr1h25vosp8.</td>
+            <td>Provider credential resolver repair was merged/deployed outside this Air Express repo; local recheck confirms resolver code is no longer the remaining blocker.</td>
+            <td>No resolver-code action remains; GSC revoked/error state, missing local Google read scopes, GA4 property selection, live delivery sync, and ServiceTitan export proof continue under #26-#30.</td>
+            <td>Merged PR/deployment evidence remains attached and no regression appears in current NewRewards status checks</td>
+            <td>Keep #25 closed and continue #26 through #30.</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/26">#26</a></td>
+            <td>open</td>
+            <td><span class="state partial">partial mapping found provider mixed</span></td>
+            <td>npm run verify:newreward-mapping now writes rows_found in data/newreward-air-express-provider-readonly-recheck.json; the configured NewRewards production env source found Air Express client cmmwe8so000077kqptwysqaem, tenant cmmwe8ri500007kqpd05kb4e5, and primary website cmorqbs9j001r5nr1h25vosp8, matching the live edge website id. The same read-only result found the legacy/non-primary website ids cmokaztm100065nqotpggbvwp and cmnfh6pi9000dj47kvq1rhqo8. After the reconnect attempt, GSC provider credential cmovx4dgo000o5nlkvdn9wd79 for sc-domain:airexpressutah.com has validationStatus revoked, the current GSC connection cmpymwqgm00xv5mo5h3spvjfg has connectionStatus error, GA4 provider credential cmovx4t46000q5nlkn8ix3aup has validationStatus valid, and GA4 connection cmovx4t7n000s5nlki14jmb69 has status CONNECTED but propertyId null. No database URL, token, encrypted credential blob, provider token, raw row payload, or customer data is stored.</td>
+            <td>Expanded the verifier from the limited ~/.config/newrewards env source to the NewRewards local/Vercel env source list, preserved read-only psql behavior, records env-file paths and sanitized row/status summaries only, rechecked provider rows after NewRewards PR #3834 merged/deployed, and reran after the 2026-06-03 reconnect attempt. A read-only saved-snapshot pull also found New Reward GSC and AI visibility history without printing or storing provider credentials.</td>
+            <td>SEO workspace UI still needs a fresh non-mutating recheck because earlier evidence reported Client not found; GSC is now revoked/error for the canonical website id; GA4 is connected but propertyId null; local Google read scopes and property/location visibility are still blocked in #27.</td>
+            <td>SEO workspace opens with Air Express run state and credential health, canonical website id cmorqbs9j001r5nr1h25vosp8 remains selected, GSC is repaired or an exact account/property blocker is recorded, and GA4 property id is selected for the stream containing G-JZ7PY32EVX.</td>
+            <td>Use james@jamesbrady.org New Reward app session to recheck the SEO workspace and provider cards, repair/reconnect GSC as newrewardplatform@gmail.com, and select the GA4 property/web stream containing G-JZ7PY32EVX.</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/27">#27</a></td>
+            <td>open</td>
+            <td><span class="state blocked-state">blocked scope</span></td>
+            <td>data/google-history/history-pull-status.json shows newrewardplatform@gmail.com is available locally; sanitized visibleScopes are present for gcloud and ADC candidates, but both lack webmasters.readonly analytics.readonly and business.manage</td>
+            <td>ADC/token availability and sanitized scope inventory checked without printing token material; Gmail evidence searched for Air Express Google setup state; April 22 and May 7 recaps support credential/status drift; 2026-06-03 current Gmail and Google Drive rechecks found no new GTM/property/scope/provider-row proof; GBP blocker is now explicit in the pull status; docs/air-express-google-readonly-reconnect-packet.md is prepared with scopes stop gates and verification commands</td>
+            <td>Read-only Google OAuth re-consent is required and may hit account chooser, MFA, recovery, owner-verification, or Business Profile location gates</td>
+            <td>npm run pull:gsc-ga4-history writes GSC GA4 and GBP history files or narrowed property/location-specific blockers after scoped re-auth</td>
+            <td>Run the prepared Google read-only reconnect packet after #26 UI/provider target is confirmed; stop at MFA recovery wrong-account unexpected-scope or provider-mutation gates</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a></td>
+            <td>open</td>
+            <td><span class="state prepared">fixed locally pending live</span></td>
+            <td>npm run verify:live-measurement writes data/live-measurement-path-check.json with status fixed_locally_pending_live; npm run verify:owned-site-delivery-sync writes data/owned-site-delivery-sync-check.json with status pending_delivery_sync; npm run verify:site-file-manifest writes data/site-file-manifest.json with status passed; docs/air-express-owned-site-delivery-sync-packet.md records P0 homepage and analytics.js delivery requirements plus local-but-not-live blog/first-hot-week-ac-checklist-utah.html; local public page coverage is 120/120; index.html and analytics.js include GA4 G-JZ7PY32EVX; Outlook evidence from April 24/27 confirms the same direct gtag id; intake-form.js prepares guarded generate_lead; contact.html request-estimate.html and schedule-service.html each load /analytics.js intake-form.js and data-intake-form; live homepage still lacks GA4/GTM and /analytics.js is 404</td>
+            <td>Local source restored and tests added; dedicated live measurement diagnostic performs read-only public marker checks, verifies no duplicate local measurement sources and no unapproved GTM containers, checks all three lead form paths individually, and stores no raw HTML; owned-site delivery sync now compares local homepage analytics.js llms.txt sitemap.xml and robots.txt against live edge hashes/status/markers without storing raw live HTML; site-file manifest verifies required publish artifacts sitemap/local HTML coverage generated blog outputs draft exclusion and local static references; delivery sync packet generated exact stop gates and post-sync commands; repo Gmail and Outlook searches found no approved Air Express GTM container id</td>
+            <td>Approved Air Express deploy, New Reward edge sync, or manual delivery path is required; approved GTM container id remains unknown</td>
+            <td>Live homepage exposes exactly one approved GA4 or verified GTM source and lead forms fire one verified generate_lead event without duplicate ServiceTitan records</td>
+            <td>Approve delivery path; if GTM is desired, first verify the exact GTM container id; rerun npm run prepare:delivery-sync-packet, npm run verify:site-file-manifest, npm run verify:owned-site-delivery-sync, and npm run verify:live-measurement before and after delivery</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/29">#29</a></td>
+            <td>open</td>
+            <td><span class="state prepared">prepared blocked by data access</span></td>
+            <td>pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, and saved New Reward snapshot evidence; direct GSC GA4 and GBP histories are not pulled due missing local read scopes, but saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.</td>
+            <td>History pull script and Pages report generated current blocker state with explicit GBP business.manage evidence plus visible/missing scope metadata; npm run pull:newreward-attribution-history pulled saved New Reward snapshot history read-only; docs/air-express-google-readonly-reconnect-packet.md defines the output contract and pass/fail gates</td>
+            <td>Direct GSC/GA4/GBP provider API read scopes, GA4 property selection, GBP location visibility, GSC revoked/error repair, and live tag delivery remain blocked; ServiceTitan export is still unavailable for attribution joining.</td>
+            <td>Report contains GSC GA4 and GBP rows by period or narrowed provider/property/location blockers; source coverage and caveats are current; saved New Reward snapshot sections remain traceable</td>
+            <td>After #26 provider/UI recheck and #27 scoped access, rerun npm run pull:newreward-attribution-history, npm run pull:gsc-ga4-history, npm run audit:seo-geo-attribution, and npm run verify:onboarding-evidence.</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/30">#30</a></td>
+            <td>open</td>
+            <td><span class="state partial">partial prior proof</span></td>
+            <td>data/servicetitan-lead-history.csv records two April 24 ServiceTitan lead IDs; data/servicetitan-prior-proof-summary.csv records the prior five-lead count; pages/new-reward-impact-report.html now includes Lead Proof Status with partial_prior_proof plus blocked_env export state and redacted export import lane; Gmail evidence also records an April 29 ServiceTitan email-notification fallback setup note and a May 1 tracked lead-visibility investigation; npm run verify:servicetitan-export writes data/servicetitan-export-access-check.json with status blocked_env after checking Air Express, global New Reward, home, and NewRewards local/Vercel env sources; npm run import:servicetitan-redacted-export now prepares a derived new_reward_impact_period output field for before_new_reward_target_brief, target_brief_to_ga4_lead_proof, and after_ga4_lead_proof</td>
+            <td>Repeatable ServiceTitan export readiness check records required env key presence across process env, known local env files, and NewRewards local/Vercel env files plus export packet schema without printing credential values tokens customer PII or raw lead payloads; npm run import:servicetitan-redacted-export prepared a safe local import template and awaiting_input manifest for owner-supplied redacted CSVs with period classification derived from created_at; npm run test:servicetitan-redacted-import verifies awaiting-input behavior, safe alias normalization, impact period classification, and PII rejection without persisting raw private values; bounded Gmail search added sanitized setup/visibility evidence and found no full export booking status revenue report or new lead IDs beyond existing proof; Google Drive metadata search found no Air Express ServiceTitan export source; local ServiceTitan/intake tests passed</td>
+            <td>Read-only ServiceTitan export access or redacted screenshot/export packet is needed; no CRM mutation or live test lead is approved</td>
+            <td>Impact report includes full lead counts by period with no customer PII, or exact export/access/import blocker remains documented</td>
+            <td>Request read-only ServiceTitan export/API access or redacted proof packet by date, source/channel, campaign, status, booking/revenue if available; then run npm run test:servicetitan-redacted-import, npm run import:servicetitan-redacted-export -- --input &lt;csv&gt;, npm run pull:gsc-ga4-history, and npm run verify:onboarding-evidence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Acceptance Criteria Audit</h2>
+    <p>Detailed criterion-level evidence is recorded in <code>data/issue-24-30-acceptance-criteria-audit.csv</code>. An issue stays open when any required criterion remains false.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Issue</th><th>Closure-Ready Criteria</th><th>Still Not Ready</th><th>Current Gate</th></tr></thead>
+        <tbody>
+          <tr><td>#24</td><td>1 / 6</td><td>5</td><td>Child issues #26-#30 remain open</td></tr>
+          <tr><td>#25</td><td>4 / 4</td><td>0</td><td></td></tr>
+          <tr><td>#26</td><td>1 / 4</td><td>3</td><td>New Reward SEO workspace route must be rechecked with the james@jamesbrady.org app session and must open without Client not found.</td></tr>
+          <tr><td>#27</td><td>1 / 5</td><td>4</td><td>No scoped GSC read token or property visibility proof</td></tr>
+          <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Approved deploy edge sync or manual delivery path is required</td></tr>
+          <tr><td>#29</td><td>1 / 5</td><td>4</td><td>No scoped local GSC read token or normalized query/page/device history; saved GSC snapshots are aggregate totals only</td></tr>
+          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Full period export or redacted owner packet is missing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>New Reward Cross-Repo Evidence</h2>
+    <p>Cross-repo evidence is recorded in <code>data/newreward-cross-repo-evidence.csv</code> so paid-run work, New Reward owned-site attribution work, and the Air Express resolver repair are not mistaken for Air Express GSC/GA4/GBP access proof.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Surface</th><th>State</th><th>Evidence</th><th>Relevance</th><th>Next Action</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Air Express client ops</td>
+            <td><span class="state blocked-state">active paid run gate</span></td>
+            <td>Air Express is marked healthy in the direct-client roster but the paid-run path is not cleared; May access audit showed GSC and GA4 expired, GBP missing, and Cloudflare not started.</td>
+            <td>Supports #26/#27/#28 root cause: client health, reporting health, and paid-run readiness are separate states that must be reverified before any attribution or paid-spend claim.</td>
+            <td>Reverify current GSC, GA4, GBP, Cloudflare, and delivery state from authorized New Reward and provider sources before closing attribution blockers.</td>
+          </tr>
+          <tr>
+            <td>Signed contract client activation</td>
+            <td><span class="state blocked-state">source drift evidence</span></td>
+            <td>NewRewards plan records that Air Express CRM client cmmwe8so000077kqptwysqaem was manually promoted from prospect to client on 2026-04-29, onboarding day was set, and franchise billing owner was assigned to Fearless Rhino after signed-but-unpaid and stale reseller-contract readiness drift.</td>
+            <td>Supports #26 root cause: Air Express had known contract/client activation drift before the current website/provider mapping blocker, so the reconciliation packet must verify active client status, primaryWebsiteId, SEO workspace mapping, and billing-owner context rather than only provider rows.</td>
+            <td>Use as a source-of-truth clue in #26; run the prepared read-only mapping packet against the actual production source that contains the manual activation correction.</td>
+          </tr>
+          <tr>
+            <td>Air Express campaign lock and package gate</td>
+            <td><span class="state blocked-state">open</span></td>
+            <td>Issue remains open after the stale-campaign-lock repair because no controlled campaign test result is captured; last comment records post-merge paid-run blocker work and guardrails.</td>
+            <td>Separates paid campaign execution readiness from the Air Express GSC/GA4/GBP attribution lane; do not treat package-gate work as provider access proof.</td>
+            <td>Keep Air Express attribution issues open until provider mapping, scopes, live measurement, and lead proof are independently verified.</td>
+          </tr>
+          <tr>
+            <td>Air Express paid package hardening</td>
+            <td><span class="state blocked-state">merged live</span></td>
+            <td>PR #2880 merged at 0bc7bc3d8b5a5a353f978541fec1ba67da4deb0d with Vercel and Railway production proof; no paid/no-spend campaign canary was run by Codex.</td>
+            <td>Confirms a separate Air Express paid-run infrastructure repair shipped, but it does not repair GSC/GA4/GBP access or live Air Express tagging.</td>
+            <td>Use as campaign-lock context only; keep #24/#26-#30 driven by their own acceptance evidence.</td>
+          </tr>
+          <tr>
+            <td>New Reward owned-site attribution</td>
+            <td><span class="state blocked-state">open blocked</span></td>
+            <td>New Reward's own www.newreward.com attribution remains partial: GA4 connected, primary GSC expired/invalid_grant, duplicate primary website records remain pending safe provider mapping.</td>
+            <td>Shows the platform-level Google provider lane also has reconnect and website-record mapping controls; this is not proof Air Express properties are absent.</td>
+            <td>Use the same fail-closed pattern for Air Express: reconcile selected website id before any provider reconnect or property selection.</td>
+          </tr>
+          <tr>
+            <td>Google provider reconnect and aggregate sync</td>
+            <td><span class="state blocked-state">open blocked</span></td>
+            <td>Approved provider-lane preflight stopped before provider mutation because primary GSC remains expired/invalid_grant and no safe repo-local CLI can complete the durable Google OAuth reconnect; #3729 tracks OAuth project ownership/migration decision.</td>
+            <td>Supports #27/#29 blocker class: scoped read access likely requires the platform OAuth flow and approved account/project path, not another local report edit.</td>
+            <td>For Air Express, use docs/air-express-google-readonly-reconnect-packet.md only after #26 UI/provider target is confirmed for cmorqbs9j001r5nr1h25vosp8 and stop at OAuth/project/account gates.</td>
+          </tr>
+          <tr>
+            <td>Air Express GSC/GA4 resolver repair</td>
+            <td><span class="state blocked-state">merged live</span></td>
+            <td>PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f and production deployment reached success; post-merge Air Express configured DB recheck now returns rows_found for canonical website cmorqbs9j001r5nr1h25vosp8 with expired GSC/GA4 provider rows under newrewardplatform@gmail.com.</td>
+            <td>Confirms #25 is complete and remaining Air Express blockers are expired provider rows, Google scopes/property visibility, live delivery sync, and ServiceTitan proof rather than resolver code.</td>
+            <td>Continue #26 through #30; do not reopen resolver work unless new evidence points back to code.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Evidence Files</h2>
+    <p>
+      Source CSVs: <code>data/issue-24-30-completion-audit.csv</code>, <code>data/issue-24-30-acceptance-criteria-audit.csv</code>, <code>data/newreward-cross-repo-evidence.csv</code>.
+      Diagnostic reports: <code>pages/new-reward-impact-report.html</code> and <code>pages/seo-geo-attribution-report.html</code>.
+    </p>
+  </main>
+</body>
+</html>

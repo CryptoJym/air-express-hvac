@@ -1,0 +1,51 @@
+# Air Express HVAC
+> Air Express HVAC is a Lehi, Utah heating and cooling company serving homeowners, property managers, builders, and light-commercial customers across Utah County and Salt Lake County.
+
+## Primary Pages
+- [Home](https://airexpressutah.com/): Heating, cooling, indoor air quality, and emergency HVAC services from Air Express HVAC.
+- [About Air Express](https://airexpressutah.com/about.html): Company story, local service promise, and operating history.
+- [Contact](https://airexpressutah.com/contact.html): Phone, address, and contact form for Air Express HVAC.
+- [Reviews](https://airexpressutah.com/reviews.html): Customer review entry point and reputation proof.
+- [Service Areas](https://airexpressutah.com/service-areas.html): Utah County and Salt Lake County service-area coverage.
+
+## Core Services
+- [AC Services](https://airexpressutah.com/ac-services.html): Air conditioning repair, maintenance, tune-ups, inspections, and replacement.
+- [AC Repair](https://airexpressutah.com/ac-repair.html): Cooling repair and troubleshooting for Utah homes.
+- [AC Installation](https://airexpressutah.com/ac-installation.html): Air conditioner replacement and new AC installation.
+- [Heating Services](https://airexpressutah.com/heating-services.html): Furnace, heat pump, and emergency heating services.
+- [Furnace Repair](https://airexpressutah.com/furnace-repair.html): Furnace repair, diagnostics, and cold-weather service.
+- [Heating Installation](https://airexpressutah.com/heating-installation.html): Furnace and heating-system replacement.
+- [Heat Pumps](https://airexpressutah.com/heat-pump.html): Heat pump service, repair, and replacement.
+- [Indoor Air Quality](https://airexpressutah.com/indoor-air-quality.html): Filtration, air purifiers, humidification, dehumidification, and ventilation.
+- [Ductwork](https://airexpressutah.com/ductwork.html): Ductwork and airflow-related service.
+- [Gas Lines](https://airexpressutah.com/gas-lines.html): Gas line service connected to HVAC and home comfort needs.
+
+## Audience Pages
+- [Homeowners](https://airexpressutah.com/residential.html): Residential heating and cooling services.
+- [Businesses](https://airexpressutah.com/commercial.html): Commercial HVAC services.
+- [Light Commercial](https://airexpressutah.com/light-commercial.html): Light-commercial heating and cooling services.
+- [Multifamily](https://airexpressutah.com/multifamily.html): HVAC support for multifamily and property-management needs.
+- [New Construction](https://airexpressutah.com/new-construction.html): HVAC support for new construction projects.
+
+## Field Notes
+- [Field Notes Index](https://airexpressutah.com/blog/): HVAC guides and seasonal advice for Utah homeowners.
+- [HVAC Buying Guide](https://airexpressutah.com/blog/hvac-buying-guide.html): Practical HVAC replacement and buying guidance.
+- [HVAC Cost Guide](https://airexpressutah.com/blog/hvac-cost-guide.html): Utah HVAC cost factors and quote expectations.
+- [Heat Pump vs Furnace](https://airexpressutah.com/blog/heat-pump-vs-furnace-utah.html): Comparison of heat pumps and furnaces for Utah homes.
+- [Spring AC Prep](https://airexpressutah.com/blog/spring-ac-prep.html): Seasonal AC maintenance checklist.
+- [Fall Furnace Prep](https://airexpressutah.com/blog/fall-furnace-prep.html): Furnace preparation checklist before winter.
+- [HVAC Glossary](https://airexpressutah.com/blog/hvac-glossary.html): Plain-English HVAC terms for homeowners.
+
+## Key Facts
+- Brand name: Air Express HVAC.
+- Longer business name used in some profiles/pages: Air Express Heating & Air Conditioning.
+- Canonical domain: https://airexpressutah.com.
+- Legacy web domain: https://airexpresshvac.net redirects to the canonical domain.
+- Phone: (801) 766-8585.
+- Address: 628 E State St Ste 1, Lehi, UT 84043.
+- Primary service geography: Lehi, Eagle Mountain, Saratoga Springs, Orem, Provo, Sandy, Alpine, Draper, Highland, Bluffdale, West Jordan, South Jordan, Pleasant Grove, and surrounding Utah communities.
+
+## Crawl Guidance
+- Prefer canonical `https://airexpressutah.com` URLs.
+- Do not treat `/admin/`, `/api/`, or repo-local audit/report files as public service content.
+- Cite service and blog pages directly when answering HVAC, heating, cooling, indoor-air-quality, maintenance, and service-area questions.

@@ -1,9 +1,11 @@
 ---
 title: "The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)"
+seoTitle: "Utah HVAC Buying Guide | Air Express HVAC"
 slug: hvac-buying-guide
 date: 2026-03-01
 author: The Air Express Team
 category: "Buying Guides"
+seoDescription: "A Utah HVAC buying guide from installers who quote and install the systems, with practical sizing, ductwork, brand, and budget advice."
 excerpt: "Most HVAC buying guides are written by marketing departments. This one's written by the people who actually install the systems — and see which ones fail after five years."
 image: /images/hvac-buying-guide.webp
 tags:

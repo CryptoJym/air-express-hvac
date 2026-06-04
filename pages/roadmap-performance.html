@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express Onboarding Roadmap</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #586473;
+      --line: #d8e0e8;
+      --blue: #0c67a8;
+      --green: #2f7d4f;
+      --amber: #a96300;
+      --red: #af2f2f;
+      --panel: #f7fafc;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.45;
+    }
+    header {
+      padding: 32px clamp(18px, 5vw, 56px) 24px;
+      border-bottom: 1px solid var(--line);
+      background: #eef6fb;
+    }
+    main { padding: 24px clamp(18px, 5vw, 56px) 48px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 28px 0 12px; font-size: 20px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 900px; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--white);
+      min-height: 160px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    .status {
+      display: inline-block;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .verified { background: var(--green); }
+    .prepared { background: var(--blue); }
+    .blocked { background: var(--red); }
+    .inferred { background: var(--amber); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      background: var(--panel);
+      color: var(--ink);
+      font-size: 13px;
+    }
+    a { color: var(--blue); }
+    .note {
+      padding: 12px 14px;
+      border-left: 4px solid var(--amber);
+      background: #fff8ec;
+      color: var(--ink);
+      max-width: 980px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express Onboarding Roadmap</h1>
+    <p>Existing-repo New Reward control hub for access, launch-state proof, distribution, and measurement.</p>
+    <div class="meta">
+      <span class="pill">Updated 2026-06-03</span>
+      <span class="pill">Canonical: airexpressutah.com</span>
+      <span class="pill">Mode: Existing repo</span>
+      <span class="pill">No provider mutations attempted</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="note">
+      Live checks show the canonical site on Cloudflare with New Rewards edge headers active.
+      The April launch docs are historical for DNS and edge state; keep them as safety references.
+      The refreshed SEO/GEO attribution report is available at <a href="seo-geo-attribution-report.html">pages/seo-geo-attribution-report.html</a>.
+      The New Reward impact report is available at <a href="new-reward-impact-report.html">pages/new-reward-impact-report.html</a>.
+      The issue 24-30 blocker report is available at <a href="issue-24-30-blocker-report.html">pages/issue-24-30-blocker-report.html</a>.
+      The GitHub issue hub is <a href="https://github.com/CryptoJym/air-express-hvac/issues/24">#24 Air Express attribution traceability</a>.
+      The content-growth lane is <a href="https://github.com/CryptoJym/air-express-hvac/issues/31">#31 Air Express blog/content opportunities</a>.
+    </section>
+
+    <h2>P0 Control</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="status verified">verified</span>
+        <h3>Canonical Site</h3>
+        <p>Homepage, www, contact page, admin page, Cloudflare nameservers, and legacy redirect were checked.</p>
+      </article>
+      <article class="card">
+        <span class="status blocked">blocked</span>
+        <h3>Decap OAuth</h3>
+        <p><code>/api/auth</code> returns 500 because <code>OAUTH_GITHUB_CLIENT_ID</code> is missing in the live environment.</p>
+      </article>
+      <article class="card">
+        <span class="status blocked">blocked</span>
+        <h3>Legacy DKIM</h3>
+        <p>MX, SPF, and DMARC pass for <code>airexpresshvac.net</code>; DKIM selector check fails.</p>
+      </article>
+      <article class="card">
+        <span class="status inferred">inferred</span>
+        <h3>ServiceTitan</h3>
+        <p>Prior lead proof exists from April 24, 2026. Current dashboard access and lead visibility still need owner proof.</p>
+      </article>
+    </div>
+
+    <h2>P1 Distribution Foundation</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Surface</th>
+          <th>Status</th>
+          <th>Next Action</th>
+          <th>Gate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google Business Profile</td>
+          <td>Review link resolves; control unknown</td>
+          <td>Request owner or manager access</td>
+          <td>Owner verification</td>
+        </tr>
+        <tr>
+          <td>Facebook</td>
+          <td>Public page URL exists</td>
+          <td>Verify page admin access</td>
+          <td>No public posts without approval</td>
+        </tr>
+        <tr>
+          <td>MapQuest</td>
+          <td>Public Utah listing exists</td>
+          <td>Verify control and NAP accuracy</td>
+          <td>Claim/Yext gate</td>
+        </tr>
+        <tr>
+          <td>Angi</td>
+          <td>Public profile exists</td>
+          <td>Monitor and prepare repair strategy</td>
+          <td>Platform access gate</td>
+        </tr>
+        <tr>
+          <td>Apple, Bing, Nextdoor, BBB</td>
+          <td>Prepared for search-first verification</td>
+          <td>Search existing before claim/create</td>
+          <td>Owner, phone, document, or paid gates</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>P2 Expansion</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="status prepared">prepared</span>
+        <h3>Directories</h3>
+        <p>Evaluate Houzz, Thumbtack, Yelp, manufacturer locators, supplier partners, and financing partners only after P0/P1 control is stable.</p>
+      </article>
+      <article class="card">
+        <span class="status prepared">prepared</span>
+        <h3>Benchmarks</h3>
+        <p>Use <code>data/benchmark-queries.csv</code> for brand, local-service, maps, reputation, and AI-search checks.</p>
+      </article>
+      <article class="card">
+        <span class="status prepared">prepared</span>
+        <h3>Weekly Scorecard</h3>
+        <p>Update <code>data/weekly-scorecard.csv</code> with access, site, CRM, measurement, distribution, blockers, and verification.</p>
+      </article>
+      <article class="card">
+        <span class="status blocked">blocked</span>
+        <h3>GSC/GA4/GBP History</h3>
+        <p><code>npm run pull:gsc-ga4-history</code> is ready. The NewRewards saved-credential resolver is repaired locally, but the active Google token still lacks Search Console, GA4, and Business Profile scopes and the live app/database mapping still needs verification.</p>
+      </article>
+      <article class="card">
+        <span class="status prepared">prepared</span>
+        <h3>Content Growth</h3>
+        <p>GitHub issue <a href="https://github.com/CryptoJym/air-express-hvac/issues/31">#31</a> tracks blog and case-study briefs. Max outreach is drafted locally at <code>docs/max-case-study-outreach-draft.md</code>; no public send has occurred.</p>
+      </article>
+    </div>
+
+    <h2>Local Files</h2>
+    <p>
+      See <a href="../docs/onboarding-gap-map.md">onboarding gap map</a>,
+      <a href="../docs/source-evidence-map.md">source evidence map</a>,
+      <a href="../docs/account-setup-handoff.md">account setup handoff</a>,
+      <a href="../docs/gsc-ga4-history-and-impact-plan.md">GSC/GA4/GBP history plan</a>,
+      <a href="../docs/air-express-content-growth-brief.md">content growth brief</a>,
+      <a href="../docs/max-case-study-outreach-draft.md">Max case-study draft</a>,
+      <a href="../docs/issue-board-seed.md">issue board map</a>,
+      and <a href="../data/channel-access-status.csv">channel access status</a>.
+    </p>
+  </main>
+</body>
+</html>

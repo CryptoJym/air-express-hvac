@@ -92,6 +92,17 @@ Optional notification-email env vars:
 - `INTAKE_NOTIFICATION_CC`
 - `INTAKE_NOTIFICATION_BCC`
 
+Required public-intake abuse protection env vars:
+
+- `TURNSTILE_SITE_KEY`
+- `TURNSTILE_SECRET_KEY`
+
+Alias env var names are also supported for Cloudflare-managed naming:
+
+- `TURNSTILE_SITEKEY`
+- `CLOUDFLARE_TURNSTILE_SITE_KEY`
+- `CLOUDFLARE_TURNSTILE_SECRET_KEY`
+
 Confirmed Air Express notification identity:
 
 - Keep ServiceTitan as the primary lead system.
@@ -104,6 +115,7 @@ Operational note:
 - This implementation always supplies `SERVICETITAN_LEAD_CAMPAIGN_ID`.
 - If `SERVICETITAN_LEAD_CALL_REASON_ID` is not configured, the intake layer defaults the lead follow-up date to 24 hours after submission.
 - If the Resend notification env vars are present, the intake layer also sends a non-blocking email notification after ServiceTitan accepts the lead.
+- The intake layer must verify a Cloudflare Turnstile token server-side before ServiceTitan lead creation or client notification.
 
 Current blockers to clear before public cutover:
 

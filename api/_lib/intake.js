@@ -2,6 +2,11 @@ import {
   getServiceTitanConfig,
   serviceTitanAuthorizedRequest,
 } from "./servicetitan-client.js";
+import {
+  getRequestIp,
+  readTurnstileToken,
+  verifyTurnstileToken,
+} from "./turnstile.js";
 
 export const INTAKE_FORMS = Object.freeze({
   contact: Object.freeze({
@@ -97,6 +102,14 @@ const INTAKE_NOTIFICATION_ENV_KEYS = Object.freeze({
 });
 
 const DEFAULT_LEAD_FOLLOW_UP_DELAY_MS = 24 * 60 * 60 * 1000;
+const ATTRIBUTION_FIELD_NAMES = Object.freeze([
+  "trace_id",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+]);
 
 function readStringField(formData, name) {
   const value = formData.get(name);
@@ -104,6 +117,18 @@ function readStringField(formData, name) {
     return "";
   }
   return value.trim();
+}
+
+function readAttributionField(formData, name) {
+  return readStringField(formData, name).replace(/[\r\n\t]+/g, " ").slice(0, 120);
+}
+
+function normalizeAttributionFields(formData) {
+  return Object.fromEntries(
+    ATTRIBUTION_FIELD_NAMES
+      .map((fieldName) => [fieldName, readAttributionField(formData, fieldName)])
+      .filter(([, value]) => value)
+  );
 }
 
 function isSafeRelativePath(value) {
@@ -178,6 +203,18 @@ function buildSummaryLines(submission) {
     `Source Page: ${submission.sourcePath}`,
     `Submitted At: ${submission.submittedAt}`,
   ];
+
+  if (submission.attribution?.trace_id) {
+    lines.push(`Trace ID: ${submission.attribution.trace_id}`);
+  }
+
+  const utmLines = Object.entries(submission.attribution || {})
+    .filter(([key]) => key.startsWith("utm_"))
+    .map(([key, value]) => `${key}: ${value}`);
+  if (utmLines.length) {
+    lines.push("Attribution:");
+    lines.push(...utmLines);
+  }
 
   if (submission.formType === "schedule" && submission.preferredDate) {
     lines.push(`Preferred Date: ${submission.preferredDate}`);
@@ -338,6 +375,7 @@ export function normalizeIntakeSubmission(formType, formData, { now = () => new 
     service,
     preferredDate,
     preferredTime,
+    attribution: normalizeAttributionFields(formData),
     freeformNotes: normalizeFreeformNotes(formData),
     missingFields,
   };
@@ -500,6 +538,7 @@ export function createIntakeHandler({
   defaultReturnTo = INTAKE_FORMS[formType]?.defaultReturnTo,
   submitLead = defaultSubmitLead,
   notifySubmission = sendIntakeNotificationEmail,
+  verifyChallenge = verifyTurnstileToken,
   now = () => new Date(),
 } = {}) {
   if (!INTAKE_FORMS[formType]) {
@@ -527,6 +566,41 @@ export function createIntakeHandler({
       return redirectResponse(submission.returnTo || defaultReturnTo, {
         intake: RESULT_QUERY_VALUES.validationError,
         fields: submission.missingFields.join(","),
+      });
+    }
+
+    let challengeResult;
+    try {
+      challengeResult = await verifyChallenge(readTurnstileToken(formData), {
+        remoteIp: getRequestIp(request),
+      });
+    } catch (error) {
+      console.error(`[intake:${formType}] Turnstile verification request failed`, error);
+      return redirectResponse(submission.returnTo || defaultReturnTo, {
+        intake: RESULT_QUERY_VALUES.upstreamError,
+      });
+    }
+
+    if (!challengeResult?.success) {
+      if (challengeResult?.reason === "not_configured") {
+        const missingKeys = Array.isArray(challengeResult.missingKeys)
+          ? ` missing_keys=${challengeResult.missingKeys.join(",")}`
+          : "";
+        console.error(`[intake:${formType}] Turnstile verification is not configured.${missingKeys}`);
+        return redirectResponse(submission.returnTo || defaultReturnTo, {
+          intake: RESULT_QUERY_VALUES.upstreamError,
+        });
+      }
+
+      const errorCodes = Array.isArray(challengeResult?.errorCodes)
+        && challengeResult.errorCodes.length > 0
+        ? ` error_codes=${challengeResult.errorCodes.join(",")}`
+        : "";
+      const reason = challengeResult?.reason || "unknown";
+      console.warn(`[intake:${formType}] Turnstile verification rejected submission: ${reason}${errorCodes}`);
+      return redirectResponse(submission.returnTo || defaultReturnTo, {
+        intake: RESULT_QUERY_VALUES.validationError,
+        fields: "captcha",
       });
     }
 

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express Content Readiness Report</title>
+  <style>
+    :root {
+      --ink: #162231;
+      --muted: #5e6b78;
+      --line: #d9e2ea;
+      --panel: #f6f9fb;
+      --good: #287549;
+      --warn: #9f5d00;
+      --bad: #b33434;
+      --blue: #0d66a2;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.45; }
+    header { padding: 34px clamp(18px, 5vw, 58px) 24px; background: #eef6fb; border-bottom: 1px solid var(--line); }
+    main { padding: 24px clamp(18px, 5vw, 58px) 56px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+    a { color: var(--blue); }
+    .meta, .grid { display: grid; gap: 12px; }
+    .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
+    .pill, .state { display: inline-block; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 750; white-space: nowrap; }
+    .pill { border: 1px solid var(--line); background: var(--white); }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .good-state { background: var(--good); color: var(--white); }
+    .prepared-state { background: var(--blue); color: var(--white); }
+    .blocked-state { background: var(--bad); color: var(--white); }
+    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { background: var(--panel); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express Content Readiness Report</h1>
+    <p>Repo-local status for the blog, distribution, sub-agent, and Max outreach lane. Prepared only; no public send, post, schedule, provider mutation, or production deploy occurred.</p>
+    <div class="meta">
+      <span class="pill">Generated 2026-06-04T21:21:08.876Z</span>
+      <span class="pill">Issue #31 separate from #24-#30</span>
+      <span class="pill">No public distribution attempted</span>
+      <span class="pill">No customer PII stored</span>
+    </div>
+  </header>
+  <main>
+    <section class="note">
+      One seasonal blog post is ready in local source and generated locally. Two this-week posts remain draft-only pending Max/New Reward approval. Social access and case-study outreach are drafted locally only.
+    </section>
+
+    <h2>Content Summary</h2>
+    <section class="grid">
+      <article class="card"><h3>Total Briefs</h3><div class="metric good">10</div><p>Structured in <code>data/content-briefs.csv</code>.</p></article>
+      <article class="card"><h3>Ready Local Posts</h3><div class="metric good">1</div><p>Ready in source and generated locally, pending approved live delivery.</p></article>
+      <article class="card"><h3>Draft Posts</h3><div class="metric warn">2</div><p>Excluded from generated blog outputs until approved.</p></article>
+      <article class="card"><h3>External Sends</h3><div class="metric bad">0</div><p>Max/social/case-study requests remain draft-only.</p></article>
+    </section>
+
+    <h2>This Week</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Slug</th><th>Title</th><th>Draft</th><th>Generated</th><th>Brief State</th><th>Gate</th><th>Proof Required</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>first-hot-week-ac-checklist-utah</code></td>
+            <td>First Hot Week in Utah: AC Checks to Do Before the Rush</td>
+            <td><span class="state good-state">false</span></td>
+            <td><code>blog/first-hot-week-ac-checklist-utah.html</code></td>
+            <td><span class="state good-state">ready_in_source</span></td>
+            <td>Approved Air Express deploy or New Reward edge sync before public URL is claimed live</td>
+            <td>No special owner proof beyond approved homeowner safety guidance; avoid diagnostic guarantees</td>
+          </tr>
+          <tr>
+            <td><code>wildfire-smoke-hvac-filter-utah</code></td>
+            <td>Wildfire Smoke Days in Utah: How to Use Your HVAC System Wisely</td>
+            <td><span class="state prepared-state">true</span></td>
+            <td>not generated</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Max/New Reward content approval, then approved Air Express deploy or edge sync</td>
+            <td>Product-neutral IAQ guidance; technician/static-pressure caveat; no health outcome claims</td>
+          </tr>
+          <tr>
+            <td><code>thermostat-settings-utah-heat-wave</code></td>
+            <td>Thermostat Settings That Actually Help During a Utah Heat Wave</td>
+            <td><span class="state prepared-state">true</span></td>
+            <td>not generated</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Max/New Reward content approval, then approved Air Express deploy or edge sync</td>
+            <td>Avoid universal setpoint or savings claims; keep guidance framed as practical homeowner checks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Brief Backlog</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Status</th><th>Working Title</th><th>Target Query</th><th>Slug</th><th>Internal Links</th><th>Attribution Plan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>CB-001</td>
+            <td><span class="state good-state">ready_in_source</span></td>
+            <td>First Hot Week in Utah: AC Checks to Do Before the Rush</td>
+            <td>Utah first hot week AC checklist</td>
+            <td><code>first-hot-week-ac-checklist-utah</code></td>
+            <td>/ac-maintenance.html; /ac-repair.html; /ac-tune-up.html; /service-area-lehi.html</td>
+            <td>Canonical /blog/first-hot-week-ac-checklist-utah.html; UTM campaign air_express_summer_2026; review GSC query/page clicks, GA4 landing-page sessions, generate_lead events, and ServiceTitan campaign/source rows</td>
+          </tr>
+          <tr>
+            <td>CB-002</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Wildfire Smoke Days in Utah: How to Use Your HVAC System Wisely</td>
+            <td>Utah wildfire smoke HVAC filter</td>
+            <td><code>wildfire-smoke-hvac-filter-utah</code></td>
+            <td>/air-filters.html; /filtration.html; /indoor-air-quality.html; /air-purifiers.html</td>
+            <td>Canonical /blog/wildfire-smoke-hvac-filter-utah.html; UTM content wildfire_smoke_hvac_filter; review GSC smoke/filter queries, GA4 landing sessions, CTA clicks, and lead notes</td>
+          </tr>
+          <tr>
+            <td>CB-003</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Thermostat Settings That Actually Help During a Utah Heat Wave</td>
+            <td>Utah heat wave thermostat settings</td>
+            <td><code>thermostat-settings-utah-heat-wave</code></td>
+            <td>/thermostats.html; /energy-efficiency.html; /ac-inspection.html; /ac-replacement.html</td>
+            <td>Canonical /blog/thermostat-settings-utah-heat-wave.html; UTM content thermostat_heat_wave; review GSC thermostat/heat-wave queries, GA4 sessions, CTA clicks, and generate_lead events</td>
+          </tr>
+          <tr>
+            <td>CB-004</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>How to Tell If Your AC Is Undersized in Utah County</td>
+            <td>AC undersized Utah County</td>
+            <td><code>ac-undersized-utah-county</code></td>
+            <td>/ac-replacement.html; /ac-repair.html; /ac-installation.html; /service-areas.html</td>
+            <td>Canonical /blog/ac-undersized-utah-county.html; UTM content ac_undersized; review GSC replacement intent, GA4 engagement, and ServiceTitan replacement lead source</td>
+          </tr>
+          <tr>
+            <td>CB-005</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>Furnace Repair vs Replacement in Lehi</td>
+            <td>furnace repair vs replacement Lehi</td>
+            <td><code>furnace-repair-vs-replacement-lehi</code></td>
+            <td>/furnace-repair-lehi-ut.html; /furnace-installation.html; /heating-replacement.html; /maintenance-plan.html</td>
+            <td>Canonical /blog/furnace-repair-vs-replacement-lehi.html; UTM content furnace_repair_replace; review GSC heating queries, GA4 sessions, and ServiceTitan heating calls</td>
+          </tr>
+          <tr>
+            <td>CB-006</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>What an HVAC Tune-Up Includes Before a Saratoga Springs Summer</td>
+            <td>HVAC tune up Saratoga Springs summer</td>
+            <td><code>hvac-tune-up-saratoga-springs-summer</code></td>
+            <td>/ac-tune-up.html; /maintenance-plan.html; /service-area-saratoga-springs.html; /ac-maintenance.html</td>
+            <td>Canonical /blog/hvac-tune-up-saratoga-springs-summer.html; UTM content tuneup_saratoga_springs; review local GSC queries, GA4 bookings/clicks, and ServiceTitan campaign rows</td>
+          </tr>
+          <tr>
+            <td>CB-007</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>Indoor Air Quality During Utah Inversions</td>
+            <td>Utah inversion indoor air quality HVAC</td>
+            <td><code>utah-inversion-indoor-air-quality-hvac</code></td>
+            <td>/indoor-air-quality.html; /air-purifiers.html; /air-filters.html; /humidification.html</td>
+            <td>Canonical /blog/utah-inversion-indoor-air-quality-hvac.html; UTM content inversion_iaq; review GSC IAQ queries, GA4 page engagement, and IAQ lead notes</td>
+          </tr>
+          <tr>
+            <td>CB-008</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>Emergency HVAC Checklist Before Calling After Hours</td>
+            <td>emergency HVAC checklist Utah</td>
+            <td><code>emergency-hvac-checklist-utah</code></td>
+            <td>/emergency.html; /schedule-service.html; /contact.html; /hvac-repair.html</td>
+            <td>Canonical /blog/emergency-hvac-checklist-utah.html; UTM content emergency_checklist; review GSC emergency queries, GA4 click-to-call/form submits, and ServiceTitan emergency leads</td>
+          </tr>
+          <tr>
+            <td>CB-009</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>Why Some Rooms Stay Hot or Cold After a System Replacement</td>
+            <td>rooms hot after HVAC replacement Utah</td>
+            <td><code>rooms-hot-cold-after-hvac-replacement</code></td>
+            <td>/ductwork.html; /air-duct-cleaning.html; /hvac-service.html; /energy-efficiency.html</td>
+            <td>Canonical /blog/rooms-hot-cold-after-hvac-replacement.html; UTM content room_comfort; review GSC room comfort queries, GA4 engagement, and comfort-service leads</td>
+          </tr>
+          <tr>
+            <td>CB-010</td>
+            <td><span class="state good-state">brief_ready</span></td>
+            <td>Case Study: From No-Cool Call to Repaired Comfort</td>
+            <td>Air Express AC repair case study</td>
+            <td><code>case-study-no-cool-repair-utah</code></td>
+            <td>/ac-repair.html; /emergency.html; /reviews.html; relevant service-area page</td>
+            <td>Canonical /blog/case-study-no-cool-repair-utah.html; UTM content case_study_no_cool; join GA4 landing sessions with ServiceTitan lead source and approved proof status</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Distribution And Max Follow-Up</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Asset</th><th>Lane</th><th>State</th><th>Destination</th><th>Next Action</th><th>Blocker</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>blog-first-hot-week</td>
+            <td>content</td>
+            <td><span class="state good-state">ready_in_source_pending_delivery</span></td>
+            <td>Website blog plus Facebook GBP email excerpt</td>
+            <td>approve Air Express deploy or New Reward edge sync before claiming live</td>
+            <td>production delivery path and channel access not approved</td>
+          </tr>
+          <tr>
+            <td>blog-wildfire-smoke</td>
+            <td>content</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Website blog plus GBP Facebook excerpt</td>
+            <td>review and approve content then deploy or edge sync</td>
+            <td>Max/New Reward content approval and production delivery required</td>
+          </tr>
+          <tr>
+            <td>blog-thermostat-heat-wave</td>
+            <td>content</td>
+            <td><span class="state prepared-state">review_draft</span></td>
+            <td>Website blog plus social email excerpt</td>
+            <td>review and approve content then deploy or edge sync</td>
+            <td>Max/New Reward content approval and production delivery required</td>
+          </tr>
+          <tr>
+            <td>max-social-access</td>
+            <td>direct_social</td>
+            <td><span class="state prepared-state">draft_only</span></td>
+            <td>Facebook and Google Business Profile access request</td>
+            <td>confirm Max recipient and approved sender then send or create draft</td>
+            <td>no external send approval recorded</td>
+          </tr>
+          <tr>
+            <td>max-case-study-proof</td>
+            <td>proof_content</td>
+            <td><span class="state prepared-state">draft_only</span></td>
+            <td>case study source proof request</td>
+            <td>confirm Max recipient and approved sender then send or create draft</td>
+            <td>no external send approval recorded</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Source Files</h2>
+    <p>
+      Content briefs: <code>data/content-briefs.csv</code> and <code>docs/air-express-content-briefs.md</code>.
+      Distribution schedule: <code>docs/air-express-blog-distribution-schedule.md</code>.
+      Max drafts: <code>docs/max-social-access-request-draft.md</code> and <code>docs/max-case-study-outreach-draft.md</code>.
+    </p>
+    <p>
+      Refresh command: <code>npm run build:content-readiness-report</code>. Verification command:
+      <code>npm run verify:onboarding-evidence</code>.
+    </p>
+  </main>
+</body>
+</html>

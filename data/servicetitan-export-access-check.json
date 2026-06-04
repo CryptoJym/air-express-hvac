@@ -1,0 +1,848 @@
+{
+  "generatedAt": "2026-06-04T03:54:03.447Z",
+  "evidenceClass": "servicetitan_export_access_readiness_check",
+  "status": "blocked_env",
+  "secretHandling": "Only environment variable presence, local source labels, public endpoint names, and sanitized error text are stored. Credential values, access tokens, customer names, phones, emails, addresses, and raw lead payloads are not printed or written.",
+  "mutationBoundary": "No ServiceTitan lead, customer, job, campaign, booking, note, or revenue data is created, updated, deleted, exported, or stored by this diagnostic.",
+  "authCheck": "not_attempted",
+  "requiredEnv": [
+    {
+      "name": "SERVICETITAN_ENV",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_TENANT_ID",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_APP_KEY",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_CLIENT_ID",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_CLIENT_SECRET",
+      "present": false
+    }
+  ],
+  "optionalEnv": [
+    {
+      "name": "SERVICETITAN_API_BASE_URL",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_AUTH_URL",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+      "present": false
+    },
+    {
+      "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+      "present": false
+    }
+  ],
+  "envSourceSearch": {
+    "scannedFiles": [
+      {
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env",
+        "exists": false
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env.local",
+        "exists": false
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env.production",
+        "exists": false
+      },
+      {
+        "path": "/Users/jamesbrady/.config/newrewards/.env",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/.env",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env.local",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env.vercel",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.production.local",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.development.local",
+        "exists": true
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env",
+        "exists": false
+      },
+      {
+        "path": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env.local",
+        "exists": false
+      }
+    ],
+    "sourcePresence": [
+      {
+        "label": "process.env",
+        "type": "process_env",
+        "path": "",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/air-express-hvac/.env",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env",
+        "exists": false,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/air-express-hvac/.env.local",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env.local",
+        "exists": false,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/air-express-hvac/.env.production",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/air-express-hvac/.env.production",
+        "exists": false,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/.config/newrewards/.env",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/.config/newrewards/.env",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/.env",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/.env",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards/.env",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards/.env.local",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env.local",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards/.env.vercel",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards/.env.vercel",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.production.local",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.production.local",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.development.local",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards/.vercel/.env.development.local",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env",
+        "exists": false,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env.local",
+        "type": "env_file",
+        "path": "/Users/jamesbrady/Projects/NewRewards-air-express-resolver/.env.local",
+        "exists": false,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": false
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      }
+    ],
+    "keySources": {}
+  },
+  "publicConfig": null,
+  "blockers": [
+    {
+      "surface": "ServiceTitan environment",
+      "status": "blocked_env",
+      "evidence": "Missing required env vars: SERVICETITAN_ENV, SERVICETITAN_TENANT_ID, SERVICETITAN_APP_KEY, SERVICETITAN_CLIENT_ID, SERVICETITAN_CLIENT_SECRET.",
+      "nextAction": "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet. Do not store credential values in repo files."
+    }
+  ],
+  "exportPacketRequirement": {
+    "acceptedSources": [
+      "approved read-only ServiceTitan lead export",
+      "redacted screenshot packet",
+      "approved API export with customer PII stripped before repo storage"
+    ],
+    "requiredFields": [
+      "service_titan_lead_id",
+      "created_at",
+      "campaign_id_or_source",
+      "service_type_or_category",
+      "lead_status",
+      "booked_job_id_if_available",
+      "sold_or_revenue_marker_if_approved"
+    ],
+    "prohibitedFields": [
+      "customer_name",
+      "phone",
+      "email",
+      "street_address",
+      "raw_notes_with_private_details",
+      "payment_data"
+    ],
+    "localImportCommand": "npm run import:servicetitan-redacted-export -- --input <path-to-redacted-csv>",
+    "localTemplatePath": "data/servicetitan-redacted-export-template.csv"
+  }
+}

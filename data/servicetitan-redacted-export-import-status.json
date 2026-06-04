@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-06-03T17:55:41.812Z",
+  "evidenceClass": "servicetitan_redacted_export_import",
+  "status": "awaiting_input",
+  "templatePath": "data/servicetitan-redacted-export-template.csv",
+  "outputPath": "data/servicetitan-redacted-export-import.csv",
+  "requiredFields": [
+    "service_titan_lead_id",
+    "created_at",
+    "campaign_id_or_source",
+    "service_type_or_category",
+    "lead_status",
+    "booked_job_id_if_available",
+    "sold_or_revenue_marker_if_approved"
+  ],
+  "derivedFields": [
+    "new_reward_impact_period"
+  ],
+  "impactPeriods": [
+    {
+      "id": "before_new_reward_target_brief",
+      "label": "Before New Reward target brief",
+      "startDate": "",
+      "endDate": "2026-03-11"
+    },
+    {
+      "id": "target_brief_to_ga4_lead_proof",
+      "label": "Target brief to GA4/lead proof",
+      "startDate": "2026-03-12",
+      "endDate": "2026-04-23"
+    },
+    {
+      "id": "after_ga4_lead_proof",
+      "label": "After GA4/lead proof",
+      "startDate": "2026-04-24",
+      "endDate": ""
+    }
+  ],
+  "prohibitedFields": [
+    "customer_name",
+    "first_name",
+    "last_name",
+    "phone",
+    "email",
+    "street_address",
+    "raw_notes_with_private_details",
+    "payment_data",
+    "credential_values"
+  ],
+  "piiExcluded": true,
+  "mutationBoundary": "No ServiceTitan API call, CRM mutation, live test lead, customer edit, booking edit, revenue edit, provider change, or production mutation is performed.",
+  "nextAction": "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>. Use the template columns and remove customer PII before import."
+}

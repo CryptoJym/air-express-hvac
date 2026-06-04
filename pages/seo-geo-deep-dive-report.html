@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express SEO/GEO Deep Dive</title>
+  <style>
+    :root { --ink:#162231; --muted:#5e6b78; --line:#d9e2ea; --panel:#f6f9fb; --good:#287549; --warn:#9f5d00; --bad:#b33434; --blue:#0d66a2; --white:#fff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.45; }
+    header { padding: 34px clamp(18px, 5vw, 58px) 24px; background: #eef6fb; border-bottom: 1px solid var(--line); }
+    main { padding: 24px clamp(18px, 5vw, 58px) 56px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    a { color: var(--blue); }
+    .meta, .grid { display: grid; gap: 12px; }
+    .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
+    .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
+    .good { color: var(--good); } .warn { color: var(--warn); } .bad { color: var(--bad); }
+    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { background: var(--panel); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express SEO/GEO Deep Dive</h1>
+    <p>Metadata, backlinks/public citations, tagging/attribution, and blogging extractability audit for the repo-local Pages reporting lane.</p>
+    <div class="meta">
+      <span class="pill">Generated 2026-06-04T21:21:08.912Z</span>
+      <span class="pill">GitHub Pages report only</span>
+      <span class="pill">No secrets or customer PII</span>
+      <span class="pill">Backlink data is public-citation evidence, not full link-index totals</span>
+      <span class="pill">Ledger: <a href="../data/air-express-citation-cleanup-ledger.csv">citation cleanup CSV</a></span>
+    </div>
+  </header>
+  <main>
+    <section class="note">Traditional local source SEO is mostly healthy, but GEO and attribution need stronger extractable content, source-backed authority, live tagging, and public citation cleanup.</section>
+
+    <h2>Audit Summary</h2>
+    <section class="grid">
+      <article class="card"><h3>Technical SEO</h3><div class="metric good">100</div><p>Existing local audit score.</p></article>
+      <article class="card"><h3>GEO</h3><div class="metric good">90</div><p>Good base, but blog extractability and authority citations need work.</p></article>
+      <article class="card"><h3>Attribution</h3><div class="metric bad">25</div><p>Direct Google and lead joins remain blocked.</p></article>
+      <article class="card"><h3>Public Citations</h3><div class="metric warn">10</div><p>Observed public citation surfaces needing cleanup or proof review.</p></article>
+    </section>
+
+    <h2>Metadata And Schema</h2>
+    <section class="grid">
+      <article class="card"><h3>Short Descriptions</h3><div class="metric warn">7</div><p>Pages with descriptions under 100 characters.</p></article>
+      <article class="card"><h3>No Schema</h3><div class="metric warn">2</div><p>blog/index.html, resources.html</p></article>
+      <article class="card"><h3>Missing Twitter Card</h3><div class="metric warn">53</div><p>Social preview tags are inconsistent.</p></article>
+      <article class="card"><h3>Schema Errors</h3><div class="metric good">0</div><p>JSON-LD parse errors found.</p></article>
+    </section>
+
+    <h2>Recommended Issues</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Bucket</th><th>Issue</th><th>Severity</th><th>Evidence</th><th>Acceptance</th><th>Tracking</th></tr></thead>
+        <tbody><tr>
+  <td>metadata</td>
+  <td><strong>Tighten Air Express metadata descriptions, schema coverage, and social tags</strong></td>
+  <td>medium</td>
+  <td>7 pages have short or truncated descriptions; 2 pages have no JSON-LD schema; 53 pages have no Twitter card tag.</td>
+  <td>Descriptions are complete for flagged pages; resources/blog index schema is added or explicitly excluded; Twitter card tags are normalized or intentionally omitted with evidence.</td>
+  <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/32">https://github.com/CryptoJym/air-express-hvac/issues/32</a></td>
+</tr>
+<tr>
+  <td>blogging</td>
+  <td><strong>Upgrade Air Express blog posts for GEO extractability and internal-link authority</strong></td>
+  <td>high</td>
+  <td>13 content/blog posts lack at least one extractability signal: question headings, internal links, or external citations.</td>
+  <td>Priority posts include natural-language answer headings, useful internal links, appropriate external/official citations, and article schema remains valid after rebuild.</td>
+  <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/33">https://github.com/CryptoJym/air-express-hvac/issues/33</a></td>
+</tr>
+<tr>
+  <td>backlinks</td>
+  <td><strong>Create Air Express backlink and local citation cleanup ledger</strong></td>
+  <td>high</td>
+  <td>10 public citation surfaces were observed; several show legacy domain, alternate phone, reputation, missing website, or claim-status risks.</td>
+  <td>Citation ledger records surface, URL, observed NAP/website/rating state, owner/claim status, requested fix, proof date, and whether a backlink/citation is usable for reporting.</td>
+  <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/34">https://github.com/CryptoJym/air-express-hvac/issues/34</a></td>
+</tr>
+<tr>
+  <td>tagging</td>
+  <td><strong>Restore live tagging and attribution joins after source access is repaired</strong></td>
+  <td>high</td>
+  <td>Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=blocked_scope; attribution score remains blocked at 25.</td>
+  <td>Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.</td>
+  <td>Existing: #24, #27, #28, #29, #30</td>
+</tr>
+<tr>
+  <td>geo</td>
+  <td><strong>Build proof-backed authority surfaces for AI and local-service citations</strong></td>
+  <td>medium</td>
+  <td>Public sources include dealer, directory, trade, and utility/regulatory mentions, but current site content does not convert those into approved proof pages or dated authority references.</td>
+  <td>At least two proof-backed pages or sections are prepared with approved client evidence, dated source links, claim-safe wording, and inclusion rules for llms.txt/sitemap after live verification.</td>
+  <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/35">https://github.com/CryptoJym/air-express-hvac/issues/35</a></td>
+</tr></tbody>
+      </table>
+    </div>
+
+    <h2>Public Citation / Backlink Observations</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Surface</th><th>Status</th><th>Evidence</th><th>Action</th><th>URL</th></tr></thead>
+        <tbody><tr>
+          <td>Cylex</td>
+          <td>legacy_domain</td>
+          <td>Public listing shows Air Express in Lehi and links to https://www.airexpresshvac.net/.</td>
+          <td>Claim or update listing to canonical https://airexpressutah.com and verify NAP.</td>
+          <td><a href="https://www.cylex.us.com/company/air-express-heating-and-air-conditioning-5877278.html">https://www.cylex.us.com/company/air-express-heating-and-air-conditioning-5877278.html</a></td>
+        </tr>
+<tr>
+          <td>ContractorsUp</td>
+          <td>legacy_domain</td>
+          <td>Public listing shows airexpresshvac.net plus Facebook profile and a 4.0/5 review snapshot.</td>
+          <td>Update website to canonical domain and record whether profile is claimable.</td>
+          <td><a href="https://www.contractorsup.com/87980">https://www.contractorsup.com/87980</a></td>
+        </tr>
+<tr>
+          <td>Bryant dealer locator</td>
+          <td>nap_review</td>
+          <td>Public dealer profile uses Air Express name/address but displays a phone number that differs from the canonical site phone.</td>
+          <td>Confirm whether the number is an approved tracking/dealer number; update or document if not.</td>
+          <td><a href="https://www.bryant.com/en/us/dealers/ut/lehi/628-e-state-st-bry-16112-loc">https://www.bryant.com/en/us/dealers/ut/lehi/628-e-state-st-bry-16112-loc</a></td>
+        </tr>
+<tr>
+          <td>Angi</td>
+          <td>reputation_risk</td>
+          <td>Public profile shows a low rating snapshot and long negative review content.</td>
+          <td>Prepare an owner-approved profile response/monitoring strategy and avoid stronger reputation claims until current proof is supplied.</td>
+          <td><a href="https://www.angi.com/companylist/us/ut/lehi/air-express-heating-and-air-conditioning-inc-reviews-3641163.htm/">https://www.angi.com/companylist/us/ut/lehi/air-express-heating-and-air-conditioning-inc-reviews-3641163.htm/</a></td>
+        </tr>
+<tr>
+          <td>The Blue Book / ProView</td>
+          <td>nap_review</td>
+          <td>Public profile has business history and trade categories but shows alternate phone data.</td>
+          <td>Confirm phone/website details and add to citation cleanup ledger.</td>
+          <td><a href="https://www.thebluebook.com/iProView/1630726/air-express-heating-air-conditioning/subcontractors/">https://www.thebluebook.com/iProView/1630726/air-express-heating-air-conditioning/subcontractors/</a></td>
+        </tr>
+<tr>
+          <td>City to City Market</td>
+          <td>claim_opportunity</td>
+          <td>Public listing is claimable and includes address, canonical phone, 1996 history, and license/bond language.</td>
+          <td>Verify claim status and proof before using license/bond wording in public claims.</td>
+          <td><a href="https://citytocitymarket.com/air-express-heating-air-conditioning-lehi">https://citytocitymarket.com/air-express-heating-air-conditioning-lehi</a></td>
+        </tr>
+<tr>
+          <td>homeyou</td>
+          <td>nap_review</td>
+          <td>Public profile uses masked phone and unusual rating fields.</td>
+          <td>Review for duplicate, stale, or malformed listing data.</td>
+          <td><a href="https://www.homeyou.com/air-express-heating-air-conditioning-specialist-lehi-ut">https://www.homeyou.com/air-express-heating-air-conditioning-specialist-lehi-ut</a></td>
+        </tr>
+<tr>
+          <td>Utah construction directory</td>
+          <td>missing_website</td>
+          <td>Public listing shows Air Express name, address, phone, owner, and website unknown.</td>
+          <td>If claimable, add canonical website and verify category/NAP.</td>
+          <td><a href="https://utah.construction-us.org/947699-air_express_heating_air_conditioning.htm">https://utah.construction-us.org/947699-air_express_heating_air_conditioning.htm</a></td>
+        </tr>
+<tr>
+          <td>HVAC USA / Nears</td>
+          <td>nap_review</td>
+          <td>Public profile shows a phone number and hours that differ from canonical site evidence.</td>
+          <td>Confirm whether data is autogenerated and whether profile can be corrected.</td>
+          <td><a href="https://hvac-usa.nears.me/hvac-contractor/united-states/utah/lehi/air-express-heating-and-air-conditioning-lehi-ut/">https://hvac-usa.nears.me/hvac-contractor/united-states/utah/lehi/air-express-heating-and-air-conditioning-lehi-ut/</a></td>
+        </tr>
+<tr>
+          <td>PacifiCorp / Utah efficiency trade ally documents</td>
+          <td>authority_opportunity</td>
+          <td>Public utility/regulatory appendices mention Air Express Heating and Air Conditioning Inc in Lehi.</td>
+          <td>Use only as dated authority context after verifying current program participation and client approval.</td>
+          <td><a href="https://www.pacificorp.com/content/dam/pcorp/documents/en/pacificorp/environment/dsm/utah/UT_Energy_Efficiency_and_Peak_Reduction_Report_Appendices.pdf">https://www.pacificorp.com/content/dam/pcorp/documents/en/pacificorp/environment/dsm/utah/UT_Energy_Efficiency_and_Peak_Reduction_Report_Appendices.pdf</a></td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <h2>Blog Extractability</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Post</th><th>Draft</th><th>Words</th><th>Question headings</th><th>Internal links</th><th>External links</th><th>Generated</th></tr></thead>
+        <tbody><tr>
+          <td><code>fall-furnace-prep.md</code><br>The Fall Furnace Checklist We Actually Do Before Utah Winter Hits</td>
+          <td>true</td>
+          <td>1548</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>first-hot-week-ac-checklist-utah.md</code><br>First Hot Week in Utah: AC Checks to Do Before the Rush</td>
+          <td>false</td>
+          <td>776</td>
+          <td>0</td>
+          <td>4</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>geothermal-guide.md</code><br>Geothermal in Utah: Brutally Honest About When It Makes Sense</td>
+          <td>false</td>
+          <td>1654</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>heat-pump-vs-furnace-utah.md</code><br>Heat Pump vs. Furnace in Utah: The Honest Comparison</td>
+          <td>true</td>
+          <td>1470</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>hvac-buying-guide.md</code><br>The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)</td>
+          <td>false</td>
+          <td>1870</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>hvac-cost-guide.md</code><br>What HVAC Actually Costs in Utah (Real Numbers, No Games)</td>
+          <td>false</td>
+          <td>1846</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>hvac-glossary.md</code><br>The Plain-English HVAC Glossary for Utah Homeowners</td>
+          <td>true</td>
+          <td>2916</td>
+          <td>0</td>
+          <td>21</td>
+          <td>0</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>indoor-air-quality-utah.md</code><br>What Indoor Air Quality Actually Means at 4,500 Feet</td>
+          <td>false</td>
+          <td>1432</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>spring-ac-prep.md</code><br>Spring AC Prep: What We Actually Check Before Utah Hits 100°F</td>
+          <td>false</td>
+          <td>1348</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr>
+<tr>
+          <td><code>summer-energy-efficiency.md</code><br>Why Your Utah AC Runs All Day in July (and What Actually Helps)</td>
+          <td>true</td>
+          <td>1346</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>thermostat-settings-utah-heat-wave.md</code><br>Thermostat Settings That Actually Help During a Utah Heat Wave</td>
+          <td>true</td>
+          <td>646</td>
+          <td>0</td>
+          <td>4</td>
+          <td>2</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>wildfire-smoke-hvac-filter-utah.md</code><br>Wildfire Smoke Days in Utah: How to Use Your HVAC System Wisely</td>
+          <td>true</td>
+          <td>599</td>
+          <td>0</td>
+          <td>3</td>
+          <td>6</td>
+          <td>false</td>
+        </tr>
+<tr>
+          <td><code>winter-heating-troubleshooting.md</code><br>Furnace Not Heating? Ten Things to Check Before You Call Us</td>
+          <td>false</td>
+          <td>1855</td>
+          <td>10</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

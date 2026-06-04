@@ -1,0 +1,165 @@
+{
+  "generatedAt": "2026-06-03T18:15:46.757Z",
+  "client": "Air Express HVAC",
+  "status": "blocked",
+  "expectedAccessAccount": "newrewardplatform@gmail.com",
+  "expectedNewRewardAppAccount": "james@jamesbrady.org",
+  "expectedGoogleProviderAccount": "newrewardplatform@gmail.com",
+  "summary": "Authenticated New Reward admin access still reaches the Air Express setup record, and PR #3834 is merged/deployed. The latest read-only configured NewRewards production env lookup now finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. The blocker has shifted: GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly, analytics.readonly, and business.manage; the live homepage still lacks the GA4/GTM marker and /analytics.js is 404; the SEO workspace UI needs a fresh read-only recheck after earlier Client not found evidence.",
+  "rootCause": "There are now six separate breaks. First, prior UI evidence showed the Air Express setup page falling back to a local setup snapshot after GSC/GA4/GBP load failures. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, the SEO workspace previously reported Client not found and must be rechecked against the now-proven production source mapping. Fourth, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fifth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Sixth, no approved Air Express GTM container id has been found.",
+  "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+  "verified": [
+    {
+      "surface": "New Reward access guide",
+      "result": "New Reward docs name newrewardplatform@gmail.com as the expected Google Search Console, GA4, Google Business Profile, and Cloudflare invite/access account."
+    },
+    {
+      "surface": "James identity clarification",
+      "result": "James clarified on 2026-06-02 that the New Reward app is linked under james@jamesbrady.org and the Google accounts should be connected to that app using newrewardplatform@gmail.com."
+    },
+    {
+      "surface": "New Reward live app",
+      "result": "The Air Express setup API returns 401 signed-out when unauthenticated. The admin setup route renders the Clerk sign-in shell but does not expose setup data without a valid app session."
+    },
+    {
+      "surface": "New Reward authenticated admin session",
+      "result": "A saved Chrome credential opened the live New Reward admin CRM and the Air Express setup route at /admin/crm/cmmwe8so000077kqptwysqaem/setup. No password, token, cookie, or recovery material was printed, stored, or committed."
+    },
+    {
+      "surface": "NewRewards resolver deployment",
+      "result": "GitHub read-only verification shows h3ro-dev/NewRewards PR #3834 was merged to main at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f on 2026-06-03T13:33:04Z with green targeted QA and production-preview gates. GitHub deployment 4919441936 for the same SHA reached Production success on Vercel at 2026-06-03T13:36:03Z, and Railway production deployment 4919401175 recorded success states before later inactive lifecycle statuses. This verifies the resolver repair was merged and deployed, but it does not prove a usable Air Express provider credential exists."
+    },
+    {
+      "surface": "NewRewards configured DB provider recheck",
+      "result": "On 2026-06-03, npm run verify:newreward-mapping expanded the read-only source scan to configured NewRewards local/Vercel env paths and found Air Express rows in a production env source. It records client cmmwe8so000077kqptwysqaem, tenant cmmwe8ri500007kqpd05kb4e5, primary website cmorqbs9j001r5nr1h25vosp8 matching live edge, GSC credential/connection for sc-domain:airexpressutah.com under newrewardplatform@gmail.com with expired status, GA4 credential/connection under the same website/account with expired status and propertyId null, plus valid Cloudflare provider rows. No database URL, token, encrypted credential blob, provider token, raw private payload, or customer data is stored."
+    },
+    {
+      "surface": "New Reward Air Express setup page",
+      "result": "Earlier live setup evidence identified the client as Air Express Heating and Air Conditioning at setup 3/5 with managed activation/delivery blocked by access. The 2026-06-02 recheck supersedes that status with setup 4/5 and local setup snapshot fallback."
+    },
+    {
+      "surface": "New Reward Air Express setup recheck",
+      "result": "On 2026-06-02, the live setup page reports Air Express setup 4/5 and says it is using a local setup snapshot because Search Console, GA4, Google Business Profile, and Google Business Profile sync failed to load. Managed activation profile is Complete, with business facts, approved service areas, access, and approval policy all Complete."
+    },
+    {
+      "surface": "New Reward activation/payment state",
+      "result": "The setup page reports Override approved, but payment or subscription confirmation is not recorded yet, with Contract signed, Payment unpaid, and Lifecycle authority."
+    },
+    {
+      "surface": "New Reward GSC setup card",
+      "result": "The Google Search Console card is NOT CONNECTED for gsc.read. It reports credential missing/no saved provider credential or status for the selected website, next action to connect the matching Google account or confirm website scope, and readiness gaps of missing scopes and missing website property."
+    },
+    {
+      "surface": "New Reward GA4 setup card",
+      "result": "The Google Analytics 4 card is NOT CONNECTED for ga4.read. It reports credential missing/no saved provider credential or status for the selected website, next action to connect the matching Google account or confirm website scope, and readiness gaps of missing analytics scope and missing GA4 property."
+    },
+    {
+      "surface": "New Reward GBP and Cloudflare setup cards",
+      "result": "Google Business Profile is also NOT CONNECTED. Cloudflare shows delivery edge as stale with a refresh recommended; the top setup warning says Cloudflare account ID or target zone proof is missing even though the live site is serving through the New Reward edge."
+    },
+    {
+      "surface": "New Reward settings profile",
+      "result": "The Air Express settings profile shows company name Air Express Heating and Air Conditioning, industry home services/HVAC, and website https://airexpressutah.com."
+    },
+    {
+      "surface": "New Reward website delivery settings",
+      "result": "Website delivery shows direct production writes stay off; Cloudflare artifacts=CLOUDFLARE_EDGE, owned-site content=MANUAL_REQUIRED, GitHub App=NOT CONNECTED, Vercel=MISSING, execution mode=draft_preview, outreach mode=proof_mode, and no automation toggles enabled."
+    },
+    {
+      "surface": "New Reward SEO workspace",
+      "result": "Open SEO workspace navigates to /admin/crm/cmmwe8so000077kqptwysqaem/seo-optimization, which displays Client not found: cmmwe8so000077kqptwysqaem. Run state is not run; credential health is unknown/not checked; delivery profile shows artifacts cloudflare edge, content manual required, blog manual required, outreach resend email outreach, and measurement gsc ga4."
+    },
+    {
+      "surface": "New Reward app login attempt",
+      "result": "A bounded sign-in attempt for newrewardplatform@gmail.com returned 'Couldn't find your account'. This should now be treated only as evidence that the Gmail is not the New Reward app user identity; it does not rule out using that account for Google provider OAuth from the james@jamesbrady.org app session."
+    },
+    {
+      "surface": "Stored Clerk API credentials",
+      "result": "The saved New Reward Clerk secret items resolve to a development Clerk instance. Read-only user lookups found no newrewardplatform@gmail.com or support@newreward.com user in that saved instance."
+    },
+    {
+      "surface": "Notion CRM account",
+      "result": "Air Express account client:cmmwe8so000077kqptwysqaem is listed as client/healthy for tenant cmmwe8ri500007kqpd05kb4e5 and domain airexpressutah.com."
+    },
+    {
+      "surface": "Notion CRM integrations",
+      "result": "Air Express gsc and ga4 integration rows are both status=missing/statusGroup=missing and both reference website id cmnfh6pi9000dj47kvq1rhqo8."
+    },
+    {
+      "surface": "Live Air Express edge",
+      "result": "The live site returns New Reward edge website id cmorqbs9j001r5nr1h25vosp8, proving delivery-path integration but not an attribution provider connection."
+    },
+    {
+      "surface": "Website ID reconciliation",
+      "result": "The CRM integration website id cmnfh6pi9000dj47kvq1rhqo8 does not match the live edge website id cmorqbs9j001r5nr1h25vosp8; this must be reconciled before reconnecting GSC/GA4/GBP."
+    },
+    {
+      "surface": "GA4 implementation history",
+      "result": "A New Reward PM task says GA4 measurement ID G-JZ7PY32EVX was added and live-verified on April 24, 2026."
+    },
+    {
+      "surface": "Current GA4 implementation check",
+      "result": "Repo-local source now contains /analytics.js with G-JZ7PY32EVX and public HTML/template includes. Live homepage checks for https://airexpressutah.com/ and https://airexpresshvac.net/ still found no G-JZ7PY32EVX, GA4, GTM, gtag(), googletagmanager, or google-analytics marker."
+    },
+    {
+      "surface": "Current live delivery recheck",
+      "result": "On 2026-06-02, https://airexpressutah.com/ returned HTTP 200 with New Reward edge website id cmorqbs9j001r5nr1h25vosp8 and edge version v20260601032350-675731b8-57d4bf; /analytics.js returned HTTP 404 on the same edge website id; no live GA4/GTM marker was found."
+    },
+    {
+      "surface": "Gmail connector evidence",
+      "result": "James's mailbox contains a 2026-05-07 training recap saying Air Express Google products showed not connected in the demo, and a 2026-05-27 sent note saying later notes showed GSC and GA4 live while GBP was not connected. This supports a source-of-truth split rather than a clean missing-access conclusion."
+    },
+    {
+      "surface": "Local Google auth",
+      "result": "gcloud now has newrewardplatform@gmail.com as an active local account, and history-pull-status.json records sanitized visibleScopes for both gcloud and ADC token candidates. Those visible scopes are cloud/admin identity scopes; both candidates lack Search Console webmasters.readonly, GA4 analytics.readonly, and Google Business Profile business.manage scopes, so GSC/GA4/GBP history still cannot be pulled without an approved read-only OAuth re-auth."
+    },
+    {
+      "surface": "1Password metadata",
+      "result": "Found New Reward Supabase, Google Cloud, Vercel, Railway, and Clerk/service-role items. Google Cloud entries are OAuth app/client configuration, not a stored user refresh token; the generic Google login item has no username field."
+    },
+    {
+      "surface": "Saved Supabase credential path",
+      "result": "The saved NEWREWARD_SUPABASE REST key is rejected as invalid, direct database host resolves to unreachable IPv6, and common pooler hosts reject the saved project ref."
+    },
+    {
+      "surface": "Exported Supabase env path",
+      "result": "The already-exported Supabase URL/service-role pair is reachable but does not expose the New Reward Prisma tables used for Air Express attribution."
+    },
+    {
+      "surface": "Saved Railway credential path",
+      "result": "The saved NEWREWARD_RAILWAY PAT is rejected by Railway as unauthorized."
+    },
+    {
+      "surface": "Provider mutation safety",
+      "result": "A bounded GSC Connect UI action was attempted from the authenticated Air Express setup page, but no Google OAuth/account chooser opened and no visible provider connection state changed. No GSC, GA4, DNS, Cloudflare, Vercel deployment, ServiceTitan, public send, or production mutation was completed."
+    }
+  ],
+  "notFound": [
+    "Direct connector-authenticated mailbox/session for newrewardplatform@gmail.com",
+    "Authenticated local Google session for newrewardplatform@gmail.com",
+    "Usable GSC/GA4 OAuth refresh token for newrewardplatform@gmail.com in reachable New Reward credential metadata",
+    "Usable saved Supabase REST key for the stored NEWREWARD_SUPABASE URL",
+    "Usable saved Railway PAT",
+    "Confirmed Air Express raw selected website id from the live setup UI that reconciles CRM setup and live edge delivery",
+    "SEO workspace client record for cmmwe8so000077kqptwysqaem",
+    "Connected GitHub App delivery for Air Express",
+    "Vercel project/delivery mapping inside New Reward website delivery settings",
+    "Connected GSC provider credential/status for the selected Air Express website",
+    "Connected GA4 provider credential/status or GA4 property mapping for the selected Air Express website",
+    "Stored GSC/GA4 snapshot history reachable from this lane",
+    "Current live GA4 tag marker for G-JZ7PY32EVX",
+    "Usable non-expired GSC provider credential for Air Express canonical website cmorqbs9j001r5nr1h25vosp8",
+    "Usable non-expired GA4 provider credential or GA4 property id for Air Express canonical website cmorqbs9j001r5nr1h25vosp8",
+    "Confirmed Air Express GBP location/provider row reachable from this lane",
+    "Approved Air Express GTM container id"
+  ],
+  "notAttempted": [
+    "No Clerk sign-in token, impersonation token, or live app auth mutation was created",
+    "No Google OAuth reconnect was completed",
+    "No Google account was selected and no Google consent was submitted",
+    "No provider credential rows were created, edited, disconnected, or deleted",
+    "No production deploy",
+    "No DNS, Cloudflare, Vercel, ServiceTitan, Google Search Console, or GA4 changes"
+  ],
+  "nextAction": "Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4/GBP read access only within the approved stop gates. After read scopes and property/location visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path."
+}

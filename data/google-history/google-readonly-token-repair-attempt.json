@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-06-04T03:53:08Z",
+  "evidenceClass": "google_readonly_token_repair_attempt",
+  "status": "blocked_interactive_oauth_code_gate",
+  "account": "newrewardplatform@gmail.com",
+  "secretHandling": "No access tokens, refresh tokens, OAuth URLs, verification codes, recovery prompts, cookies, passwords, or credential files are stored in this artifact.",
+  "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC, GA4, and GBP history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
+  "currentTokenState": {
+    "email": "newrewardplatform@gmail.com",
+    "present": true,
+    "missingRequiredScopes": [
+      "https://www.googleapis.com/auth/webmasters.readonly",
+      "https://www.googleapis.com/auth/analytics.readonly",
+      "https://www.googleapis.com/auth/business.manage"
+    ],
+    "visibleScopeClasses": [
+      "accounts.reauth",
+      "appengine.admin",
+      "cloud-platform",
+      "compute",
+      "sqlservice.login",
+      "userinfo.email",
+      "openid"
+    ]
+  },
+  "attempts": [
+    {
+      "action": "Checked active gcloud identity",
+      "result": "account_confirmed",
+      "evidence": "gcloud auth list and tokeninfo identify newrewardplatform@gmail.com as the active local Google identity.",
+      "nextAction": "Keep using newrewardplatform@gmail.com as the approved Google provider account."
+    },
+    {
+      "action": "Ran gcloud ADC reauth without cloud-platform scope",
+      "result": "blocked_required_scope",
+      "evidence": "gcloud rejected the scoped ADC command because cloud-platform is required by this gcloud application-default flow.",
+      "nextAction": "Include cloud-platform along with the product read scopes in the local ADC repair command."
+    },
+    {
+      "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, GBP, openid, and userinfo.email scopes",
+      "result": "blocked_interactive_oauth_code_gate",
+      "evidence": "The command produced a browser OAuth URL and waited for a verification code. The process was stopped before any code, token, or credential material was entered or stored.",
+      "nextAction": "James should complete the OAuth flow locally, not in chat, then rerun npm run pull:gsc-ga4-history."
+    },
+    {
+      "action": "Checked gcloud auth login --update-adc fallback",
+      "result": "not_viable_for_scope_repair",
+      "evidence": "The update-adc flow is available, but does not expose the needed product scope selection for this repair.",
+      "nextAction": "Use application-default login with explicit scopes, or reconnect through the New Reward provider UI."
+    },
+    {
+      "action": "Ran New Reward GSC mismatch diagnostic against saved DB candidates",
+      "result": "not_a_clear_workaround",
+      "evidence": "The app-side pg diagnostic did not return the Air Express row from reachable candidates in this session, while the Air Express psql-safe verifier still finds the canonical provider rows.",
+      "nextAction": "Continue using the Air Express verifier evidence for canonical website/provider state until the New Reward app route is rechecked."
+    }
+  ],
+  "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/business.manage,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
+  "providerState": {
+    "canonicalWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+    "gsc": "Provider row exists for sc-domain:airexpressutah.com under newrewardplatform@gmail.com, but validation is revoked and the legacy connection status is error.",
+    "ga4": "Provider row exists under newrewardplatform@gmail.com, but propertyId is null and the Air Express property containing G-JZ7PY32EVX still needs selection.",
+    "gbp": "No Air Express account/location-specific proof is available from the current local evidence."
+  },
+  "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4/GBP through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution."
+}
