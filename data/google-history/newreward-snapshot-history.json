@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T18:37:38.790Z",
+  "generatedAt": "2026-06-05T17:42:40.264Z",
   "status": "saved_snapshot_history_available",
   "evidenceClass": "read_only_newreward_saved_snapshot_history",
   "secretHandling": "No database URL, OAuth token, encrypted credential, customer PII, or full AI response text is printed or stored.",
@@ -772,8 +772,8 @@
       "table_name": "AiTrafficLog"
     },
     {
-      "rows": 32,
-      "last_at": "2026-06-04T12:00:00",
+      "rows": 36,
+      "last_at": "2026-06-05T12:00:00",
       "first_at": "2026-05-27T12:00:00",
       "table_name": "CloudflareAiTrafficSnapshot"
     },
@@ -1358,8 +1358,8 @@
     }
   ],
   "aiTrafficRoiDailyRollup": {
-    "rows": 70,
-    "last_date": "2026-06-04",
+    "rows": 72,
+    "last_date": "2026-06-05",
     "first_date": "2026-05-01",
     "matched_hits": 0,
     "observed_hits": 0,
@@ -1370,16 +1370,16 @@
   "leadFormSubmissionSummary": [],
   "cloudflareAiTrafficSummary": [
     {
-      "snapshots": 32,
+      "snapshots": 36,
       "zone_name": "airexpressutah.com",
       "metric_source": "cloudflare_graphql_ai_traffic_v1",
-      "total_requests": 2419,
-      "last_window_end": "2026-06-04T12:00:00",
-      "allowed_requests": 2275,
+      "total_requests": 2747,
+      "last_window_end": "2026-06-05T12:00:00",
+      "allowed_requests": 2588,
       "first_window_start": "2026-05-27T12:00:00",
-      "successful_requests": 2275,
-      "unsuccessful_requests": 58,
-      "total_data_transfer_bytes": 53620556
+      "successful_requests": 2588,
+      "unsuccessful_requests": 61,
+      "total_data_transfer_bytes": 58755433
     }
   ]
 }

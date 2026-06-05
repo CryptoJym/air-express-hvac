@@ -165,7 +165,7 @@ const providerRows = [
     status: historyStatus.ga4?.status || (providerMapping.rootCauseSummary?.ga4?.propertyId ? "property_selected" : "property_pending"),
     evidence: providerMapping.rootCauseSummary?.ga4?.propertyId
       ? `Property ${providerMapping.rootCauseSummary.ga4.propertyId} selected.`
-      : "GA4 connection exists in local evidence, but propertyId remains blank or scope-gated.",
+      : `GA4 provider evidence is ${providerMapping.rootCauseSummary?.ga4?.credentialStatus || "pending"} / ${providerMapping.rootCauseSummary?.ga4?.connectionStatus || "pending"} and propertyId remains blank or scope-gated.`,
     nextAction: "Select the GA4 property/web stream containing G-JZ7PY32EVX and verify live delivery.",
   },
   {

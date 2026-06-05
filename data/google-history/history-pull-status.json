@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-05T00:14:19.689Z",
+  "generatedAt": "2026-06-05T17:42:45.174Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
-    "gscStartDate": "2025-02-05",
-    "ga4StartDate": "2020-01-01",
-    "gbpStartDate": "2025-02-05",
+    "gscStartDate": "2026-01-01",
+    "ga4StartDate": "2026-01-01",
+    "gbpStartDate": "2026-01-01",
     "endDate": "2026-06-03",
     "explicitGscProperty": "",
     "explicitGa4PropertyId": ""
@@ -13,7 +13,7 @@
     {
       "state": "verified",
       "meaning": "Directly checked in this pass through local files, public HTTP, GitHub status, sanitized mailbox evidence, or a read-only command output.",
-      "currentUse": "PR #3834 merge/deployment proof, local GA4 source coverage, sanitized token-scope inventory, and ServiceTitan prior lead proof."
+      "currentUse": "PR #3834 resolver proof, PR #4105 Google provider proxy proof, local GA4 source coverage, sanitized token-scope inventory, and ServiceTitan prior lead proof."
     },
     {
       "state": "inferred",
@@ -50,7 +50,7 @@
   },
   "source": {
     "status": "blocked",
-    "evidence": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist."
+    "evidence": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker."
   },
   "serviceTitan": {
     "status": "blocked_env",
@@ -289,7 +289,7 @@
   ],
   "clientFriendlySummary": {
     "status": "blocked_pending_google_reconnect",
-    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,419 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs a read-only export or redacted packet before lead/revenue claims.",
+    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,747 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs a read-only export or redacted packet before lead/revenue claims.",
     "googleSearch": {
       "status": "saved_snapshot_available",
       "clicks": 5,
@@ -368,7 +368,7 @@
     }
   },
   "newRewardSnapshotHistory": {
-    "generatedAt": "2026-06-04T18:37:38.790Z",
+    "generatedAt": "2026-06-05T17:42:40.264Z",
     "status": "saved_snapshot_history_available",
     "evidenceClass": "read_only_newreward_saved_snapshot_history",
     "secretHandling": "No database URL, OAuth token, encrypted credential, customer PII, or full AI response text is printed or stored.",
@@ -1141,8 +1141,8 @@
         "table_name": "AiTrafficLog"
       },
       {
-        "rows": 32,
-        "last_at": "2026-06-04T12:00:00",
+        "rows": 36,
+        "last_at": "2026-06-05T12:00:00",
         "first_at": "2026-05-27T12:00:00",
         "table_name": "CloudflareAiTrafficSnapshot"
       },
@@ -1727,8 +1727,8 @@
       }
     ],
     "aiTrafficRoiDailyRollup": {
-      "rows": 70,
-      "last_date": "2026-06-04",
+      "rows": 72,
+      "last_date": "2026-06-05",
       "first_date": "2026-05-01",
       "matched_hits": 0,
       "observed_hits": 0,
@@ -1739,16 +1739,16 @@
     "leadFormSubmissionSummary": [],
     "cloudflareAiTrafficSummary": [
       {
-        "snapshots": 32,
+        "snapshots": 36,
         "zone_name": "airexpressutah.com",
         "metric_source": "cloudflare_graphql_ai_traffic_v1",
-        "total_requests": 2419,
-        "last_window_end": "2026-06-04T12:00:00",
-        "allowed_requests": 2275,
+        "total_requests": 2747,
+        "last_window_end": "2026-06-05T12:00:00",
+        "allowed_requests": 2588,
         "first_window_start": "2026-05-27T12:00:00",
-        "successful_requests": 2275,
-        "unsuccessful_requests": 58,
-        "total_data_transfer_bytes": 53620556
+        "successful_requests": 2588,
+        "unsuccessful_requests": 61,
+        "total_data_transfer_bytes": 58755433
       }
     ],
     "path": "/Users/jamesbrady/Projects/air-express-hvac/data/google-history/newreward-snapshot-history.json"

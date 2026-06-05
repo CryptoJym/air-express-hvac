@@ -1,7 +1,7 @@
 # Air Express GSC/GA4/GBP History And New Reward Impact Plan
 
 Date: 2026-06-02
-Last updated: 2026-06-03
+Last updated: 2026-06-05
 
 ## Goal
 
@@ -10,6 +10,46 @@ Business Profile history, then compare performance across New Reward operating
 milestones.
 
 ## Current Finding
+
+2026-06-05 retry: after NewRewards PR #4105 merged and deployed the
+GSC/GA4/GBP same-origin auth proxy fix, the Air Express local history pull was
+rerun for January-to-now using:
+
+```sh
+npm run pull:newreward-attribution-history
+npm run pull:gsc-ga4-history -- --gsc-start-date 2026-01-01 --ga4-start-date 2026-01-01
+```
+
+The result is split:
+
+- Saved New Reward snapshot history is available.
+- Direct Google API history is still blocked because the local
+  `newrewardplatform@gmail.com` `gcloud` and ADC tokens lack
+  `webmasters.readonly`, `analytics.readonly`, and `business.manage`.
+- This means the missing bearer-token platform route is no longer the leading
+  code blocker; the remaining blocker is Google product scope/property/location
+  access plus live delivery and ServiceTitan joins.
+
+Current saved-data baseline:
+
+- GSC saved snapshots: 24 snapshots, latest window 2026-05-06 to 2026-06-03,
+  3,832 appearances, 5 clicks, 0.1% CTR, 2,193 captured rows, average position
+  38.0.
+- GSC first-to-latest saved movement: +3,599 appearances, +1 click, +2,110 row
+  coverage. CTR fell from 1.7% to 0.1% as broader query coverage appeared.
+- AI visibility: 5,181 saved answer snapshots, 443 unique questions, 16
+  mentions, 6 citations, across 7 engines.
+- Engine distribution: all observed mentions/citations are currently from
+  Perplexity; ChatGPT, Claude, Google AI, Google AI Overview, Copilot, and Grok
+  show zero observed mentions/citations in the saved rows.
+- Cloudflare AI traffic observability: 2,747 saved AI-traffic requests from
+  2026-05-27 to 2026-06-05. This is crawl/traffic context, not lead or revenue
+  proof.
+- Lead/revenue joins: no saved New Reward LeadTouchpoint, LeadFormSubmission,
+  LeadOpportunity, or LeadRevenueEvent rows exist for Air Express yet.
+- ServiceTitan: only partial prior proof is available, with 5 count-only
+  website leads on 2026-04-24 and 2 already-approved listed lead ids; no full
+  export, booking report, or revenue report is joined.
 
 `newrewardplatform@gmail.com` is present as a local `gcloud` account, but the
 available local tokens do not include the read/API scopes needed for history:
@@ -50,6 +90,15 @@ So the source-of-truth question is narrowed. The current blocker is read-only UI
 confirmation plus provider refresh/scope/property access, not proof that Air
 Express rows are missing from New Reward.
 
+The New Reward platform route proof changed again on 2026-06-05. PR #4105
+merged to main at `bfa5fc67b2568fc337f1f5f4600a9e51b1525054` and post-merge
+Vercel status reached success. It adds explicit `/api/gsc`, `/api/ga4`, and
+`/api/gbp` proxy routes through the auth bridge after Air Express reconnect
+attempts reported missing bearer-token behavior. If the live app reconnect still
+fails after this deployment, capture the exact provider status/error and treat
+the next root cause as provider account/scope/property/location state, not
+frontend bearer-token forwarding.
+
 The status JSON and impact report now include an explicit evidence state model
 for `verified`, `inferred`, `prepared`, `blocked`, and `not_attempted` so the
 report does not blur checked facts, likely-but-unproven provider state,
@@ -60,7 +109,9 @@ Latest local audit state:
 - `npm run audit:seo-geo-attribution` on 2026-06-03 regenerated
   `data/seo-geo-attribution-audit.json` and
   `pages/seo-geo-attribution-report.html`.
-- Scores are technical `100`, GEO `90`, messaging `100`, attribution `25`.
+- `npm run audit:seo-geo-attribution` on 2026-06-05 regenerated the same
+  outputs after the Google retry. Scores are technical `100`, GEO `90`,
+  messaging `100`, accessibility `100`, attribution `25`.
 - The remaining high-severity findings are live/provider-state blockers:
   live GA4/GTM marker not synced, one prepared sitemap URL not live, live
   sitemap lastmod drift, live `llms.txt` drift, and edge-managed `robots.txt`

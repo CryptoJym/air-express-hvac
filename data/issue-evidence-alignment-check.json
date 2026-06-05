@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T21:21:14.108Z",
+  "generatedAt": "2026-06-05T17:42:50.718Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {
@@ -71,7 +71,7 @@
     {
       "id": "#26-mapping-json-alignment",
       "status": "passed",
-      "evidence": "mappingStatus.status=rows_found; #26 evidence=npm run verify:newreward-mapping now writes rows_found in data/newreward-air-express-provider-readonly-recheck.json; the configured NewRewards production env source found Air Express client cmmwe8so000077kqptwysqaem, tenant cmmwe8ri500007kqpd05kb4e5, and primary website cmorqbs9j001r5nr1h25vosp8, matching the live edge website id. The same read-only result found the legacy/non-primary website ids cmokaztm100065nqotpggbvwp and cmnfh6pi9000dj47kvq1rhqo8. After the reconnect attempt, GSC provider credential cmovx4dgo000o5nlkvdn9wd79 for sc-domain:airexpressutah.com has validationStatus revoked, the current GSC connection cmpymwqgm00xv5mo5h3spvjfg has connectionStatus error, GA4 provider credential cmovx4t46000q5nlkn8ix3aup has validationStatus valid, and GA4 connection cmovx4t7n000s5nlki14jmb69 has status CONNECTED but propertyId null. No database URL, token, encrypted credential blob, provider token, raw row payload, or customer data is stored.",
+      "evidence": "mappingStatus.status=rows_found; #26 evidence=npm run verify:newreward-mapping now writes rows_found in data/newreward-air-express-provider-readonly-recheck.json; the configured NewRewards production env source found Air Express client cmmwe8so000077kqptwysqaem, tenant cmmwe8ri500007kqpd05kb4e5, and primary website cmorqbs9j001r5nr1h25vosp8, matching the live edge website id. The same read-only result found the legacy/non-primary website ids cmokaztm100065nqotpggbvwp and cmnfh6pi9000dj47kvq1rhqo8. After the reconnect attempt, GSC provider credential cmovx4dgo000o5nlkvdn9wd79 for sc-domain:airexpressutah.com has validationStatus revoked, the current GSC connection cmpymwqgm00xv5mo5h3spvjfg has connectionStatus error, GA4 provider credential cmovx4t46000q5nlkn8ix3aup has validationStatus expired, and GA4 connection cmovx4t7n000s5nlki14jmb69 has status EXPIRED with propertyId null. No database URL, token, encrypted credential blob, provider token, raw row payload, or customer data is stored.",
       "nextAction": "Refresh the mapping verifier and #26 matrix row together."
     },
     {

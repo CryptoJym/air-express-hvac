@@ -41,6 +41,12 @@ const DEFAULT_MILESTONES = [
     label: "New Reward edge and onboarding recheck",
     evidence: "Air Express onboarding control hub",
   },
+  {
+    id: "google_provider_proxy_fix",
+    date: "2026-06-05",
+    label: "New Reward Google provider bearer-token proxy fix",
+    evidence: "NewRewards PR #4105 merged to main at bfa5fc67b2568fc337f1f5f4600a9e51b1525054; Vercel production deployment completed.",
+  },
 ];
 const LOCAL_PREPARED_ACTIONS = [
   {
@@ -51,13 +57,21 @@ const LOCAL_PREPARED_ACTIONS = [
     nextAction:
       "Recheck Air Express setup/status from the live New Reward app without mutating providers; current local history pull remains blocked by missing Google read scopes, expired GSC/GA4 provider rows, missing GA4 property id, and Air Express live delivery sync.",
   },
+  {
+    surface: "NewRewards Google provider proxy",
+    status: "deployed_verified_newrewards",
+    evidence:
+      "NewRewards PR #4105 added explicit same-origin /api/gsc, /api/ga4, and /api/gbp proxy routes through the auth bridge after Air Express reconnect attempts reported missing bearer-token behavior. PR #4105 merged to main at bfa5fc67b2568fc337f1f5f4600a9e51b1525054 on 2026-06-05T16:28:13Z; post-merge Vercel status reached success, and Railway statuses reported success/no deployment needed for watched paths.",
+    nextAction:
+      "Retry Air Express GSC, GA4, and GBP reconnect from an authenticated New Reward app session for website cmorqbs9j001r5nr1h25vosp8. If provider reads still fail, treat the remaining blocker as Google scope/property/provider state, not frontend bearer-token forwarding.",
+  },
 ];
 const EVIDENCE_STATE_MODEL = [
   {
     state: "verified",
     meaning: "Directly checked in this pass through local files, public HTTP, GitHub status, sanitized mailbox evidence, or a read-only command output.",
     currentUse:
-      "PR #3834 merge/deployment proof, local GA4 source coverage, sanitized token-scope inventory, and ServiceTitan prior lead proof.",
+      "PR #3834 resolver proof, PR #4105 Google provider proxy proof, local GA4 source coverage, sanitized token-scope inventory, and ServiceTitan prior lead proof.",
   },
   {
     state: "inferred",
@@ -1234,10 +1248,10 @@ function renderReport({
     ],
     [
       "GA4 saved snapshots",
-      newRewardSnapshots?.ga4Snapshots?.rows ? "saved_snapshot_available" : "blocked_missing_property_selection",
+      newRewardSnapshots?.ga4Snapshots?.rows ? "saved_snapshot_available" : "blocked_provider_property_selection",
       newRewardSnapshots?.ga4Snapshots?.rows
         ? `${formatInteger(newRewardSnapshots.ga4Snapshots.rows)} snapshot(s) from ${htmlEscape(newRewardSnapshots.ga4Snapshots.first_date || "unknown")} to ${htmlEscape(newRewardSnapshots.ga4Snapshots.last_date || "unknown")}.`
-        : "No saved GA4 snapshots found for Air Express; New Reward GA4 is connected but propertyId is still null.",
+        : "No saved GA4 snapshots found for Air Express; current New Reward evidence shows the GA4 provider row is expired and propertyId is still null.",
     ],
     [
       "GSC query metric sync",

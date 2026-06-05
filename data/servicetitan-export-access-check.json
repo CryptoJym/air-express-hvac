@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T00:14:12.738Z",
+  "generatedAt": "2026-06-05T17:41:21.922Z",
   "evidenceClass": "servicetitan_export_access_readiness_check",
   "status": "blocked_env",
   "secretHandling": "Only environment variable presence, local source labels, public endpoint names, and sanitized error text are stored. Credential values, access tokens, customer names, phones, emails, addresses, and raw lead payloads are not printed or written.",

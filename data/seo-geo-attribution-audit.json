@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T18:37:36.118Z",
+  "generatedAt": "2026-06-05T17:42:46.821Z",
   "site": "https://airexpressutah.com",
   "legacySite": "https://airexpresshvac.net",
   "skillsUsed": [
@@ -22,8 +22,8 @@
       "area": "Attribution / New Reward",
       "status": "blocked",
       "issue": "Air Express GSC/GA4/GBP source cannot be pulled through New Reward",
-      "rootCause": "There are now six separate breaks. First, prior UI evidence showed the Air Express setup page falling back to a local setup snapshot after GSC/GA4/GBP load failures. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, the SEO workspace previously reported Client not found and must be rechecked against the now-proven production source mapping. Fourth, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fifth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Sixth, no approved Air Express GTM container id has been found.",
-      "evidence": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fourth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Fifth, no approved Air Express GTM container id has been found. Sixth, no full ServiceTitan lead/revenue export is joined yet.",
+      "evidence": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
       "workaround": "Checks used the authenticated Air Express New Reward setup, settings, and SEO workspace pages; repo-local source; prior reachable credential metadata; and public live-edge artifact checks. No provider connection, deploy, DNS, CRM, OAuth, or public mutation was completed.",
       "nextAction": "Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4/GBP read access only within the approved stop gates. After read scopes and property/location visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path."
     },
@@ -10294,7 +10294,7 @@
   },
   "attribution": {
     "status": "blocked",
-    "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+    "blocker": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
     "auth": {
       "ok": false,
       "source": "local_gcloud",
@@ -10302,15 +10302,15 @@
       "reason": "Local Google CLI auth was not used because the requested source of truth is the New Reward Air Express control-plane mapping."
     },
     "newRewardSystem": {
-      "generatedAt": "2026-06-03T18:15:46.757Z",
+      "generatedAt": "2026-06-05T17:40:00.000Z",
       "client": "Air Express HVAC",
       "status": "blocked",
       "expectedAccessAccount": "newrewardplatform@gmail.com",
       "expectedNewRewardAppAccount": "james@jamesbrady.org",
       "expectedGoogleProviderAccount": "newrewardplatform@gmail.com",
-      "summary": "Authenticated New Reward admin access still reaches the Air Express setup record, and PR #3834 is merged/deployed. The latest read-only configured NewRewards production env lookup now finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. The blocker has shifted: GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly, analytics.readonly, and business.manage; the live homepage still lacks the GA4/GTM marker and /analytics.js is 404; the SEO workspace UI needs a fresh read-only recheck after earlier Client not found evidence.",
-      "rootCause": "There are now six separate breaks. First, prior UI evidence showed the Air Express setup page falling back to a local setup snapshot after GSC/GA4/GBP load failures. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, the SEO workspace previously reported Client not found and must be rechecked against the now-proven production source mapping. Fourth, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fifth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Sixth, no approved Air Express GTM container id has been found.",
-      "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+      "summary": "Authenticated New Reward admin access previously reached the Air Express setup record, PR #3834 is merged/deployed, and PR #4105 is now merged/deployed for the GSC/GA4/GBP bearer-token proxy path. The latest read-only configured NewRewards production env lookup still finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. The blocker is now narrower: GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly, analytics.readonly, and business.manage; GBP location/provider proof is still missing; the live homepage still lacks the GA4/GTM marker and /analytics.js is 404; and the live SEO workspace/provider UI still needs a fresh authenticated recheck after the #4105 deployment.",
+      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console, GA4, and Business Profile read scopes. Fourth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Fifth, no approved Air Express GTM container id has been found. Sixth, no full ServiceTitan lead/revenue export is joined yet.",
+      "blocker": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
       "verified": [
         {
           "surface": "New Reward access guide",
@@ -10331,6 +10331,10 @@
         {
           "surface": "NewRewards resolver deployment",
           "result": "GitHub read-only verification shows h3ro-dev/NewRewards PR #3834 was merged to main at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f on 2026-06-03T13:33:04Z with green targeted QA and production-preview gates. GitHub deployment 4919441936 for the same SHA reached Production success on Vercel at 2026-06-03T13:36:03Z, and Railway production deployment 4919401175 recorded success states before later inactive lifecycle statuses. This verifies the resolver repair was merged and deployed, but it does not prove a usable Air Express provider credential exists."
+        },
+        {
+          "surface": "NewRewards Google provider proxy deployment",
+          "result": "GitHub read-only verification shows h3ro-dev/NewRewards PR #4105 merged to main at bfa5fc67b2568fc337f1f5f4600a9e51b1525054 on 2026-06-05T16:28:13Z. Post-merge status reached success for Vercel; Railway NewRewards and NewRewards-Temporal-Worker-Prod reported success/no deployment needed for watched paths. This verifies the app route bearer-token forwarding repair, but it does not prove Air Express Google provider scopes, property selection, GBP location access, or ServiceTitan joins."
         },
         {
           "surface": "NewRewards configured DB provider recheck",
@@ -10468,19 +10472,19 @@
     },
     "gsc": {
       "status": "blocked",
-      "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+      "blocker": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
       "sites": [],
       "rows": []
     },
     "ga4": {
       "status": "blocked",
-      "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+      "blocker": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
       "accounts": [],
       "rows": []
     },
     "gbp": {
       "status": "blocked",
-      "blocker": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+      "blocker": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
       "rows": [],
       "locations": []
     },
@@ -10560,7 +10564,7 @@
       {
         "priority": "Critical",
         "issue": "Air Express GSC/GA4/GBP attribution source not found in reachable New Reward systems",
-        "evidence": "Air Express GSC/GA4/GBP attribution cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, the SEO workspace UI needs a fresh read-only recheck, and the locally restored GA4 tag is not deployed to the live edge path. This is not evidence that the Google assets do not exist.",
+        "evidence": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
         "fix": "Use the New Reward app session under james@jamesbrady.org, repair the Air Express client/tenant/website credential mapping, connect the Google provider as newrewardplatform@gmail.com, then rerun this audit from that source."
       }
     ],

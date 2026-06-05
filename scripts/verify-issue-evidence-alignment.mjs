@@ -128,10 +128,10 @@ check(
     mappingStatus.targetedLookup?.clients?.[0]?.primaryWebsiteId === "cmorqbs9j001r5nr1h25vosp8" &&
     gscRootCause.credentialStatus === "revoked" &&
     gscRootCause.connectionStatus === "error" &&
-    ga4RootCause.credentialStatus === "valid" &&
-    ga4RootCause.connectionStatus === "CONNECTED" &&
+    ga4RootCause.credentialStatus === "expired" &&
+    ga4RootCause.connectionStatus === "EXPIRED" &&
     ga4RootCause.propertyId === "" &&
-    includesAll(row26.current_evidence, ["rows_found", "cmorqbs9j001r5nr1h25vosp8", "revoked", "CONNECTED", "propertyId null"]) &&
+    includesAll(row26.current_evidence, ["rows_found", "cmorqbs9j001r5nr1h25vosp8", "revoked", "EXPIRED", "propertyId null"]) &&
     includesAll(row26.remaining_blocker, ["SEO workspace", "propertyId", "read scopes"]),
   `mappingStatus.status=${mappingStatus.status}; #26 evidence=${row26.current_evidence || ""}`,
   "Refresh the mapping verifier and #26 matrix row together."
