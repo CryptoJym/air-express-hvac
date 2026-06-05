@@ -52,7 +52,7 @@
     <h1>Air Express Issue 24-30 Blocker Report</h1>
     <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T17:42:50.842Z</span>
+      <span class="pill">Generated 2026-06-05T19:37:39.481Z</span>
       <span class="pill">Repo: CryptoJym/air-express-hvac</span>
       <span class="pill">No provider mutations attempted</span>
       <span class="pill">No Air Express production deploy attempted</span>
@@ -70,7 +70,7 @@
       <article class="card"><h3>Closed</h3><div class="metric good">1</div><p>#25 NewRewards provider resolver repair.</p></article>
       <article class="card"><h3>Open</h3><div class="metric bad">6</div><p>#24 and #26-#30 remain open with documented blockers.</p></article>
       <article class="card"><h3>Technical SEO</h3><div class="metric good">100</div><p>Current local SEO/GEO attribution audit.</p></article>
-      <article class="card"><h3>Attribution</h3><div class="metric bad">25</div><p>Blocked by Google scopes, New Reward mapping, live tag sync, and ServiceTitan export proof.</p></article>
+      <article class="card"><h3>Attribution</h3><div class="metric bad">25</div><p>Blocked by Google scopes, New Reward mapping, live tag sync, and ServiceTitan booking/revenue proof.</p></article>
     </section>
 
     <h2>Current Diagnostics</h2>
@@ -82,7 +82,7 @@
           <tr><td>Delivery Sync</td><td><span class="state prepared">pending delivery sync</span></td><td><code>data/owned-site-delivery-sync-check.json</code></td></tr>
           <tr><td>Google History</td><td><span class="state blocked-state">blocked</span></td><td><code>data/google-history/history-pull-status.json</code></td></tr>
           <tr><td>New Reward Mapping</td><td><span class="state blocked-state">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
-          <tr><td>ServiceTitan Export</td><td><span class="state blocked-state">blocked env</span></td><td><code>data/servicetitan-export-access-check.json</code></td></tr>
+          <tr><td>ServiceTitan Export</td><td><span class="state blocked-state">auth ready no export</span></td><td><code>data/servicetitan-export-access-check.json</code></td></tr>
           <tr><td>Site Manifest</td><td><span class="state blocked-state">passed</span></td><td><code>data/site-file-manifest.json</code></td></tr>
           <tr><td>Public Claims</td><td><span class="state blocked-state">passed</span></td><td><code>data/public-claim-register.json</code></td></tr>
         </tbody>
@@ -104,7 +104,7 @@
             <td><span class="state blocked-state">parent incomplete</span></td>
             <td>Issue comments updated; pages/new-reward-impact-report.html and pages/seo-geo-attribution-report.html regenerated; data/attribution-email-evidence.csv now preserves Gmail and Outlook root-cause evidence; data/public-claim-register.json records clean public-claim state; child issues #26-#30 remain open</td>
             <td>Local reports, source evidence map, history pull status, saved New Reward snapshot history, mailbox evidence ledger, public claim register, and blocker comments were refreshed without provider or production mutations</td>
-            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google read scopes/property or location proof, live sync, and ServiceTitan export proof</td>
+            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google read scopes/property or location proof, live sync, and ServiceTitan booked-job/revenue proof</td>
             <td>All child issues are closed or explicitly blocked with exact evidence; live report shows pulled history or narrowed provider-specific blockers</td>
             <td>Resolve #26, #27, #28, #29, and #30 in sequence</td>
           </tr>
@@ -114,7 +114,7 @@
             <td><span class="state complete">completed verified</span></td>
             <td>h3ro-dev/NewRewards PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f on 2026-06-03T13:33:04Z; targeted QA and production-preview gates were green; post-merge Air Express read-only provider recheck now returns rows_found for the canonical live website id cmorqbs9j001r5nr1h25vosp8.</td>
             <td>Provider credential resolver repair was merged/deployed outside this Air Express repo; local recheck confirms resolver code is no longer the remaining blocker.</td>
-            <td>No resolver-code action remains; GSC revoked/error state, missing local Google read scopes, GA4 property selection, live delivery sync, and ServiceTitan export proof continue under #26-#30.</td>
+            <td>No resolver-code action remains; GSC revoked/error state, missing local Google read scopes, GA4 property selection, live delivery sync, and ServiceTitan booked-job/revenue proof continue under #26-#30.</td>
             <td>Merged PR/deployment evidence remains attached and no regression appears in current NewRewards status checks</td>
             <td>Keep #25 closed and continue #26 through #30.</td>
           </tr>
@@ -161,12 +161,12 @@
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/30">#30</a></td>
             <td>open</td>
-            <td><span class="state partial">partial prior proof</span></td>
-            <td>data/servicetitan-lead-history.csv records two April 24 ServiceTitan lead IDs; data/servicetitan-prior-proof-summary.csv records the prior five-lead count; pages/new-reward-impact-report.html now includes Lead Proof Status with partial_prior_proof plus blocked_env export state and redacted export import lane; Gmail evidence also records an April 29 ServiceTitan email-notification fallback setup note and a May 1 tracked lead-visibility investigation; npm run verify:servicetitan-export writes data/servicetitan-export-access-check.json with status blocked_env after checking Air Express, global New Reward, home, and NewRewards local/Vercel env sources; npm run import:servicetitan-redacted-export now prepares a derived new_reward_impact_period output field for before_new_reward_target_brief, target_brief_to_ga4_lead_proof, and after_ga4_lead_proof</td>
-            <td>Repeatable ServiceTitan export readiness check records required env key presence across process env, known local env files, and NewRewards local/Vercel env files plus export packet schema without printing credential values tokens customer PII or raw lead payloads; npm run import:servicetitan-redacted-export prepared a safe local import template and awaiting_input manifest for owner-supplied redacted CSVs with period classification derived from created_at; npm run test:servicetitan-redacted-import verifies awaiting-input behavior, safe alias normalization, impact period classification, and PII rejection without persisting raw private values; bounded Gmail search added sanitized setup/visibility evidence and found no full export booking status revenue report or new lead IDs beyond existing proof; Google Drive metadata search found no Air Express ServiceTitan export source; local ServiceTitan/intake tests passed</td>
-            <td>Read-only ServiceTitan export access or redacted screenshot/export packet is needed; no CRM mutation or live test lead is approved</td>
-            <td>Impact report includes full lead counts by period with no customer PII, or exact export/access/import blocker remains documented</td>
-            <td>Request read-only ServiceTitan export/API access or redacted proof packet by date, source/channel, campaign, status, booking/revenue if available; then run npm run test:servicetitan-redacted-import, npm run import:servicetitan-redacted-export -- --input &lt;csv&gt;, npm run pull:gsc-ga4-history, and npm run verify:onboarding-evidence</td>
+            <td><span class="state partial">partial api history pulled revenue blocked</span></td>
+            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, and 0 rows with booking ids. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/campaign/status/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.</td>
+            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
+            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; direct Google/GA4/GBP history and live GA4 delivery are still blocked in #27-#29.</td>
+            <td>Impact report includes ServiceTitan lead counts by period and week with no customer PII; booked-job and revenue attribution either become joined through an approved endpoint/export or remain blocked with exact proof.</td>
+            <td>Use the pulled redacted lead history for lead-count trend comparison, verify whether CRM v2 export/bookings or another approved ServiceTitan report can provide booking/revenue joins, then rerun npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
           </tr>
         </tbody>
       </table>
@@ -184,7 +184,7 @@
           <tr><td>#27</td><td>1 / 5</td><td>4</td><td>No scoped GSC read token or property visibility proof</td></tr>
           <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Approved deploy edge sync or manual delivery path is required</td></tr>
           <tr><td>#29</td><td>1 / 5</td><td>4</td><td>No scoped local GSC read token or normalized query/page/device history; saved GSC snapshots are aggregate totals only</td></tr>
-          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Full period export or redacted owner packet is missing</td></tr>
+          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Booking and revenue joins are not included in this lead endpoint response</td></tr>
         </tbody>
       </table>
     </div>

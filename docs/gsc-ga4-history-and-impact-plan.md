@@ -341,29 +341,51 @@ check now records this without printing credential values:
 
 - `npm run verify:servicetitan-export`
 - `data/servicetitan-export-access-check.json`
+- `npm run pull:servicetitan-lead-history`
+- `data/servicetitan-api-lead-history-summary.json`
+- `data/servicetitan-api-lead-history-redacted.csv`
 - `npm run import:servicetitan-redacted-export`
 - `data/servicetitan-redacted-export-template.csv`
 - `data/servicetitan-redacted-export-import-status.json`
 
-A sanitized partial proof file was prepared from prior verified email/repo guide
+2026-06-05 ServiceTitan update: the API key path was found in the separate
+Vercel `option-c` production project, not in the Air Express repo, NewRewards
+repo env files, process env, or discoverable 1Password item names. After pulling
+that env into a temp-only file, `npm run verify:servicetitan-export` returned
+`auth_ready_no_export`, and `npm run pull:servicetitan-lead-history` pulled
+read-only CRM v2 lead history for 2026-01-01 through 2026-06-05.
+
+Pulled ServiceTitan lead-count baseline:
+
+- 78 redacted lead rows.
+- 76 rows for configured website campaign `80365413`.
+- Impact periods: 2 before the New Reward target brief, 29 from target brief to
+  GA4/lead proof, and 47 after GA4/lead proof.
+- Status mix: 55 dismissed, 22 open, 1 converted.
+- Booked-job and revenue proof remains blocked: the lead endpoint returned 0
+  booking IDs and no approved revenue fields.
+- Stored fields exclude customer names, phone numbers, emails, street addresses,
+  lead summaries, lead URLs, raw payloads, credential values, and tokens.
+
+A sanitized partial proof file still exists from prior verified email/repo guide
 evidence:
 
 - `data/servicetitan-lead-history.csv`
 - `data/servicetitan-prior-proof-summary.csv`
 
-The lead-history file records two April 24, 2026 website lead IDs under campaign
+The prior lead-history file records two April 24, 2026 website lead IDs under campaign
 `80365413` without customer PII. The prior-proof summary preserves the
 already-generated guide's count-only statement that five website leads were
 created in ServiceTitan on April 24, 2026, with the same campaign and without
-private customer data. The next proof step is still a read-only ServiceTitan
-lead export or screenshot packet by date, source/channel/campaign, lead status,
-and revenue or booking status if approved.
+private customer data. This prior proof is now superseded for lead-count trend
+work by the read-only API pull, but it remains useful corroborating evidence for
+the April 24 lead-visibility milestone.
 
 The generated impact report now has a `Lead Proof Status` section. It records
-the partial prior proof as `partial_prior_proof`, the full export/history lane
-as `blocked_env`, the prior five-lead count, the listed lead-id count, campaign
-`80365413`, and the no-PII boundary. It still does not claim booking, revenue,
-or full historical lead coverage.
+the API lead proof as `api_history_pulled`, the ServiceTitan auth state as
+`auth_ready_no_export`, the pulled lead counts, campaign `80365413`, and the
+no-PII boundary. It still does not claim booked jobs, revenue, ROI, or full
+closed-won attribution.
 
 2026-06-03 redacted export import update: a local-only import path is prepared
 for owner-supplied ServiceTitan CSV evidence:

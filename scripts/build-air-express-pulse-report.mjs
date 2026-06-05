@@ -125,10 +125,28 @@ function table(headers, rows) {
   </table></div>`;
 }
 
+function publicCheckDisplayUrl(row) {
+  const sourceUrl = String(row.url || "");
+  let hostname = "";
+  try {
+    hostname = new URL(sourceUrl).hostname;
+  } catch {
+    hostname = "";
+  }
+  if (hostname === "airexpresshvac.net") return "legacy apex redirect";
+  if (hostname === "www.airexpresshvac.net") return "legacy www redirect";
+  return sourceUrl;
+}
+
+function publicCheckHref(row) {
+  return row.final_url || row.url || "";
+}
+
 const snapshotHistory = readJson("data/google-history/newreward-snapshot-history.json");
 const seoAudit = readJson("data/seo-geo-deep-dive-audit.json");
 const historyStatus = readJson("data/google-history/history-pull-status.json");
 const serviceTitanStatus = readJson("data/servicetitan-export-access-check.json");
+const serviceTitanLeadSummary = readJson("data/servicetitan-api-lead-history-summary.json");
 const providerMapping = readJson("data/newreward-air-express-provider-readonly-recheck.json");
 
 const pulseItems = parseCsv(read("data/air-express-pulse-items.csv"));
@@ -152,6 +170,13 @@ const readyBriefs = contentBriefs.filter((row) => /ready/.test(row.status || "")
 const blockedHypotheses = hypotheses.filter((row) => /blocked/.test(row.validation_status || row.blocker || "")).length;
 const competitorSeeds = competitors.filter((row) => row.entity_type === "competitor").length;
 const generatedAt = new Date().toISOString();
+const serviceTitanWeeklyRows = Object.entries(serviceTitanLeadSummary.countsByWeek || {})
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([week, count]) => ({
+    week,
+    count,
+    websiteCount: serviceTitanLeadSummary.websiteCampaignCountsByWeek?.[week] || 0,
+  }));
 
 const providerRows = [
   {
@@ -176,11 +201,15 @@ const providerRows = [
   },
   {
     surface: "ServiceTitan",
-    status: serviceTitanStatus.status || "blocked_env",
-    evidence: serviceTitanStatus.status === "blocked_env"
-      ? "Local ServiceTitan export/API keys are not present in the approved env sources."
-      : "ServiceTitan export status needs review.",
-    nextAction: "Import an approved redacted export or enable read-only export/API access.",
+    status: serviceTitanLeadSummary.status || serviceTitanStatus.status || "blocked_env",
+    evidence: serviceTitanLeadSummary.status === "api_history_pulled"
+      ? `${serviceTitanLeadSummary.rows || 0} redacted lead row(s) pulled; ${serviceTitanLeadSummary.websiteCampaignLeadCount || 0} match the configured website campaign; booked/revenue proof remains pending.`
+      : serviceTitanStatus.status === "blocked_env"
+        ? "Local ServiceTitan export/API keys are not present in the approved env sources."
+        : "ServiceTitan export status needs review.",
+    nextAction: serviceTitanLeadSummary.status === "api_history_pulled"
+      ? "Use lead counts for trend comparison and keep revenue attribution blocked until booking/revenue joins are approved."
+      : "Import an approved redacted export or enable read-only export/API access.",
   },
 ];
 
@@ -305,6 +334,14 @@ const html = `<!doctype html>
       <td>${statePill(row.coverage_status)}<br>${escapeHtml(row.notes)}</td>
     </tr>`))}
 
+    <h2>ServiceTitan Lead Trend</h2>
+    ${table(["Week", "Redacted Leads", "Configured Website Campaign", "Read"], serviceTitanWeeklyRows.length ? serviceTitanWeeklyRows.map((row) => `<tr>
+      <td>${escapeHtml(row.week)}</td>
+      <td>${formatInteger(row.count)}</td>
+      <td>${formatInteger(row.websiteCount)}</td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>`) : [`<tr><td>pending</td><td>0</td><td>0</td><td>ServiceTitan API lead history has not been pulled.</td></tr>`])}
+
     <h2>Competitor And Entity Baseline</h2>
     <p>${formatInteger(competitorSeeds)} competitor seed row(s) are ready for read-only geolocated local-pack and AI-answer tracking. Current rows are baseline seeds, not rank proof.</p>
     ${table(["Brand", "Type", "Confidence", "Domain", "Focus", "Issue / Gap", "State", "Next Action"], competitors.map((row) => `<tr>
@@ -338,7 +375,7 @@ const html = `<!doctype html>
     <h2>Public HTTP Checks</h2>
     ${table(["Checked", "URL", "Status", "Evidence", "Next Action", "Issue"], publicChecks.map((row) => `<tr>
       <td>${escapeHtml(row.checked_at)}</td>
-      <td><a href="${escapeHtml(row.url)}">${escapeHtml(row.url)}</a></td>
+      <td><a href="${escapeHtml(publicCheckHref(row))}">${escapeHtml(publicCheckDisplayUrl(row))}</a></td>
       <td>${statePill(row.status)}</td>
       <td>${escapeHtml(row.evidence)}</td>
       <td>${escapeHtml(row.next_action)}</td>

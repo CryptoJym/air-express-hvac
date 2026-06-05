@@ -128,7 +128,7 @@ Blocked without explicit approval and provider access:
 | Weekly scorecard | `data/weekly-scorecard.csv` | prepared |
 | Google auth scope audit | `data/google-auth-scope-audit.csv` | prepared |
 | Attribution work items | `data/attribution-work-items.csv` | prepared |
-| ServiceTitan export readiness check | `data/servicetitan-export-access-check.json` | blocked by missing env keys |
+| ServiceTitan lead-history pull | `data/servicetitan-api-lead-history-summary.json` | lead counts pulled; booked/revenue proof still pending |
 | Issue 24-30 completion audit | `data/issue-24-30-completion-audit.csv` | prepared |
 | Issue evidence alignment check | `data/issue-evidence-alignment-check.json` | prepared |
 | Pages index | `pages/index.html` | prepared |

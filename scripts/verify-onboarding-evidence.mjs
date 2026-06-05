@@ -33,6 +33,7 @@ const REQUIRED_FILES = [
   "scripts/build-issue-blocker-report.mjs",
   "scripts/build-content-readiness-report.mjs",
   "scripts/verify-servicetitan-export-access.mjs",
+  "scripts/pull-servicetitan-lead-history.mjs",
   "tests/unit/servicetitan-redacted-import.test.js",
   "data/issue-24-30-completion-audit.csv",
   "data/issue-24-30-acceptance-criteria-audit.csv",
@@ -50,6 +51,8 @@ const REQUIRED_FILES = [
   "data/air-express-evidence-refresh-status.json",
   "data/seo-geo-attribution-audit.json",
   "data/servicetitan-export-access-check.json",
+  "data/servicetitan-api-lead-history-redacted.csv",
+  "data/servicetitan-api-lead-history-summary.json",
   "data/servicetitan-lead-history.csv",
   "data/servicetitan-prior-proof-summary.csv",
   "data/servicetitan-redacted-export-template.csv",
@@ -202,7 +205,7 @@ function checkIssueMatrix() {
     "pending delivery sync",
     "blocked",
     "rows found",
-    "blocked env",
+    "api history pulled",
   ]) {
     assert(
       report.includes(requiredStatus),
@@ -471,12 +474,12 @@ function checkHistoryStatus() {
 
   assert(status.serviceTitan, "History pull status must include ServiceTitan lead-proof status.");
   assert(
-    status.serviceTitan.priorProofStatus === "partial_prior_proof",
-    `Expected ServiceTitan prior proof status partial_prior_proof, received ${status.serviceTitan.priorProofStatus}.`
+    status.serviceTitan.priorProofStatus === "api_history_pulled",
+    `Expected ServiceTitan lead proof status api_history_pulled, received ${status.serviceTitan.priorProofStatus}.`
   );
   assert(
-    status.serviceTitan.status === "blocked_env",
-    `Expected ServiceTitan export status blocked_env, received ${status.serviceTitan.status}.`
+    status.serviceTitan.status === "auth_ready_no_export",
+    `Expected ServiceTitan export status auth_ready_no_export, received ${status.serviceTitan.status}.`
   );
   assert(
     status.serviceTitan.piiExcluded === true,
@@ -487,16 +490,21 @@ function checkHistoryStatus() {
     "ServiceTitan lead proof status must preserve the prior five-lead count."
   );
   assert(
+    Number(status.serviceTitan.apiLeadCount) === 78 &&
+      Number(status.serviceTitan.websiteCampaignLeadCount) === 76,
+    "ServiceTitan lead proof status must include the pulled API lead counts."
+  );
+  assert(
     impactReport.includes("Lead Proof Status"),
     "Impact report must include a Lead Proof Status section."
   );
   assert(
-    impactReport.includes("ServiceTitan prior proof") && impactReport.includes("partial_prior_proof"),
-    "Impact report must show ServiceTitan partial prior proof."
+    impactReport.includes("ServiceTitan lead history") && impactReport.includes("api_history_pulled"),
+    "Impact report must show ServiceTitan API lead history."
   );
   assert(
-    impactReport.includes("ServiceTitan export/history") && impactReport.includes("blocked_env"),
-    "Impact report must show the ServiceTitan export blocker."
+    impactReport.includes("ServiceTitan export/history") && impactReport.includes("auth_ready_no_export"),
+    "Impact report must show the ServiceTitan auth-ready export state."
   );
   assert(
     impactReport.includes("ServiceTitan redacted export import"),

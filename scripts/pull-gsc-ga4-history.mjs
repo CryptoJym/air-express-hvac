@@ -89,7 +89,7 @@ const EVIDENCE_STATE_MODEL = [
     state: "blocked",
     meaning: "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
     currentUse:
-      "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and full ServiceTitan history export.",
+        "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join.",
   },
   {
     state: "not_attempted",
@@ -897,8 +897,14 @@ function buildClientFriendlySummary({
       verifiedCount: serviceTitan.verifiedCount,
       listedLeadCount: serviceTitan.listedLeadCount,
       importedLeadCount: serviceTitan.importedLeadCount,
+      apiLeadCount: serviceTitan.apiLeadCount,
+      websiteCampaignLeadCount: serviceTitan.websiteCampaignLeadCount,
+      bookedLeadCount: serviceTitan.bookedLeadCount,
+      apiCountsByImpactPeriod: serviceTitan.apiCountsByImpactPeriod,
+      apiCountsByWeek: serviceTitan.apiCountsByWeek,
+      apiCountsByStatus: serviceTitan.apiCountsByStatus,
       caveat:
-        "Do not claim booked jobs, revenue, ROI, or full lead trend until a read-only ServiceTitan export/API pull or redacted owner packet is joined.",
+        "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined.",
     },
   };
 }
@@ -909,44 +915,64 @@ function loadServiceTitanLeadProof() {
   const priorRows = readCsv(join(root, "data/servicetitan-prior-proof-summary.csv"));
   const leadRows = readCsv(join(root, "data/servicetitan-lead-history.csv"));
   const importedRows = readCsv(join(root, "data/servicetitan-redacted-export-import.csv"));
+  const apiRows = readCsv(join(root, "data/servicetitan-api-lead-history-redacted.csv"));
+  const apiSummary = readJson(join(root, "data/servicetitan-api-lead-history-summary.json"), {});
   const prior = priorRows[0] || {};
   const campaignIds = Array.from(
     new Set(
-      [...priorRows, ...leadRows, ...importedRows]
+      [...priorRows, ...leadRows, ...importedRows, ...apiRows]
         .map((row) => row.campaign_id || row.campaign_id_or_source || "")
         .filter(Boolean)
     )
   );
-  const verifiedCount = Number(prior.verified_count || 0) || leadRows.length;
-  const listedLeadCount = new Set(leadRows.map((row) => row.service_titan_lead_id).filter(Boolean)).size;
+  const apiLeadCount = Number(apiSummary.rows || 0) || apiRows.length;
+  const websiteCampaignLeadCount = Number(apiSummary.websiteCampaignLeadCount || 0);
+  const bookedLeadCount = Number(apiSummary.bookedLeadCount || 0);
+  const verifiedCount = apiLeadCount || Number(prior.verified_count || 0) || leadRows.length;
+  const listedLeadCount = new Set([...leadRows, ...apiRows].map((row) => row.service_titan_lead_id).filter(Boolean)).size;
   const importedLeadCount = new Set(importedRows.map((row) => row.service_titan_lead_id).filter(Boolean)).size;
-  const piiExcluded = [...priorRows, ...leadRows, ...importedRows].every((row) => row.pii_excluded === "true");
+  const piiExcluded = [...priorRows, ...leadRows, ...importedRows, ...apiRows].every((row) => row.pii_excluded === "true");
   const firstBlocker = Array.isArray(exportStatus.blockers) ? exportStatus.blockers[0] : null;
   const importStatus = redactedImportStatus.status || "not_attempted";
   const importEvidence = importedRows.length
     ? `Imported ${importedRows.length} approved redacted ServiceTitan lead row(s), with ${importedLeadCount} listed lead id(s), safe campaign/source fields, and customer PII excluded.`
     : `Redacted ServiceTitan export import is ${importStatus}; template ${redactedImportStatus.templatePath || "data/servicetitan-redacted-export-template.csv"} is prepared.`;
+  const apiEvidence = apiLeadCount
+    ? `Read-only ServiceTitan API pull returned ${apiLeadCount} redacted lead row(s) from ${apiSummary.requestedRange?.startDate || "unknown"} to ${apiSummary.requestedRange?.endDate || "unknown"}; ${websiteCampaignLeadCount} row(s) match configured website campaign ${campaignIds.includes("80365413") ? "80365413" : "unknown"}; ${bookedLeadCount} row(s) include booking ids; customer PII and raw payloads are excluded.`
+    : "";
 
   return {
     status: exportStatus.status || "unknown",
-    priorProofStatus: priorRows.length || leadRows.length ? "partial_prior_proof" : "not_attempted",
+    priorProofStatus: apiLeadCount ? "api_history_pulled" : priorRows.length || leadRows.length ? "partial_prior_proof" : "not_attempted",
     verifiedCount,
     listedLeadCount,
     importedLeadCount,
+    apiLeadCount,
+    websiteCampaignLeadCount,
+    bookedLeadCount,
+    apiStatus: apiSummary.status || "not_pulled",
+    apiCountsByImpactPeriod: apiSummary.countsByImpactPeriod || {},
+    apiCountsByWeek: apiSummary.countsByWeek || {},
+    apiCountsByMonth: apiSummary.countsByMonth || {},
+    apiCountsByStatus: apiSummary.countsByStatus || {},
     campaignIds,
     piiExcluded,
-    evidence: priorRows.length || leadRows.length
+    evidence: apiEvidence || (priorRows.length || leadRows.length
       ? `Prior sanitized proof records ${verifiedCount} website lead(s) on 2026-04-24, with ${listedLeadCount} listed lead id(s), campaign ${campaignIds.join(";") || "unknown"}, and customer PII excluded.`
-      : "No ServiceTitan lead proof rows are present in repo-local evidence.",
+      : "No ServiceTitan lead proof rows are present in repo-local evidence."),
     redactedImportStatus: importStatus,
     redactedImportEvidence: importEvidence,
     redactedImportNextAction:
       redactedImportStatus.nextAction ||
       "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>.",
-    blocker: firstBlocker?.evidence || "Full ServiceTitan history is not available from current local evidence.",
+    blocker: apiLeadCount
+      ? "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields."
+      : firstBlocker?.evidence || "Full ServiceTitan history is not available from current local evidence.",
     nextAction:
-      firstBlocker?.nextAction ||
-      "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet before joining leads by period.",
+      apiLeadCount
+        ? "Join the redacted lead counts to Google/GA4 periods after Google history is restored; pull bookings/revenue only after the exact approved ServiceTitan endpoint/scope is verified."
+        : firstBlocker?.nextAction ||
+          "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet before joining leads by period.",
     exportEvidenceClass: exportStatus.evidenceClass || "",
     authCheck: exportStatus.authCheck || "not_attempted",
   };
@@ -1058,7 +1084,7 @@ function applySavedSnapshotSummary(clientSummary, snapshotHistory) {
         : null,
       nextAction:
         aiMetrics?.rows
-          ? "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics and lead exports are joined."
+          ? "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics plus booked-job/revenue joins are available."
           : "Use saved AI visibility snapshots for trend context; pull score metrics when available.",
     };
   }
@@ -1121,7 +1147,7 @@ function applySavedSnapshotSummary(clientSummary, snapshotHistory) {
     clientSummary.plainEnglish = [
       "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available.",
       savedBits.join(" "),
-      "GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs a read-only export or redacted packet before lead/revenue claims.",
+      "GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs booked-job/revenue proof before ROI claims.",
     ].join(" ");
   }
 
@@ -1204,7 +1230,7 @@ function renderReport({
     ["Organic search sessions", formatInteger(clientSummary.websiteEngagement.organicSearchSessions), clientSummary.websiteEngagement.status],
     ["GA4 engagement rate", clientSummary.websiteEngagement.averageEngagementRate ? formatPercent(clientSummary.websiteEngagement.averageEngagementRate) : "pending", clientSummary.websiteEngagement.status],
     ["GA4 conversions", formatInteger(clientSummary.websiteEngagement.conversions), clientSummary.websiteEngagement.status],
-    ["Prior ServiceTitan proof", `${formatInteger(clientSummary.leadProof.verifiedCount)} count-only lead(s); ${formatInteger(clientSummary.leadProof.listedLeadCount)} listed id(s)`, clientSummary.leadProof.status],
+    ["ServiceTitan leads", `${formatInteger(clientSummary.leadProof.verifiedCount)} redacted lead row(s); ${formatInteger(clientSummary.leadProof.websiteCampaignLeadCount || 0)} website campaign row(s)`, clientSummary.leadProof.status],
     ["AI answer snapshots", aiSearch.snapshots ? formatInteger(aiSearch.snapshots) : "pending", aiSearch.status],
     ["AI unique questions", aiSearch.uniqueQuestions ? formatInteger(aiSearch.uniqueQuestions) : "pending", aiSearch.status],
     ["AI mentions", aiSearch.mentions !== undefined ? formatInteger(aiSearch.mentions) : "pending", aiSearch.status],
@@ -1667,10 +1693,12 @@ function renderReport({
     ${table(["New Reward table", "Rows", "First seen", "Last seen", "Join read"], leadJoinRows.length ? leadJoinRows : [["pending", "0", "", "", "No saved lead/touchpoint/revenue join rows found."]])}
     ${table(["Source", "State", "Evidence", "Next action"], [
       [
-        "ServiceTitan prior proof",
+        "ServiceTitan lead history",
         htmlEscape(serviceTitan.priorProofStatus),
         htmlEscape(serviceTitan.evidence),
-        "Use this as partial historical proof only; do not treat it as a full export, booking report, or revenue report.",
+        serviceTitan.apiLeadCount
+          ? "Use for lead-count trend comparison only; do not treat it as booked-job or revenue proof."
+          : "Use this as partial historical proof only; do not treat it as a full export, booking report, or revenue report.",
       ],
       [
         "ServiceTitan export/history",

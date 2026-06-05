@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T17:42:50.718Z",
+  "generatedAt": "2026-06-05T19:37:45.813Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {
@@ -10,7 +10,8 @@
     "ga4Status": "blocked_scope",
     "gbpStatus": "blocked_scope",
     "newRewardMappingStatus": "rows_found",
-    "serviceTitanStatus": "blocked_env"
+    "serviceTitanStatus": "auth_ready_no_export",
+    "serviceTitanLeadStatus": "api_history_pulled"
   },
   "summary": {
     "checks": 19,
@@ -65,7 +66,7 @@
     {
       "id": "#30-completion-state",
       "status": "passed",
-      "evidence": "#30 row status=open, completion_state=partial_prior_proof; expected open/partial_prior_proof.",
+      "evidence": "#30 row status=open, completion_state=partial_api_history_pulled_revenue_blocked; expected open/partial_api_history_pulled_revenue_blocked.",
       "nextAction": "Update data/issue-24-30-completion-audit.csv for #30."
     },
     {
@@ -95,7 +96,7 @@
     {
       "id": "#30-servicetitan-alignment",
       "status": "passed",
-      "evidence": "serviceTitanStatus.status=blocked_env; #30 evidence=data/servicetitan-lead-history.csv records two April 24 ServiceTitan lead IDs; data/servicetitan-prior-proof-summary.csv records the prior five-lead count; pages/new-reward-impact-report.html now includes Lead Proof Status with partial_prior_proof plus blocked_env export state and redacted export import lane; Gmail evidence also records an April 29 ServiceTitan email-notification fallback setup note and a May 1 tracked lead-visibility investigation; npm run verify:servicetitan-export writes data/servicetitan-export-access-check.json with status blocked_env after checking Air Express, global New Reward, home, and NewRewards local/Vercel env sources; npm run import:servicetitan-redacted-export now prepares a derived new_reward_impact_period output field for before_new_reward_target_brief, target_brief_to_ga4_lead_proof, and after_ga4_lead_proof",
+      "evidence": "serviceTitanStatus.status=auth_ready_no_export; serviceTitanLeadSummary.status=api_history_pulled; #30 evidence=data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, and 0 rows with booking ids. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/campaign/status/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.",
       "nextAction": "Refresh ServiceTitan export/import evidence and #30 matrix row together."
     },
     {

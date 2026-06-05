@@ -1,44 +1,44 @@
 {
-  "generatedAt": "2026-06-05T17:41:21.922Z",
+  "generatedAt": "2026-06-05T19:29:46.795Z",
   "evidenceClass": "servicetitan_export_access_readiness_check",
-  "status": "blocked_env",
+  "status": "auth_ready_no_export",
   "secretHandling": "Only environment variable presence, local source labels, public endpoint names, and sanitized error text are stored. Credential values, access tokens, customer names, phones, emails, addresses, and raw lead payloads are not printed or written.",
   "mutationBoundary": "No ServiceTitan lead, customer, job, campaign, booking, note, or revenue data is created, updated, deleted, exported, or stored by this diagnostic.",
-  "authCheck": "not_attempted",
+  "authCheck": "token_request_succeeded_no_token_stored",
   "requiredEnv": [
     {
       "name": "SERVICETITAN_ENV",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_TENANT_ID",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_APP_KEY",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_CLIENT_ID",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_CLIENT_SECRET",
-      "present": false
+      "present": true
     }
   ],
   "optionalEnv": [
     {
       "name": "SERVICETITAN_API_BASE_URL",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_AUTH_URL",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
-      "present": false
+      "present": true
     },
     {
       "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
@@ -55,6 +55,10 @@
   ],
   "envSourceSearch": {
     "scannedFiles": [
+      {
+        "path": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+        "exists": true
+      },
       {
         "path": "/Users/jamesbrady/Projects/air-express-hvac/.env",
         "exists": false
@@ -144,6 +148,60 @@
           {
             "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
             "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_BUSINESS_UNIT_ID",
+            "present": false
+          },
+          {
+            "name": "SERVICETITAN_LEAD_JOB_TYPE_ID",
+            "present": false
+          }
+        ]
+      },
+      {
+        "label": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+        "type": "env_file",
+        "path": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+        "exists": true,
+        "requiredEnv": [
+          {
+            "name": "SERVICETITAN_ENV",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_TENANT_ID",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_APP_KEY",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_ID",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_CLIENT_SECRET",
+            "present": true
+          }
+        ],
+        "optionalEnv": [
+          {
+            "name": "SERVICETITAN_API_BASE_URL",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_AUTH_URL",
+            "present": true
+          },
+          {
+            "name": "SERVICETITAN_LEAD_CAMPAIGN_ID",
+            "present": true
           },
           {
             "name": "SERVICETITAN_LEAD_CALL_REASON_ID",
@@ -808,17 +866,26 @@
         ]
       }
     ],
-    "keySources": {}
-  },
-  "publicConfig": null,
-  "blockers": [
-    {
-      "surface": "ServiceTitan environment",
-      "status": "blocked_env",
-      "evidence": "Missing required env vars: SERVICETITAN_ENV, SERVICETITAN_TENANT_ID, SERVICETITAN_APP_KEY, SERVICETITAN_CLIENT_ID, SERVICETITAN_CLIENT_SECRET.",
-      "nextAction": "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet. Do not store credential values in repo files."
+    "keySources": {
+      "SERVICETITAN_ENV": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_TENANT_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_APP_KEY": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_CLIENT_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_CLIENT_SECRET": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_API_BASE_URL": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_AUTH_URL": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env",
+      "SERVICETITAN_LEAD_CAMPAIGN_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.Vu5Oxt4TUV/option-c-production.env"
     }
-  ],
+  },
+  "publicConfig": {
+    "env": "production",
+    "tenantId": "4378713196",
+    "apiBaseUrl": "https://api.servicetitan.io",
+    "authUrl": "https://auth.servicetitan.io/connect/token",
+    "appKeyPresent": true,
+    "clientIdPresent": true
+  },
+  "blockers": [],
   "exportPacketRequirement": {
     "acceptedSources": [
       "approved read-only ServiceTitan lead export",

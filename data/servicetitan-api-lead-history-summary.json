@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-06-05T19:29:47.428Z",
+  "evidenceClass": "servicetitan_api_lead_history_redacted",
+  "status": "api_history_pulled",
+  "requestedRange": {
+    "startDate": "2026-01-01",
+    "endDate": "2026-06-05"
+  },
+  "endpoint": "ServiceTitan CRM v2 GET /leads",
+  "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-crm-v2/endpoints",
+  "rows": 78,
+  "pagesFetched": 1,
+  "reportedTotalCount": 78,
+  "websiteCampaignIdPresent": true,
+  "websiteCampaignLeadCount": 76,
+  "bookedLeadCount": 0,
+  "piiExcluded": true,
+  "secretHandling": "No credential values, access tokens, customer names, phones, emails, street addresses, lead summaries, lead URLs, raw notes, payment data, or raw ServiceTitan payloads are stored.",
+  "storedFields": [
+    "source_date",
+    "evidence_class",
+    "service_titan_lead_id",
+    "created_at",
+    "modified_at",
+    "new_reward_impact_period",
+    "campaign_id_or_source",
+    "service_type_or_category",
+    "lead_status",
+    "priority",
+    "booked_job_id_if_available",
+    "sold_or_revenue_marker_if_approved",
+    "capture_source",
+    "business_unit_id",
+    "job_type_id",
+    "call_reason_id",
+    "customer_id_present",
+    "location_id_present",
+    "pii_excluded",
+    "source_evidence",
+    "blocker",
+    "next_action"
+  ],
+  "excludedFields": [
+    "summary",
+    "leadUrl",
+    "leadCustomerName",
+    "leadPhone",
+    "leadEmail",
+    "leadStreet",
+    "leadUnit",
+    "leadCity",
+    "leadState",
+    "leadZip",
+    "leadCountry",
+    "raw payload"
+  ],
+  "impactPeriods": [
+    {
+      "id": "before_new_reward_target_brief",
+      "label": "Before New Reward target brief",
+      "startDate": "",
+      "endDate": "2026-03-11"
+    },
+    {
+      "id": "target_brief_to_ga4_lead_proof",
+      "label": "Target brief to GA4/lead proof",
+      "startDate": "2026-03-12",
+      "endDate": "2026-04-23"
+    },
+    {
+      "id": "after_ga4_lead_proof",
+      "label": "After GA4/lead proof",
+      "startDate": "2026-04-24",
+      "endDate": ""
+    }
+  ],
+  "countsByImpactPeriod": {
+    "after_ga4_lead_proof": 47,
+    "before_new_reward_target_brief": 2,
+    "target_brief_to_ga4_lead_proof": 29
+  },
+  "countsByMonth": {
+    "2026-01": 1,
+    "2026-02": 1,
+    "2026-04": 44,
+    "2026-05": 32
+  },
+  "countsByWeek": {
+    "2026-01-05": 1,
+    "2026-02-16": 1,
+    "2026-04-13": 13,
+    "2026-04-20": 22,
+    "2026-04-27": 9,
+    "2026-05-04": 6,
+    "2026-05-11": 11,
+    "2026-05-18": 15
+  },
+  "countsByStatus": {
+    "Converted": 1,
+    "Dismissed": 55,
+    "Open": 22
+  },
+  "countsByCampaignOrSource": {
+    "80365029": 2,
+    "80365413": 76
+  },
+  "websiteCampaignCountsByWeek": {
+    "2026-02-16": 1,
+    "2026-04-13": 13,
+    "2026-04-20": 22,
+    "2026-04-27": 9,
+    "2026-05-04": 6,
+    "2026-05-11": 10,
+    "2026-05-18": 15
+  },
+  "attempts": [
+    {
+      "page": 1,
+      "status": 200,
+      "ok": true,
+      "rowCount": 78,
+      "hasMore": false,
+      "totalCount": 0
+    }
+  ],
+  "outputPath": "data/servicetitan-api-lead-history-redacted.csv"
+}

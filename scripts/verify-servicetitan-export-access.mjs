@@ -64,12 +64,18 @@ function parseEnvFile(filePath) {
     const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
     if (!match) continue;
     let value = match[2].trim();
-    if (
-      (value.startsWith("\"") && value.endsWith("\"")) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
+    if (value.startsWith("\"") && value.endsWith("\"")) {
+      value = value
+        .slice(1, -1)
+        .replace(/\\n/g, "\n")
+        .replace(/\\r/g, "\r")
+        .replace(/\\t/g, "\t")
+        .replace(/\\"/g, "\"")
+        .replace(/\\\\/g, "\\");
+    } else if (value.startsWith("'") && value.endsWith("'")) {
       value = value.slice(1, -1);
     }
+    value = value.trim();
     parsed[match[1]] = value;
   }
   return parsed;

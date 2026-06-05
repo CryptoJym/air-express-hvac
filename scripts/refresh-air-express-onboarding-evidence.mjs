@@ -187,7 +187,7 @@ const payload = {
   },
   observed,
   nextAction:
-    "Use the observed statuses to update #24-#30. Current expected blockers are expired New Reward Google provider rows plus Google read scopes/property visibility, live owned-site delivery sync, and ServiceTitan export proof.",
+    "Use the observed statuses to update #24-#30. Current expected blockers are expired New Reward Google provider rows plus Google read scopes/property visibility, live owned-site delivery sync, and ServiceTitan booked-job/revenue proof.",
 };
 
 writeFileSync(outPath, `${JSON.stringify(payload, null, 2)}\n`);

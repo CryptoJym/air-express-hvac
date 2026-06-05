@@ -85,6 +85,7 @@ const deliverySync = readJson("data/owned-site-delivery-sync-check.json");
 const historyStatus = readJson("data/google-history/history-pull-status.json");
 const mappingStatus = readJson("data/newreward-air-express-provider-readonly-recheck.json");
 const serviceTitanStatus = readJson("data/servicetitan-export-access-check.json");
+const serviceTitanLeadSummary = readJson("data/servicetitan-api-lead-history-summary.json");
 
 const expectedCompletion = {
   "#24": { status: "open", completion_state: "parent_incomplete" },
@@ -93,7 +94,7 @@ const expectedCompletion = {
   "#27": { status: "open", completion_state: "blocked_scope" },
   "#28": { status: "open", completion_state: liveMeasurement.status },
   "#29": { status: "open", completion_state: "prepared_blocked_by_data_access" },
-  "#30": { status: "open", completion_state: "partial_prior_proof" },
+  "#30": { status: "open", completion_state: "partial_api_history_pulled_revenue_blocked" },
 };
 
 const checks = [];
@@ -173,10 +174,13 @@ check(
 const row30 = completionByIssue.get("#30") || {};
 check(
   "#30-servicetitan-alignment",
-  serviceTitanStatus.status === "blocked_env" &&
-    includesAll(row30.current_evidence, ["partial_prior_proof", "blocked_env", "redacted"]) &&
-    includesAll(row30.remaining_blocker, ["read-only", "redacted"]),
-  `serviceTitanStatus.status=${serviceTitanStatus.status}; #30 evidence=${row30.current_evidence || ""}`,
+  serviceTitanStatus.status === "auth_ready_no_export" &&
+    serviceTitanLeadSummary.status === "api_history_pulled" &&
+    Number(serviceTitanLeadSummary.rows || 0) === 78 &&
+    Number(serviceTitanLeadSummary.websiteCampaignLeadCount || 0) === 76 &&
+    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted"]) &&
+    includesAll(row30.remaining_blocker, ["booking", "revenue"]),
+  `serviceTitanStatus.status=${serviceTitanStatus.status}; serviceTitanLeadSummary.status=${serviceTitanLeadSummary.status}; #30 evidence=${row30.current_evidence || ""}`,
   "Refresh ServiceTitan export/import evidence and #30 matrix row together."
 );
 
@@ -218,6 +222,7 @@ const result = {
     gbpStatus: historyStatus.gbp?.status || "",
     newRewardMappingStatus: mappingStatus.status,
     serviceTitanStatus: serviceTitanStatus.status,
+    serviceTitanLeadStatus: serviceTitanLeadSummary.status || "",
   },
   summary: {
     checks: checks.length,

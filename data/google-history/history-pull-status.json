@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T17:42:45.174Z",
+  "generatedAt": "2026-06-05T19:37:33.449Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
     "gscStartDate": "2026-01-01",
@@ -28,7 +28,7 @@
     {
       "state": "blocked",
       "meaning": "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
-      "currentUse": "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and full ServiceTitan history export."
+      "currentUse": "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join."
     },
     {
       "state": "not_attempted",
@@ -53,23 +53,54 @@
     "evidence": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker."
   },
   "serviceTitan": {
-    "status": "blocked_env",
-    "priorProofStatus": "partial_prior_proof",
-    "verifiedCount": 5,
-    "listedLeadCount": 2,
+    "status": "auth_ready_no_export",
+    "priorProofStatus": "api_history_pulled",
+    "verifiedCount": 78,
+    "listedLeadCount": 78,
     "importedLeadCount": 0,
+    "apiLeadCount": 78,
+    "websiteCampaignLeadCount": 76,
+    "bookedLeadCount": 0,
+    "apiStatus": "api_history_pulled",
+    "apiCountsByImpactPeriod": {
+      "after_ga4_lead_proof": 47,
+      "before_new_reward_target_brief": 2,
+      "target_brief_to_ga4_lead_proof": 29
+    },
+    "apiCountsByWeek": {
+      "2026-01-05": 1,
+      "2026-02-16": 1,
+      "2026-04-13": 13,
+      "2026-04-20": 22,
+      "2026-04-27": 9,
+      "2026-05-04": 6,
+      "2026-05-11": 11,
+      "2026-05-18": 15
+    },
+    "apiCountsByMonth": {
+      "2026-01": 1,
+      "2026-02": 1,
+      "2026-04": 44,
+      "2026-05": 32
+    },
+    "apiCountsByStatus": {
+      "Converted": 1,
+      "Dismissed": 55,
+      "Open": 22
+    },
     "campaignIds": [
-      "80365413"
+      "80365413",
+      "80365029"
     ],
     "piiExcluded": true,
-    "evidence": "Prior sanitized proof records 5 website lead(s) on 2026-04-24, with 2 listed lead id(s), campaign 80365413, and customer PII excluded.",
+    "evidence": "Read-only ServiceTitan API pull returned 78 redacted lead row(s) from 2026-01-01 to 2026-06-05; 76 row(s) match configured website campaign 80365413; 0 row(s) include booking ids; customer PII and raw payloads are excluded.",
     "redactedImportStatus": "awaiting_input",
     "redactedImportEvidence": "Redacted ServiceTitan export import is awaiting_input; template data/servicetitan-redacted-export-template.csv is prepared.",
     "redactedImportNextAction": "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>. Use the template columns and remove customer PII before import.",
-    "blocker": "Missing required env vars: SERVICETITAN_ENV, SERVICETITAN_TENANT_ID, SERVICETITAN_APP_KEY, SERVICETITAN_CLIENT_ID, SERVICETITAN_CLIENT_SECRET.",
-    "nextAction": "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet. Do not store credential values in repo files.",
+    "blocker": "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.",
+    "nextAction": "Join the redacted lead counts to Google/GA4 periods after Google history is restored; pull bookings/revenue only after the exact approved ServiceTitan endpoint/scope is verified.",
     "exportEvidenceClass": "servicetitan_export_access_readiness_check",
-    "authCheck": "not_attempted"
+    "authCheck": "token_request_succeeded_no_token_stored"
   },
   "blockers": [
     {
@@ -289,7 +320,7 @@
   ],
   "clientFriendlySummary": {
     "status": "blocked_pending_google_reconnect",
-    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,747 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs a read-only export or redacted packet before lead/revenue claims.",
+    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,747 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs booked-job/revenue proof before ROI claims.",
     "googleSearch": {
       "status": "saved_snapshot_available",
       "clicks": 5,
@@ -357,14 +388,37 @@
         "citationRate": 0,
         "completedAt": "2026-06-01T17:06:29.302"
       },
-      "nextAction": "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics and lead exports are joined."
+      "nextAction": "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics plus booked-job/revenue joins are available."
     },
     "leadProof": {
-      "status": "partial_prior_proof",
-      "verifiedCount": 5,
-      "listedLeadCount": 2,
+      "status": "api_history_pulled",
+      "verifiedCount": 78,
+      "listedLeadCount": 78,
       "importedLeadCount": 0,
-      "caveat": "Do not claim booked jobs, revenue, ROI, or full lead trend until a read-only ServiceTitan export/API pull or redacted owner packet is joined."
+      "apiLeadCount": 78,
+      "websiteCampaignLeadCount": 76,
+      "bookedLeadCount": 0,
+      "apiCountsByImpactPeriod": {
+        "after_ga4_lead_proof": 47,
+        "before_new_reward_target_brief": 2,
+        "target_brief_to_ga4_lead_proof": 29
+      },
+      "apiCountsByWeek": {
+        "2026-01-05": 1,
+        "2026-02-16": 1,
+        "2026-04-13": 13,
+        "2026-04-20": 22,
+        "2026-04-27": 9,
+        "2026-05-04": 6,
+        "2026-05-11": 11,
+        "2026-05-18": 15
+      },
+      "apiCountsByStatus": {
+        "Converted": 1,
+        "Dismissed": 55,
+        "Open": 22
+      },
+      "caveat": "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined."
     }
   },
   "newRewardSnapshotHistory": {
