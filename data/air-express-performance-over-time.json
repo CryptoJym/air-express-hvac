@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:54:33.731Z",
+  "generatedAt": "2026-06-05T23:06:32.525Z",
   "evidenceClass": "air_express_performance_over_time_report",
   "secretHandling": "Only aggregate saved visibility metrics, redacted ServiceTitan counts, public marker booleans, and audit statuses are stored. No tokens, credentials, customer PII, raw lead notes, cookies, or raw HTML are stored.",
   "status": "prepared_with_provider_and_delivery_blockers",
@@ -21,8 +21,8 @@
       "evidence": "Missing analytics.readonly OAuth scope."
     },
     "gbp": {
-      "status": "not_included",
-      "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
+      "status": "blocked_scope",
+      "evidence": "Missing business.manage OAuth scope."
     },
     "status": "blocked"
   },
@@ -616,7 +616,7 @@
       "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
       "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
       "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
-      "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
+      "interpretation": "Use this as the source-code marker only. The week of 2026-05-25 already had 0 leads before the source CAPTCHA marker, so Turnstile cannot explain the full late-May drop. The week of 2026-06-01 overlaps the 2026-06-04 source marker; because live checks show Turnstile config is not healthy on active delivery paths, CAPTCHA/config could block valid web submissions after source/live delivery, but this is not proven as the sole cause until valid CAPTCHA-to-ServiceTitan proof runs."
     }
   },
   "liveMeasurement": {
@@ -661,6 +661,341 @@
         "exposesSiteKey": false,
         "error": ""
       }
+    }
+  },
+  "turnstileLeadPath": {
+    "status": "captcha_delivery_blocker_but_not_full_drop_cause",
+    "sourceMarker": {
+      "date": "2026-06-04",
+      "timestamp": "2026-06-04T15:21:32-06:00",
+      "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+      "evidence": "Git history shows the Turnstile source integration landed in commit 27cf800 on June 4, 2026.",
+      "commitDetails": {
+        "hash": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+        "committedIso": "2026-06-04T15:21:32-06:00",
+        "committedLocal": "2026-06-04 15:21:32 -0600",
+        "subject": "Add Air Express onboarding and pulse reports",
+        "files": [
+          {
+            "status": "M",
+            "file": "api/_lib/intake.js"
+          },
+          {
+            "status": "A",
+            "file": "api/_lib/turnstile.js"
+          },
+          {
+            "status": "A",
+            "file": "api/turnstile/config.js"
+          },
+          {
+            "status": "M",
+            "file": "contact.html"
+          },
+          {
+            "status": "M",
+            "file": "intake-form.js"
+          },
+          {
+            "status": "M",
+            "file": "request-estimate.html"
+          },
+          {
+            "status": "M",
+            "file": "schedule-service.html"
+          },
+          {
+            "status": "M",
+            "file": "tests/unit/intake.test.js"
+          }
+        ]
+      }
+    },
+    "liveTurnstileConfig": {
+      "apex": {
+        "url": "https://airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 404,
+        "contentType": "text/plain; charset=utf-8",
+        "edgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+        "edgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+        "edgeRouteMode": "ZERO_REDIRECT",
+        "configured": false,
+        "missingKeys": [],
+        "exposesSiteKey": false,
+        "responseClass": "non_json_or_missing"
+      },
+      "www": {
+        "url": "https://www.airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://www.airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 503,
+        "contentType": "application/json; charset=utf-8",
+        "edgeWebsiteId": "",
+        "edgeActiveVersion": "",
+        "edgeRouteMode": "",
+        "configured": false,
+        "missingKeys": [
+          "TURNSTILE_SITE_KEY",
+          "TURNSTILE_SECRET_KEY"
+        ],
+        "exposesSiteKey": false,
+        "responseClass": "json"
+      }
+    },
+    "validationOnlyProbes": {
+      "apex": {
+        "url": "https://airexpressutah.com/api/intake/contact",
+        "method": "POST",
+        "safeProbe": true,
+        "submittedRealCustomerData": false,
+        "submittedCaptchaToken": false,
+        "expectedServiceTitanMutation": false,
+        "status": 303,
+        "ok": false,
+        "location": "/contact.html?intake=upstream_error",
+        "contentType": "",
+        "edgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+        "edgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+        "edgeRouteMode": "ZERO_REDIRECT",
+        "blockedByCaptcha": false,
+        "upstreamError": true,
+        "interpretation": "The canonical edge did not return a CAPTCHA validation error for the no-token probe; it returned an upstream error before successful lead creation."
+      },
+      "www": {
+        "url": "https://www.airexpressutah.com/api/intake/contact",
+        "method": "POST",
+        "safeProbe": true,
+        "submittedRealCustomerData": false,
+        "submittedCaptchaToken": false,
+        "expectedServiceTitanMutation": false,
+        "status": 303,
+        "ok": false,
+        "location": "/contact.html?intake=validation_error&fields=captcha",
+        "contentType": "",
+        "edgeWebsiteId": "",
+        "edgeActiveVersion": "",
+        "edgeRouteMode": "",
+        "blockedByCaptcha": true,
+        "upstreamError": false,
+        "interpretation": "The live form path rejects a submission before ServiceTitan when the CAPTCHA token is absent."
+      }
+    },
+    "serviceTitanTimeline": {
+      "sourceStatus": "api_history_pulled",
+      "requestedRange": {
+        "startDate": "2026-01-01",
+        "endDate": "2026-06-05"
+      },
+      "totalRows": 78,
+      "websiteCampaignLeadCount": 76,
+      "countsByCaptchaPeriod": {
+        "before_source_captcha": 78,
+        "source_captcha_day_or_after": 0
+      },
+      "qualityProxyByCaptchaPeriod": {
+        "before_source_captcha": {
+          "total": 78,
+          "dismissed": 55,
+          "open": 22,
+          "converted": 1,
+          "dismissedRate": 0.7051282051282052,
+          "convertedRate": 0.01282051282051282,
+          "interpretation": "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
+        },
+        "source_captcha_day_or_after": {
+          "total": 0,
+          "dismissed": 0,
+          "open": 0,
+          "converted": 0,
+          "dismissedRate": 0,
+          "convertedRate": 0,
+          "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
+        }
+      },
+      "latestWeeks": [
+        {
+          "week": "2026-04-13",
+          "totalLeads": 13,
+          "websiteCampaignLeads": 13,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 3,
+            "air_quality": 5,
+            "emergency_repair": 1,
+            "maintenance_tuneup": 1,
+            "other": 2,
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 13
+          }
+        },
+        {
+          "week": "2026-04-20",
+          "totalLeads": 22,
+          "websiteCampaignLeads": 22,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 7,
+            "air_quality": 1,
+            "emergency_repair": 1,
+            "heat_pump": 2,
+            "maintenance_tuneup": 6,
+            "other": 5
+          },
+          "statuses": {
+            "Dismissed": 22
+          }
+        },
+        {
+          "week": "2026-04-27",
+          "totalLeads": 9,
+          "websiteCampaignLeads": 9,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "air_quality": 1,
+            "emergency_repair": 1,
+            "heat_pump": 3,
+            "heating_furnace": 2,
+            "other": 1
+          },
+          "statuses": {
+            "Converted": 1,
+            "Dismissed": 8
+          }
+        },
+        {
+          "week": "2026-05-04",
+          "totalLeads": 6,
+          "websiteCampaignLeads": 6,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "heating_furnace": 3,
+            "maintenance_tuneup": 1,
+            "other": 1
+          },
+          "statuses": {
+            "Dismissed": 6
+          }
+        },
+        {
+          "week": "2026-05-11",
+          "totalLeads": 11,
+          "websiteCampaignLeads": 10,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "air_quality": 1,
+            "heating_furnace": 2,
+            "maintenance_tuneup": 3,
+            "other": 3,
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 4,
+            "Open": 7
+          }
+        },
+        {
+          "week": "2026-05-18",
+          "totalLeads": 15,
+          "websiteCampaignLeads": 15,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "air_quality": 2,
+            "emergency_repair": 2,
+            "heat_pump": 2,
+            "heating_furnace": 2,
+            "maintenance_tuneup": 2,
+            "other": 5
+          },
+          "statuses": {
+            "Open": 15
+          }
+        },
+        {
+          "week": "2026-05-25",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-06-01",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "source_captcha_week_or_after",
+          "serviceTypes": {},
+          "statuses": {}
+        }
+      ],
+      "firstZeroWeek": {
+        "week": "2026-01-12",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      "lastPositiveWeekBeforeLateDrop": {
+        "week": "2026-05-18",
+        "totalLeads": 15,
+        "websiteCampaignLeads": 15,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "air_quality": 2,
+          "emergency_repair": 2,
+          "heat_pump": 2,
+          "heating_furnace": 2,
+          "maintenance_tuneup": 2,
+          "other": 5
+        },
+        "statuses": {
+          "Open": 15
+        }
+      },
+      "lateMayZeroWeek": {
+        "week": "2026-05-25",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      "markerWeek": {
+        "week": "2026-06-01",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "source_captcha_week_or_after",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      "lateDropPredatesTurnstile": true,
+      "interpretation": "The late-May zero-lead week started before the Turnstile source marker, so CAPTCHA cannot explain the whole late-May drop. The week of 2026-06-01 overlaps the June 4 Turnstile source marker and live config failure, so CAPTCHA/delivery can be a current blocker but not the sole root cause."
+    },
+    "causalRead": {
+      "verified": [
+        "Turnstile source marker: 2026-06-04T15:21:32-06:00 (27cf800).",
+        "www Turnstile config status: HTTP 503; missing keys: TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY.",
+        "apex Turnstile config status: HTTP 404.",
+        "www no-token probe status: HTTP 303; location: /contact.html?intake=validation_error&fields=captcha.",
+        "apex no-token probe status: HTTP 303; location: /contact.html?intake=upstream_error."
+      ],
+      "inferred": [
+        "www can fail closed before ServiceTitan when CAPTCHA token is missing.",
+        "canonical apex is still on a New Reward edge path that does not match the www Vercel behavior."
+      ],
+      "notProven": [
+        "CAPTCHA caused the full lead drop.",
+        "CAPTCHA improved lead quality.",
+        "A valid CAPTCHA submission currently reaches ServiceTitan and GA4 generate_lead on the canonical host."
+      ],
+      "explanation": "CAPTCHA/Turnstile is a current lead-path blocker on live delivery, but it cannot explain the full late-May lead drop because the zero-lead week beginning May 25 started before the Turnstile source commit. The likely root cause is a combined delivery/configuration problem: canonical apex edge mismatch, missing Turnstile env keys on www, and incomplete tracking/event proof."
     }
   },
   "audit": {
@@ -776,7 +1111,7 @@
     {
       "finding": "Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.",
       "evidence": "78 redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.",
-      "attributionRead": "Do not claim CAPTCHA caused the drop or quality improvement yet. Source CAPTCHA was added June 4, but live Turnstile config and canonical delivery are still unhealthy."
+      "attributionRead": "Do not claim CAPTCHA caused the full drop or quality improvement yet. Source CAPTCHA was added June 4, but the first zero-lead week began May 25. CAPTCHA/config is a current blocker because live Turnstile config and canonical delivery are still unhealthy."
     },
     {
       "finding": "Attribution is the weak score, not base SEO.",
@@ -800,8 +1135,8 @@
     {
       "priority": "P0",
       "action": "Configure Turnstile on the active production delivery path before interpreting lead-quality changes.",
-      "state": "blocked_turnstile_env_or_delivery",
-      "proof": "Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof."
+      "state": "captcha_delivery_blocker_but_not_full_drop_cause",
+      "proof": "Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof that reaches ServiceTitan and GA4 generate_lead."
     },
     {
       "priority": "P1",

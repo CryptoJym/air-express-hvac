@@ -19,6 +19,7 @@
     "verify:onboarding-evidence": "node scripts/verify-onboarding-evidence.mjs",
     "verify:newreward-mapping": "node scripts/verify-newreward-air-express-mapping.mjs",
     "verify:live-measurement": "node scripts/verify-live-measurement-path.mjs",
+    "diagnose:turnstile-lead-path": "node scripts/diagnose-turnstile-lead-path.mjs",
     "verify:owned-site-delivery-sync": "node scripts/verify-owned-site-delivery-sync.mjs",
     "verify:site-file-manifest": "node scripts/verify-site-file-manifest.mjs",
     "verify:public-claims": "node scripts/verify-public-claims.mjs",

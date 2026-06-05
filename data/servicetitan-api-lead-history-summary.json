@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:45:59.114Z",
+  "generatedAt": "2026-06-05T23:04:32.844Z",
   "evidenceClass": "servicetitan_api_lead_history_redacted",
   "status": "api_history_pulled",
   "requestedRange": {
@@ -20,7 +20,7 @@
     "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
     "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
     "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
-    "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
+    "interpretation": "Use this as the source-code marker only. The week of 2026-05-25 already had 0 leads before the source CAPTCHA marker, so Turnstile cannot explain the full late-May drop. The week of 2026-06-01 overlaps the 2026-06-04 source marker; because live checks show Turnstile config is not healthy on active delivery paths, CAPTCHA/config could block valid web submissions after source/live delivery, but this is not proven as the sole cause until valid CAPTCHA-to-ServiceTitan proof runs."
   },
   "piiExcluded": true,
   "secretHandling": "No credential values, access tokens, customer names, phones, emails, street addresses, lead summaries, lead URLs, raw notes, payment data, or raw ServiceTitan payloads are stored.",

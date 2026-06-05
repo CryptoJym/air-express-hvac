@@ -13,20 +13,20 @@
     h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
     h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; color: var(--muted); max-width: 1040px; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 1040px; overflow-wrap: anywhere; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: normal; overflow-wrap: anywhere; }
     a { color: var(--blue); }
     .meta, .grid { display: grid; gap: 12px; }
     .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
     .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; min-width: 0; }
     .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
     .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
     .good { color: var(--good); } .warn { color: var(--warn); } .bad { color: var(--bad); }
     .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 1040px; }
-    .scroll { overflow-x: auto; }
+    .scroll { overflow-x: auto; max-width: 100%; }
     table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; overflow-wrap: anywhere; }
     th { background: var(--panel); font-size: 13px; }
   </style>
 </head>
@@ -35,7 +35,7 @@
     <h1>Air Express Performance Over Time</h1>
     <p>Private Pages report for visibility, leads, attribution readiness, and GEO/AEO optimization evidence. This is a reporting/control page, not a public site page.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T22:54:33.731Z</span>
+      <span class="pill">Generated 2026-06-05T23:06:32.525Z</span>
       <span class="pill">No secrets or customer PII</span>
       <span class="pill">Direct GSC/GA4: blocked</span>
       <span class="pill">Live measurement: partial_live_www_only_canonical_pending</span>
@@ -55,7 +55,7 @@
     <h2>What Changed</h2>
     <div class="scroll"><table><thead><tr><th>Finding</th><th>Evidence</th><th>Attribution read</th></tr></thead><tbody><tr><td>Visibility expanded in saved Search Console snapshots.</td><td>First saved window to latest saved window: impressions +3599, clicks +1, captured rows +2110, CTR 1.7% to 0.1%, average position 3.2 to 38.0.</td><td>This is visibility proof from saved New Reward snapshots, not full direct GSC query/page history until provider scopes are repaired.</td></tr>
 <tr><td>AI visibility exists, but all observed mentions and citations are concentrated in Perplexity.</td><td>5,181 snapshots, 16 mentions, 6 citations, 443 unique questions.</td><td>Improve engine diversity by strengthening answer-ready service pages, blog Q&amp;A headings, citations, and competitor prompt sets.</td></tr>
-<tr><td>Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.</td><td>78 redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.</td><td>Do not claim CAPTCHA caused the drop or quality improvement yet. Source CAPTCHA was added June 4, but live Turnstile config and canonical delivery are still unhealthy.</td></tr>
+<tr><td>Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.</td><td>78 redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.</td><td>Do not claim CAPTCHA caused the full drop or quality improvement yet. Source CAPTCHA was added June 4, but the first zero-lead week began May 25. CAPTCHA/config is a current blocker because live Turnstile config and canonical delivery are still unhealthy.</td></tr>
 <tr><td>Attribution is the weak score, not base SEO.</td><td>Latest audit scores: technical 100, GEO 90, messaging 100, attribution 30.</td><td>The next revenue-proof step is provider scope/property repair plus canonical delivery sync, not more local-only SEO cleanup.</td></tr></tbody></table></div>
 
     <h2>Saved GSC Trend</h2>
@@ -84,7 +84,7 @@
 <tr><td>2026-06-01</td><td>1,167</td><td>52</td><td>3</td><td>2</td></tr></tbody></table></div>
 
     <h2>Lead Counts By Week</h2>
-    <p>CAPTCHA source was added June 4, 2026. Since live Turnstile config is still unhealthy and there are zero leads after the source marker, the report should not claim quality improvement from CAPTCHA yet.</p>
+    <p>CAPTCHA source was added June 4, 2026. Since the week of May 25 already had zero leads before that marker, CAPTCHA cannot explain the whole drop. Since live Turnstile config is still unhealthy, CAPTCHA/config is still a current lead-path blocker until valid CAPTCHA to ServiceTitan proof passes.</p>
     <div class="scroll"><table><thead><tr><th>Week</th><th>Total leads</th><th>Website campaign</th><th>Status mix</th><th>Service mix</th><th>CAPTCHA period</th></tr></thead><tbody><tr><td>2026-01-05</td><td>1</td><td>0</td><td>Dismissed: 1</td><td>unclassified_summary: 1</td><td>before_source_captcha_week</td></tr>
 <tr><td>2026-01-12</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
 <tr><td>2026-01-19</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
@@ -108,6 +108,17 @@
 <tr><td>2026-05-25</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
 <tr><td>2026-06-01</td><td>0</td><td>0</td><td>none</td><td>none</td><td>source_captcha_week_or_after</td></tr></tbody></table></div>
 
+    <h2>CAPTCHA / Turnstile Lead Path</h2>
+    <p>Diagnostic status: <code>captcha_delivery_blocker_but_not_full_drop_cause</code>. This section uses public endpoint checks and validation-only no-token probes; no real customer data or ServiceTitan lead mutation is expected.</p>
+    <section class="grid">
+      <article class="card"><h3>Source Marker</h3><p>2026-06-04T15:21:32-06:00 in commit <code>27cf800</code>.</p></article>
+      <article class="card"><h3>Causal Read</h3><p>CAPTCHA/Turnstile is a current lead-path blocker on live delivery, but it cannot explain the full late-May lead drop because the zero-lead week beginning May 25 started before the Turnstile source commit. The likely root cause is a combined delivery/configuration problem: canonical apex edge mismatch, missing Turnstile env keys on www, and incomplete tracking/event proof.</p></article>
+    </section>
+    <div class="scroll"><table><thead><tr><th>Host</th><th>Config status</th><th>Configured</th><th>Missing keys</th><th>Edge website</th><th>Edge version</th></tr></thead><tbody><tr><td>apex</td><td>HTTP 404</td><td>not configured</td><td>none reported</td><td>cmorqbs9j001r5nr1h25vosp8</td><td>v20260601032350-675731b8-57d4bf</td></tr>
+<tr><td>www</td><td>HTTP 503</td><td>not configured</td><td>TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY</td><td>none</td><td>none</td></tr></tbody></table></div>
+    <div class="scroll"><table><thead><tr><th>Host</th><th>Probe status</th><th>Redirect</th><th>Result</th><th>Edge website</th><th>Interpretation</th></tr></thead><tbody><tr><td>apex</td><td>HTTP 303</td><td>/contact.html?intake=upstream_error</td><td>upstream error</td><td>cmorqbs9j001r5nr1h25vosp8</td><td>The canonical edge did not return a CAPTCHA validation error for the no-token probe; it returned an upstream error before successful lead creation.</td></tr>
+<tr><td>www</td><td>HTTP 303</td><td>/contact.html?intake=validation_error&amp;fields=captcha</td><td>captcha validation block</td><td>none</td><td>The live form path rejects a submission before ServiceTitan when the CAPTCHA token is absent.</td></tr></tbody></table></div>
+
     <h2>Why Leads Changed</h2>
     <section class="grid">
       <article class="card"><h3>Likely Demand Window</h3><p>April and May concentrate the observed ServiceTitan lead volume, which lines up with the first cooling demand window in Utah County.</p></article>
@@ -125,7 +136,7 @@
     <h2>Next Actions</h2>
     <div class="scroll"><table><thead><tr><th>Priority</th><th>Action</th><th>State</th><th>Proof</th></tr></thead><tbody><tr><td>P0</td><td>Repair canonical delivery so apex serves the same approved GA4 and /analytics.js source as www.</td><td>partial_live_www_only_canonical_pending</td><td>Rerun npm run verify:live-measurement and require canonical homepage GA4=true and apex /analytics.js HTTP 200.</td></tr>
 <tr><td>P0</td><td>Restore read-only GSC/GA4 scopes or reconnect through the New Reward app for website cmorqbs9j001r5nr1h25vosp8.</td><td>blocked</td><td>Rerun npm run pull:gsc-ga4-history and require direct GSC/GA4 histories or exact provider/property blocker output.</td></tr>
-<tr><td>P0</td><td>Configure Turnstile on the active production delivery path before interpreting lead-quality changes.</td><td>blocked_turnstile_env_or_delivery</td><td>Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof.</td></tr>
+<tr><td>P0</td><td>Configure Turnstile on the active production delivery path before interpreting lead-quality changes.</td><td>captcha_delivery_blocker_but_not_full_drop_cause</td><td>Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof that reaches ServiceTitan and GA4 generate_lead.</td></tr>
 <tr><td>P1</td><td>Improve GEO/AEO extractability and prompt coverage across service pages and weekly blog reporting.</td><td>source_updates_prepared</td><td>Rerun npm run audit:seo-geo-deep-dive and require fewer metadata/blog extractability issues.</td></tr></tbody></table></div>
   </main>
 </body>

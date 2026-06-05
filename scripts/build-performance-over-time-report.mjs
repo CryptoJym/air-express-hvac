@@ -95,6 +95,7 @@ const newReward = readJson("data/google-history/newreward-snapshot-history.json"
 const googleStatus = readJson("data/google-history/history-pull-status.json");
 const serviceTitan = readJson("data/servicetitan-api-lead-history-summary.json");
 const live = readJson("data/live-measurement-path-check.json");
+const turnstileDiagnostic = readJson("data/turnstile-lead-path-diagnostic.json");
 const seoAudit = readJson("data/seo-geo-attribution-audit.json");
 const deepDive = readJson("data/seo-geo-deep-dive-audit.json");
 
@@ -154,6 +155,14 @@ const report = {
     wwwAnalyticsJsStatus: live.live?.wwwAnalyticsJs?.status || null,
     turnstile: live.live?.turnstileConfig || null,
   },
+  turnstileLeadPath: {
+    status: turnstileDiagnostic.status || "not_run",
+    sourceMarker: turnstileDiagnostic.sourceMarker || null,
+    liveTurnstileConfig: turnstileDiagnostic.liveTurnstileConfig || null,
+    validationOnlyProbes: turnstileDiagnostic.validationOnlyProbes || null,
+    serviceTitanTimeline: turnstileDiagnostic.serviceTitanTimeline || null,
+    causalRead: turnstileDiagnostic.causalRead || null,
+  },
   audit: {
     scores: seoAudit.scores || {},
     blockerRootCauses: seoAudit.blockerRootCauses || [],
@@ -175,7 +184,7 @@ const report = {
     {
       finding: "Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.",
       evidence: `${fmt(serviceTitan.rows || 0)} redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.`,
-      attributionRead: "Do not claim CAPTCHA caused the drop or quality improvement yet. Source CAPTCHA was added June 4, but live Turnstile config and canonical delivery are still unhealthy.",
+      attributionRead: "Do not claim CAPTCHA caused the full drop or quality improvement yet. Source CAPTCHA was added June 4, but the first zero-lead week began May 25. CAPTCHA/config is a current blocker because live Turnstile config and canonical delivery are still unhealthy.",
     },
     {
       finding: "Attribution is the weak score, not base SEO.",
@@ -199,8 +208,8 @@ const report = {
     {
       priority: "P0",
       action: "Configure Turnstile on the active production delivery path before interpreting lead-quality changes.",
-      state: live.live?.turnstileConfig?.www?.configured ? "configured_www" : "blocked_turnstile_env_or_delivery",
-      proof: "Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof.",
+      state: turnstileDiagnostic.status || (live.live?.turnstileConfig?.www?.configured ? "configured_www" : "blocked_turnstile_env_or_delivery"),
+      proof: "Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof that reaches ServiceTitan and GA4 generate_lead.",
     },
     {
       priority: "P1",
@@ -253,6 +262,24 @@ const leadRows = weeklyLeads.map((week) => row([
   escapeHtml(week.captchaPeriod || ""),
 ]));
 
+const turnstileConfigRows = Object.entries(turnstileDiagnostic.liveTurnstileConfig || {}).map(([host, config]) => row([
+  escapeHtml(host),
+  escapeHtml(`HTTP ${config.status ?? "pending"}`),
+  escapeHtml(config.configured ? "configured" : "not configured"),
+  escapeHtml((config.missingKeys || []).join(", ") || "none reported"),
+  escapeHtml(config.edgeWebsiteId || "none"),
+  escapeHtml(config.edgeActiveVersion || "none"),
+]));
+
+const validationProbeRows = Object.entries(turnstileDiagnostic.validationOnlyProbes || {}).map(([host, probe]) => row([
+  escapeHtml(host),
+  escapeHtml(`HTTP ${probe.status ?? "pending"}`),
+  escapeHtml(probe.location || "none"),
+  escapeHtml(probe.blockedByCaptcha ? "captcha validation block" : probe.upstreamError ? "upstream error" : "not captcha-specific"),
+  escapeHtml(probe.edgeWebsiteId || "none"),
+  escapeHtml(probe.interpretation || ""),
+]));
+
 const issueRows = (deepDive.recommendedIssues || []).map((item) => row([
   escapeHtml(item.severity || ""),
   escapeHtml(item.bucket || ""),
@@ -276,20 +303,20 @@ const html = `<!doctype html>
     h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
     h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; color: var(--muted); max-width: 1040px; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 1040px; overflow-wrap: anywhere; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: normal; overflow-wrap: anywhere; }
     a { color: var(--blue); }
     .meta, .grid { display: grid; gap: 12px; }
     .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
     .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; min-width: 0; }
     .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
     .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
     .good { color: var(--good); } .warn { color: var(--warn); } .bad { color: var(--bad); }
     .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 1040px; }
-    .scroll { overflow-x: auto; }
+    .scroll { overflow-x: auto; max-width: 100%; }
     table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; overflow-wrap: anywhere; }
     th { background: var(--panel); font-size: 13px; }
   </style>
 </head>
@@ -334,8 +361,17 @@ const html = `<!doctype html>
     ${table(["Week", "Snapshots", "Unique questions", "Mentions", "Citations"], aiWeekRows)}
 
     <h2>Lead Counts By Week</h2>
-    <p>CAPTCHA source was added June 4, 2026. Since live Turnstile config is still unhealthy and there are zero leads after the source marker, the report should not claim quality improvement from CAPTCHA yet.</p>
+    <p>CAPTCHA source was added June 4, 2026. Since the week of May 25 already had zero leads before that marker, CAPTCHA cannot explain the whole drop. Since live Turnstile config is still unhealthy, CAPTCHA/config is still a current lead-path blocker until valid CAPTCHA to ServiceTitan proof passes.</p>
     ${table(["Week", "Total leads", "Website campaign", "Status mix", "Service mix", "CAPTCHA period"], leadRows)}
+
+    <h2>CAPTCHA / Turnstile Lead Path</h2>
+    <p>Diagnostic status: <code>${escapeHtml(turnstileDiagnostic.status || "not_run")}</code>. This section uses public endpoint checks and validation-only no-token probes; no real customer data or ServiceTitan lead mutation is expected.</p>
+    <section class="grid">
+      <article class="card"><h3>Source Marker</h3><p>${escapeHtml(turnstileDiagnostic.sourceMarker?.timestamp || "pending")} in commit <code>${escapeHtml((turnstileDiagnostic.sourceMarker?.commit || "").slice(0, 7) || "pending")}</code>.</p></article>
+      <article class="card"><h3>Causal Read</h3><p>${escapeHtml(turnstileDiagnostic.causalRead?.explanation || "Run npm run diagnose:turnstile-lead-path for the current causal read.")}</p></article>
+    </section>
+    ${table(["Host", "Config status", "Configured", "Missing keys", "Edge website", "Edge version"], turnstileConfigRows)}
+    ${table(["Host", "Probe status", "Redirect", "Result", "Edge website", "Interpretation"], validationProbeRows)}
 
     <h2>Why Leads Changed</h2>
     <section class="grid">

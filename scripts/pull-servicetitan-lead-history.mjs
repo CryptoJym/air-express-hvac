@@ -403,7 +403,7 @@ async function main() {
       ...CAPTCHA_SOURCE_INTRODUCED,
       liveStatus: "source_added_live_turnstile_env_or_canonical_delivery_pending",
       interpretation:
-        "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet.",
+        "Use this as the source-code marker only. The week of 2026-05-25 already had 0 leads before the source CAPTCHA marker, so Turnstile cannot explain the full late-May drop. The week of 2026-06-01 overlaps the 2026-06-04 source marker; because live checks show Turnstile config is not healthy on active delivery paths, CAPTCHA/config could block valid web submissions after source/live delivery, but this is not proven as the sole cause until valid CAPTCHA-to-ServiceTitan proof runs.",
     },
     piiExcluded: true,
     secretHandling:

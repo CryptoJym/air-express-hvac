@@ -1,16 +1,17 @@
 {
-  "generatedAt": "2026-06-05T22:54:07.065Z",
+  "generatedAt": "2026-06-05T23:04:41.493Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
-    "gscStartDate": "2026-01-01",
-    "ga4StartDate": "2026-01-01",
-    "gbpStartDate": null,
-    "endDate": "2026-06-05",
+    "gscStartDate": "2025-02-05",
+    "ga4StartDate": "2020-01-01",
+    "gbpStartDate": "2025-02-05",
+    "endDate": "2026-06-03",
     "explicitGscProperty": "",
     "explicitGa4PropertyId": "",
     "includedGoogleSurfaces": [
       "gsc",
-      "ga4"
+      "ga4",
+      "gbp"
     ]
   },
   "evidenceStates": [
@@ -32,7 +33,7 @@
     {
       "state": "blocked",
       "meaning": "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
-      "currentUse": "GSC/GA4 history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification."
+      "currentUse": "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification."
     },
     {
       "state": "not_attempted",
@@ -49,8 +50,8 @@
     "evidence": "Missing analytics.readonly OAuth scope."
   },
   "gbp": {
-    "status": "not_included",
-    "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
+    "status": "blocked_scope",
+    "evidence": "Missing business.manage OAuth scope."
   },
   "source": {
     "status": "blocked",
@@ -358,7 +359,7 @@
       "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
       "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
       "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
-      "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
+      "interpretation": "Use this as the source-code marker only. The week of 2026-05-25 already had 0 leads before the source CAPTCHA marker, so Turnstile cannot explain the full late-May drop. The week of 2026-06-01 overlaps the 2026-06-04 source marker; because live checks show Turnstile config is not healthy on active delivery paths, CAPTCHA/config could block valid web submissions after source/live delivery, but this is not proven as the sole cause until valid CAPTCHA-to-ServiceTitan proof runs."
     },
     "qualityProxyByCaptchaPeriod": {
       "before_source_captcha": {
@@ -422,6 +423,12 @@
       "status": "blocked",
       "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/analytics.readonly.",
       "nextAction": "Run read-only re-auth for newrewardplatform@gmail.com with Analytics readonly scope, then rerun npm run pull:gsc-ga4-history."
+    },
+    {
+      "surface": "Google Business Profile OAuth scope",
+      "status": "blocked",
+      "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/business.manage.",
+      "nextAction": "Run approved read-only re-auth for newrewardplatform@gmail.com with Business Profile scope, confirm Air Express location visibility, then rerun npm run pull:gsc-ga4-history."
     }
   ],
   "tokenRepairAttempt": {
@@ -430,13 +437,14 @@
     "status": "blocked_interactive_oauth_code_gate",
     "account": "newrewardplatform@gmail.com",
     "secretHandling": "No access tokens, refresh tokens, OAuth URLs, verification codes, recovery prompts, cookies, passwords, or credential files are stored in this artifact.",
-    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC and GA4 history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
+    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC, GA4, and GBP history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
     "currentTokenState": {
       "email": "newrewardplatform@gmail.com",
       "present": true,
       "missingRequiredScopes": [
         "https://www.googleapis.com/auth/webmasters.readonly",
-        "https://www.googleapis.com/auth/analytics.readonly"
+        "https://www.googleapis.com/auth/analytics.readonly",
+        "https://www.googleapis.com/auth/business.manage"
       ],
       "visibleScopeClasses": [
         "accounts.reauth",
@@ -462,7 +470,7 @@
         "nextAction": "Include cloud-platform along with the product read scopes in the local ADC repair command."
       },
       {
-        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, openid, and userinfo.email scopes",
+        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, GBP, openid, and userinfo.email scopes",
         "result": "blocked_interactive_oauth_code_gate",
         "evidence": "The command produced a browser OAuth URL and waited for a verification code. The process was stopped before any code, token, or credential material was entered or stored.",
         "nextAction": "James should complete the OAuth flow locally, not in chat, then rerun npm run pull:gsc-ga4-history."
@@ -480,18 +488,14 @@
         "nextAction": "Continue using the Air Express verifier evidence for canonical website/provider state until the New Reward app route is rechecked."
       }
     ],
-    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
+    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/business.manage,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
     "providerState": {
       "canonicalWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
       "gsc": "Provider row exists for sc-domain:airexpressutah.com under newrewardplatform@gmail.com, but validation is revoked and the legacy connection status is error.",
       "ga4": "Provider row exists under newrewardplatform@gmail.com, but propertyId is null and the Air Express property containing G-JZ7PY32EVX still needs selection.",
       "gbp": "No Air Express account/location-specific proof is available from the current local evidence."
     },
-    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4 through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution.",
-    "requiredScopes": {
-      "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
-      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
-    }
+    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4/GBP through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution."
   },
   "token": {
     "ok": true,
@@ -503,11 +507,13 @@
     "scopeCount": 8,
     "requiredScopes": {
       "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
-      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
+      "ga4": "https://www.googleapis.com/auth/analytics.readonly",
+      "gbp": "https://www.googleapis.com/auth/business.manage"
     },
     "missingRequiredScopes": [
       "https://www.googleapis.com/auth/webmasters.readonly",
-      "https://www.googleapis.com/auth/analytics.readonly"
+      "https://www.googleapis.com/auth/analytics.readonly",
+      "https://www.googleapis.com/auth/business.manage"
     ],
     "visibleScopes": [
       "https://www.googleapis.com/auth/accounts.reauth",
@@ -530,7 +536,8 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly"
+          "https://www.googleapis.com/auth/analytics.readonly",
+          "https://www.googleapis.com/auth/business.manage"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -553,7 +560,8 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly"
+          "https://www.googleapis.com/auth/analytics.readonly",
+          "https://www.googleapis.com/auth/business.manage"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -606,7 +614,7 @@
       "id": "post_install",
       "label": "After GA4/lead proof",
       "start": "2026-04-24",
-      "end": "2026-06-05",
+      "end": "2026-06-03",
       "days": 0,
       "gscClicks": 0,
       "gscImpressions": 0,
@@ -975,7 +983,7 @@
         "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
         "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
         "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
-        "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
+        "interpretation": "Use this as the source-code marker only. The week of 2026-05-25 already had 0 leads before the source CAPTCHA marker, so Turnstile cannot explain the full late-May drop. The week of 2026-06-01 overlaps the 2026-06-04 source marker; because live checks show Turnstile config is not healthy on active delivery paths, CAPTCHA/config could block valid web submissions after source/live delivery, but this is not proven as the sole cause until valid CAPTCHA-to-ServiceTitan proof runs."
       },
       "qualityProxyByCaptchaPeriod": {
         "before_source_captcha": {
