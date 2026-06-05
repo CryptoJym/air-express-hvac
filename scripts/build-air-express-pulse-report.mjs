@@ -137,6 +137,7 @@ const weeklyMetrics = parseCsv(read("data/air-express-weekly-pulse-metrics.csv")
 const competitors = parseCsv(read("data/air-express-competitor-baseline-ledger.csv"));
 const contentBriefs = parseCsv(read("data/content-briefs.csv"));
 const issueMap = parseCsv(read("data/air-express-next-action-issue-map.csv"));
+const publicChecks = parseCsv(read("data/air-express-public-http-checks.csv"));
 
 const latestGsc = snapshotHistory.gscSnapshotSummary?.latest || {};
 const aiByEngine = Array.isArray(snapshotHistory.aiByEngine) ? snapshotHistory.aiByEngine : [];
@@ -332,6 +333,16 @@ const html = `<!doctype html>
       <td>${statePill(row.status)}</td>
       <td>${escapeHtml(row.evidence)}</td>
       <td>${escapeHtml(row.nextAction)}</td>
+    </tr>`))}
+
+    <h2>Public HTTP Checks</h2>
+    ${table(["Checked", "URL", "Status", "Evidence", "Next Action", "Issue"], publicChecks.map((row) => `<tr>
+      <td>${escapeHtml(row.checked_at)}</td>
+      <td><a href="${escapeHtml(row.url)}">${escapeHtml(row.url)}</a></td>
+      <td>${statePill(row.status)}</td>
+      <td>${escapeHtml(row.evidence)}</td>
+      <td>${escapeHtml(row.next_action)}</td>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/${escapeHtml(row.issue)}">#${escapeHtml(row.issue)}</a></td>
     </tr>`))}
 
     <h2>Issue Map And Closeout State</h2>

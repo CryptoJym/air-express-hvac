@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T21:21:14.125Z",
+  "generatedAt": "2026-06-05T00:15:15.634Z",
   "status": "passed",
   "scope": "Local public HTML claim scan. No provider mutation, public profile edit, external send, deploy, token use, or customer data access.",
   "sourceNote": "Public sources are recorded as proof references, but this command does not fetch or mutate external providers.",

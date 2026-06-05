@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-04T18:37:39.096Z",
+  "generatedAt": "2026-06-05T00:14:19.689Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
-    "gscStartDate": "2025-02-04",
+    "gscStartDate": "2025-02-05",
     "ga4StartDate": "2020-01-01",
-    "gbpStartDate": "2025-02-04",
-    "endDate": "2026-06-02",
+    "gbpStartDate": "2025-02-05",
+    "endDate": "2026-06-03",
     "explicitGscProperty": "",
     "explicitGa4PropertyId": ""
   },
@@ -274,7 +274,7 @@
       "id": "post_install",
       "label": "After GA4/lead proof",
       "start": "2026-04-24",
-      "end": "2026-06-02",
+      "end": "2026-06-03",
       "days": 0,
       "gscClicks": 0,
       "gscImpressions": 0,

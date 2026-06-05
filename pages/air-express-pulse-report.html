@@ -54,7 +54,7 @@
     <h1>Air Express Pulse And Revenue Visibility Report</h1>
     <p>Pages-only weekly control surface for local HVAC signals, SEO/GEO strategy, competitor/entity baseline, visibility metrics, revenue hypotheses, and proof gates.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-04T23:22:11.449Z</span>
+      <span class="pill">Generated 2026-06-05T00:15:15.586Z</span>
       <span class="pill">Issue #36 growth lane</span>
       <span class="pill">No public publish or provider mutation</span>
       <span class="pill">Directional until attribution joins are restored</span>
@@ -94,17 +94,17 @@
       <tr>
       <td>2026-06-04</td>
       <td>entity_trust</td>
-      <td><span class="state prepared-state">p0_prepared</span></td>
-      <td>Air Express / One Hour entity cleanup baseline<br><span class="muted">Public and local evidence indicate Air Express needs canonical brand, domain, phone, One Hour relationship, review/listing, and BBB claim cleanup before stronger GEO claims.</span></td>
-      <td><code>data/air-express-competitor-baseline-ledger.csv</code><br><span class="state prepared-state">prepared</span></td>
+      <td><span class="state good-state">p0_partially_verified</span></td>
+      <td>Air Express / One Hour entity cleanup baseline<br><span class="muted">Legacy host redirects are now HTTP-verified, but Air Express still needs canonical brand, phone, One Hour relationship, review/listing, and BBB claim cleanup before stronger GEO claims.</span></td>
+      <td><code>data/air-express-competitor-baseline-ledger.csv; data/air-express-public-http-checks.csv</code><br><span class="state good-state">partial_verified</span></td>
       <td>Verify Air Express/One Hour relationship and live listing facts; update citation cleanup ledger and public claim register.</td>
     </tr>
       <tr>
       <td>2026-06-04</td>
       <td>content</td>
-      <td><span class="state good-state">ready_in_source_pending_delivery</span></td>
-      <td>First hot-week AC checklist<br><span class="muted">Local source and generated blog artifact exist for the first summer AC checklist; production delivery and channel access remain gated.</span></td>
-      <td><code>content/blog/first-hot-week-ac-checklist-utah.md</code><br><span class="state prepared-state">prepared</span></td>
+      <td><span class="state good-state">ready_in_source_live_404</span></td>
+      <td>First hot-week AC checklist<br><span class="muted">Local source and generated blog artifact exist for the first summer AC checklist; 2026-06-05 public check shows the production URL is still 404.</span></td>
+      <td><code>content/blog/first-hot-week-ac-checklist-utah.md; data/air-express-public-http-checks.csv</code><br><span class="state good-state">partial_verified</span></td>
       <td>Approve delivery path, verify public URL HTTP 200, then distribute with UTM-tagged channel posts after access proof.</td>
     </tr>
       <tr>
@@ -254,12 +254,12 @@
       <tr>
       <td>Air Express older domain</td>
       <td>legacy_surface</td>
-      <td>inferred_legacy</td>
+      <td>verified_redirect_current</td>
       <td><a href="https://airexpresshvac.net">airexpresshvac.net</a></td>
       <td>Utah County / historical<br>HVAC services</td>
-      <td>Old or indexed legacy-domain surfaces can fragment entity signals if not consistently redirected/canonicalized</td>
-      <td><span class="state prepared-state">prepared_monitor</span></td>
-      <td>Monitor redirect/canonical behavior weekly and preserve old-domain cleanup in citation issue #34</td>
+      <td>Host-level redirect is verified, but indexed old URLs/listings can still fragment entity signals until citation cleanup is complete</td>
+      <td><span class="state good-state">verified_redirect_current</span></td>
+      <td>Keep monitoring redirects and reconcile indexed old-domain URLs/listings in citation issue #34</td>
     </tr>
       <tr>
       <td>One Hour Heating and Air Conditioning of Lehi</td>
@@ -481,6 +481,45 @@
     </tbody>
   </table></div>
 
+    <h2>Public HTTP Checks</h2>
+    <div class="scroll"><table>
+    <thead><tr><th>Checked</th><th>URL</th><th>Status</th><th>Evidence</th><th>Next Action</th><th>Issue</th></tr></thead>
+    <tbody>
+      <tr>
+      <td>2026-06-05T00:14:31Z</td>
+      <td><a href="https://airexpresshvac.net">https://airexpresshvac.net</a></td>
+      <td><span class="state neutral-state">308_then_200</span></td>
+      <td>Legacy apex host redirects to canonical Air Express site; final response includes New Reward edge website id cmorqbs9j001r5nr1h25vosp8.</td>
+      <td>Keep monitoring old-domain redirects and reconcile indexed old URLs/listings in entity cleanup.</td>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/37">#37</a></td>
+    </tr>
+      <tr>
+      <td>2026-06-05T00:14:31Z</td>
+      <td><a href="https://www.airexpresshvac.net">https://www.airexpresshvac.net</a></td>
+      <td><span class="state neutral-state">308_then_200</span></td>
+      <td>Legacy www host redirects to canonical Air Express site; final response includes New Reward edge website id cmorqbs9j001r5nr1h25vosp8.</td>
+      <td>Keep monitoring old-domain redirects and reconcile indexed old URLs/listings in entity cleanup.</td>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/37">#37</a></td>
+    </tr>
+      <tr>
+      <td>2026-06-05T00:14:31Z</td>
+      <td><a href="https://airexpressutah.com/blog/first-hot-week-ac-checklist-utah.html">https://airexpressutah.com/blog/first-hot-week-ac-checklist-utah.html</a></td>
+      <td><span class="state neutral-state">404</span></td>
+      <td>Prepared first-hot-week blog URL is not live on the current production edge.</td>
+      <td>Delivery sync or merge/deploy is required before the post can be called live or distributed.</td>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/39">#39</a></td>
+    </tr>
+      <tr>
+      <td>2026-06-05T00:14:31Z</td>
+      <td><a href="https://airexpressutah.com/analytics.js">https://airexpressutah.com/analytics.js</a></td>
+      <td><span class="state neutral-state">404</span></td>
+      <td>Live analytics.js is still missing on the current production edge.</td>
+      <td>Delivery sync or merge/deploy is required before live GA4 delivery can be verified.</td>
+      <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a></td>
+    </tr>
+    </tbody>
+  </table></div>
+
     <h2>Issue Map And Closeout State</h2>
     <div class="scroll"><table>
     <thead><tr><th>Issue</th><th>Lane</th><th>Status</th><th>Private Evidence</th><th>Blocker</th><th>Next Action</th></tr></thead>
@@ -496,9 +535,9 @@
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a><br>Deploy or sync Air Express GA4 tag source and verify single live measurement path</td>
       <td>live_measurement</td>
-      <td><span class="state prepared-state">fixed_locally_pending_live</span><br>not_complete_delivery_needed</td>
-      <td>data/live-measurement-path-check.json; data/owned-site-delivery-sync-check.json</td>
-      <td>Local analytics source is prepared, but live homepage and /analytics.js still need delivery verification</td>
+      <td><span class="state prepared-state">fixed_locally_pending_live_analytics_404</span><br>not_complete_delivery_needed</td>
+      <td>data/live-measurement-path-check.json; data/owned-site-delivery-sync-check.json; data/air-express-public-http-checks.csv</td>
+      <td>Local analytics source is prepared, but live /analytics.js returns 404 on the current production edge</td>
       <td>Approve delivery path or merge/deploy branch, then rerun verify:live-measurement and verify:owned-site-delivery-sync</td>
     </tr>
       <tr>
@@ -512,9 +551,9 @@
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/37">#37</a><br>Resolve Air Express entity fragmentation and trust-claim proof gates</td>
       <td>entity_trust</td>
-      <td><span class="state neutral-state">created</span><br>open_new_child_issue</td>
-      <td>data/air-express-competitor-baseline-ledger.csv; pages/air-express-pulse-report.html</td>
-      <td>Air Express / One Hour relationship, old-domain state, BBB/review/listing facts need current proof</td>
+      <td><span class="state good-state">partially_verified</span><br>open_external_proof_needed</td>
+      <td>data/air-express-competitor-baseline-ledger.csv; data/air-express-public-http-checks.csv; pages/air-express-pulse-report.html</td>
+      <td>Old-domain host redirect is verified; Air Express / One Hour relationship plus BBB/review/listing facts still need current proof</td>
       <td>Verify relationship/listing/trust facts and update citation ledger, public claim register, and pulse report</td>
     </tr>
       <tr>
@@ -528,9 +567,9 @@
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/39">#39</a><br>Publish and verify Air Express summer blog batch with attribution tags</td>
       <td>content_publication</td>
-      <td><span class="state neutral-state">created</span><br>open_new_child_issue</td>
-      <td>docs/air-express-blog-distribution-schedule.md; pages/content-readiness-report.html</td>
-      <td>First post is ready in source but not verified live; two posts need Max/New Reward approval</td>
+      <td><span class="state good-state">ready_in_source_live_404</span><br>not_complete_delivery_needed</td>
+      <td>docs/air-express-blog-distribution-schedule.md; pages/content-readiness-report.html; data/air-express-public-http-checks.csv</td>
+      <td>First post is ready in source but public URL returns 404; two posts need Max/New Reward approval</td>
       <td>Verify production URL and delivery path, then approve/publish/distribute with UTM and receipt evidence</td>
     </tr>
       <tr>
