@@ -124,6 +124,7 @@ const deliverySync = readJson("data/owned-site-delivery-sync-check.json");
 const historyStatus = readJson("data/google-history/history-pull-status.json");
 const mappingStatus = readJson("data/newreward-air-express-provider-readonly-recheck.json");
 const serviceTitanStatus = readJson("data/servicetitan-export-access-check.json");
+const serviceTitanJoinProbe = readJson("data/servicetitan-attribution-join-probe.json");
 const siteManifest = readJson("data/site-file-manifest.json");
 const publicClaims = readJson("data/public-claim-register.json");
 
@@ -136,6 +137,7 @@ const diagnosticCards = [
   ["Google History", historyStatus.status, "data/google-history/history-pull-status.json"],
   ["New Reward Mapping", mappingStatus.status, "data/newreward-air-express-provider-readonly-recheck.json"],
   ["ServiceTitan Export", serviceTitanStatus.status, "data/servicetitan-export-access-check.json"],
+  ["ServiceTitan Join Probe", serviceTitanJoinProbe.status, "data/servicetitan-attribution-join-probe.json"],
   ["Site Manifest", siteManifest.status, "data/site-file-manifest.json"],
   ["Public Claims", publicClaims.status, "data/public-claim-register.json"],
 ];

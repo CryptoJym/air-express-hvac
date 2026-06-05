@@ -34,6 +34,7 @@ const REQUIRED_FILES = [
   "scripts/build-content-readiness-report.mjs",
   "scripts/verify-servicetitan-export-access.mjs",
   "scripts/pull-servicetitan-lead-history.mjs",
+  "scripts/probe-servicetitan-attribution-joins.mjs",
   "tests/unit/servicetitan-redacted-import.test.js",
   "data/issue-24-30-completion-audit.csv",
   "data/issue-24-30-acceptance-criteria-audit.csv",
@@ -51,6 +52,7 @@ const REQUIRED_FILES = [
   "data/air-express-evidence-refresh-status.json",
   "data/seo-geo-attribution-audit.json",
   "data/servicetitan-export-access-check.json",
+  "data/servicetitan-attribution-join-probe.json",
   "data/servicetitan-api-lead-history-redacted.csv",
   "data/servicetitan-api-lead-history-summary.json",
   "data/servicetitan-lead-history.csv",
@@ -59,6 +61,7 @@ const REQUIRED_FILES = [
   "data/servicetitan-redacted-export-import-status.json",
   "pages/index.html",
   "pages/roadmap-performance.html",
+  "pages/air-express-impact-trace.html",
   "pages/issue-24-30-blocker-report.html",
   "pages/content-readiness-report.html",
   "pages/seo-geo-attribution-report.html",
@@ -70,6 +73,7 @@ const REQUIRED_FILES = [
 
 const REQUIRED_PAGE_LINKS = [
   "roadmap-performance.html",
+  "air-express-impact-trace.html",
   "issue-24-30-blocker-report.html",
   "content-readiness-report.html",
   "seo-geo-attribution-report.html",
@@ -237,6 +241,7 @@ function checkIssueEvidenceAlignment() {
   const historyStatus = JSON.parse(readFile("data/google-history/history-pull-status.json"));
   const mappingStatus = JSON.parse(readFile("data/newreward-air-express-provider-readonly-recheck.json"));
   const serviceTitanStatus = JSON.parse(readFile("data/servicetitan-export-access-check.json"));
+  const serviceTitanJoinProbe = JSON.parse(readFile("data/servicetitan-attribution-join-probe.json"));
 
   assert(
     observed.liveMeasurementStatus === liveMeasurement.status,
@@ -260,6 +265,10 @@ function checkIssueEvidenceAlignment() {
   assert(
     observed.serviceTitanStatus === serviceTitanStatus.status,
     "Issue evidence alignment ServiceTitan snapshot is stale."
+  );
+  assert(
+    observed.serviceTitanJoinProbeStatus === serviceTitanJoinProbe.status,
+    "Issue evidence alignment ServiceTitan join probe snapshot is stale."
   );
 
   const checks = alignment.checks || [];
@@ -510,6 +519,12 @@ function checkHistoryStatus() {
     "ServiceTitan lead proof status must preserve the current zero post-CAPTCHA-source lead count."
   );
   assert(
+    status.serviceTitan.attributionJoinProbe?.status === "partial_join_surfaces_readable" &&
+      status.serviceTitan.attributionJoinProbe?.bookingRowCount === 0 &&
+      status.serviceTitan.attributionJoinProbe?.blockedSurfaces?.includes("JPM export jobs"),
+    "ServiceTitan lead proof status must preserve booking/revenue join-probe state."
+  );
+  assert(
     Number(status.serviceTitan.apiCountsByServiceType?.ac_repair || 0) > 0,
     "ServiceTitan lead proof status must include service-type buckets from safe fixed-keyword classification."
   );
@@ -524,6 +539,12 @@ function checkHistoryStatus() {
   assert(
     impactReport.includes("ServiceTitan export/history") && impactReport.includes("auth_ready_no_export"),
     "Impact report must show the ServiceTitan auth-ready export state."
+  );
+  assert(
+    impactReport.includes("ServiceTitan booking/revenue join probe") &&
+      impactReport.includes("partial_join_surfaces_readable") &&
+      impactReport.includes("JPM export jobs"),
+    "Impact report must show the ServiceTitan booking/revenue join-probe state."
   );
   assert(
     impactReport.includes("ServiceTitan redacted export import"),
@@ -787,6 +808,79 @@ function checkServiceTitanExportAccess() {
     "after_ga4_lead_proof",
   ]) {
     assert(importDoc.includes(requiredText), `ServiceTitan redacted export import doc missing ${requiredText}.`);
+  }
+}
+
+function checkServiceTitanAttributionJoinProbe() {
+  const packageJson = JSON.parse(readFile("package.json"));
+  assert(
+    packageJson.scripts?.["probe:servicetitan-attribution-joins"] ===
+      "node scripts/probe-servicetitan-attribution-joins.mjs",
+    "package.json missing probe:servicetitan-attribution-joins script."
+  );
+
+  const source = readFile("data/servicetitan-attribution-join-probe.json");
+  for (const pattern of [
+    /Bearer\s+[A-Za-z0-9._~+/=-]+/i,
+    /access[_-]?token[=:]\s*[^,\s"']+/i,
+    /refresh[_-]?token[=:]\s*[^,\s"']+/i,
+    /client[_-]?secret[=:]\s*[^,\s"']+/i,
+    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i,
+    /(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\b/,
+  ]) {
+    assert(!pattern.test(source), `ServiceTitan join probe contains forbidden sensitive pattern: ${pattern}`);
+  }
+
+  const probe = JSON.parse(source);
+  assert(
+    probe.evidenceClass === "servicetitan_attribution_join_probe",
+    `Unexpected ServiceTitan join probe evidence class: ${probe.evidenceClass}`
+  );
+  assert(
+    probe.status === "partial_join_surfaces_readable",
+    `Unexpected ServiceTitan join probe status: ${probe.status}`
+  );
+  assert(
+    probe.requested?.from === "2020-01-01",
+    "ServiceTitan join probe must preserve the widened 2020 cursor check."
+  );
+  assert(
+    String(probe.secretHandling || "").includes("No credential values") &&
+      String(probe.secretHandling || "").includes("customer names"),
+    "ServiceTitan join probe must preserve no-secret and no-PII handling."
+  );
+  assert(
+    String(probe.mutationBoundary || "").includes("Read-only GET probes only"),
+    "ServiceTitan join probe must preserve read-only mutation boundary."
+  );
+
+  const bySurface = new Map((probe.probes || []).map((row) => [row.surface, row]));
+  const bookings = bySurface.get("CRM export bookings");
+  assert(bookings, "ServiceTitan join probe missing CRM export bookings surface.");
+  assert(
+    bookings.status === "readable" && Number(bookings.httpStatus) === 200,
+    "CRM export bookings surface must be readable."
+  );
+  assert(
+    Number(bookings.rowCount || 0) === 0,
+    "CRM export bookings must preserve zero rows for the widened cursor."
+  );
+
+  for (const [surface, requiredScope] of [
+    ["JPM export jobs", "Job Planning and Management > Jobs (Read)"],
+    ["Accounting export invoices", "Accounting > Invoices (Read)"],
+    ["Accounting export invoice items", "Accounting > Invoice Items (Read)"],
+    ["Accounting export payments", "Accounting > Payments (Read)"],
+  ]) {
+    const row = bySurface.get(surface);
+    assert(row, `ServiceTitan join probe missing ${surface}.`);
+    assert(row.status === "blocked", `${surface} should remain blocked until scope is granted.`);
+    assert(Number(row.httpStatus) === 403, `${surface} must preserve the 403 scope blocker.`);
+    assert(row.requiredScope === requiredScope, `${surface} required scope changed unexpectedly.`);
+    assert(
+      String(row.blocker || "").includes("Scope validation failed"),
+      `${surface} must preserve scope-validation blocker text.`
+    );
   }
 }
 
@@ -1441,6 +1535,7 @@ function checkDocsPointers() {
     "npm run build:content-readiness-report",
     "npm run verify:issue-evidence-alignment",
     "pages/index.html",
+    "pages/air-express-impact-trace.html",
     "pages/issue-24-30-blocker-report.html",
     "pages/content-readiness-report.html",
     "data/issue-24-30-completion-audit.csv",
@@ -1454,6 +1549,9 @@ function checkDocsPointers() {
     "data/owned-site-delivery-sync-check.json",
     "data/public-claim-register.json",
     "data/servicetitan-export-access-check.json",
+    "data/servicetitan-api-lead-history-summary.json",
+    "data/servicetitan-api-lead-history-redacted.csv",
+    "data/servicetitan-attribution-join-probe.json",
     "docs/air-express-content-briefs.md",
     "docs/air-express-blog-distribution-schedule.md",
     "docs/air-express-access-request-packet.md",
@@ -1486,6 +1584,7 @@ try {
   checkPublicClaimRegister();
   checkServiceTitanProof();
   checkServiceTitanExportAccess();
+  checkServiceTitanAttributionJoinProbe();
   checkEmailEvidence();
   checkContentBriefs();
   checkHermesSeoGeoAuditPacket();

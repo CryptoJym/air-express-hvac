@@ -140,6 +140,7 @@ const seoAudit = readJson("data/seo-geo-attribution-audit.json");
 const mapping = readJson("data/newreward-air-express-provider-readonly-recheck.json");
 const serviceTitan = readJson("data/servicetitan-export-access-check.json");
 const serviceTitanLeadSummary = readJson("data/servicetitan-api-lead-history-summary.json");
+const serviceTitanJoinProbe = readJson("data/servicetitan-attribution-join-probe.json");
 
 const rawGscTrend = Array.isArray(snapshotHistory.gscSnapshotTrend)
   ? snapshotHistory.gscSnapshotTrend
@@ -153,6 +154,12 @@ const aiByEngine = Array.isArray(snapshotHistory.aiByEngine) ? snapshotHistory.a
 const latestAiWeek = aiByWeek.at(-1) || null;
 const previousAiWeek = aiByWeek.length > 1 ? aiByWeek.at(-2) : null;
 const rootCause = mapping.rootCauseSummary || {};
+const joinProbes = Array.isArray(serviceTitanJoinProbe.probes) ? serviceTitanJoinProbe.probes : [];
+const bookingJoinProbe = joinProbes.find((probe) => probe.surface === "CRM export bookings") || null;
+const blockedJoinSurfaces = joinProbes.filter((probe) => probe.status === "blocked");
+const joinProbeEvidence = serviceTitanJoinProbe.status
+  ? `Join probe from ${serviceTitanJoinProbe.requested?.from || "unknown"}: CRM export bookings readable with ${formatInteger(bookingJoinProbe?.rowCount)} row(s); ${formatInteger(blockedJoinSurfaces.length)} booking/revenue surface(s) are scope-blocked.`
+  : "No booking/revenue join probe recorded yet.";
 const includeGbpInReport = historyStatus.gbp?.status !== "not_included";
 const googleScopeLabel = includeGbpInReport
   ? "direct Google, GBP, and ServiceTitan"
@@ -189,14 +196,14 @@ const providerRows = [
     }]),
   {
     surface: "ServiceTitan",
-    state: serviceTitanLeadSummary.status || serviceTitan.status || "blocked_env",
+    state: serviceTitanJoinProbe.status || serviceTitanLeadSummary.status || serviceTitan.status || "blocked_env",
     evidence: serviceTitanLeadSummary.status === "api_history_pulled"
-      ? `${formatInteger(serviceTitanLeadSummary.rows)} redacted lead row(s) pulled; ${formatInteger(serviceTitanLeadSummary.websiteCampaignLeadCount)} match the configured website campaign; ${formatInteger(serviceTitanLeadSummary.bookedLeadCount)} include booking ids.`
+      ? `${formatInteger(serviceTitanLeadSummary.rows)} redacted lead row(s) pulled; ${formatInteger(serviceTitanLeadSummary.websiteCampaignLeadCount)} match the configured website campaign; ${formatInteger(serviceTitanLeadSummary.bookedLeadCount)} include booking ids. ${joinProbeEvidence}`
       : serviceTitan.status === "blocked_env"
         ? "Missing required ServiceTitan export/API env keys."
         : serviceTitan.blockers?.[0]?.evidence || "Lead export/API access is not available locally.",
     nextAction: serviceTitanLeadSummary.status === "api_history_pulled"
-      ? "Use lead counts for trend comparison; do not claim booked jobs or revenue until an approved booking/revenue join is pulled."
+      ? "Use lead counts for trend comparison; request JPM Jobs and Accounting read scopes or import an approved redacted export before ROI claims."
       : serviceTitan.blockers?.[0]?.nextAction || "Provide approved redacted export or read-only API access.",
   },
 ];
@@ -753,7 +760,7 @@ const html = `<!doctype html>
         </article>
         <article class="evidence-card bad">
           <h3>Blocked attribution</h3>
-          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Google Business Profile is separate from this refresh.</p>
+          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. ${escapeHtml(joinProbeEvidence)} Google Business Profile is separate from this refresh.</p>
         </article>
       </aside>
     </section>
@@ -799,7 +806,7 @@ const html = `<!doctype html>
     </section>
 
     <section class="footer-note">
-      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
+      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. The current ServiceTitan API key can pull lead counts, but JPM/accounting export scopes are still required for booked-job and revenue attribution. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
     </section>
   </main>
 

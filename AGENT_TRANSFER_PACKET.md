@@ -17,6 +17,7 @@ Start files:
 - `docs/air-express-tomorrow-checklist.md`
 - `pages/index.html`
 - `pages/roadmap-performance.html`
+- `pages/air-express-impact-trace.html`
 - `pages/issue-24-30-blocker-report.html`
 - `pages/content-readiness-report.html`
 - `pages/seo-geo-attribution-report.html`
@@ -35,6 +36,9 @@ Start files:
 - `data/site-file-manifest.json`
 - `data/public-claim-register.json`
 - `data/servicetitan-export-access-check.json`
+- `data/servicetitan-api-lead-history-summary.json`
+- `data/servicetitan-api-lead-history-redacted.csv`
+- `data/servicetitan-attribution-join-probe.json`
 - `data/servicetitan-redacted-export-template.csv`
 - `data/servicetitan-redacted-export-import-status.json`
 - `docs/gsc-ga4-history-and-impact-plan.md`
@@ -60,7 +64,7 @@ Boundaries:
 - Treat the worktree as shared and dirty. Preserve unrelated changes.
 - Distinguish verified, inferred, prepared, blocked, and not attempted.
 
-Current verified facts from 2026-06-03:
+Current verified facts from 2026-06-05:
 
 - `airexpressutah.com` resolves through Cloudflare nameservers
   `romina.ns.cloudflare.com` and `yisroel.ns.cloudflare.com`.
@@ -100,10 +104,14 @@ Current verified facts from 2026-06-03:
   `data/google-history/history-pull-status.json` and
   `pages/new-reward-impact-report.html`; the active
   `newrewardplatform@gmail.com` token is present but blocked by missing
-  `webmasters.readonly`, `analytics.readonly`, and `business.manage` scopes.
-  The report now models Google Business Profile explicitly and includes a
-  sanitized token scope inventory instead of leaving GBP or token state as
-  implicit unpulled surfaces.
+  `webmasters.readonly` and `analytics.readonly` scopes. Google Business
+  Profile is marked `not_included` for the current GSC/GA4 refresh and remains
+  a separate later lane. The report includes a sanitized token scope inventory
+  instead of storing token material.
+- `npm run build:impact-trace-report` writes
+  `pages/air-express-impact-trace.html`; it visualizes saved New Reward GSC
+  snapshots, saved AI visibility, provider gates, ServiceTitan lead-count
+  evidence, and the separate booking/revenue attribution blocker.
 - `npm run verify:newreward-mapping` refreshes sanitized New Reward source
   mapping evidence through `psql` with `BEGIN READ ONLY` and writes
   `data/newreward-air-express-provider-readonly-recheck.json`; the latest
@@ -181,12 +189,27 @@ Current verified facts from 2026-06-03:
   without passwords, verification codes, recovery codes, or token material.
 - `npm run verify:servicetitan-export` writes
   `data/servicetitan-export-access-check.json`; current status is
-  `blocked_env` because required ServiceTitan env vars are absent from process
-  env, the Air Express repo env files, `~/.config/newrewards/.env`, and
-  `~/.env`. The diagnostic stores only key presence, sanitized errors, and the
-  approved export-packet schema, not credential values, tokens, customer PII, or
-  raw lead payloads. `data/servicetitan-prior-proof-summary.csv` also preserves
-  the prior count-only five-lead guide evidence without private customer data.
+  `auth_ready_no_export` after using the separate Vercel `option-c` production
+  credential path through a temp-only env file. The diagnostic stores only key
+  presence, sanitized errors, and the approved export-packet schema, not
+  credential values, tokens, customer PII, or raw lead payloads.
+- `npm run pull:servicetitan-lead-history` writes
+  `data/servicetitan-api-lead-history-summary.json` and
+  `data/servicetitan-api-lead-history-redacted.csv`; current evidence records
+  78 redacted lead rows from 2026-01-01 through 2026-06-05, 76 configured
+  website campaign rows, weekly zero-fill through 2026-06-01, service-type
+  buckets, and CAPTCHA source-period markers. Customer names, phones, emails,
+  addresses, summaries, raw payloads, lead URLs, tokens, and credential values
+  are excluded.
+- `npm run probe:servicetitan-attribution-joins -- --from 2020-01-01` writes
+  `data/servicetitan-attribution-join-probe.json`; CRM export bookings is
+  readable but returned 0 rows from the widened cursor, while JPM export jobs
+  and Accounting export invoices, invoice items, and payments return HTTP 403
+  `Scope validation failed`. This means the API key is usable for lead counts
+  but does not currently have the jobs/accounting read scopes needed for booked
+  job or revenue attribution.
+- `data/servicetitan-prior-proof-summary.csv` preserves the prior count-only
+  five-lead guide evidence without private customer data.
 - `npm run import:servicetitan-redacted-export` writes
   `data/servicetitan-redacted-export-template.csv` and
   `data/servicetitan-redacted-export-import-status.json`; current status is

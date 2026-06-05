@@ -46,7 +46,7 @@
     <h1>Air Express New Reward Control Hub</h1>
     <p>Repo-local Pages dashboard for onboarding, SEO/GEO, attribution, issue blockers, and prepared content work.</p>
     <div class="meta">
-      <span class="pill">Updated 2026-06-04</span>
+      <span class="pill">Updated 2026-06-05</span>
       <span class="pill">Canonical: airexpressutah.com</span>
       <span class="pill">Issues #24-#30 active</span>
       <span class="pill">No provider mutations attempted</span>
@@ -184,7 +184,12 @@
         <tr>
           <td><a href="../data/servicetitan-export-access-check.json">ServiceTitan Export Readiness</a></td>
           <td>Repeatable non-secret check for ServiceTitan export/API readiness and required redacted proof fields.</td>
-          <td>Current status is blocked by missing local ServiceTitan env keys across process env and known local env files.</td>
+          <td>Current status is <code>auth_ready_no_export</code> through the separate Vercel <code>option-c</code> credential path; no credential values, tokens, or customer PII are stored.</td>
+        </tr>
+        <tr>
+          <td><a href="../data/servicetitan-attribution-join-probe.json">ServiceTitan Attribution Join Probe</a></td>
+          <td>Read-only probe for booking, job, invoice, invoice item, and payment export surfaces needed for revenue attribution.</td>
+          <td>CRM export bookings is readable but empty from a 2020 cursor; JPM jobs and Accounting invoice/payment exports are scope-blocked.</td>
         </tr>
         <tr>
           <td><a href="../data/servicetitan-prior-proof-summary.csv">ServiceTitan Prior Proof Summary</a></td>

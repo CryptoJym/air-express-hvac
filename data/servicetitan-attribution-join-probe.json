@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-06-05T21:11:18.401Z",
+  "evidenceClass": "servicetitan_attribution_join_probe",
+  "status": "partial_join_surfaces_readable",
+  "requested": {
+    "from": "2020-01-01",
+    "endpointCount": 5
+  },
+  "secretHandling": "No credential values, access tokens, raw payloads, customer names, phones, emails, addresses, notes, summaries, descriptions, URLs, or line-item text are stored.",
+  "mutationBoundary": "Read-only GET probes only. No ServiceTitan lead, booking, job, invoice, payment, customer, note, export-marker, provider, or production mutation is performed.",
+  "probes": [
+    {
+      "surface": "CRM export bookings",
+      "status": "readable",
+      "httpStatus": 200,
+      "requiredScope": "CRM > Bookings (Read)",
+      "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-crm-v2/endpoints",
+      "hasMore": false,
+      "continueFromPresent": true,
+      "piiExcluded": true,
+      "rowCount": 0,
+      "safeJoinKeysInFirstRow": [],
+      "omittedSensitiveKeyHintsInFirstRow": [],
+      "joinFieldPresence": {
+        "id": 0,
+        "leadId": 0,
+        "bookingId": 0,
+        "jobId": 0,
+        "invoiceId": 0,
+        "customerId": 0,
+        "locationId": 0,
+        "campaignId": 0,
+        "leadCallId": 0,
+        "partnerLeadCallId": 0,
+        "createdOn": 0,
+        "modifiedOn": 0,
+        "completedOn": 0,
+        "status": 0,
+        "total": 0,
+        "subtotal": 0,
+        "balance": 0,
+        "amount": 0
+      },
+      "aggregateNumericFields": {
+        "total": 0,
+        "subtotal": 0,
+        "balance": 0,
+        "amount": 0
+      },
+      "blocker": "Endpoint is readable but returned no rows for the requested export cursor/date.",
+      "nextAction": "Try an earlier export cursor/date or confirm whether this tenant has data on the endpoint."
+    },
+    {
+      "surface": "JPM export jobs",
+      "status": "blocked",
+      "httpStatus": 403,
+      "requiredScope": "Job Planning and Management > Jobs (Read)",
+      "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-jpm-v2/endpoints/Export_Jobs",
+      "hasMore": false,
+      "continueFromPresent": false,
+      "piiExcluded": true,
+      "blocker": "Scope validation failed. Access token does not have permission to access 'GET /tenant/{tenant}/export/jobs' operation.",
+      "nextAction": "Confirm ServiceTitan entitlement for Job Planning and Management > Jobs (Read)."
+    },
+    {
+      "surface": "Accounting export invoices",
+      "status": "blocked",
+      "httpStatus": 403,
+      "requiredScope": "Accounting > Invoices (Read)",
+      "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-accounting-v2",
+      "hasMore": false,
+      "continueFromPresent": false,
+      "piiExcluded": true,
+      "blocker": "Scope validation failed. Access token does not have permission to access 'GET /tenant/{tenant}/export/invoices' operation.",
+      "nextAction": "Confirm ServiceTitan entitlement for Accounting > Invoices (Read)."
+    },
+    {
+      "surface": "Accounting export invoice items",
+      "status": "blocked",
+      "httpStatus": 403,
+      "requiredScope": "Accounting > Invoice Items (Read)",
+      "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-accounting-v2/endpoints/Export_InvoiceItems",
+      "hasMore": false,
+      "continueFromPresent": false,
+      "piiExcluded": true,
+      "blocker": "Scope validation failed. Access token does not have permission to access 'GET /tenant/{tenant}/export/invoice-items' operation.",
+      "nextAction": "Confirm ServiceTitan entitlement for Accounting > Invoice Items (Read)."
+    },
+    {
+      "surface": "Accounting export payments",
+      "status": "blocked",
+      "httpStatus": 403,
+      "requiredScope": "Accounting > Payments (Read)",
+      "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-accounting-v2",
+      "hasMore": false,
+      "continueFromPresent": false,
+      "piiExcluded": true,
+      "blocker": "Scope validation failed. Access token does not have permission to access 'GET /tenant/{tenant}/export/payments' operation.",
+      "nextAction": "Confirm ServiceTitan entitlement for Accounting > Payments (Read)."
+    }
+  ],
+  "summary": {
+    "readableSurfaces": [
+      "CRM export bookings"
+    ],
+    "blockedSurfaces": [
+      "JPM export jobs",
+      "Accounting export invoices",
+      "Accounting export invoice items",
+      "Accounting export payments"
+    ],
+    "recommendedJoinPath": "Request JPM Jobs (Read) and Accounting Invoices/Payments (Read), or import an owner-approved redacted export."
+  }
+}

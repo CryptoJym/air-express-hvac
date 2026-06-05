@@ -349,6 +349,8 @@ path record this without printing credential values:
 - `npm run pull:servicetitan-lead-history`
 - `data/servicetitan-api-lead-history-summary.json`
 - `data/servicetitan-api-lead-history-redacted.csv`
+- `npm run probe:servicetitan-attribution-joins`
+- `data/servicetitan-attribution-join-probe.json`
 - `npm run import:servicetitan-redacted-export`
 - `data/servicetitan-redacted-export-template.csv`
 - `data/servicetitan-redacted-export-import-status.json`
@@ -374,6 +376,12 @@ Pulled ServiceTitan lead-count baseline:
   2026-06-01 had 0 leads.
 - Booked-job and revenue proof remains blocked: the lead endpoint returned 0
   booking IDs and no approved revenue fields.
+- Booking/revenue join probe: a read-only 2020-to-now export probe found CRM
+  export bookings readable with 0 rows, while JPM export jobs and Accounting
+  export invoices, invoice items, and payments returned HTTP 403 scope
+  validation failures. Root cause: the current ServiceTitan credential path can
+  read lead history, but it is not entitled to the jobs/accounting read scopes
+  required for booked-job or revenue attribution.
 - Stored fields exclude customer names, phone numbers, emails, street addresses,
   lead summaries, lead URLs, raw payloads, credential values, and tokens.
 - Cloudflare Turnstile/CAPTCHA source was added on 2026-06-04 in commit
@@ -399,7 +407,8 @@ the April 24 lead-visibility milestone.
 
 The generated impact report now has a `Lead Proof Status` section. It records
 the API lead proof as `api_history_pulled`, the ServiceTitan auth state as
-`auth_ready_no_export`, the pulled lead counts, campaign `80365413`, and the
+`auth_ready_no_export`, the pulled lead counts, campaign `80365413`, the
+booking/revenue join probe state as `partial_join_surfaces_readable`, and the
 no-PII boundary. It still does not claim booked jobs, revenue, ROI, or full
 closed-won attribution.
 

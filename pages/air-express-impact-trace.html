@@ -478,10 +478,10 @@
                   <strong>GBP</strong>
                   <span class="state-pill neutral">not_included</span>
                   <p>Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4.</p>
-                </article><article class="provider neutral">
+                </article><article class="provider warn">
                   <strong>ServiceTitan</strong>
-                  <span class="state-pill neutral">api_history_pulled</span>
-                  <p>78 redacted lead row(s) pulled; 76 match the configured website campaign; 0 include booking ids.</p>
+                  <span class="state-pill warn">partial_join_surfaces_readable</span>
+                  <p>78 redacted lead row(s) pulled; 76 match the configured website campaign; 0 include booking ids. Join probe from 2020-01-01: CRM export bookings readable with 0 row(s); 4 booking/revenue surface(s) are scope-blocked.</p>
                 </article>
               </div>
             </div>
@@ -613,7 +613,7 @@
         </article>
         <article class="evidence-card bad">
           <h3>Blocked attribution</h3>
-          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Google Business Profile is separate from this refresh.</p>
+          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Join probe from 2020-01-01: CRM export bookings readable with 0 row(s); 4 booking/revenue surface(s) are scope-blocked. Google Business Profile is separate from this refresh.</p>
         </article>
       </aside>
     </section>
@@ -703,7 +703,7 @@
     </section>
 
     <section class="footer-note">
-      Generated 2026-06-05T20:15:19.722Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
+      Generated 2026-06-05T21:20:29.262Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. The current ServiceTitan API key can pull lead counts, but JPM/accounting export scopes are still required for booked-job and revenue attribution. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
     </section>
   </main>
 

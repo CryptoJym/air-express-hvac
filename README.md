@@ -3,7 +3,7 @@
 This repository is the Air Express HVAC website and New Reward onboarding
 control hub.
 
-Current verified operating state as of 2026-06-03:
+Current verified operating state as of 2026-06-05:
 
 - Canonical site: `https://airexpressutah.com`
 - Legacy web domain: `https://airexpresshvac.net` redirects to the canonical
@@ -25,9 +25,13 @@ Current verified operating state as of 2026-06-03:
 - The New Reward impact report and GSC/GA4 pull status are refreshed locally at
   [pages/new-reward-impact-report.html](pages/new-reward-impact-report.html)
   and [data/google-history/history-pull-status.json](data/google-history/history-pull-status.json).
-  The pull status now records GSC, GA4, and Google Business Profile blockers;
-  the current token scope inventory contains cloud/admin scopes but lacks
-  `webmasters.readonly`, `analytics.readonly`, and `business.manage`.
+  The current refresh is scoped to GSC/GA4; Google Business Profile is a
+  separate later lane. The token scope inventory contains cloud/admin scopes but
+  still lacks `webmasters.readonly` and `analytics.readonly`.
+- The visual impact trace is refreshed locally at
+  [pages/air-express-impact-trace.html](pages/air-express-impact-trace.html).
+  It shows saved GSC visibility, saved AI visibility, provider gates,
+  ServiceTitan lead-count history, and the remaining attribution blockers.
 - The issue 24-30 blocker report is refreshed locally at
   [pages/issue-24-30-blocker-report.html](pages/issue-24-30-blocker-report.html).
   The criterion-level closeout audit is recorded at
@@ -85,8 +89,20 @@ Current verified operating state as of 2026-06-03:
   It has not been executed and no OAuth consent was submitted.
 - ServiceTitan export readiness is checked locally at
   [data/servicetitan-export-access-check.json](data/servicetitan-export-access-check.json);
-  current status is `blocked_env`, with no credential values, tokens, or
+  current status is `auth_ready_no_export` through the separate Vercel
+  `option-c` production credential path, with no credential values, tokens, or
   customer PII stored.
+- ServiceTitan lead history is pulled locally at
+  [data/servicetitan-api-lead-history-summary.json](data/servicetitan-api-lead-history-summary.json)
+  and [data/servicetitan-api-lead-history-redacted.csv](data/servicetitan-api-lead-history-redacted.csv).
+  Current evidence records 78 redacted lead rows, 76 configured website campaign
+  rows, weekly zero-fill through 2026-06-01, and CAPTCHA source-period markers.
+- ServiceTitan booking/revenue join probing is recorded at
+  [data/servicetitan-attribution-join-probe.json](data/servicetitan-attribution-join-probe.json).
+  CRM export bookings is readable but returned 0 rows from a 2020 cursor; JPM
+  jobs and Accounting invoice/payment exports are HTTP 403 scope-blocked. Use
+  lead counts for trend comparison only until Jobs and Accounting read scopes,
+  or an approved redacted export, provide booking/revenue proof.
 - The redacted ServiceTitan export import path is prepared at
   [docs/air-express-servicetitan-redacted-export-import.md](docs/air-express-servicetitan-redacted-export-import.md),
   with template
@@ -116,6 +132,7 @@ Primary onboarding docs:
 - [docs/issue-board-seed.md](docs/issue-board-seed.md)
 - [pages/index.html](pages/index.html)
 - [pages/roadmap-performance.html](pages/roadmap-performance.html)
+- [pages/air-express-impact-trace.html](pages/air-express-impact-trace.html)
 - [pages/issue-24-30-blocker-report.html](pages/issue-24-30-blocker-report.html)
 - [pages/content-readiness-report.html](pages/content-readiness-report.html)
 - [pages/seo-geo-attribution-report.html](pages/seo-geo-attribution-report.html)
@@ -142,6 +159,9 @@ Operational ledgers:
 - [data/site-file-manifest.json](data/site-file-manifest.json)
 - [data/public-claim-register.json](data/public-claim-register.json)
 - [data/servicetitan-export-access-check.json](data/servicetitan-export-access-check.json)
+- [data/servicetitan-api-lead-history-summary.json](data/servicetitan-api-lead-history-summary.json)
+- [data/servicetitan-api-lead-history-redacted.csv](data/servicetitan-api-lead-history-redacted.csv)
+- [data/servicetitan-attribution-join-probe.json](data/servicetitan-attribution-join-probe.json)
 - [data/servicetitan-redacted-export-template.csv](data/servicetitan-redacted-export-template.csv)
 - [data/servicetitan-redacted-export-import-status.json](data/servicetitan-redacted-export-import-status.json)
 - [data/public-scan-agent-manifest.json](data/public-scan-agent-manifest.json)
@@ -173,6 +193,7 @@ Useful local verification commands:
 - `npm run verify:site-file-manifest`
 - `npm run verify:public-claims`
 - `npm run verify:servicetitan-export`
+- `npm run probe:servicetitan-attribution-joins`
 - `npm run verify:issue-evidence-alignment`
 - `npm run test:servicetitan-redacted-import`
 - `npm run build:issue-blocker-report`
@@ -180,4 +201,5 @@ Useful local verification commands:
 - `npm run prepare:delivery-sync-packet`
 - `npm run import:servicetitan-redacted-export`
 - `npm run pull:gsc-ga4-history`
+- `npm run build:impact-trace-report`
 - `npm run audit:seo-geo-attribution`

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T20:15:04.249Z",
+  "generatedAt": "2026-06-05T21:20:18.773Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
     "gscStartDate": "2026-01-01",
@@ -380,6 +380,22 @@
         "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
       }
     },
+    "attributionJoinProbe": {
+      "status": "partial_join_surfaces_readable",
+      "from": "2020-01-01",
+      "readableSurfaces": [
+        "CRM export bookings"
+      ],
+      "blockedSurfaces": [
+        "JPM export jobs",
+        "Accounting export invoices",
+        "Accounting export invoice items",
+        "Accounting export payments"
+      ],
+      "bookingRowCount": 0,
+      "evidence": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked.",
+      "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
+    },
     "campaignIds": [
       "80365413",
       "80365029"
@@ -389,8 +405,8 @@
     "redactedImportStatus": "awaiting_input",
     "redactedImportEvidence": "Redacted ServiceTitan export import is awaiting_input; template data/servicetitan-redacted-export-template.csv is prepared.",
     "redactedImportNextAction": "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>. Use the template columns and remove customer PII before import.",
-    "blocker": "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.",
-    "nextAction": "Join the redacted lead counts to Google/GA4 periods after Google history is restored; pull bookings/revenue only after the exact approved ServiceTitan endpoint/scope is verified.",
+    "blocker": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked. Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.",
+    "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields.",
     "exportEvidenceClass": "servicetitan_export_access_readiness_check",
     "authCheck": "token_request_succeeded_no_token_stored"
   },
@@ -980,6 +996,22 @@
           "convertedRate": 0,
           "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
         }
+      },
+      "attributionJoinProbe": {
+        "status": "partial_join_surfaces_readable",
+        "from": "2020-01-01",
+        "readableSurfaces": [
+          "CRM export bookings"
+        ],
+        "blockedSurfaces": [
+          "JPM export jobs",
+          "Accounting export invoices",
+          "Accounting export invoice items",
+          "Accounting export payments"
+        ],
+        "bookingRowCount": 0,
+        "evidence": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked.",
+        "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
       },
       "caveat": "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined."
     }

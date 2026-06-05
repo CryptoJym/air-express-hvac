@@ -958,6 +958,7 @@ function buildClientFriendlySummary({
       apiCompleteWeeklyTrend: serviceTitan.apiCompleteWeeklyTrend,
       captcha: serviceTitan.captcha,
       qualityProxyByCaptchaPeriod: serviceTitan.qualityProxyByCaptchaPeriod,
+      attributionJoinProbe: serviceTitan.attributionJoinProbe,
       caveat:
         "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined.",
     },
@@ -972,6 +973,7 @@ function loadServiceTitanLeadProof() {
   const importedRows = readCsv(join(root, "data/servicetitan-redacted-export-import.csv"));
   const apiRows = readCsv(join(root, "data/servicetitan-api-lead-history-redacted.csv"));
   const apiSummary = readJson(join(root, "data/servicetitan-api-lead-history-summary.json"), {});
+  const joinProbe = readJson(join(root, "data/servicetitan-attribution-join-probe.json"), {});
   const prior = priorRows[0] || {};
   const campaignIds = Array.from(
     new Set(
@@ -995,6 +997,15 @@ function loadServiceTitanLeadProof() {
   const apiEvidence = apiLeadCount
     ? `Read-only ServiceTitan API pull returned ${apiLeadCount} redacted lead row(s) from ${apiSummary.requestedRange?.startDate || "unknown"} to ${apiSummary.requestedRange?.endDate || "unknown"}; ${websiteCampaignLeadCount} row(s) match configured website campaign ${campaignIds.includes("80365413") ? "80365413" : "unknown"}; ${bookedLeadCount} row(s) include booking ids; customer PII and raw payloads are excluded.`
     : "";
+  const joinProbes = Array.isArray(joinProbe.probes) ? joinProbe.probes : [];
+  const bookingProbe = joinProbes.find((probe) => probe.surface === "CRM export bookings") || null;
+  const blockedJoinSurfaces = joinProbes.filter((probe) => probe.status === "blocked");
+  const joinProbeEvidence = joinProbe.status
+    ? `Read-only join probe from ${joinProbe.requested?.from || "unknown"} found CRM export bookings readable with ${Number(bookingProbe?.rowCount || 0)} row(s), while ${blockedJoinSurfaces.map((probe) => `${probe.surface} (${probe.httpStatus})`).join(", ") || "no join surfaces"} remain blocked.`
+    : "No ServiceTitan booking/revenue join probe has been recorded yet.";
+  const joinProbeNextAction = joinProbe.status
+    ? "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
+    : "Run npm run probe:servicetitan-attribution-joins with approved read-only credentials before claiming booking or revenue attribution.";
 
   return {
     status: exportStatus.status || "unknown",
@@ -1015,6 +1026,15 @@ function loadServiceTitanLeadProof() {
     apiCompleteWeeklyTrend: Array.isArray(apiSummary.completeWeeklyTrend) ? apiSummary.completeWeeklyTrend : [],
     captcha: apiSummary.captcha || null,
     qualityProxyByCaptchaPeriod: apiSummary.qualityProxyByCaptchaPeriod || {},
+    attributionJoinProbe: {
+      status: joinProbe.status || "not_attempted",
+      from: joinProbe.requested?.from || "",
+      readableSurfaces: joinProbe.summary?.readableSurfaces || [],
+      blockedSurfaces: joinProbe.summary?.blockedSurfaces || [],
+      bookingRowCount: Number(bookingProbe?.rowCount || 0),
+      evidence: joinProbeEvidence,
+      nextAction: joinProbeNextAction,
+    },
     campaignIds,
     piiExcluded,
     evidence: apiEvidence || (priorRows.length || leadRows.length
@@ -1026,11 +1046,13 @@ function loadServiceTitanLeadProof() {
       redactedImportStatus.nextAction ||
       "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>.",
     blocker: apiLeadCount
-      ? "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields."
+      ? joinProbe.status
+        ? `${joinProbeEvidence} Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.`
+        : "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields."
       : firstBlocker?.evidence || "Full ServiceTitan history is not available from current local evidence.",
     nextAction:
       apiLeadCount
-        ? "Join the redacted lead counts to Google/GA4 periods after Google history is restored; pull bookings/revenue only after the exact approved ServiceTitan endpoint/scope is verified."
+        ? joinProbeNextAction
         : firstBlocker?.nextAction ||
           "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet before joining leads by period.",
     exportEvidenceClass: exportStatus.evidenceClass || "",
@@ -1828,6 +1850,12 @@ function renderReport({
         htmlEscape(serviceTitan.status),
         htmlEscape(serviceTitan.blocker),
         htmlEscape(serviceTitan.nextAction),
+      ],
+      [
+        "ServiceTitan booking/revenue join probe",
+        htmlEscape(serviceTitan.attributionJoinProbe?.status || "not_attempted"),
+        htmlEscape(serviceTitan.attributionJoinProbe?.evidence || "No booking/revenue join probe recorded."),
+        htmlEscape(serviceTitan.attributionJoinProbe?.nextAction || "Run the read-only join probe or import an approved redacted export before ROI claims."),
       ],
       [
         "ServiceTitan redacted export import",

@@ -52,7 +52,7 @@
     <h1>Air Express Issue 24-30 Blocker Report</h1>
     <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T20:15:19.803Z</span>
+      <span class="pill">Generated 2026-06-05T21:20:29.296Z</span>
       <span class="pill">Repo: CryptoJym/air-express-hvac</span>
       <span class="pill">No provider mutations attempted</span>
       <span class="pill">No Air Express production deploy attempted</span>
@@ -83,6 +83,7 @@
           <tr><td>Google History</td><td><span class="state blocked-state">blocked</span></td><td><code>data/google-history/history-pull-status.json</code></td></tr>
           <tr><td>New Reward Mapping</td><td><span class="state blocked-state">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
           <tr><td>ServiceTitan Export</td><td><span class="state blocked-state">auth ready no export</span></td><td><code>data/servicetitan-export-access-check.json</code></td></tr>
+          <tr><td>ServiceTitan Join Probe</td><td><span class="state partial">partial join surfaces readable</span></td><td><code>data/servicetitan-attribution-join-probe.json</code></td></tr>
           <tr><td>Site Manifest</td><td><span class="state blocked-state">passed</span></td><td><code>data/site-file-manifest.json</code></td></tr>
           <tr><td>Public Claims</td><td><span class="state blocked-state">passed</span></td><td><code>data/public-claim-register.json</code></td></tr>
         </tbody>
@@ -161,12 +162,12 @@
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/30">#30</a></td>
             <td>open</td>
-            <td><span class="state partial">partial api history pulled revenue blocked</span></td>
-            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.</td>
-            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, classified service type from fixed keywords without storing raw summaries, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
-            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; live Turnstile is not yet verified because public assets are older and /api/turnstile/config returns 404; direct GSC/GA4 history and live GA4 delivery are still blocked in #27-#29.</td>
-            <td>Impact report includes ServiceTitan lead counts by period, week, service type, and CAPTCHA source marker with no customer PII; booked-job and revenue attribution either become joined through an approved endpoint/export or remain blocked with exact proof.</td>
-            <td>Use the pulled redacted lead history for lead-count trend comparison, verify whether CRM v2 export/bookings or another approved ServiceTitan report can provide booking/revenue joins, then rerun npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
+            <td><span class="state partial">partial api history pulled join scope blocked</span></td>
+            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens. data/servicetitan-attribution-join-probe.json records CRM export bookings readable with 0 rows from a 2020 cursor, while JPM export jobs and Accounting export invoices, invoice items, and payments return HTTP 403 scope validation failures.</td>
+            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, classified service type from fixed keywords without storing raw summaries, probed read-only CRM booking/JPM job/accounting export surfaces, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
+            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; CRM export bookings is readable but empty from a 2020 cursor; JPM Jobs (Read) and Accounting invoice/payment read scopes are not granted to the current token; live Turnstile is not yet verified because public assets are older and /api/turnstile/config returns 404; direct GSC/GA4 history and live GA4 delivery are still blocked in #27-#29.</td>
+            <td>Impact report includes ServiceTitan lead counts by period, week, service type, CAPTCHA source marker, and the booking/revenue join-probe blocker with no customer PII; booked-job and revenue attribution either become joined through approved Jobs/Accounting scopes or an approved redacted export, or remain blocked with exact proof.</td>
+            <td>Use the pulled redacted lead history for lead-count trend comparison, request Job Planning and Management &gt; Jobs (Read) plus Accounting invoice/payment read scopes or import an approved redacted export, then rerun npm run probe:servicetitan-attribution-joins, npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run build:impact-trace-report, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
           </tr>
         </tbody>
       </table>
@@ -184,7 +185,7 @@
           <tr><td>#27</td><td>1 / 5</td><td>4</td><td>No scoped GSC read token or property visibility proof</td></tr>
           <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Approved deploy edge sync or manual delivery path is required</td></tr>
           <tr><td>#29</td><td>1 / 5</td><td>4</td><td>No scoped local GSC read token or normalized query/page/device history; saved GSC snapshots are aggregate totals only</td></tr>
-          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Booking and revenue joins are not included in this lead endpoint response</td></tr>
+          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Booking and revenue joins are not included in the lead endpoint response and require Jobs/Accounting scopes or an approved redacted export</td></tr>
         </tbody>
       </table>
     </div>

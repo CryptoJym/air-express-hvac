@@ -86,6 +86,7 @@ const historyStatus = readJson("data/google-history/history-pull-status.json");
 const mappingStatus = readJson("data/newreward-air-express-provider-readonly-recheck.json");
 const serviceTitanStatus = readJson("data/servicetitan-export-access-check.json");
 const serviceTitanLeadSummary = readJson("data/servicetitan-api-lead-history-summary.json");
+const serviceTitanJoinProbe = readJson("data/servicetitan-attribution-join-probe.json");
 
 const expectedCompletion = {
   "#24": { status: "open", completion_state: "parent_incomplete" },
@@ -94,7 +95,7 @@ const expectedCompletion = {
   "#27": { status: "open", completion_state: "blocked_scope" },
   "#28": { status: "open", completion_state: liveMeasurement.status },
   "#29": { status: "open", completion_state: "prepared_blocked_by_data_access" },
-  "#30": { status: "open", completion_state: "partial_api_history_pulled_revenue_blocked" },
+  "#30": { status: "open", completion_state: "partial_api_history_pulled_join_scope_blocked" },
 };
 
 const checks = [];
@@ -172,19 +173,27 @@ check(
 );
 
 const row30 = completionByIssue.get("#30") || {};
+const joinProbes = Array.isArray(serviceTitanJoinProbe.probes) ? serviceTitanJoinProbe.probes : [];
+const bookingProbe = joinProbes.find((probe) => probe.surface === "CRM export bookings") || {};
+const jobsProbe = joinProbes.find((probe) => probe.surface === "JPM export jobs") || {};
 check(
   "#30-servicetitan-alignment",
   serviceTitanStatus.status === "auth_ready_no_export" &&
     serviceTitanLeadSummary.status === "api_history_pulled" &&
+    serviceTitanJoinProbe.status === "partial_join_surfaces_readable" &&
+    serviceTitanJoinProbe.requested?.from === "2020-01-01" &&
+    Number(bookingProbe.rowCount || 0) === 0 &&
+    jobsProbe.status === "blocked" &&
+    Number(jobsProbe.httpStatus || 0) === 403 &&
     Number(serviceTitanLeadSummary.rows || 0) === 78 &&
     Number(serviceTitanLeadSummary.websiteCampaignLeadCount || 0) === 76 &&
     serviceTitanLeadSummary.captcha?.date === "2026-06-04" &&
     serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-05-25" && Number(week.totalLeads || 0) === 0) &&
     serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-06-01" && Number(week.totalLeads || 0) === 0) &&
-    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted", "CAPTCHA"]) &&
-    includesAll(row30.remaining_blocker, ["booking", "revenue"]),
-  `serviceTitanStatus.status=${serviceTitanStatus.status}; serviceTitanLeadSummary.status=${serviceTitanLeadSummary.status}; #30 evidence=${row30.current_evidence || ""}`,
-  "Refresh ServiceTitan export/import evidence and #30 matrix row together."
+    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted", "CAPTCHA", "403", "scope"]) &&
+    includesAll(row30.remaining_blocker, ["booking", "revenue", "JPM", "Accounting"]),
+  `serviceTitanStatus.status=${serviceTitanStatus.status}; serviceTitanLeadSummary.status=${serviceTitanLeadSummary.status}; joinProbe.status=${serviceTitanJoinProbe.status}; #30 evidence=${row30.current_evidence || ""}`,
+  "Refresh ServiceTitan lead history, join probe, and #30 matrix row together."
 );
 
 const acceptanceByIssue = new Map();
@@ -226,6 +235,7 @@ const result = {
     newRewardMappingStatus: mappingStatus.status,
     serviceTitanStatus: serviceTitanStatus.status,
     serviceTitanLeadStatus: serviceTitanLeadSummary.status || "",
+    serviceTitanJoinProbeStatus: serviceTitanJoinProbe.status || "",
   },
   summary: {
     checks: checks.length,

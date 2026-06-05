@@ -75,6 +75,7 @@ Evidence classes:
 | Air Express package/report links were not client-ready in May evidence | user_verified | Outlook evidence from 2026-05-05 and 2026-05-11 says an Air Express technical infrastructure package link/button was not working and a Social Media Strategy package link was broken before a requested walkthrough. This supports the public artifact readiness blocker and does not prove production artifacts are currently fixed. |
 | Lead conversion tracking is prepared locally | repo_verified | `intake-form.js` emits a guarded GA4 `generate_lead` event after successful intake returns only when `window.gtag` exists; `contact.html`, `request-estimate.html`, and `schedule-service.html` each load `/analytics.js`, load `intake-form.js`, and expose `data-intake-form`; `api/_lib/intake.js` passes safe `trace_id` and UTM fields into ServiceTitan notes. `data/live-measurement-path-check.json` records this as `prepared_source_pending_live`, and `npm run verify:onboarding-evidence` now verifies all three lead form paths individually. This is not live until approved deploy or edge sync. |
 | ServiceTitan lead history is pulled through the option-c credential path | repo_verified | `npm run verify:servicetitan-export` now writes `data/servicetitan-export-access-check.json` with status `auth_ready_no_export` after pulling the separate Vercel `option-c` production env into a temp-only file. `npm run pull:servicetitan-lead-history` writes `data/servicetitan-api-lead-history-summary.json` and `data/servicetitan-api-lead-history-redacted.csv` with 78 redacted lead rows from 2026-01-01 through 2026-06-05, including 76 configured website campaign rows, service-type buckets, weekly zero-fill through the week beginning 2026-06-01, and CAPTCHA source-period markers. Stored fields exclude customer names, phone numbers, emails, addresses, summaries, lead URLs, raw payloads, credential values, and tokens. The remaining blocker is booked-job/revenue attribution: the CRM v2 leads response included 0 booking IDs and no approved revenue fields. |
+| ServiceTitan booking/revenue join probe is partially readable but scope-blocked | repo_verified / official_doc | `npm run probe:servicetitan-attribution-joins -- --from 2020-01-01` writes `data/servicetitan-attribution-join-probe.json`. It confirms CRM export bookings is readable but returned 0 rows from the widened cursor, while JPM export jobs and Accounting export invoices, invoice items, and payments returned HTTP 403 `Scope validation failed` blockers. Current ServiceTitan docs identify the jobs export as requiring Job Planning and Management > Jobs (Read) and invoice-items export as requiring Accounting > Invoice Items (Read); the remaining accounting exports also require Accounting read entitlements. No credential values, tokens, raw payloads, customer PII, job summaries, invoice line text, or lead URLs are stored. |
 | ServiceTitan redacted export import path is prepared | repo_verified | `npm run import:servicetitan-redacted-export` writes `data/servicetitan-redacted-export-template.csv` and `data/servicetitan-redacted-export-import-status.json`; current status is `awaiting_input`. `npm run test:servicetitan-redacted-import` verifies awaiting-input behavior, safe alias normalization, and PII column/value rejection without persisting raw private values. If an approved redacted CSV is supplied later, the command writes only safe lead id, date, campaign/source, service category, status, optional booking id, and approved sold/revenue marker fields. No ServiceTitan API call, CRM mutation, live test lead, Drive mutation, or production change occurs. |
 | Local SEO/GEO source audit is clean for technical SEO and messaging | repo_verified | `npm run audit:seo-geo-attribution` on 2026-06-03 regenerated `data/seo-geo-attribution-audit.json` and `pages/seo-geo-attribution-report.html` with scores: technical `100`, GEO `90`, messaging `100`, attribution `25`. Remaining findings are live/provider sync blockers, not local metadata or messaging blockers. |
 
@@ -104,6 +105,8 @@ Evidence classes:
 | Bing Places | official_doc | free service to claim existing listings or add new listings for Bing and Bing Maps |
 | Nextdoor Business Page | official_doc | businesses claim or create a Business Page and may need verification documents |
 | MapQuest business listings | official_doc | MapQuest listing management/duplicate handling exists through its business listings help/Yext flow |
+| ServiceTitan JPM jobs export | official_doc | The jobs export is a read-only export feed requiring Job Planning and Management > Jobs (Read) |
+| ServiceTitan Accounting invoice items export | official_doc | The invoice-items export is a read-only export feed requiring Accounting > Invoice Items (Read) |
 
 Official links used:
 
@@ -125,6 +128,12 @@ Official links used:
   `https://business.nextdoor.com/en-us/getting-started/business-page`
 - MapQuest business listings help:
   `https://help.mapquest.com/hc/en-us/categories/200432404-Business-Listings`
+- ServiceTitan JPM export jobs:
+  `https://developer.servicetitan.io/docs/apis/tenant-jpm-v2/endpoints/Export_Jobs`
+- ServiceTitan Accounting export invoice items:
+  `https://developer.servicetitan.io/docs/apis/tenant-accounting-v2/endpoints/Export_InvoiceItems`
+- ServiceTitan Data Export API overview:
+  `https://developer.servicetitan.io/docs/transactional-and-export-apis`
 
 ## Unknowns And Claim Limits
 

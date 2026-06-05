@@ -15,6 +15,7 @@
     "pull:newreward-attribution-history": "node scripts/pull-newreward-attribution-history.mjs",
     "pull:gsc-ga4-history": "node scripts/pull-gsc-ga4-history.mjs",
     "pull:servicetitan-lead-history": "node scripts/pull-servicetitan-lead-history.mjs",
+    "probe:servicetitan-attribution-joins": "node scripts/probe-servicetitan-attribution-joins.mjs",
     "verify:onboarding-evidence": "node scripts/verify-onboarding-evidence.mjs",
     "verify:newreward-mapping": "node scripts/verify-newreward-air-express-mapping.mjs",
     "verify:live-measurement": "node scripts/verify-live-measurement-path.mjs",
