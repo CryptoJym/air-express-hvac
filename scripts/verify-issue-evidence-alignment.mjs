@@ -144,8 +144,8 @@ check(
   historyStatus.status === "blocked" &&
     historyStatus.gsc?.status === "blocked_scope" &&
     historyStatus.ga4?.status === "blocked_scope" &&
-    historyStatus.gbp?.status === "blocked_scope" &&
-    includesAll(row27.current_evidence, ["webmasters.readonly", "analytics.readonly", "business.manage"]),
+    historyStatus.gbp?.status === "not_included" &&
+    includesAll(row27.current_evidence, ["webmasters.readonly", "analytics.readonly", "not_included"]),
   `history status=${historyStatus.status}; gsc=${historyStatus.gsc?.status}; ga4=${historyStatus.ga4?.status}; gbp=${historyStatus.gbp?.status}`,
   "Refresh the Google history pull and #27 matrix row together."
 );
@@ -165,7 +165,7 @@ const row29 = completionByIssue.get("#29") || {};
 check(
   "#29-impact-report-alignment",
   historyStatus.status === "blocked" &&
-    includesAll(row29.current_evidence, ["blocked state", "GSC", "GA4", "GBP"]) &&
+    includesAll(row29.current_evidence, ["blocked state", "GSC", "GA4", "ServiceTitan", "CAPTCHA"]) &&
     includesAll(row29.remaining_blocker, ["read scopes", "provider"]),
   `historyStatus.status=${historyStatus.status}; #29 evidence=${row29.current_evidence || ""}`,
   "Refresh the history pull/report and #29 matrix row together."
@@ -178,7 +178,10 @@ check(
     serviceTitanLeadSummary.status === "api_history_pulled" &&
     Number(serviceTitanLeadSummary.rows || 0) === 78 &&
     Number(serviceTitanLeadSummary.websiteCampaignLeadCount || 0) === 76 &&
-    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted"]) &&
+    serviceTitanLeadSummary.captcha?.date === "2026-06-04" &&
+    serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-05-25" && Number(week.totalLeads || 0) === 0) &&
+    serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-06-01" && Number(week.totalLeads || 0) === 0) &&
+    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted", "CAPTCHA"]) &&
     includesAll(row30.remaining_blocker, ["booking", "revenue"]),
   `serviceTitanStatus.status=${serviceTitanStatus.status}; serviceTitanLeadSummary.status=${serviceTitanLeadSummary.status}; #30 evidence=${row30.current_evidence || ""}`,
   "Refresh ServiceTitan export/import evidence and #30 matrix row together."

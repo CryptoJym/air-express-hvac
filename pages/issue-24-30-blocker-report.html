@@ -52,7 +52,7 @@
     <h1>Air Express Issue 24-30 Blocker Report</h1>
     <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T19:37:39.481Z</span>
+      <span class="pill">Generated 2026-06-05T20:15:19.803Z</span>
       <span class="pill">Repo: CryptoJym/air-express-hvac</span>
       <span class="pill">No provider mutations attempted</span>
       <span class="pill">No Air Express production deploy attempted</span>
@@ -104,7 +104,7 @@
             <td><span class="state blocked-state">parent incomplete</span></td>
             <td>Issue comments updated; pages/new-reward-impact-report.html and pages/seo-geo-attribution-report.html regenerated; data/attribution-email-evidence.csv now preserves Gmail and Outlook root-cause evidence; data/public-claim-register.json records clean public-claim state; child issues #26-#30 remain open</td>
             <td>Local reports, source evidence map, history pull status, saved New Reward snapshot history, mailbox evidence ledger, public claim register, and blocker comments were refreshed without provider or production mutations</td>
-            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google read scopes/property or location proof, live sync, and ServiceTitan booked-job/revenue proof</td>
+            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google GSC/GA4 read scopes/property proof, live sync, and ServiceTitan booked-job/revenue proof. GBP is a separate later lane in this refresh.</td>
             <td>All child issues are closed or explicitly blocked with exact evidence; live report shows pulled history or narrowed provider-specific blockers</td>
             <td>Resolve #26, #27, #28, #29, and #30 in sequence</td>
           </tr>
@@ -132,10 +132,10 @@
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/27">#27</a></td>
             <td>open</td>
             <td><span class="state blocked-state">blocked scope</span></td>
-            <td>data/google-history/history-pull-status.json shows newrewardplatform@gmail.com is available locally; sanitized visibleScopes are present for gcloud and ADC candidates, but both lack webmasters.readonly analytics.readonly and business.manage</td>
-            <td>ADC/token availability and sanitized scope inventory checked without printing token material; Gmail evidence searched for Air Express Google setup state; April 22 and May 7 recaps support credential/status drift; 2026-06-03 current Gmail and Google Drive rechecks found no new GTM/property/scope/provider-row proof; GBP blocker is now explicit in the pull status; docs/air-express-google-readonly-reconnect-packet.md is prepared with scopes stop gates and verification commands</td>
-            <td>Read-only Google OAuth re-consent is required and may hit account chooser, MFA, recovery, owner-verification, or Business Profile location gates</td>
-            <td>npm run pull:gsc-ga4-history writes GSC GA4 and GBP history files or narrowed property/location-specific blockers after scoped re-auth</td>
+            <td>data/google-history/history-pull-status.json shows newrewardplatform@gmail.com is available locally; sanitized visibleScopes are present for gcloud and ADC candidates, but both lack webmasters.readonly and analytics.readonly. GBP is marked not_included for this refresh.</td>
+            <td>ADC/token availability and sanitized scope inventory checked without printing token material; Gmail evidence searched for Air Express Google setup state; April 22 and May 7 recaps support credential/status drift; 2026-06-03 current Gmail and Google Drive rechecks found no new GTM/property/scope/provider-row proof; docs/air-express-google-readonly-reconnect-packet.md is prepared with scopes stop gates and verification commands</td>
+            <td>Read-only Google OAuth re-consent is required for GSC/GA4 and may hit account chooser, MFA, recovery, owner-verification, or provider/property gates</td>
+            <td>npm run pull:gsc-ga4-history -- --skip-gbp writes GSC and GA4 history files or narrowed property-specific blockers after scoped re-auth</td>
             <td>Run the prepared Google read-only reconnect packet after #26 UI/provider target is confirmed; stop at MFA recovery wrong-account unexpected-scope or provider-mutation gates</td>
           </tr>
           <tr>
@@ -152,21 +152,21 @@
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/29">#29</a></td>
             <td>open</td>
             <td><span class="state prepared">prepared blocked by data access</span></td>
-            <td>pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, and saved New Reward snapshot evidence; direct GSC GA4 and GBP histories are not pulled due missing local read scopes, but saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.</td>
-            <td>History pull script and Pages report generated current blocker state with explicit GBP business.manage evidence plus visible/missing scope metadata; npm run pull:newreward-attribution-history pulled saved New Reward snapshot history read-only; docs/air-express-google-readonly-reconnect-packet.md defines the output contract and pass/fail gates</td>
-            <td>Direct GSC/GA4/GBP provider API read scopes, GA4 property selection, GBP location visibility, GSC revoked/error repair, and live tag delivery remain blocked; ServiceTitan export is still unavailable for attribution joining.</td>
-            <td>Report contains GSC GA4 and GBP rows by period or narrowed provider/property/location blockers; source coverage and caveats are current; saved New Reward snapshot sections remain traceable</td>
-            <td>After #26 provider/UI recheck and #27 scoped access, rerun npm run pull:newreward-attribution-history, npm run pull:gsc-ga4-history, npm run audit:seo-geo-attribution, and npm run verify:onboarding-evidence.</td>
+            <td>pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, saved New Reward snapshot evidence, ServiceTitan weekly lead trend, service-type mix, and CAPTCHA marker; direct GSC and GA4 histories are not pulled due missing local read scopes, while GBP is excluded from this refresh. Saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.</td>
+            <td>History pull script and Pages report generated current blocker state with explicit GSC/GA4 missing scope metadata; npm run pull:newreward-attribution-history pulled saved New Reward snapshot history read-only; ServiceTitan API pull added current weekly/service/CAPTCHA-safe lead evidence; docs/air-express-google-readonly-reconnect-packet.md defines the output contract and pass/fail gates</td>
+            <td>Direct GSC/GA4 provider API read scopes, GA4 property selection, GSC revoked/error repair, and live tag delivery remain blocked; booked-job/revenue attribution remains unavailable from the current ServiceTitan lead endpoint.</td>
+            <td>Report contains GSC and GA4 rows by period or narrowed provider/property blockers; source coverage and caveats are current; saved New Reward snapshot and ServiceTitan lead-trend sections remain traceable</td>
+            <td>After #26 provider/UI recheck and #27 scoped access, rerun npm run pull:newreward-attribution-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run audit:seo-geo-attribution, and npm run verify:onboarding-evidence.</td>
           </tr>
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/30">#30</a></td>
             <td>open</td>
             <td><span class="state partial">partial api history pulled revenue blocked</span></td>
-            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, and 0 rows with booking ids. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/campaign/status/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.</td>
-            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
-            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; direct Google/GA4/GBP history and live GA4 delivery are still blocked in #27-#29.</td>
-            <td>Impact report includes ServiceTitan lead counts by period and week with no customer PII; booked-job and revenue attribution either become joined through an approved endpoint/export or remain blocked with exact proof.</td>
-            <td>Use the pulled redacted lead history for lead-count trend comparison, verify whether CRM v2 export/bookings or another approved ServiceTitan report can provide booking/revenue joins, then rerun npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
+            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.</td>
+            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, classified service type from fixed keywords without storing raw summaries, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
+            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; live Turnstile is not yet verified because public assets are older and /api/turnstile/config returns 404; direct GSC/GA4 history and live GA4 delivery are still blocked in #27-#29.</td>
+            <td>Impact report includes ServiceTitan lead counts by period, week, service type, and CAPTCHA source marker with no customer PII; booked-job and revenue attribution either become joined through an approved endpoint/export or remain blocked with exact proof.</td>
+            <td>Use the pulled redacted lead history for lead-count trend comparison, verify whether CRM v2 export/bookings or another approved ServiceTitan report can provide booking/revenue joins, then rerun npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
           </tr>
         </tbody>
       </table>

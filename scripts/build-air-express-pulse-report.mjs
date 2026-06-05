@@ -98,6 +98,20 @@ function formatPercent(value, digits = 1) {
   })}%`;
 }
 
+function labelize(value) {
+  return String(value || "unknown")
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function formatMix(object = {}) {
+  const entries = Object.entries(object)
+    .filter(([, value]) => Number(value || 0) > 0)
+    .sort(([, a], [, b]) => Number(b || 0) - Number(a || 0));
+  if (!entries.length) return "none observed";
+  return entries.map(([key, value]) => `${labelize(key)}: ${formatInteger(value)}`).join("; ");
+}
+
 function statusClass(value) {
   const text = String(value || "").toLowerCase();
   if (/verified|ready_in_source|public_baseline_seeded|saved_snapshot|complete|available/.test(text)) {
@@ -170,13 +184,28 @@ const readyBriefs = contentBriefs.filter((row) => /ready/.test(row.status || "")
 const blockedHypotheses = hypotheses.filter((row) => /blocked/.test(row.validation_status || row.blocker || "")).length;
 const competitorSeeds = competitors.filter((row) => row.entity_type === "competitor").length;
 const generatedAt = new Date().toISOString();
-const serviceTitanWeeklyRows = Object.entries(serviceTitanLeadSummary.countsByWeek || {})
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([week, count]) => ({
-    week,
+const serviceTitanWeeklyRows = Array.isArray(serviceTitanLeadSummary.completeWeeklyTrend)
+  ? serviceTitanLeadSummary.completeWeeklyTrend
+  : Object.entries(serviceTitanLeadSummary.countsByWeek || {})
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([week, count]) => ({
+      week,
+      totalLeads: count,
+      websiteCampaignLeads: serviceTitanLeadSummary.websiteCampaignCountsByWeek?.[week] || 0,
+      serviceTypes: serviceTitanLeadSummary.countsByWeekServiceType?.[week] || {},
+      statuses: serviceTitanLeadSummary.countsByWeekStatus?.[week] || {},
+      captchaPeriod: "not_recorded",
+    }));
+const serviceTitanServiceRows = Object.entries(serviceTitanLeadSummary.countsByServiceType || {})
+  .sort(([, a], [, b]) => Number(b || 0) - Number(a || 0))
+  .map(([serviceType, count]) => ({
+    serviceType,
     count,
-    websiteCount: serviceTitanLeadSummary.websiteCampaignCountsByWeek?.[week] || 0,
+    websiteCount: serviceTitanLeadSummary.websiteCampaignCountsByServiceType?.[serviceType] || 0,
   }));
+const captchaSummary = serviceTitanLeadSummary.captcha || {};
+const captchaCounts = serviceTitanLeadSummary.countsByCaptchaPeriod || {};
+const captchaQuality = serviceTitanLeadSummary.qualityProxyByCaptchaPeriod || {};
 
 const providerRows = [
   {
@@ -195,9 +224,9 @@ const providerRows = [
   },
   {
     surface: "GBP",
-    status: historyStatus.gbp?.status || "proof_pending",
-    evidence: historyStatus.gbp?.evidence || "Business Profile location proof is not available locally.",
-    nextAction: "Confirm Air Express location visibility after scoped account access.",
+    status: "not_included_current_pass",
+    evidence: "Google Business Profile is intentionally excluded from this refresh; James scoped the immediate expectation to GSC and GA4.",
+    nextAction: "Handle GBP separately after GSC/GA4 attribution and live measurement are repaired.",
   },
   {
     surface: "ServiceTitan",
@@ -277,7 +306,7 @@ const html = `<!doctype html>
   </header>
   <main>
     <section class="note">
-      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while GSC/GA4/GBP read scopes, live GA4 delivery, and ServiceTitan joins remain required for hard attribution.
+      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while direct GSC/GA4 read scopes, live GA4 delivery, and ServiceTitan booking/revenue joins remain required for hard attribution. Google Business Profile is not included in this pass.
     </section>
 
     <h2>Strategy Decision</h2>
@@ -291,8 +320,29 @@ const html = `<!doctype html>
       <article class="card"><h3>Saved GSC Impressions</h3><div class="metric good">${formatInteger(latestGsc.total_impressions)}</div><p>${escapeHtml(latestGsc.dateRange?.start || "pending")} to ${escapeHtml(latestGsc.dateRange?.end || "pending")} from saved New Reward snapshots.</p></article>
       <article class="card"><h3>Saved GSC Clicks</h3><div class="metric good">${formatInteger(latestGsc.total_clicks)}</div><p>CTR ${formatPercent(latestGsc.average_ctr, 1)}; average position ${formatDecimal(latestGsc.average_position, 1)}.</p></article>
       <article class="card"><h3>Saved AI Mentions</h3><div class="metric warn">${formatInteger(totalAiMentions)}</div><p>Latest weekly saved row: ${formatInteger(latestAiWeek.mentions)} mentions and ${formatInteger(latestAiWeek.citations)} citations.</p></article>
-      <article class="card"><h3>Attribution Score</h3><div class="metric bad">${escapeHtml(attributionScore)}</div><p>Blocked until direct Google scopes, GA4 property/live tag, GBP proof, and ServiceTitan joins are restored.</p></article>
+      <article class="card"><h3>Attribution Score</h3><div class="metric bad">${escapeHtml(attributionScore)}</div><p>Blocked until direct GSC/GA4 scopes, GA4 property/live tag, and ServiceTitan booking/revenue joins are restored.</p></article>
     </section>
+
+    <h2>CAPTCHA / Lead Quality Marker</h2>
+    <section class="decision">
+      <p><strong>Cloudflare Turnstile source was added on ${escapeHtml(captchaSummary.date || "pending")}.</strong> Git evidence: ${escapeHtml(captchaSummary.commit || "pending")} at ${escapeHtml(captchaSummary.timestamp || "pending")}.</p>
+      <p>Current live check still shows the public forms serving older assets and <code>/api/turnstile/config</code> returning 404, so this is a source-ready marker, not verified live CAPTCHA impact.</p>
+    </section>
+    ${table(["Period", "Lead Count", "Dismissed", "Open", "Converted", "Dismissed Rate", "Interpretation"], [
+      "before_source_captcha",
+      "source_captcha_day_or_after",
+    ].map((period) => {
+      const quality = captchaQuality[period] || {};
+      return `<tr>
+        <td>${labelize(period)}</td>
+        <td>${formatInteger(captchaCounts[period] || quality.total || 0)}</td>
+        <td>${formatInteger(quality.dismissed || 0)}</td>
+        <td>${formatInteger(quality.open || 0)}</td>
+        <td>${formatInteger(quality.converted || 0)}</td>
+        <td>${formatPercent(quality.dismissedRate || 0)}</td>
+        <td>${escapeHtml(quality.interpretation || "Pending ServiceTitan lead evidence.")}</td>
+      </tr>`;
+    }))}
 
     <h2>SEO/GEO Scores</h2>
     <section class="grid">
@@ -335,11 +385,22 @@ const html = `<!doctype html>
     </tr>`))}
 
     <h2>ServiceTitan Lead Trend</h2>
-    ${table(["Week", "Redacted Leads", "Configured Website Campaign", "Read"], serviceTitanWeeklyRows.length ? serviceTitanWeeklyRows.map((row) => `<tr>
+    ${table(["Week", "Redacted Leads", "Configured Website Campaign", "Service Mix", "Status Mix", "CAPTCHA Marker", "Read"], serviceTitanWeeklyRows.length ? serviceTitanWeeklyRows.map((row) => `<tr>
       <td>${escapeHtml(row.week)}</td>
+      <td>${formatInteger(row.totalLeads ?? row.count)}</td>
+      <td>${formatInteger(row.websiteCampaignLeads ?? row.websiteCount)}</td>
+      <td>${escapeHtml(formatMix(row.serviceTypes))}</td>
+      <td>${escapeHtml(formatMix(row.statuses))}</td>
+      <td>${statePill(row.captchaPeriod)}</td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>`) : [`<tr><td>pending</td><td>0</td><td>0</td><td>none observed</td><td>none observed</td><td>${statePill("not_pulled")}</td><td>ServiceTitan API lead history has not been pulled.</td></tr>`])}
+
+    <h2>ServiceTitan Service-Type Mix</h2>
+    ${table(["Service Type", "Redacted Leads", "Configured Website Campaign", "Read"], serviceTitanServiceRows.length ? serviceTitanServiceRows.map((row) => `<tr>
+      <td>${escapeHtml(labelize(row.serviceType))}</td>
       <td>${formatInteger(row.count)}</td>
       <td>${formatInteger(row.websiteCount)}</td>
-      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
     </tr>`) : [`<tr><td>pending</td><td>0</td><td>0</td><td>ServiceTitan API lead history has not been pulled.</td></tr>`])}
 
     <h2>Competitor And Entity Baseline</h2>

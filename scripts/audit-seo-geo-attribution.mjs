@@ -410,11 +410,13 @@ function isoDateDaysAgo(days) {
 
 async function pullGoogleData() {
   const auth = gcloudToken();
+  const historyStatus = readOptionalJson(join(root, "data/google-history/history-pull-status.json"));
   const base = {
     auth: auth.ok ? { ok: true, account: auth.account, project: auth.project } : auth,
     gsc: { status: "blocked", rows: [], sites: [] },
     ga4: { status: "blocked", rows: [], accounts: [] },
     gbp: { status: "blocked", rows: [], locations: [] },
+    includedGoogleSurfaces: historyStatus?.requested?.includedGoogleSurfaces || ["gsc", "ga4", "gbp"],
   };
 
   if (!auth.ok) return base;
@@ -494,7 +496,20 @@ async function pullGoogleData() {
       base.ga4.rows = data.json.rows || [];
     }
   }
-  const historyStatus = readOptionalJson(join(root, "data/google-history/history-pull-status.json"));
+  if (historyStatus?.gsc && base.gsc.status !== "pulled") {
+    base.gsc = {
+      ...base.gsc,
+      status: historyStatus.gsc.status || base.gsc.status,
+      blocker: historyStatus.gsc.evidence || base.gsc.blocker || "",
+    };
+  }
+  if (historyStatus?.ga4 && base.ga4.status !== "pulled") {
+    base.ga4 = {
+      ...base.ga4,
+      status: historyStatus.ga4.status || base.ga4.status,
+      blocker: historyStatus.ga4.evidence || base.ga4.blocker || "",
+    };
+  }
   if (historyStatus?.gbp) {
     base.gbp = {
       status: historyStatus.gbp.status || "blocked",
@@ -538,20 +553,66 @@ function aggregateGoogleRows(gscRows, gaRows) {
   return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
 }
 
+function includeGbpForGoogle(google) {
+  return google?.gbp?.status !== "not_included";
+}
+
+function scopeTextForCurrentPass(value = "", { includeGbp = true } = {}) {
+  if (includeGbp) return value;
+  return String(value || "")
+    .replaceAll("GSC/GA4/GBP", "GSC/GA4")
+    .replaceAll("GSC, GA4, and GBP", "GSC and GA4")
+    .replaceAll("Search Console, GA4, and Google Business Profile", "Search Console and GA4")
+    .replaceAll("Search Console, GA4, and Business Profile", "Search Console and GA4")
+    .replaceAll("Search Console, GA4, and GBP", "Search Console and GA4")
+    .replaceAll("Google provider records", "Google GSC/GA4 provider records")
+    .replaceAll(", GBP location/provider proof is still missing", "")
+    .replaceAll("GBP location/provider proof is still missing, ", "")
+    .replaceAll("GA4 propertyId is null location/provider proof is still missing, ", "GA4 propertyId is null, ")
+    .replaceAll("GA4 propertyId is null location/provider proof is still missing", "GA4 propertyId is null")
+    .replaceAll("lacks Search Console, GA4, and Business Profile read scopes", "lacks Search Console and GA4 read scopes")
+    .replaceAll("Google Business Profile business.manage scopes", "the GSC/GA4 product scopes")
+    .replaceAll("webmasters.readonly, analytics.readonly, and business.manage", "webmasters.readonly and analytics.readonly")
+    .replaceAll("GSC/GA4/GBP read access", "GSC/GA4 read access")
+    .replaceAll("property/location visibility", "property visibility")
+    .replaceAll("properties/location", "properties")
+    .replaceAll(" and GBP", "")
+    .replaceAll(", GBP", "");
+}
+
+function scopeValueForCurrentPass(value, { includeGbp = true } = {}) {
+  if (includeGbp) return value;
+  if (typeof value === "string") return scopeTextForCurrentPass(value, { includeGbp });
+  if (Array.isArray(value)) return value.map((item) => scopeValueForCurrentPass(item, { includeGbp }));
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [key, scopeValueForCurrentPass(item, { includeGbp })])
+    );
+  }
+  return value;
+}
+
+function scopedNewRewardAttributionCheck(newRewardCheck, { includeGbp = true } = {}) {
+  if (!newRewardCheck) return newRewardCheck;
+  return scopeValueForCurrentPass(newRewardCheck, { includeGbp });
+}
+
 function applyNewRewardAttributionCheck(google, newRewardCheck) {
   if (!newRewardCheck) return google;
   const result = structuredClone(google);
-  result.newRewardSystem = newRewardCheck;
+  const includeGbp = includeGbpForGoogle(result);
+  const scopedCheck = scopedNewRewardAttributionCheck(newRewardCheck, { includeGbp });
+  result.newRewardSystem = scopedCheck;
 
-  if (newRewardCheck.status === "blocked") {
-    const blocker = newRewardCheck.blocker || "Air Express attribution source is not available in the reachable New Reward control-plane records.";
+  if (scopedCheck.status === "blocked") {
+    const blocker = scopedCheck.blocker || "Air Express attribution source is not available in the reachable New Reward control-plane records.";
     if (result.gsc.status !== "pulled") {
       result.gsc = { ...result.gsc, status: "blocked", blocker };
     }
     if (result.ga4.status !== "pulled") {
       result.ga4 = { ...result.ga4, status: "blocked", blocker };
     }
-    if (result.gbp.status !== "pulled") {
+    if (includeGbp && result.gbp.status !== "pulled") {
       result.gbp = { ...result.gbp, status: "blocked", blocker };
     }
   }
@@ -703,6 +764,7 @@ function buildRootCauseMap(context) {
     localLlmsHash,
     localRobotsHash,
     publicClaimRegister,
+    includeGbpInAudit = true,
   } = context;
 
   const blockers = [];
@@ -713,13 +775,17 @@ function buildRootCauseMap(context) {
       severity: "Critical",
       area: "Attribution / New Reward",
       status: "blocked",
-      issue: "Air Express GSC/GA4/GBP source cannot be pulled through New Reward",
+      issue: includeGbpInAudit
+        ? "Air Express GSC/GA4/GBP source cannot be pulled through New Reward"
+        : "Air Express GSC/GA4 source cannot be pulled through New Reward",
       rootCause: newRewardAttributionCheck.rootCause
         || "Reachable New Reward control-plane records and saved credential metadata do not contain an Air Express client, tenant, website, GSC connection, GA4 connection, or stored snapshot source.",
       evidence: newRewardAttributionCheck.blocker,
       workaround: "Checks used the authenticated Air Express New Reward setup, settings, and SEO workspace pages; repo-local source; prior reachable credential metadata; and public live-edge artifact checks. No provider connection, deploy, DNS, CRM, OAuth, or public mutation was completed.",
       nextAction: newRewardAttributionCheck.nextAction
-        || "Create or repair the Air Express New Reward source mapping, connect the correct GSC/GA4 properties and GBP location, then rerun this audit.",
+        || (includeGbpInAudit
+          ? "Create or repair the Air Express New Reward source mapping, connect the correct GSC/GA4 properties and GBP location, then rerun this audit."
+          : "Create or repair the Air Express New Reward source mapping, connect the correct GSC/GA4 properties, then rerun this audit."),
     });
   }
 
@@ -995,6 +1061,15 @@ function renderReport(audit) {
         "Rerun npm run verify:owned-site-delivery-sync after approved deploy, edge sync, or manual artifact sync.",
       ])
     : "";
+  const includeGbpInReport = audit.attribution.gbp?.status !== "not_included";
+  const googleSurfaceLabel = includeGbpInReport ? "GSC/GA4/GBP" : "GSC/GA4";
+  const googleTimelineLabel = includeGbpInReport ? "GSC, GA4, and GBP timeline" : "GSC and GA4 timeline";
+  const googleTraceabilityText = includeGbpInReport
+    ? "Traceability should connect Search Console impressions/clicks, GA4 landing-page sessions and conversion events, and Google Business Profile location activity to ServiceTitan lead IDs/campaign notes."
+    : "Traceability should connect Search Console impressions/clicks and GA4 landing-page sessions/conversion events to ServiceTitan lead IDs/campaign notes. Google Business Profile is intentionally outside this refresh and should be handled separately after GSC/GA4 attribution and live measurement are repaired.";
+  const gbpRow = includeGbpInReport
+    ? row(["Google Business Profile", htmlEscape(audit.attribution.gbp.status), htmlEscape(audit.attribution.gbp.blocker || `${audit.attribution.gbp.rows.length} rows pulled`), "Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, then confirm the Air Express Business Profile location before pulling performance history."])
+    : row(["Google Business Profile", htmlEscape(audit.attribution.gbp.status), htmlEscape(audit.attribution.gbp.blocker || "Excluded from this GSC/GA4 refresh."), "Handle GBP separately after GSC/GA4 attribution and live measurement are repaired."]);
 
   return `<!doctype html>
 <html lang="en">
@@ -1064,7 +1139,7 @@ function renderReport(audit) {
       <article class="card"><h3>Accessibility</h3><div class="metric ${audit.scores.accessibility >= 85 ? "good" : audit.scores.accessibility >= 70 ? "warn" : "bad"}">${audit.scores.accessibility}</div><p>Automated checks for page language, landmarks, labels, headings, links, buttons, and image alternatives.</p></article>
     </section>
 
-    ${audit.attribution.status === "blocked" ? `<h2>Attribution Pull Blocked</h2><div class="blocked"><strong>GSC/GA4/GBP data was not pulled.</strong> ${htmlEscape(audit.attribution.blocker)} Resolve the listed source/access gap, then rerun <code>npm run audit:seo-geo-attribution</code> to populate this report with time-series data.</div>` : ""}
+    ${audit.attribution.status === "blocked" ? `<h2>Attribution Pull Blocked</h2><div class="blocked"><strong>${googleSurfaceLabel} data was not pulled.</strong> ${htmlEscape(audit.attribution.blocker)} Resolve the listed source/access gap, then rerun <code>npm run audit:seo-geo-attribution</code> to populate this report with time-series data.</div>` : ""}
 
     <h2>Top Fixes</h2>
     <div class="scroll">
@@ -1084,8 +1159,8 @@ function renderReport(audit) {
     </div>
 
     <h2>Attribution Traceability</h2>
-    <canvas id="timeline" width="1100" height="280" aria-label="GSC, GA4, and GBP timeline"></canvas>
-    <p>Traceability should connect Search Console impressions/clicks, GA4 landing-page sessions and conversion events, and Google Business Profile location activity to ServiceTitan lead IDs/campaign notes. ${htmlEscape(tagNarrative)} New Reward attribution remains blocked until the New Reward app session under james@jamesbrady.org can connect or verify the Air Express Google provider records using newrewardplatform@gmail.com.</p>
+    <canvas id="timeline" width="1100" height="280" aria-label="${htmlEscape(googleTimelineLabel)}"></canvas>
+    <p>${htmlEscape(googleTraceabilityText)} ${htmlEscape(tagNarrative)} New Reward attribution remains blocked until the New Reward app session under james@jamesbrady.org can connect or verify the Air Express Google provider records using newrewardplatform@gmail.com.</p>
     <div class="scroll">
       <table>
         <thead><tr><th>Layer</th><th>Status</th><th>Evidence</th><th>Next action</th></tr></thead>
@@ -1093,7 +1168,7 @@ function renderReport(audit) {
           ${audit.attribution.newRewardSystem ? row(["New Reward control plane", htmlEscape(audit.attribution.newRewardSystem.status), htmlEscape(audit.attribution.newRewardSystem.summary || audit.attribution.newRewardSystem.blocker || "Checked."), htmlEscape(audit.attribution.newRewardSystem.nextAction || "Create/repair the Air Express client, tenant, website, GSC, and GA4 source mapping in New Reward.")]) : ""}
           ${row(["Search Console", htmlEscape(audit.attribution.gsc.status), htmlEscape(audit.attribution.gsc.blocker || `${audit.attribution.gsc.rows.length} rows pulled`), "Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, then connect/select the Air Express Search Console property."])}
           ${row(["GA4", htmlEscape(audit.attribution.ga4.status), htmlEscape(audit.attribution.ga4.blocker || `${audit.attribution.ga4.rows.length} rows pulled`), "Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, verify measurement ID G-JZ7PY32EVX, then connect/select the property."])}
-          ${row(["Google Business Profile", htmlEscape(audit.attribution.gbp.status), htmlEscape(audit.attribution.gbp.blocker || `${audit.attribution.gbp.rows.length} rows pulled`), "Sign into New Reward as james@jamesbrady.org, select newrewardplatform@gmail.com in the Google provider flow, then confirm the Air Express Business Profile location before pulling performance history."])}
+          ${gbpRow}
           ${liveMeasurementRow}
           ${deliverySyncRow}
           ${row(["On-site tag", htmlEscape(audit.attribution.onSiteTag.status), htmlEscape(audit.attribution.onSiteTag.evidence), "Deploy/sync the approved GA4 source and verify the live homepage without duplicating events."])}
@@ -1160,7 +1235,7 @@ function renderReport(audit) {
     ctx.fillStyle = "#5f6d7a";
     ctx.font = "16px system-ui, sans-serif";
     if (!points.length) {
-      ctx.fillText("No GSC/GA4/GBP time-series data available yet. Connect the Air Express New Reward Google provider records and rerun.", 32, 140);
+      ctx.fillText("No ${googleSurfaceLabel} time-series data available yet. Connect the Air Express New Reward Google provider records and rerun.", 32, 140);
     } else {
       const pad = 38;
       const max = Math.max(...points.map(p => Math.max(p.clicks, p.sessions, 1)));
@@ -1323,25 +1398,33 @@ async function main() {
   const ownedSiteDeliverySyncCheck = readOptionalJson(ownedSiteDeliverySyncCheckPath);
   const publicClaimRegister = readOptionalJson(publicClaimRegisterPath);
   const google = applyNewRewardAttributionCheck(await pullGoogleData(), newRewardAttributionCheck);
+  const includeGbpInAudit = includeGbpForGoogle(google);
+  const scopedNewRewardCheck = google.newRewardSystem || scopedNewRewardAttributionCheck(newRewardAttributionCheck, { includeGbp: includeGbpInAudit });
   const timeline = aggregateGoogleRows(google.gsc.rows, google.ga4.rows);
 
   const critical = [];
   const high = [];
   const medium = [];
 
-  if (newRewardAttributionCheck?.status === "blocked") {
+  if (scopedNewRewardCheck?.status === "blocked") {
     critical.push({
       priority: "Critical",
-      issue: "Air Express GSC/GA4/GBP attribution source not found in reachable New Reward systems",
-      evidence: newRewardAttributionCheck.blocker,
+      issue: includeGbpInAudit
+        ? "Air Express GSC/GA4/GBP attribution source not found in reachable New Reward systems"
+        : "Air Express GSC/GA4 attribution source is blocked in reachable New Reward systems",
+      evidence: scopedNewRewardCheck.blocker,
       fix: "Use the New Reward app session under james@jamesbrady.org, repair the Air Express client/tenant/website credential mapping, connect the Google provider as newrewardplatform@gmail.com, then rerun this audit from that source.",
     });
   } else if (google.auth.ok === false) {
     critical.push({
       priority: "Critical",
-      issue: "GSC/GA4/GBP pull blocked by expired Google CLI auth",
+      issue: includeGbpInAudit
+        ? "GSC/GA4/GBP pull blocked by expired Google CLI auth"
+        : "GSC/GA4 pull blocked by expired Google CLI auth",
       evidence: google.auth.blocker,
-      fix: "Run interactive Google re-auth for an account with Search Console, GA4, and GBP access, then rerun the audit.",
+      fix: includeGbpInAudit
+        ? "Run interactive Google re-auth for an account with Search Console, GA4, and GBP access, then rerun the audit."
+        : "Run interactive Google re-auth for an account with Search Console and GA4 access, then rerun the audit.",
     });
   }
   if (liveMeasurementCheck?.status === "fixed_locally_pending_live") {
@@ -1561,7 +1644,7 @@ async function main() {
     - accessibilityFindings.filter((item) => item.severity === "High").length * 2
     - accessibilityFindings.filter((item) => item.severity === "Medium").length);
   const blockerRootCauses = buildRootCauseMap({
-    newRewardAttributionCheck,
+    newRewardAttributionCheck: scopedNewRewardCheck,
     liveMeasurementCheck,
     onSiteTagEvidence,
     liveOnSiteTagEvidence,
@@ -1576,6 +1659,7 @@ async function main() {
     localLlmsHash: liveArtifacts.llms?.localHash || "",
     localRobotsHash: liveArtifacts.robots?.localHash || "",
     publicClaimRegister,
+    includeGbpInAudit,
   });
 
   const audit = {
@@ -1661,12 +1745,12 @@ async function main() {
     },
     attribution: {
       status: google.gsc.status === "pulled" || google.ga4.status === "pulled" || google.gbp.status === "pulled" ? "partial_or_pulled" : "blocked",
-      blocker: newRewardAttributionCheck?.status === "blocked"
-        ? newRewardAttributionCheck.blocker
+      blocker: scopedNewRewardCheck?.status === "blocked"
+        ? scopedNewRewardCheck.blocker
         : google.auth.ok === false
         ? `${google.auth.blocker} Active account: ${google.auth.account || "unknown"}.`
         : [google.gsc.blocker, google.ga4.blocker, google.gbp.blocker].filter(Boolean).join(" "),
-      auth: newRewardAttributionCheck?.status === "blocked"
+      auth: scopedNewRewardCheck?.status === "blocked"
         ? {
             ok: false,
             source: "local_gcloud",
@@ -1674,7 +1758,7 @@ async function main() {
             reason: "Local Google CLI auth was not used because the requested source of truth is the New Reward Air Express control-plane mapping.",
           }
         : google.auth,
-      newRewardSystem: newRewardAttributionCheck,
+      newRewardSystem: scopedNewRewardCheck,
       gsc: google.gsc,
       ga4: google.ga4,
       gbp: google.gbp,

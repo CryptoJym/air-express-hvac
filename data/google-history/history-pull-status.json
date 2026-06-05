@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-06-05T19:37:33.449Z",
+  "generatedAt": "2026-06-05T20:15:04.249Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
     "gscStartDate": "2026-01-01",
     "ga4StartDate": "2026-01-01",
-    "gbpStartDate": "2026-01-01",
-    "endDate": "2026-06-03",
+    "gbpStartDate": null,
+    "endDate": "2026-06-05",
     "explicitGscProperty": "",
-    "explicitGa4PropertyId": ""
+    "explicitGa4PropertyId": "",
+    "includedGoogleSurfaces": [
+      "gsc",
+      "ga4"
+    ]
   },
   "evidenceStates": [
     {
@@ -28,7 +32,7 @@
     {
       "state": "blocked",
       "meaning": "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
-      "currentUse": "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join."
+      "currentUse": "GSC/GA4 history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join."
     },
     {
       "state": "not_attempted",
@@ -45,12 +49,12 @@
     "evidence": "Missing analytics.readonly OAuth scope."
   },
   "gbp": {
-    "status": "blocked_scope",
-    "evidence": "Missing business.manage OAuth scope."
+    "status": "not_included",
+    "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
   },
   "source": {
     "status": "blocked",
-    "evidence": "Air Express GSC/GA4/GBP direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, GBP location/provider proof is still missing, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker."
+    "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker."
   },
   "serviceTitan": {
     "status": "auth_ready_no_export",
@@ -88,6 +92,294 @@
       "Dismissed": 55,
       "Open": 22
     },
+    "apiCountsByServiceType": {
+      "ac_repair": 13,
+      "air_quality": 10,
+      "emergency_repair": 5,
+      "heat_pump": 7,
+      "heating_furnace": 9,
+      "maintenance_tuneup": 13,
+      "other": 17,
+      "unclassified_summary": 4
+    },
+    "apiWebsiteCampaignCountsByServiceType": {
+      "ac_repair": 13,
+      "air_quality": 10,
+      "emergency_repair": 5,
+      "heat_pump": 7,
+      "heating_furnace": 9,
+      "maintenance_tuneup": 13,
+      "other": 17,
+      "unclassified_summary": 2
+    },
+    "apiCompleteWeeklyTrend": [
+      {
+        "week": "2026-01-05",
+        "totalLeads": 1,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 1
+        }
+      },
+      {
+        "week": "2026-01-12",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-01-19",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-01-26",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-02",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-09",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-16",
+        "totalLeads": 1,
+        "websiteCampaignLeads": 1,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 1
+        }
+      },
+      {
+        "week": "2026-02-23",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-02",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-09",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-16",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-23",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-30",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-04-06",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-04-13",
+        "totalLeads": 13,
+        "websiteCampaignLeads": 13,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 3,
+          "air_quality": 5,
+          "emergency_repair": 1,
+          "maintenance_tuneup": 1,
+          "other": 2,
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 13
+        }
+      },
+      {
+        "week": "2026-04-20",
+        "totalLeads": 22,
+        "websiteCampaignLeads": 22,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 7,
+          "air_quality": 1,
+          "emergency_repair": 1,
+          "heat_pump": 2,
+          "maintenance_tuneup": 6,
+          "other": 5
+        },
+        "statuses": {
+          "Dismissed": 22
+        }
+      },
+      {
+        "week": "2026-04-27",
+        "totalLeads": 9,
+        "websiteCampaignLeads": 9,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "air_quality": 1,
+          "emergency_repair": 1,
+          "heat_pump": 3,
+          "heating_furnace": 2,
+          "other": 1
+        },
+        "statuses": {
+          "Converted": 1,
+          "Dismissed": 8
+        }
+      },
+      {
+        "week": "2026-05-04",
+        "totalLeads": 6,
+        "websiteCampaignLeads": 6,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "heating_furnace": 3,
+          "maintenance_tuneup": 1,
+          "other": 1
+        },
+        "statuses": {
+          "Dismissed": 6
+        }
+      },
+      {
+        "week": "2026-05-11",
+        "totalLeads": 11,
+        "websiteCampaignLeads": 10,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "air_quality": 1,
+          "heating_furnace": 2,
+          "maintenance_tuneup": 3,
+          "other": 3,
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 4,
+          "Open": 7
+        }
+      },
+      {
+        "week": "2026-05-18",
+        "totalLeads": 15,
+        "websiteCampaignLeads": 15,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "air_quality": 2,
+          "emergency_repair": 2,
+          "heat_pump": 2,
+          "heating_furnace": 2,
+          "maintenance_tuneup": 2,
+          "other": 5
+        },
+        "statuses": {
+          "Open": 15
+        }
+      },
+      {
+        "week": "2026-05-25",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-06-01",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "source_captcha_week_or_after",
+        "serviceTypes": {},
+        "statuses": {}
+      }
+    ],
+    "captcha": {
+      "date": "2026-06-04",
+      "timestamp": "2026-06-04T15:21:32-06:00",
+      "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+      "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
+      "liveStatus": "source_added_pending_live_delivery_verification",
+      "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+    },
+    "qualityProxyByCaptchaPeriod": {
+      "before_source_captcha": {
+        "total": 78,
+        "dismissed": 55,
+        "open": 22,
+        "converted": 1,
+        "dismissedRate": 0.7051282051282052,
+        "convertedRate": 0.01282051282051282,
+        "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+      },
+      "source_captcha_day_or_after": {
+        "total": 0,
+        "dismissed": 0,
+        "open": 0,
+        "converted": 0,
+        "dismissedRate": 0,
+        "convertedRate": 0,
+        "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
+      }
+    },
     "campaignIds": [
       "80365413",
       "80365029"
@@ -114,12 +406,6 @@
       "status": "blocked",
       "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/analytics.readonly.",
       "nextAction": "Run read-only re-auth for newrewardplatform@gmail.com with Analytics readonly scope, then rerun npm run pull:gsc-ga4-history."
-    },
-    {
-      "surface": "Google Business Profile OAuth scope",
-      "status": "blocked",
-      "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/business.manage.",
-      "nextAction": "Run approved read-only re-auth for newrewardplatform@gmail.com with Business Profile scope, confirm Air Express location visibility, then rerun npm run pull:gsc-ga4-history."
     }
   ],
   "tokenRepairAttempt": {
@@ -128,14 +414,13 @@
     "status": "blocked_interactive_oauth_code_gate",
     "account": "newrewardplatform@gmail.com",
     "secretHandling": "No access tokens, refresh tokens, OAuth URLs, verification codes, recovery prompts, cookies, passwords, or credential files are stored in this artifact.",
-    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC, GA4, and GBP history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
+    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC and GA4 history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
     "currentTokenState": {
       "email": "newrewardplatform@gmail.com",
       "present": true,
       "missingRequiredScopes": [
         "https://www.googleapis.com/auth/webmasters.readonly",
-        "https://www.googleapis.com/auth/analytics.readonly",
-        "https://www.googleapis.com/auth/business.manage"
+        "https://www.googleapis.com/auth/analytics.readonly"
       ],
       "visibleScopeClasses": [
         "accounts.reauth",
@@ -161,7 +446,7 @@
         "nextAction": "Include cloud-platform along with the product read scopes in the local ADC repair command."
       },
       {
-        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, GBP, openid, and userinfo.email scopes",
+        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, openid, and userinfo.email scopes",
         "result": "blocked_interactive_oauth_code_gate",
         "evidence": "The command produced a browser OAuth URL and waited for a verification code. The process was stopped before any code, token, or credential material was entered or stored.",
         "nextAction": "James should complete the OAuth flow locally, not in chat, then rerun npm run pull:gsc-ga4-history."
@@ -179,14 +464,18 @@
         "nextAction": "Continue using the Air Express verifier evidence for canonical website/provider state until the New Reward app route is rechecked."
       }
     ],
-    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/business.manage,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
+    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
     "providerState": {
       "canonicalWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
       "gsc": "Provider row exists for sc-domain:airexpressutah.com under newrewardplatform@gmail.com, but validation is revoked and the legacy connection status is error.",
       "ga4": "Provider row exists under newrewardplatform@gmail.com, but propertyId is null and the Air Express property containing G-JZ7PY32EVX still needs selection.",
       "gbp": "No Air Express account/location-specific proof is available from the current local evidence."
     },
-    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4/GBP through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution."
+    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4 through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution.",
+    "requiredScopes": {
+      "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
+      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
+    }
   },
   "token": {
     "ok": true,
@@ -198,13 +487,11 @@
     "scopeCount": 8,
     "requiredScopes": {
       "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
-      "ga4": "https://www.googleapis.com/auth/analytics.readonly",
-      "gbp": "https://www.googleapis.com/auth/business.manage"
+      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
     },
     "missingRequiredScopes": [
       "https://www.googleapis.com/auth/webmasters.readonly",
-      "https://www.googleapis.com/auth/analytics.readonly",
-      "https://www.googleapis.com/auth/business.manage"
+      "https://www.googleapis.com/auth/analytics.readonly"
     ],
     "visibleScopes": [
       "https://www.googleapis.com/auth/accounts.reauth",
@@ -227,8 +514,7 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly",
-          "https://www.googleapis.com/auth/business.manage"
+          "https://www.googleapis.com/auth/analytics.readonly"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -251,8 +537,7 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly",
-          "https://www.googleapis.com/auth/business.manage"
+          "https://www.googleapis.com/auth/analytics.readonly"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -305,7 +590,7 @@
       "id": "post_install",
       "label": "After GA4/lead proof",
       "start": "2026-04-24",
-      "end": "2026-06-03",
+      "end": "2026-06-05",
       "days": 0,
       "gscClicks": 0,
       "gscImpressions": 0,
@@ -417,6 +702,284 @@
         "Converted": 1,
         "Dismissed": 55,
         "Open": 22
+      },
+      "apiCountsByServiceType": {
+        "ac_repair": 13,
+        "air_quality": 10,
+        "emergency_repair": 5,
+        "heat_pump": 7,
+        "heating_furnace": 9,
+        "maintenance_tuneup": 13,
+        "other": 17,
+        "unclassified_summary": 4
+      },
+      "apiCompleteWeeklyTrend": [
+        {
+          "week": "2026-01-05",
+          "totalLeads": 1,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 1
+          }
+        },
+        {
+          "week": "2026-01-12",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-01-19",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-01-26",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-02-02",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-02-09",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-02-16",
+          "totalLeads": 1,
+          "websiteCampaignLeads": 1,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 1
+          }
+        },
+        {
+          "week": "2026-02-23",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-03-02",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-03-09",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-03-16",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-03-23",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-03-30",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-04-06",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-04-13",
+          "totalLeads": 13,
+          "websiteCampaignLeads": 13,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 3,
+            "air_quality": 5,
+            "emergency_repair": 1,
+            "maintenance_tuneup": 1,
+            "other": 2,
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 13
+          }
+        },
+        {
+          "week": "2026-04-20",
+          "totalLeads": 22,
+          "websiteCampaignLeads": 22,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 7,
+            "air_quality": 1,
+            "emergency_repair": 1,
+            "heat_pump": 2,
+            "maintenance_tuneup": 6,
+            "other": 5
+          },
+          "statuses": {
+            "Dismissed": 22
+          }
+        },
+        {
+          "week": "2026-04-27",
+          "totalLeads": 9,
+          "websiteCampaignLeads": 9,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "air_quality": 1,
+            "emergency_repair": 1,
+            "heat_pump": 3,
+            "heating_furnace": 2,
+            "other": 1
+          },
+          "statuses": {
+            "Converted": 1,
+            "Dismissed": 8
+          }
+        },
+        {
+          "week": "2026-05-04",
+          "totalLeads": 6,
+          "websiteCampaignLeads": 6,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "heating_furnace": 3,
+            "maintenance_tuneup": 1,
+            "other": 1
+          },
+          "statuses": {
+            "Dismissed": 6
+          }
+        },
+        {
+          "week": "2026-05-11",
+          "totalLeads": 11,
+          "websiteCampaignLeads": 10,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "ac_repair": 1,
+            "air_quality": 1,
+            "heating_furnace": 2,
+            "maintenance_tuneup": 3,
+            "other": 3,
+            "unclassified_summary": 1
+          },
+          "statuses": {
+            "Dismissed": 4,
+            "Open": 7
+          }
+        },
+        {
+          "week": "2026-05-18",
+          "totalLeads": 15,
+          "websiteCampaignLeads": 15,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {
+            "air_quality": 2,
+            "emergency_repair": 2,
+            "heat_pump": 2,
+            "heating_furnace": 2,
+            "maintenance_tuneup": 2,
+            "other": 5
+          },
+          "statuses": {
+            "Open": 15
+          }
+        },
+        {
+          "week": "2026-05-25",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "before_source_captcha_week",
+          "serviceTypes": {},
+          "statuses": {}
+        },
+        {
+          "week": "2026-06-01",
+          "totalLeads": 0,
+          "websiteCampaignLeads": 0,
+          "captchaPeriod": "source_captcha_week_or_after",
+          "serviceTypes": {},
+          "statuses": {}
+        }
+      ],
+      "captcha": {
+        "date": "2026-06-04",
+        "timestamp": "2026-06-04T15:21:32-06:00",
+        "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+        "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
+        "liveStatus": "source_added_pending_live_delivery_verification",
+        "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+      },
+      "qualityProxyByCaptchaPeriod": {
+        "before_source_captcha": {
+          "total": 78,
+          "dismissed": 55,
+          "open": 22,
+          "converted": 1,
+          "dismissedRate": 0.7051282051282052,
+          "convertedRate": 0.01282051282051282,
+          "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+        },
+        "source_captcha_day_or_after": {
+          "total": 0,
+          "dismissed": 0,
+          "open": 0,
+          "converted": 0,
+          "dismissedRate": 0,
+          "convertedRate": 0,
+          "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
+        }
       },
       "caveat": "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined."
     }

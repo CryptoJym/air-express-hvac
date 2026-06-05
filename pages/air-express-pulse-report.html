@@ -54,7 +54,7 @@
     <h1>Air Express Pulse And Revenue Visibility Report</h1>
     <p>Pages-only weekly control surface for local HVAC signals, SEO/GEO strategy, competitor/entity baseline, visibility metrics, revenue hypotheses, and proof gates.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T19:37:39.448Z</span>
+      <span class="pill">Generated 2026-06-05T20:15:19.771Z</span>
       <span class="pill">Issue #36 growth lane</span>
       <span class="pill">No public publish or provider mutation</span>
       <span class="pill">Directional until attribution joins are restored</span>
@@ -62,7 +62,7 @@
   </header>
   <main>
     <section class="note">
-      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while GSC/GA4/GBP read scopes, live GA4 delivery, and ServiceTitan joins remain required for hard attribution.
+      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while direct GSC/GA4 read scopes, live GA4 delivery, and ServiceTitan booking/revenue joins remain required for hard attribution. Google Business Profile is not included in this pass.
     </section>
 
     <h2>Strategy Decision</h2>
@@ -76,8 +76,37 @@
       <article class="card"><h3>Saved GSC Impressions</h3><div class="metric good">3,832</div><p>2026-05-06 to 2026-06-03 from saved New Reward snapshots.</p></article>
       <article class="card"><h3>Saved GSC Clicks</h3><div class="metric good">5</div><p>CTR 0.1%; average position 38.0.</p></article>
       <article class="card"><h3>Saved AI Mentions</h3><div class="metric warn">16</div><p>Latest weekly saved row: 3 mentions and 2 citations.</p></article>
-      <article class="card"><h3>Attribution Score</h3><div class="metric bad">25</div><p>Blocked until direct Google scopes, GA4 property/live tag, GBP proof, and ServiceTitan joins are restored.</p></article>
+      <article class="card"><h3>Attribution Score</h3><div class="metric bad">25</div><p>Blocked until direct GSC/GA4 scopes, GA4 property/live tag, and ServiceTitan booking/revenue joins are restored.</p></article>
     </section>
+
+    <h2>CAPTCHA / Lead Quality Marker</h2>
+    <section class="decision">
+      <p><strong>Cloudflare Turnstile source was added on 2026-06-04.</strong> Git evidence: 27cf80099165065e7f5bd0c0ca49d595326c4c44 at 2026-06-04T15:21:32-06:00.</p>
+      <p>Current live check still shows the public forms serving older assets and <code>/api/turnstile/config</code> returning 404, so this is a source-ready marker, not verified live CAPTCHA impact.</p>
+    </section>
+    <div class="scroll"><table>
+    <thead><tr><th>Period</th><th>Lead Count</th><th>Dismissed</th><th>Open</th><th>Converted</th><th>Dismissed Rate</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Before Source Captcha</td>
+        <td>78</td>
+        <td>55</td>
+        <td>22</td>
+        <td>1</td>
+        <td>70.5%</td>
+        <td>Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint.</td>
+      </tr>
+      <tr>
+        <td>Source Captcha Day Or After</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.0%</td>
+        <td>No leads in this period, so CAPTCHA quality effect cannot be measured yet.</td>
+      </tr>
+    </tbody>
+  </table></div>
 
     <h2>SEO/GEO Scores</h2>
     <section class="grid">
@@ -230,63 +259,268 @@
       <td>3,832 impressions / 5 clicks / avg position 38.03</td>
       <td>5,181 snapshots / 16 mentions / 6 citations</td>
       <td>blocked_scope sessions; forms blocked_live_tag</td>
-      <td>api_history_pulled_78_total_76_website_campaign; booked 0; revenue blocked_revenue</td>
-      <td><span class="state good-state">saved_snapshot_available_attribution_blocked</span><br>Saved New Reward snapshot and ServiceTitan redacted lead-count evidence are available; direct GSC/GA4/GBP pulls, live GA4 delivery, booked-job joins, and revenue attribution remain blocked or partial.</td>
+      <td>api_history_pulled_78_total_76_website_campaign_0_current_week_0_post_captcha_source; booked 0; revenue blocked_revenue</td>
+      <td><span class="state good-state">saved_snapshot_available_attribution_blocked</span><br>Saved New Reward snapshot and ServiceTitan redacted lead-count evidence are available; direct GSC/GA4 pulls, live GA4 delivery, booked-job joins, and revenue attribution remain blocked or partial. GBP is excluded from this refresh.</td>
     </tr>
     </tbody>
   </table></div>
 
     <h2>ServiceTitan Lead Trend</h2>
     <div class="scroll"><table>
-    <thead><tr><th>Week</th><th>Redacted Leads</th><th>Configured Website Campaign</th><th>Read</th></tr></thead>
+    <thead><tr><th>Week</th><th>Redacted Leads</th><th>Configured Website Campaign</th><th>Service Mix</th><th>Status Mix</th><th>CAPTCHA Marker</th><th>Read</th></tr></thead>
     <tbody>
       <tr>
       <td>2026-01-05</td>
       <td>1</td>
       <td>0</td>
+      <td>Unclassified Summary: 1</td>
+      <td>Dismissed: 1</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-01-12</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-01-19</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-01-26</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-02-02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-02-09</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-02-16</td>
       <td>1</td>
       <td>1</td>
+      <td>Unclassified Summary: 1</td>
+      <td>Dismissed: 1</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-02-23</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-03-02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-03-09</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-03-16</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-03-23</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-03-30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-04-06</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-04-13</td>
       <td>13</td>
       <td>13</td>
+      <td>Air Quality: 5; Ac Repair: 3; Other: 2; Emergency Repair: 1; Maintenance Tuneup: 1; Unclassified Summary: 1</td>
+      <td>Dismissed: 13</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-04-20</td>
       <td>22</td>
       <td>22</td>
+      <td>Ac Repair: 7; Maintenance Tuneup: 6; Other: 5; Heat Pump: 2; Air Quality: 1; Emergency Repair: 1</td>
+      <td>Dismissed: 22</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-04-27</td>
       <td>9</td>
       <td>9</td>
+      <td>Heat Pump: 3; Heating Furnace: 2; Ac Repair: 1; Air Quality: 1; Emergency Repair: 1; Other: 1</td>
+      <td>Dismissed: 8; Converted: 1</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-05-04</td>
       <td>6</td>
       <td>6</td>
+      <td>Heating Furnace: 3; Ac Repair: 1; Maintenance Tuneup: 1; Other: 1</td>
+      <td>Dismissed: 6</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-05-11</td>
       <td>11</td>
       <td>10</td>
+      <td>Maintenance Tuneup: 3; Other: 3; Heating Furnace: 2; Ac Repair: 1; Air Quality: 1; Unclassified Summary: 1</td>
+      <td>Open: 7; Dismissed: 4</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
     </tr>
       <tr>
       <td>2026-05-18</td>
       <td>15</td>
       <td>15</td>
+      <td>Other: 5; Air Quality: 2; Emergency Repair: 2; Heat Pump: 2; Heating Furnace: 2; Maintenance Tuneup: 2</td>
+      <td>Open: 15</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
       <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-05-25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">before_source_captcha_week</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+      <tr>
+      <td>2026-06-01</td>
+      <td>0</td>
+      <td>0</td>
+      <td>none observed</td>
+      <td>none observed</td>
+      <td><span class="state neutral-state">source_captcha_week_or_after</span></td>
+      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+    </tr>
+    </tbody>
+  </table></div>
+
+    <h2>ServiceTitan Service-Type Mix</h2>
+    <div class="scroll"><table>
+    <thead><tr><th>Service Type</th><th>Redacted Leads</th><th>Configured Website Campaign</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr>
+      <td>Other</td>
+      <td>17</td>
+      <td>17</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Ac Repair</td>
+      <td>13</td>
+      <td>13</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Maintenance Tuneup</td>
+      <td>13</td>
+      <td>13</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Air Quality</td>
+      <td>10</td>
+      <td>10</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Heating Furnace</td>
+      <td>9</td>
+      <td>9</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Heat Pump</td>
+      <td>7</td>
+      <td>7</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Emergency Repair</td>
+      <td>5</td>
+      <td>5</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
+    </tr>
+      <tr>
+      <td>Unclassified Summary</td>
+      <td>4</td>
+      <td>2</td>
+      <td>Derived from fixed keyword classification and safe ServiceTitan IDs only; raw lead summary/customer data is not stored.</td>
     </tr>
     </tbody>
   </table></div>
@@ -523,9 +757,9 @@
     </tr>
       <tr>
       <td>GBP</td>
-      <td><span class="state blocked-state">blocked_scope</span></td>
-      <td>Missing business.manage OAuth scope.</td>
-      <td>Confirm Air Express location visibility after scoped account access.</td>
+      <td><span class="state neutral-state">not_included_current_pass</span></td>
+      <td>Google Business Profile is intentionally excluded from this refresh; James scoped the immediate expectation to GSC and GA4.</td>
+      <td>Handle GBP separately after GSC/GA4 attribution and live measurement are repaired.</td>
     </tr>
       <tr>
       <td>ServiceTitan</td>
@@ -584,8 +818,8 @@
       <td>google_access</td>
       <td><span class="state blocked-state">blocked_scope</span><br>not_complete_external_access_needed</td>
       <td>pages/new-reward-impact-report.html; data/google-history/history-pull-status.json</td>
-      <td>newrewardplatform@gmail.com local token lacks required GSC/GA4/GBP scopes; provider/property/location proof still missing</td>
-      <td>Complete scoped read-only reconnect or New Reward UI reconnect, then rerun pull:gsc-ga4-history and report refreshes</td>
+      <td>Current refresh is scoped to GSC/GA4: newrewardplatform@gmail.com local token lacks webmasters.readonly and analytics.readonly; GBP remains a separate later lane</td>
+      <td>Complete scoped read-only reconnect or New Reward UI reconnect for GSC/GA4, then rerun pull:gsc-ga4-history -- --skip-gbp and report refreshes</td>
     </tr>
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a><br>Deploy or sync Air Express GA4 tag source and verify single live measurement path</td>
@@ -600,8 +834,8 @@
       <td>servicetitan</td>
       <td><span class="state prepared-state">partial_api_history_pulled_revenue_blocked</span><br>not_complete_booking_revenue_needed</td>
       <td>data/servicetitan-export-access-check.json; data/servicetitan-api-lead-history-summary.json; data/servicetitan-api-lead-history-redacted.csv</td>
-      <td>Read-only ServiceTitan lead history is now pulled with PII excluded; booking IDs and revenue fields remain unavailable from the current lead endpoint</td>
-      <td>Use redacted lead counts for trend comparison, then verify an approved bookings/revenue endpoint or export before ROI claims</td>
+      <td>Read-only ServiceTitan lead history is pulled with PII excluded, service-type buckets, weekly zero-fill through 2026-06-01, and CAPTCHA source-period markers; booking IDs and revenue fields remain unavailable from the current lead endpoint</td>
+      <td>Use redacted lead counts for trend comparison, then verify an approved bookings/revenue endpoint or export before ROI claims; do not claim CAPTCHA quality impact until live Turnstile and post-live lead data exist</td>
     </tr>
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/37">#37</a><br>Resolve Air Express entity fragmentation and trust-claim proof gates</td>

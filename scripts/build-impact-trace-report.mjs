@@ -153,6 +153,10 @@ const aiByEngine = Array.isArray(snapshotHistory.aiByEngine) ? snapshotHistory.a
 const latestAiWeek = aiByWeek.at(-1) || null;
 const previousAiWeek = aiByWeek.length > 1 ? aiByWeek.at(-2) : null;
 const rootCause = mapping.rootCauseSummary || {};
+const includeGbpInReport = historyStatus.gbp?.status !== "not_included";
+const googleScopeLabel = includeGbpInReport
+  ? "direct Google, GBP, and ServiceTitan"
+  : "direct GSC/GA4 and ServiceTitan";
 const providerRows = [
   {
     surface: "GSC",
@@ -170,12 +174,19 @@ const providerRows = [
       : "Connected row exists, but propertyId is blank.",
     nextAction: "Select the GA4 property or stream containing G-JZ7PY32EVX.",
   },
-  {
-    surface: "GBP",
-    state: historyStatus.gbp?.status || "proof_pending",
-    evidence: historyStatus.gbp?.evidence || "Business Profile location proof is not available.",
-    nextAction: "Confirm Air Express GBP location visibility after scoped account access.",
-  },
+  ...(includeGbpInReport
+    ? [{
+      surface: "GBP",
+      state: historyStatus.gbp?.status || "proof_pending",
+      evidence: historyStatus.gbp?.evidence || "Business Profile location proof is not available.",
+      nextAction: "Confirm Air Express GBP location visibility after scoped account access.",
+    }]
+    : [{
+      surface: "GBP",
+      state: "not_included",
+      evidence: historyStatus.gbp?.evidence || "Business Profile is intentionally outside this GSC/GA4 refresh.",
+      nextAction: "Handle GBP separately after GSC/GA4 attribution and live measurement are repaired.",
+    }]),
   {
     surface: "ServiceTitan",
     state: serviceTitanLeadSummary.status || serviceTitan.status || "blocked_env",
@@ -200,7 +211,11 @@ const scoreRows = [
 const directGoogleRows = [
   ["GSC", historyStatus.gsc?.status || "unknown", historyStatus.gsc?.evidence || ""],
   ["GA4", historyStatus.ga4?.status || "unknown", historyStatus.ga4?.evidence || ""],
-  ["GBP", historyStatus.gbp?.status || "unknown", historyStatus.gbp?.evidence || ""],
+  [
+    includeGbpInReport ? "GBP" : "GBP (separate)",
+    historyStatus.gbp?.status || "unknown",
+    historyStatus.gbp?.evidence || "",
+  ],
 ];
 
 const mobileWindows = [
@@ -564,12 +579,12 @@ const html = `<!doctype html>
     <div class="top">
       <div>
         <h1>Air Express Impact Trace</h1>
-        <p class="subtitle">Saved New Reward visibility signals are available, but complete attribution remains blocked until Google scopes, GA4 property selection, GBP proof, and ServiceTitan lead history are restored.</p>
+        <p class="subtitle">Saved New Reward visibility signals and ServiceTitan lead-count history are available, but complete attribution remains blocked until ${escapeHtml(googleScopeLabel)} revenue joins are restored.</p>
       </div>
       <div class="chips" aria-label="Current report status">
         <span class="chip good">Saved snapshots</span>
         <span class="chip bad">Google scope blocked</span>
-        <span class="chip bad">Lead export blocked</span>
+        <span class="chip bad">Revenue join blocked</span>
         <span class="chip warn">Attribution incomplete</span>
       </div>
     </div>
@@ -712,8 +727,8 @@ const html = `<!doctype html>
             <div class="legend-row" style="margin-top:10px">
               ${evidencePill("GSC blocked", "blocked")}
               ${evidencePill("GA4 pending", "pending")}
-              ${evidencePill("GBP pending", "pending")}
-              ${evidencePill("ST blocked", "blocked")}
+              ${evidencePill(includeGbpInReport ? "GBP pending" : "GBP separate", includeGbpInReport ? "pending" : "not_included")}
+              ${evidencePill("ST lead counts", "available")}
             </div>
           </article>`).join("")}
         </div>
@@ -738,7 +753,7 @@ const html = `<!doctype html>
         </article>
         <article class="evidence-card bad">
           <h3>Blocked attribution</h3>
-          <p>Direct Google history, GA4 property history, GBP history, and ServiceTitan lead/revenue joins are not available yet.</p>
+          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Google Business Profile is separate from this refresh.</p>
         </article>
       </aside>
     </section>
@@ -784,7 +799,7 @@ const html = `<!doctype html>
     </section>
 
     <section class="footer-note">
-      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct Google access, GA4 property selection, GBP proof, and ServiceTitan lead export remain approval/access gated. No provider mutation, deploy, public send, or production change is performed by this report.
+      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
     </section>
   </main>
 

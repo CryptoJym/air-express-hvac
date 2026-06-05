@@ -1,34 +1,35 @@
-# Air Express GSC/GA4/GBP History And New Reward Impact Plan
+# Air Express GSC/GA4 History And New Reward Impact Plan
 
 Date: 2026-06-02
 Last updated: 2026-06-05
 
 ## Goal
 
-Pull the complete available Air Express Search Console, GA4, and Google
-Business Profile history, then compare performance across New Reward operating
-milestones.
+Pull the complete available Air Express Search Console and GA4 history, then
+compare performance across New Reward operating milestones. Google Business
+Profile is a separate later lane and is not included in the current pull.
 
 ## Current Finding
 
 2026-06-05 retry: after NewRewards PR #4105 merged and deployed the
 GSC/GA4/GBP same-origin auth proxy fix, the Air Express local history pull was
-rerun for January-to-now using:
+rerun for January-to-now with Google Business Profile intentionally excluded:
 
 ```sh
 npm run pull:newreward-attribution-history
-npm run pull:gsc-ga4-history -- --gsc-start-date 2026-01-01 --ga4-start-date 2026-01-01
+npm run pull:gsc-ga4-history -- --gsc-start-date 2026-01-01 --ga4-start-date 2026-01-01 --end-date 2026-06-05 --skip-gbp
 ```
 
 The result is split:
 
 - Saved New Reward snapshot history is available.
-- Direct Google API history is still blocked because the local
+- Direct GSC/GA4 API history is still blocked because the local
   `newrewardplatform@gmail.com` `gcloud` and ADC tokens lack
-  `webmasters.readonly`, `analytics.readonly`, and `business.manage`.
+  `webmasters.readonly` and `analytics.readonly`.
+- Google Business Profile was not attempted in this pass.
 - This means the missing bearer-token platform route is no longer the leading
-  code blocker; the remaining blocker is Google product scope/property/location
-  access plus live delivery and ServiceTitan joins.
+  code blocker; the remaining blocker is GSC/GA4 product scope/property access,
+  live delivery, and ServiceTitan booked-job/revenue joins.
 
 Current saved-data baseline:
 
@@ -47,21 +48,25 @@ Current saved-data baseline:
   proof.
 - Lead/revenue joins: no saved New Reward LeadTouchpoint, LeadFormSubmission,
   LeadOpportunity, or LeadRevenueEvent rows exist for Air Express yet.
-- ServiceTitan: only partial prior proof is available, with 5 count-only
-  website leads on 2026-04-24 and 2 already-approved listed lead ids; no full
-  export, booking report, or revenue report is joined.
+- ServiceTitan lead counts are now pulled from the read-only API path: 78
+  redacted leads from 2026-01-01 through 2026-06-05, including 76 configured
+  website campaign leads. No booking ids or approved revenue fields are present.
+- Lead trend after the last observed lead week: 15 leads in the week beginning
+  2026-05-18, then 0 leads in the week beginning 2026-05-25 and 0 leads in the
+  current week beginning 2026-06-01.
 
 `newrewardplatform@gmail.com` is present as a local `gcloud` account, but the
 available local tokens do not include the read/API scopes needed for history:
 
 - Search Console needs `https://www.googleapis.com/auth/webmasters.readonly`.
 - GA4 needs `https://www.googleapis.com/auth/analytics.readonly`.
-- Google Business Profile performance/location history needs
-  `https://www.googleapis.com/auth/business.manage`.
+- Google Business Profile performance/location history would need
+  `https://www.googleapis.com/auth/business.manage`, but GBP is excluded from
+  this refresh.
 
 The latest `history-pull-status.json` records sanitized `visibleScopes` for both
 the `gcloud` and ADC token candidates. Those visible scopes are cloud/admin
-or identity scopes, not GSC, GA4, or GBP data scopes; no access token, refresh
+or identity scopes, not GSC or GA4 data scopes; no access token, refresh
 token, cookie, or recovery material is stored.
 
 The generated proof is in:
@@ -335,9 +340,9 @@ proof is joined.
 
 ## ServiceTitan Lead Proof
 
-Current local access cannot pull a full ServiceTitan lead export because the
-ServiceTitan environment variables are not present. A repeatable readiness
-check now records this without printing credential values:
+Current ServiceTitan lead-count access is available through the separate Vercel
+`option-c` production credential path. A repeatable readiness check and pull
+path record this without printing credential values:
 
 - `npm run verify:servicetitan-export`
 - `data/servicetitan-export-access-check.json`
@@ -362,10 +367,21 @@ Pulled ServiceTitan lead-count baseline:
 - Impact periods: 2 before the New Reward target brief, 29 from target brief to
   GA4/lead proof, and 47 after GA4/lead proof.
 - Status mix: 55 dismissed, 22 open, 1 converted.
+- Service-type mix from safe fixed-keyword classification: 17 other, 13 AC
+  repair, 13 maintenance/tune-up, 10 air quality, 9 heating/furnace, 7 heat
+  pump, 5 emergency repair, and 4 unclassified.
+- Latest weekly lead trend: 2026-05-18 had 15 leads; 2026-05-25 had 0 leads;
+  2026-06-01 had 0 leads.
 - Booked-job and revenue proof remains blocked: the lead endpoint returned 0
   booking IDs and no approved revenue fields.
 - Stored fields exclude customer names, phone numbers, emails, street addresses,
   lead summaries, lead URLs, raw payloads, credential values, and tokens.
+- Cloudflare Turnstile/CAPTCHA source was added on 2026-06-04 in commit
+  `27cf80099165065e7f5bd0c0ca49d595326c4c44`, but live public form assets are
+  still older and `/api/turnstile/config` returns HTTP 404. Treat this as
+  `source_ready_pending_live_verification`, not verified live CAPTCHA impact.
+- Post-CAPTCHA-source lead count is currently 0, so there is no post-live data
+  yet to claim improved lead quality.
 
 A sanitized partial proof file still exists from prior verified email/repo guide
 evidence:

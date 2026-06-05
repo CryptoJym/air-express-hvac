@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T19:37:45.813Z",
+  "generatedAt": "2026-06-05T20:15:26.202Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {
@@ -8,7 +8,7 @@
     "googleHistoryStatus": "blocked",
     "gscStatus": "blocked_scope",
     "ga4Status": "blocked_scope",
-    "gbpStatus": "blocked_scope",
+    "gbpStatus": "not_included",
     "newRewardMappingStatus": "rows_found",
     "serviceTitanStatus": "auth_ready_no_export",
     "serviceTitanLeadStatus": "api_history_pulled"
@@ -78,7 +78,7 @@
     {
       "id": "#27-google-scope-alignment",
       "status": "passed",
-      "evidence": "history status=blocked; gsc=blocked_scope; ga4=blocked_scope; gbp=blocked_scope",
+      "evidence": "history status=blocked; gsc=blocked_scope; ga4=blocked_scope; gbp=not_included",
       "nextAction": "Refresh the Google history pull and #27 matrix row together."
     },
     {
@@ -90,13 +90,13 @@
     {
       "id": "#29-impact-report-alignment",
       "status": "passed",
-      "evidence": "historyStatus.status=blocked; #29 evidence=pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, and saved New Reward snapshot evidence; direct GSC GA4 and GBP histories are not pulled due missing local read scopes, but saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.",
+      "evidence": "historyStatus.status=blocked; #29 evidence=pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, saved New Reward snapshot evidence, ServiceTitan weekly lead trend, service-type mix, and CAPTCHA marker; direct GSC and GA4 histories are not pulled due missing local read scopes, while GBP is excluded from this refresh. Saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.",
       "nextAction": "Refresh the history pull/report and #29 matrix row together."
     },
     {
       "id": "#30-servicetitan-alignment",
       "status": "passed",
-      "evidence": "serviceTitanStatus.status=auth_ready_no_export; serviceTitanLeadSummary.status=api_history_pulled; #30 evidence=data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, and 0 rows with booking ids. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/campaign/status/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.",
+      "evidence": "serviceTitanStatus.status=auth_ready_no_export; serviceTitanLeadSummary.status=api_history_pulled; #30 evidence=data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.",
       "nextAction": "Refresh ServiceTitan export/import evidence and #30 matrix row together."
     },
     {

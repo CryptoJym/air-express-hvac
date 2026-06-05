@@ -424,9 +424,9 @@ function checkSeoAudit() {
   assert(Array.isArray(findings.critical), "Audit findings.critical must be an array.");
   assert(
     findings.critical.some((finding) =>
-      String(finding.issue || "").includes("GSC/GA4/GBP attribution source")
+      String(finding.issue || "").includes("GSC/GA4 attribution source")
     ),
-    "Expected critical GSC/GA4/GBP attribution source finding is missing."
+    "Expected critical GSC/GA4 attribution source finding is missing."
   );
   assert(
     audit.attribution?.liveMeasurement?.source === "data/live-measurement-path-check.json",
@@ -495,6 +495,25 @@ function checkHistoryStatus() {
     "ServiceTitan lead proof status must include the pulled API lead counts."
   );
   assert(
+    Array.isArray(status.serviceTitan.apiCompleteWeeklyTrend) &&
+      status.serviceTitan.apiCompleteWeeklyTrend.some((week) => week.week === "2026-05-25" && Number(week.totalLeads || 0) === 0) &&
+      status.serviceTitan.apiCompleteWeeklyTrend.some((week) => week.week === "2026-06-01" && Number(week.totalLeads || 0) === 0),
+    "ServiceTitan lead proof status must include zero-filled weekly lead trend through the requested current weeks."
+  );
+  assert(
+    status.serviceTitan.captcha?.date === "2026-06-04" &&
+      String(status.serviceTitan.captcha?.liveStatus || "").includes("pending_live"),
+    "ServiceTitan lead proof status must include the June 4 Turnstile source marker without claiming live CAPTCHA proof."
+  );
+  assert(
+    status.serviceTitan.qualityProxyByCaptchaPeriod?.source_captcha_day_or_after?.total === 0,
+    "ServiceTitan lead proof status must preserve the current zero post-CAPTCHA-source lead count."
+  );
+  assert(
+    Number(status.serviceTitan.apiCountsByServiceType?.ac_repair || 0) > 0,
+    "ServiceTitan lead proof status must include service-type buckets from safe fixed-keyword classification."
+  );
+  assert(
     impactReport.includes("Lead Proof Status"),
     "Impact report must include a Lead Proof Status section."
   );
@@ -510,11 +529,17 @@ function checkHistoryStatus() {
     impactReport.includes("ServiceTitan redacted export import"),
     "Impact report must show the ServiceTitan redacted export import lane."
   );
+  assert(
+    impactReport.includes("ServiceTitan Weekly Lead Trend") &&
+      impactReport.includes("CAPTCHA") &&
+      impactReport.includes("Service-Type Mix"),
+    "Impact report must show ServiceTitan weekly trend, CAPTCHA marker, and service-type mix sections."
+  );
 
   if (status.status === "blocked") {
     assert(status.gsc?.status === "blocked_scope", `Expected GSC blocked_scope, received ${status.gsc?.status}.`);
     assert(status.ga4?.status === "blocked_scope", `Expected GA4 blocked_scope, received ${status.ga4?.status}.`);
-    assert(status.gbp?.status === "blocked_scope", `Expected GBP blocked_scope, received ${status.gbp?.status}.`);
+    assert(status.gbp?.status === "not_included", `Expected GBP not_included for current GSC/GA4 refresh, received ${status.gbp?.status}.`);
     assert(
       status.token?.requiredScopes?.gsc === "https://www.googleapis.com/auth/webmasters.readonly",
       "History pull status must record the required GSC scope."
@@ -524,8 +549,8 @@ function checkHistoryStatus() {
       "History pull status must record the required GA4 scope."
     );
     assert(
-      status.token?.requiredScopes?.gbp === "https://www.googleapis.com/auth/business.manage",
-      "History pull status must record the required GBP scope."
+      !status.token?.requiredScopes?.gbp,
+      "History pull status must not require the GBP scope when the current refresh is scoped to GSC/GA4."
     );
     assert(
       status.token?.missingRequiredScopes?.includes("https://www.googleapis.com/auth/webmasters.readonly"),
@@ -536,8 +561,8 @@ function checkHistoryStatus() {
       "History pull status must include the missing GA4 scope in missingRequiredScopes."
     );
     assert(
-      status.token?.missingRequiredScopes?.includes("https://www.googleapis.com/auth/business.manage"),
-      "History pull status must include the missing GBP scope in missingRequiredScopes."
+      !status.token?.missingRequiredScopes?.includes("https://www.googleapis.com/auth/business.manage"),
+      "History pull status must exclude the GBP scope from missingRequiredScopes for this GSC/GA4-only refresh."
     );
     assert(Array.isArray(status.token?.visibleScopes), "History pull status must include sanitized visibleScopes.");
     assert(
@@ -553,8 +578,8 @@ function checkHistoryStatus() {
       "Missing GA4 readonly scope blocker evidence."
     );
     assert(
-      status.blockers?.some((blocker) => String(blocker.evidence || "").includes("business.manage")),
-      "Missing Google Business Profile business.manage scope blocker evidence."
+      !status.blockers?.some((blocker) => String(blocker.evidence || "").includes("business.manage")),
+      "History pull status must not include a GBP business.manage blocker in this GSC/GA4-only refresh."
     );
     return;
   }

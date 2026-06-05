@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T19:29:47.428Z",
+  "generatedAt": "2026-06-05T19:58:55.227Z",
   "evidenceClass": "servicetitan_api_lead_history_redacted",
   "status": "api_history_pulled",
   "requestedRange": {
@@ -9,21 +9,34 @@
   "endpoint": "ServiceTitan CRM v2 GET /leads",
   "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-crm-v2/endpoints",
   "rows": 78,
-  "pagesFetched": 1,
+  "pagesFetched": 2,
   "reportedTotalCount": 78,
   "websiteCampaignIdPresent": true,
   "websiteCampaignLeadCount": 76,
   "bookedLeadCount": 0,
+  "captcha": {
+    "date": "2026-06-04",
+    "timestamp": "2026-06-04T15:21:32-06:00",
+    "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+    "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
+    "liveStatus": "source_added_pending_live_delivery_verification",
+    "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+  },
   "piiExcluded": true,
   "secretHandling": "No credential values, access tokens, customer names, phones, emails, street addresses, lead summaries, lead URLs, raw notes, payment data, or raw ServiceTitan payloads are stored.",
+  "summaryTextHandling": "ServiceTitan summary text is read only for fixed keyword classification into service_type_inferred. Raw summary text is not printed or stored.",
   "storedFields": [
     "source_date",
     "evidence_class",
     "service_titan_lead_id",
     "created_at",
     "modified_at",
+    "week_start",
     "new_reward_impact_period",
+    "captcha_period",
+    "captcha_state",
     "campaign_id_or_source",
+    "service_type_inferred",
     "service_type_or_category",
     "lead_status",
     "priority",
@@ -79,6 +92,37 @@
     "before_new_reward_target_brief": 2,
     "target_brief_to_ga4_lead_proof": 29
   },
+  "countsByCaptchaPeriod": {
+    "before_source_captcha": 78,
+    "source_captcha_day_or_after": 0
+  },
+  "countsByCaptchaPeriodStatus": {
+    "before_source_captcha": {
+      "Converted": 1,
+      "Dismissed": 55,
+      "Open": 22
+    }
+  },
+  "qualityProxyByCaptchaPeriod": {
+    "before_source_captcha": {
+      "total": 78,
+      "dismissed": 55,
+      "open": 22,
+      "converted": 1,
+      "dismissedRate": 0.7051282051282052,
+      "convertedRate": 0.01282051282051282,
+      "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+    },
+    "source_captcha_day_or_after": {
+      "total": 0,
+      "dismissed": 0,
+      "open": 0,
+      "converted": 0,
+      "dismissedRate": 0,
+      "convertedRate": 0,
+      "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
+    }
+  },
   "countsByMonth": {
     "2026-01": 1,
     "2026-02": 1,
@@ -95,10 +139,352 @@
     "2026-05-11": 11,
     "2026-05-18": 15
   },
+  "completeWeeklyTrend": [
+    {
+      "week": "2026-01-05",
+      "totalLeads": 1,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "unclassified_summary": 1
+      },
+      "statuses": {
+        "Dismissed": 1
+      }
+    },
+    {
+      "week": "2026-01-12",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-01-19",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-01-26",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-02-02",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-02-09",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-02-16",
+      "totalLeads": 1,
+      "websiteCampaignLeads": 1,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "unclassified_summary": 1
+      },
+      "statuses": {
+        "Dismissed": 1
+      }
+    },
+    {
+      "week": "2026-02-23",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-03-02",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-03-09",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-03-16",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-03-23",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-03-30",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-04-06",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-04-13",
+      "totalLeads": 13,
+      "websiteCampaignLeads": 13,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "ac_repair": 3,
+        "air_quality": 5,
+        "emergency_repair": 1,
+        "maintenance_tuneup": 1,
+        "other": 2,
+        "unclassified_summary": 1
+      },
+      "statuses": {
+        "Dismissed": 13
+      }
+    },
+    {
+      "week": "2026-04-20",
+      "totalLeads": 22,
+      "websiteCampaignLeads": 22,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "ac_repair": 7,
+        "air_quality": 1,
+        "emergency_repair": 1,
+        "heat_pump": 2,
+        "maintenance_tuneup": 6,
+        "other": 5
+      },
+      "statuses": {
+        "Dismissed": 22
+      }
+    },
+    {
+      "week": "2026-04-27",
+      "totalLeads": 9,
+      "websiteCampaignLeads": 9,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "ac_repair": 1,
+        "air_quality": 1,
+        "emergency_repair": 1,
+        "heat_pump": 3,
+        "heating_furnace": 2,
+        "other": 1
+      },
+      "statuses": {
+        "Converted": 1,
+        "Dismissed": 8
+      }
+    },
+    {
+      "week": "2026-05-04",
+      "totalLeads": 6,
+      "websiteCampaignLeads": 6,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "ac_repair": 1,
+        "heating_furnace": 3,
+        "maintenance_tuneup": 1,
+        "other": 1
+      },
+      "statuses": {
+        "Dismissed": 6
+      }
+    },
+    {
+      "week": "2026-05-11",
+      "totalLeads": 11,
+      "websiteCampaignLeads": 10,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "ac_repair": 1,
+        "air_quality": 1,
+        "heating_furnace": 2,
+        "maintenance_tuneup": 3,
+        "other": 3,
+        "unclassified_summary": 1
+      },
+      "statuses": {
+        "Dismissed": 4,
+        "Open": 7
+      }
+    },
+    {
+      "week": "2026-05-18",
+      "totalLeads": 15,
+      "websiteCampaignLeads": 15,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {
+        "air_quality": 2,
+        "emergency_repair": 2,
+        "heat_pump": 2,
+        "heating_furnace": 2,
+        "maintenance_tuneup": 2,
+        "other": 5
+      },
+      "statuses": {
+        "Open": 15
+      }
+    },
+    {
+      "week": "2026-05-25",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "before_source_captcha_week",
+      "serviceTypes": {},
+      "statuses": {}
+    },
+    {
+      "week": "2026-06-01",
+      "totalLeads": 0,
+      "websiteCampaignLeads": 0,
+      "captchaPeriod": "source_captcha_week_or_after",
+      "serviceTypes": {},
+      "statuses": {}
+    }
+  ],
   "countsByStatus": {
     "Converted": 1,
     "Dismissed": 55,
     "Open": 22
+  },
+  "countsByServiceType": {
+    "ac_repair": 13,
+    "air_quality": 10,
+    "emergency_repair": 5,
+    "heat_pump": 7,
+    "heating_furnace": 9,
+    "maintenance_tuneup": 13,
+    "other": 17,
+    "unclassified_summary": 4
+  },
+  "websiteCampaignCountsByServiceType": {
+    "ac_repair": 13,
+    "air_quality": 10,
+    "emergency_repair": 5,
+    "heat_pump": 7,
+    "heating_furnace": 9,
+    "maintenance_tuneup": 13,
+    "other": 17,
+    "unclassified_summary": 2
+  },
+  "countsByWeekServiceType": {
+    "2026-01-05": {
+      "unclassified_summary": 1
+    },
+    "2026-02-16": {
+      "unclassified_summary": 1
+    },
+    "2026-04-13": {
+      "ac_repair": 3,
+      "air_quality": 5,
+      "emergency_repair": 1,
+      "maintenance_tuneup": 1,
+      "other": 2,
+      "unclassified_summary": 1
+    },
+    "2026-04-20": {
+      "ac_repair": 7,
+      "air_quality": 1,
+      "emergency_repair": 1,
+      "heat_pump": 2,
+      "maintenance_tuneup": 6,
+      "other": 5
+    },
+    "2026-04-27": {
+      "ac_repair": 1,
+      "air_quality": 1,
+      "emergency_repair": 1,
+      "heat_pump": 3,
+      "heating_furnace": 2,
+      "other": 1
+    },
+    "2026-05-04": {
+      "ac_repair": 1,
+      "heating_furnace": 3,
+      "maintenance_tuneup": 1,
+      "other": 1
+    },
+    "2026-05-11": {
+      "ac_repair": 1,
+      "air_quality": 1,
+      "heating_furnace": 2,
+      "maintenance_tuneup": 3,
+      "other": 3,
+      "unclassified_summary": 1
+    },
+    "2026-05-18": {
+      "air_quality": 2,
+      "emergency_repair": 2,
+      "heat_pump": 2,
+      "heating_furnace": 2,
+      "maintenance_tuneup": 2,
+      "other": 5
+    }
+  },
+  "countsByWeekStatus": {
+    "2026-01-05": {
+      "Dismissed": 1
+    },
+    "2026-02-16": {
+      "Dismissed": 1
+    },
+    "2026-04-13": {
+      "Dismissed": 13
+    },
+    "2026-04-20": {
+      "Dismissed": 22
+    },
+    "2026-04-27": {
+      "Converted": 1,
+      "Dismissed": 8
+    },
+    "2026-05-04": {
+      "Dismissed": 6
+    },
+    "2026-05-11": {
+      "Dismissed": 4,
+      "Open": 7
+    },
+    "2026-05-18": {
+      "Open": 15
+    }
   },
   "countsByCampaignOrSource": {
     "80365029": 2,
@@ -118,7 +504,15 @@
       "page": 1,
       "status": 200,
       "ok": true,
-      "rowCount": 78,
+      "rowCount": 50,
+      "hasMore": true,
+      "totalCount": 0
+    },
+    {
+      "page": 2,
+      "status": 200,
+      "ok": true,
+      "rowCount": 28,
       "hasMore": false,
       "totalCount": 0
     }

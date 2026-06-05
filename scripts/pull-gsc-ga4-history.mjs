@@ -375,12 +375,63 @@ function sanitizeScopes(scopes = []) {
     .sort();
 }
 
-function missingRequiredScopes(scopeFlags) {
+function missingRequiredScopes(scopeFlags, { includeGbp = true } = {}) {
   return [
     ...(!scopeFlags.hasGsc ? [REQUIRED_SCOPES.gsc] : []),
     ...(!scopeFlags.hasGa4 ? [REQUIRED_SCOPES.ga4] : []),
-    ...(!scopeFlags.hasGbp ? [REQUIRED_SCOPES.gbp] : []),
+    ...(includeGbp && !scopeFlags.hasGbp ? [REQUIRED_SCOPES.gbp] : []),
   ];
+}
+
+function requiredScopes({ includeGbp = true } = {}) {
+  return includeGbp
+    ? REQUIRED_SCOPES
+    : {
+      gsc: REQUIRED_SCOPES.gsc,
+      ga4: REQUIRED_SCOPES.ga4,
+    };
+}
+
+function scopeTextForCurrentPass(value = "", { includeGbp = true } = {}) {
+  if (includeGbp) return value;
+  return String(value || "")
+    .replaceAll("GSC/GA4/GBP", "GSC/GA4")
+    .replaceAll("GSC, GA4, and GBP", "GSC and GA4")
+    .replaceAll("Search Console, GA4, and Google Business Profile", "Search Console and GA4")
+    .replaceAll("GSC, GA4, GBP, ", "GSC, GA4, ")
+    .replaceAll("GSC, GA4, and GBP access", "GSC and GA4 access")
+    .replaceAll(", GBP location/provider proof is still missing", "")
+    .replaceAll("GBP location/provider proof is still missing, ", "")
+    .replaceAll(" and GBP", "")
+    .replaceAll(", GBP", "")
+    .replaceAll("GA4 propertyId is null location/provider proof is still missing, ", "GA4 propertyId is null, ")
+    .replaceAll("GA4 propertyId is null location/provider proof is still missing", "GA4 propertyId is null")
+    .replaceAll("GBP, ", "");
+}
+
+function scopedTokenRepairAttempt(attempt, { includeGbp = true } = {}) {
+  if (!attempt || includeGbp) return attempt;
+  const scopedAttempt = JSON.parse(JSON.stringify(attempt));
+  scopedAttempt.rootCause = scopeTextForCurrentPass(scopedAttempt.rootCause, { includeGbp });
+  scopedAttempt.nextAction = scopeTextForCurrentPass(scopedAttempt.nextAction, { includeGbp });
+  scopedAttempt.requiredScopes = requiredScopes({ includeGbp });
+  if (Array.isArray(scopedAttempt.currentTokenState?.missingRequiredScopes)) {
+    scopedAttempt.currentTokenState.missingRequiredScopes =
+      scopedAttempt.currentTokenState.missingRequiredScopes.filter((scope) => scope !== REQUIRED_SCOPES.gbp);
+  }
+  scopedAttempt.safeReconnectCommand = "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project";
+  scopedAttempt.attempts = Array.isArray(scopedAttempt.attempts)
+    ? scopedAttempt.attempts.map((item) => ({
+      ...item,
+      action: scopeTextForCurrentPass(item.action, { includeGbp }),
+      evidence: scopeTextForCurrentPass(item.evidence, { includeGbp }),
+      nextAction: scopeTextForCurrentPass(item.nextAction, { includeGbp }),
+      scopes: Array.isArray(item.scopes)
+        ? item.scopes.filter((scope) => scope !== REQUIRED_SCOPES.gbp)
+        : item.scopes,
+    }))
+    : [];
+  return scopedAttempt;
 }
 
 async function getBestToken(account) {
@@ -888,7 +939,7 @@ function buildClientFriendlySummary({
     aiSearchVisibility: {
       status: "not_pulled_in_this_lane",
       evidence:
-        "This Air Express pull currently covers GSC, GA4, GBP, live tag, and ServiceTitan proof. AI mention/citation trend needs New Reward AI visibility run history for Air Express.",
+        "This Air Express pull currently covers direct Google history, live tag, and ServiceTitan proof. AI mention/citation trend needs New Reward AI visibility run history for Air Express.",
       nextAction:
         "After Google reconnect, pull or export Air Express AI visibility run history with run count, tested questions, engines, mention rate, citation rate, and cited questions.",
     },
@@ -903,6 +954,10 @@ function buildClientFriendlySummary({
       apiCountsByImpactPeriod: serviceTitan.apiCountsByImpactPeriod,
       apiCountsByWeek: serviceTitan.apiCountsByWeek,
       apiCountsByStatus: serviceTitan.apiCountsByStatus,
+      apiCountsByServiceType: serviceTitan.apiCountsByServiceType,
+      apiCompleteWeeklyTrend: serviceTitan.apiCompleteWeeklyTrend,
+      captcha: serviceTitan.captcha,
+      qualityProxyByCaptchaPeriod: serviceTitan.qualityProxyByCaptchaPeriod,
       caveat:
         "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined.",
     },
@@ -955,6 +1010,11 @@ function loadServiceTitanLeadProof() {
     apiCountsByWeek: apiSummary.countsByWeek || {},
     apiCountsByMonth: apiSummary.countsByMonth || {},
     apiCountsByStatus: apiSummary.countsByStatus || {},
+    apiCountsByServiceType: apiSummary.countsByServiceType || {},
+    apiWebsiteCampaignCountsByServiceType: apiSummary.websiteCampaignCountsByServiceType || {},
+    apiCompleteWeeklyTrend: Array.isArray(apiSummary.completeWeeklyTrend) ? apiSummary.completeWeeklyTrend : [],
+    captcha: apiSummary.captcha || null,
+    qualityProxyByCaptchaPeriod: apiSummary.qualityProxyByCaptchaPeriod || {},
     campaignIds,
     piiExcluded,
     evidence: apiEvidence || (priorRows.length || leadRows.length
@@ -1162,6 +1222,20 @@ function htmlEscape(value = "") {
     .replaceAll('"', "&quot;");
 }
 
+function labelize(value) {
+  return String(value || "unknown")
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function formatMix(object = {}) {
+  const entries = Object.entries(object)
+    .filter(([, value]) => Number(value || 0) > 0)
+    .sort(([, a], [, b]) => Number(b || 0) - Number(a || 0));
+  if (!entries.length) return "none observed";
+  return entries.map(([key, value]) => `${labelize(key)}: ${formatInteger(value)}`).join("; ");
+}
+
 function table(headers, rows) {
   return `<table><thead><tr>${headers.map((header) => `<th>${htmlEscape(header)}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 }
@@ -1183,6 +1257,20 @@ function renderReport({
   newRewardSnapshots,
   tokenRepairAttempt,
 }) {
+  const includeGbpInReport = gbp.status !== "not_included";
+  const googleSurfaceLabel = includeGbpInReport
+    ? "GSC, GA4, and Google Business Profile"
+    : "GSC and GA4";
+  const scopedReconnectCommand = includeGbpInReport
+    ? tokenRepairAttempt?.safeReconnectCommand || ""
+    : "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project";
+  const sourceEvidence = includeGbpInReport
+    ? source.evidence
+    : String(source.evidence || "")
+      .replaceAll("GSC/GA4/GBP", "GSC/GA4")
+      .replaceAll(", GBP location/provider proof is still missing", "")
+      .replaceAll("GBP location/provider proof is still missing, ", "")
+      .replaceAll("Business Profile location", "Business Profile location (out of this pass)");
   const blockerRows = [
     ...LOCAL_PREPARED_ACTIONS.map((item) => [
       htmlEscape(item.surface),
@@ -1197,7 +1285,7 @@ function renderReport({
         htmlEscape(blocker.evidence),
         htmlEscape(blocker.nextAction),
       ])
-      : [["GSC/GA4/GBP", "pulled", "History files generated.", "Review impact periods and reconcile with ServiceTitan leads."]]),
+      : [[googleSurfaceLabel, "pulled", "History files generated.", "Review impact periods and reconcile with ServiceTitan leads."]]),
   ];
   const summaryRows = summaries.map((period) => [
     htmlEscape(period.label),
@@ -1531,18 +1619,53 @@ function renderReport({
     htmlEscape(row.first_window_start || ""),
     htmlEscape(row.last_window_end || ""),
   ]);
+  const serviceTitanWeeklyRows = (serviceTitan.apiCompleteWeeklyTrend || []).map((row) => [
+    htmlEscape(row.week || ""),
+    htmlEscape(formatInteger(row.totalLeads || 0)),
+    htmlEscape(formatInteger(row.websiteCampaignLeads || 0)),
+    htmlEscape(formatMix(row.serviceTypes || {})),
+    htmlEscape(formatMix(row.statuses || {})),
+    htmlEscape(labelize(row.captchaPeriod || "")),
+  ]);
+  const serviceTitanServiceRows = Object.entries(serviceTitan.apiCountsByServiceType || {})
+    .sort(([, a], [, b]) => Number(b || 0) - Number(a || 0))
+    .map(([serviceType, count]) => [
+      htmlEscape(labelize(serviceType)),
+      htmlEscape(formatInteger(count)),
+      htmlEscape(formatInteger(serviceTitan.apiWebsiteCampaignCountsByServiceType?.[serviceType] || 0)),
+    ]);
+  const captchaQualityRows = ["before_source_captcha", "source_captcha_day_or_after"].map((period) => {
+    const quality = serviceTitan.qualityProxyByCaptchaPeriod?.[period] || {};
+    return [
+      htmlEscape(labelize(period)),
+      htmlEscape(formatInteger(quality.total || 0)),
+      htmlEscape(formatInteger(quality.dismissed || 0)),
+      htmlEscape(formatInteger(quality.open || 0)),
+      htmlEscape(formatInteger(quality.converted || 0)),
+      htmlEscape(formatPercent(quality.dismissedRate || 0)),
+      htmlEscape(quality.interpretation || "Pending ServiceTitan lead evidence."),
+    ];
+  });
   const tokenRows = token
     ? [
       ["Selected source", htmlEscape(token.source || ""), "Token source selected for this read-only pull attempt."],
       ["Selected email", htmlEscape(token.email || ""), "Google account returned by tokeninfo."],
       ["Visible scopes", htmlEscape((token.visibleScopes || []).join(", ")), "Sanitized OAuth scope names only; no token values are stored."],
-      ["Missing required scopes", htmlEscape((token.missingRequiredScopes || []).join(", ")), "Scopes required before GSC, GA4, and GBP history can be pulled."],
+      ["Missing required scopes", htmlEscape((token.missingRequiredScopes || []).join(", ")), `Scopes required before ${googleSurfaceLabel} history can be pulled.`],
     ]
     : [["Token", "not available", "No usable local token was available."]];
   const tokenRepairSummaryRows = tokenRepairAttempt
     ? [
-      ["Status", htmlEscape(tokenRepairAttempt.status || ""), htmlEscape(tokenRepairAttempt.rootCause || ""), htmlEscape(tokenRepairAttempt.nextAction || "")],
-      ["Safe command", "prepared", htmlEscape(tokenRepairAttempt.safeReconnectCommand || ""), "Run locally only; do not paste OAuth codes or tokens into chat."],
+      ["Status", htmlEscape(tokenRepairAttempt.status || ""), htmlEscape(
+        includeGbpInReport
+          ? tokenRepairAttempt.rootCause || ""
+          : String(tokenRepairAttempt.rootCause || "").replaceAll("GSC, GA4, and GBP", "GSC and GA4").replaceAll("GSC/GA4/GBP", "GSC/GA4")
+      ), htmlEscape(
+        includeGbpInReport
+          ? tokenRepairAttempt.nextAction || ""
+          : String(tokenRepairAttempt.nextAction || "").replaceAll("GSC/GA4/GBP", "GSC/GA4")
+      )],
+      ["Safe command", "prepared", htmlEscape(scopedReconnectCommand), "Run locally only; do not paste OAuth codes or tokens into chat."],
     ]
     : [["Status", "not_recorded", "No scoped token repair attempt artifact was found.", "Use the reconnect packet before rerunning the history pull."]];
   const tokenRepairRows = tokenRepairAttempt?.attempts?.length
@@ -1583,7 +1706,7 @@ function renderReport({
 <body>
   <header>
     <h1>Air Express New Reward Impact Report</h1>
-    <p>Read-only GSC, GA4, Google Business Profile, and New Reward milestone attribution for Air Express HVAC.</p>
+    <p>Read-only ${htmlEscape(googleSurfaceLabel)}, ServiceTitan lead-count trend, and New Reward milestone attribution for Air Express HVAC.</p>
     <div class="meta">
       <span class="pill">Generated ${htmlEscape(generatedAt)}</span>
       <span class="pill">Google provider: ${htmlEscape(account)}</span>
@@ -1593,16 +1716,16 @@ function renderReport({
   <main>
     <section class="${status === "pulled" ? "ready" : "blocked"}">
       ${status === "pulled"
-        ? "GSC, GA4, or Google Business Profile history was pulled from the authorized Google provider account. Use the period table below for directional impact, then reconcile leads in ServiceTitan."
-        : "GSC, GA4, and Google Business Profile history were not pulled. The local provider account is present, but the accessible token or platform source cannot read the required history yet."}
+        ? `${htmlEscape(googleSurfaceLabel)} history was pulled from the authorized Google provider account. Use the period table below for directional impact, then reconcile leads in ServiceTitan.`
+        : `${htmlEscape(googleSurfaceLabel)} history was not pulled. The local provider account is present, but the accessible token or platform source cannot read the required history yet.`}
     </section>
 
     <h2>History Coverage</h2>
     ${table(["Source", "State", "Evidence"], [
       ["GSC", htmlEscape(gsc.status), htmlEscape(gsc.evidence)],
       ["GA4", htmlEscape(ga4.status), htmlEscape(ga4.evidence)],
-      ["Google Business Profile", htmlEscape(gbp.status), htmlEscape(gbp.evidence)],
-      ["New Reward source", htmlEscape(source.status), htmlEscape(source.evidence)],
+      [includeGbpInReport ? "Google Business Profile" : "Google Business Profile (excluded)", htmlEscape(gbp.status), htmlEscape(gbp.evidence)],
+      ["New Reward source", htmlEscape(source.status), htmlEscape(sourceEvidence)],
     ])}
 
     <h2>Client-Friendly Attribution Summary</h2>
@@ -1669,7 +1792,7 @@ function renderReport({
     ${table(["State", "Meaning", "Current Air Express Use"], evidenceStates.map((item) => [
       htmlEscape(item.state),
       htmlEscape(item.meaning),
-      htmlEscape(item.currentUse),
+      htmlEscape(includeGbpInReport ? item.currentUse : String(item.currentUse || "").replaceAll("GSC/GA4/GBP", "GSC/GA4")),
     ]))}
 
     <h2>Google Token Scope Inventory</h2>
@@ -1714,6 +1837,18 @@ function renderReport({
       ],
     ])}
 
+    <h2>ServiceTitan Weekly Lead Trend</h2>
+    <p>Weeks are zero-filled through the requested end date so quiet weeks are visible instead of disappearing from the report.</p>
+    ${table(["Week", "Redacted leads", "Website campaign", "Service mix", "Status mix", "CAPTCHA marker"], serviceTitanWeeklyRows.length ? serviceTitanWeeklyRows : [["pending", "0", "0", "none observed", "none observed", "not pulled"]])}
+
+    <h2>ServiceTitan Service-Type Mix</h2>
+    <p>Service type is inferred from fixed keyword classification and safe ServiceTitan IDs only. Raw lead summaries and customer data are not stored.</p>
+    ${table(["Service type", "Redacted leads", "Website campaign"], serviceTitanServiceRows.length ? serviceTitanServiceRows : [["pending", "0", "0"]])}
+
+    <h2>CAPTCHA / Lead Quality Marker</h2>
+    <p>Cloudflare Turnstile source was added on ${htmlEscape(serviceTitan.captcha?.date || "pending")} in commit ${htmlEscape(serviceTitan.captcha?.commit || "pending")}. Live delivery is still separately gated, so do not claim CAPTCHA changed lead quality until post-live lead data exists.</p>
+    ${table(["Period", "Lead count", "Dismissed", "Open", "Converted", "Dismissed rate", "Interpretation"], captchaQualityRows)}
+
     <h2>Blockers And Next Actions</h2>
     ${table(["Surface", "Status", "Evidence", "Next action"], blockerRows)}
 
@@ -1739,6 +1874,7 @@ async function main() {
   const explicitGscProperty = argValue("--gsc-property", "");
   const explicitGa4PropertyId = argValue("--ga4-property-id", process.env.GA4_PROPERTY_ID || "");
   const force = hasFlag("--force");
+  const includeGbp = !hasFlag("--skip-gbp");
 
   mkdirSync(outDir, { recursive: true });
   mkdirSync(dirname(reportPath), { recursive: true });
@@ -1750,14 +1886,18 @@ async function main() {
   const sourceCheck = readJson(join(root, "data/newreward-attribution-source-check.json"), {});
   const source = {
     status: sourceCheck.status || "unknown",
-    evidence: sourceCheck.blocker || sourceCheck.summary || "No New Reward source-check file found.",
+    evidence: scopeTextForCurrentPass(
+      sourceCheck.blocker || sourceCheck.summary || "No New Reward source-check file found.",
+      { includeGbp },
+    ),
   };
   const serviceTitan = loadServiceTitanLeadProof();
   const newRewardSnapshots = loadNewRewardSnapshotHistory();
-  const tokenRepairAttempt = readJson(
+  const tokenRepairAttemptRaw = readJson(
     join(root, "data/google-history/google-readonly-token-repair-attempt.json"),
     null,
   );
+  const tokenRepairAttempt = scopedTokenRepairAttempt(tokenRepairAttemptRaw, { includeGbp });
 
   let gscDaily = [];
   let gscQuery = [];
@@ -1770,12 +1910,16 @@ async function main() {
     requested: {
       gscStartDate,
       ga4StartDate,
-      gbpStartDate: gscStartDate,
+      gbpStartDate: includeGbp ? gscStartDate : null,
       endDate,
       explicitGscProperty,
       explicitGa4PropertyId: explicitGa4PropertyId ? redactPropertyId(explicitGa4PropertyId) : "",
+      includedGoogleSurfaces: includeGbp ? ["gsc", "ga4", "gbp"] : ["gsc", "ga4"],
     },
-    evidenceStates: EVIDENCE_STATE_MODEL,
+    evidenceStates: EVIDENCE_STATE_MODEL.map((state) => ({
+      ...state,
+      currentUse: scopeTextForCurrentPass(state.currentUse, { includeGbp }),
+    })),
     gsc: { status: "blocked", evidence: "" },
     ga4: { status: "blocked", evidence: "" },
     gbp: { status: "blocked", evidence: "" },
@@ -1803,8 +1947,8 @@ async function main() {
       hasGa4Scope: scopes.hasGa4,
       hasGbpScope: scopes.hasGbp,
       scopeCount: info.scopes.length,
-      requiredScopes: REQUIRED_SCOPES,
-      missingRequiredScopes: missingRequiredScopes(scopes),
+      requiredScopes: requiredScopes({ includeGbp }),
+      missingRequiredScopes: missingRequiredScopes(scopes, { includeGbp }),
       visibleScopes: sanitizeScopes(info.scopes),
       error: info.error,
       candidates: tokenSelection.candidates.map((candidate) => ({
@@ -1815,7 +1959,7 @@ async function main() {
         hasGa4Scope: candidate.scopes.hasGa4,
         hasGbpScope: candidate.scopes.hasGbp,
         scopeCount: candidate.info?.scopes?.length || 0,
-        missingRequiredScopes: missingRequiredScopes(candidate.scopes),
+        missingRequiredScopes: missingRequiredScopes(candidate.scopes, { includeGbp }),
         visibleScopes: sanitizeScopes(candidate.info?.scopes || []),
         error: candidate.blocker || candidate.info?.error || "",
       })),
@@ -1955,7 +2099,12 @@ async function main() {
       }
     }
 
-    if (!scopes.hasGbp && !force) {
+    if (!includeGbp) {
+      status.gbp = {
+        status: "not_included",
+        evidence: "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4.",
+      };
+    } else if (!scopes.hasGbp && !force) {
       blockers.push({
         surface: "Google Business Profile OAuth scope",
         status: "blocked",

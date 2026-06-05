@@ -40,6 +40,16 @@ const REFRESH_COMMANDS = [
   },
   {
     script: "pull:gsc-ga4-history",
+    args: [
+      "--",
+      "--gsc-start-date",
+      "2026-01-01",
+      "--ga4-start-date",
+      "2026-01-01",
+      "--end-date",
+      "2026-06-05",
+      "--skip-gbp",
+    ],
     purpose: "Refresh Google history pull state and impact report.",
   },
   {
@@ -86,10 +96,10 @@ function tailLines(value = "", count = 5) {
     .slice(-count);
 }
 
-function runNpmScript(script) {
+function runNpmScript(script, args = []) {
   const startedAt = new Date();
   const startedMs = Date.now();
-  const result = spawnSync("npm", ["run", script], {
+  const result = spawnSync("npm", ["run", script, ...args], {
     cwd: root,
     encoding: "utf8",
     env: { ...process.env, FORCE_COLOR: "0" },
@@ -97,6 +107,7 @@ function runNpmScript(script) {
 
   return {
     script,
+    args,
     startedAt: startedAt.toISOString(),
     completedAt: new Date().toISOString(),
     durationMs: Date.now() - startedMs,
@@ -164,7 +175,7 @@ writeFileSync(
   )}\n`,
 );
 
-const commandResults = REFRESH_COMMANDS.map(({ script }) => runNpmScript(script));
+const commandResults = REFRESH_COMMANDS.map(({ script, args = [] }) => runNpmScript(script, args));
 const failedCommands = commandResults.filter((result) => result.status !== "passed");
 const observed = observedStatus();
 

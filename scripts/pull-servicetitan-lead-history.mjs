@@ -11,6 +11,13 @@ const root = join(__dirname, "..");
 
 const outCsvPath = join(root, "data", "servicetitan-api-lead-history-redacted.csv");
 const outSummaryPath = join(root, "data", "servicetitan-api-lead-history-summary.json");
+const CAPTCHA_SOURCE_INTRODUCED = Object.freeze({
+  date: "2026-06-04",
+  timestamp: "2026-06-04T15:21:32-06:00",
+  commit: "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+  evidence:
+    "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
+});
 
 const OUTPUT_FIELDS = [
   "source_date",
@@ -18,8 +25,12 @@ const OUTPUT_FIELDS = [
   "service_titan_lead_id",
   "created_at",
   "modified_at",
+  "week_start",
   "new_reward_impact_period",
+  "captcha_period",
+  "captcha_state",
   "campaign_id_or_source",
+  "service_type_inferred",
   "service_type_or_category",
   "lead_status",
   "priority",
@@ -132,6 +143,13 @@ function monthKey(value = "") {
   return date ? date.slice(0, 7) : "unknown";
 }
 
+function addDays(isoDateValue, days) {
+  const date = new Date(`${isoDateValue}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return "";
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
 function classifyImpactPeriod(createdAt = "") {
   const date = isoDate(createdAt);
   if (!date) return "unclassified_date";
@@ -151,8 +169,105 @@ function countBy(rows, keyFn) {
   }, {});
 }
 
+function countNested(rows, keyFn, nestedKeyFn) {
+  return rows.reduce((counts, row) => {
+    const key = keyFn(row) || "unknown";
+    const nestedKey = nestedKeyFn(row) || "unknown";
+    counts[key] ||= {};
+    counts[key][nestedKey] = (counts[key][nestedKey] || 0) + 1;
+    return counts;
+  }, {});
+}
+
 function sortedObject(object) {
   return Object.fromEntries(Object.entries(object).sort(([a], [b]) => a.localeCompare(b)));
+}
+
+function sortedNestedObject(object) {
+  return Object.fromEntries(
+    Object.entries(object)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, value]) => [key, sortedObject(value)])
+  );
+}
+
+function classifyCaptchaPeriod(createdAt = "") {
+  const date = isoDate(createdAt);
+  if (!date) return "unclassified_date";
+  return date >= CAPTCHA_SOURCE_INTRODUCED.date
+    ? "source_captcha_day_or_after"
+    : "before_source_captcha";
+}
+
+function captchaState(createdAt = "") {
+  const period = classifyCaptchaPeriod(createdAt);
+  if (period === "source_captcha_day_or_after") {
+    return "source_ready_pending_live_verification";
+  }
+  if (period === "before_source_captcha") {
+    return "pre_captcha_source";
+  }
+  return "unclassified";
+}
+
+function classifyServiceType(row = {}) {
+  const summary = String(row.summary || "").toLowerCase();
+  const rules = [
+    ["emergency_repair", /emergency|urgent|same[ -]?day/],
+    ["heat_pump", /heat pump/],
+    ["ac_installation", /install.*\bac\b|replace.*\bac\b|air conditioner replacement/],
+    ["ac_repair", /\bac\b|a\/c|air conditioning|cooling|no cool|not cooling/],
+    ["heating_furnace", /heat|furnace|heater/],
+    ["maintenance_tuneup", /maintenance|tune[ -]?up|service plan/],
+    ["air_quality", /air quality|duct|filter|iaq|humid|dehumid|ventilat/],
+    ["estimate", /estimate|quote/],
+    ["other", /other|something else/],
+  ];
+  return rules.find(([, pattern]) => pattern.test(summary))?.[0] || "unclassified_summary";
+}
+
+function qualityProxy(rows) {
+  const total = rows.length;
+  const statusCounts = sortedObject(countBy(rows, (row) => row.lead_status || "unknown"));
+  const dismissed = Number(statusCounts.Dismissed || 0);
+  const converted = Number(statusCounts.Converted || 0);
+  const open = Number(statusCounts.Open || 0);
+  return {
+    total,
+    dismissed,
+    open,
+    converted,
+    dismissedRate: total ? dismissed / total : 0,
+    convertedRate: total ? converted / total : 0,
+    interpretation: total
+      ? "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+      : "No leads in this period, so CAPTCHA quality effect cannot be measured yet.",
+  };
+}
+
+function weeklyTrend(rows, websiteCampaignRows, startDate, endDate) {
+  const observedWeeks = rows.map((row) => row.week_start).filter(Boolean).sort();
+  let cursor = observedWeeks[0] || isoWeekStart(startDate);
+  const finalWeek = isoWeekStart(endDate);
+  const trend = [];
+
+  while (cursor && finalWeek && cursor <= finalWeek) {
+    const weekRows = rows.filter((row) => row.week_start === cursor);
+    const websiteRows = websiteCampaignRows.filter((row) => row.week_start === cursor);
+    trend.push({
+      week: cursor,
+      totalLeads: weekRows.length,
+      websiteCampaignLeads: websiteRows.length,
+      captchaPeriod: cursor >= isoWeekStart(CAPTCHA_SOURCE_INTRODUCED.date)
+        ? "source_captcha_week_or_after"
+        : "before_source_captcha_week",
+      serviceTypes: sortedObject(countBy(weekRows, (row) => row.service_type_inferred)),
+      statuses: sortedObject(countBy(weekRows, (row) => row.lead_status)),
+    });
+    cursor = addDays(cursor, 7);
+  }
+
+  return trend;
 }
 
 function normalizeLead(row, env) {
@@ -172,8 +287,12 @@ function normalizeLead(row, env) {
     service_titan_lead_id: row.id ? String(row.id) : "",
     created_at: row.createdOn || "",
     modified_at: row.modifiedOn || "",
+    week_start: isoWeekStart(row.createdOn),
     new_reward_impact_period: classifyImpactPeriod(row.createdOn),
+    captcha_period: classifyCaptchaPeriod(row.createdOn),
+    captcha_state: captchaState(row.createdOn),
     campaign_id_or_source: campaignSource,
+    service_type_inferred: classifyServiceType(row),
     service_type_or_category: serviceCategory,
     lead_status: row.status || "",
     priority: row.priority || "",
@@ -262,6 +381,10 @@ async function main() {
     ? rows.filter((row) => row.campaign_id_or_source === websiteCampaignId)
     : [];
   const bookedRows = rows.filter((row) => row.booked_job_id_if_available);
+  const rowsByCaptchaPeriod = {
+    before_source_captcha: rows.filter((row) => row.captcha_period === "before_source_captcha"),
+    source_captcha_day_or_after: rows.filter((row) => row.captcha_period === "source_captcha_day_or_after"),
+  };
   const summary = {
     generatedAt: new Date().toISOString(),
     evidenceClass: "servicetitan_api_lead_history_redacted",
@@ -276,9 +399,17 @@ async function main() {
     websiteCampaignIdPresent: Boolean(websiteCampaignId),
     websiteCampaignLeadCount: websiteCampaignRows.length,
     bookedLeadCount: bookedRows.length,
+    captcha: {
+      ...CAPTCHA_SOURCE_INTRODUCED,
+      liveStatus: "source_added_pending_live_delivery_verification",
+      interpretation:
+        "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet.",
+    },
     piiExcluded: true,
     secretHandling:
       "No credential values, access tokens, customer names, phones, emails, street addresses, lead summaries, lead URLs, raw notes, payment data, or raw ServiceTitan payloads are stored.",
+    summaryTextHandling:
+      "ServiceTitan summary text is read only for fixed keyword classification into service_type_inferred. Raw summary text is not printed or stored.",
     storedFields: OUTPUT_FIELDS,
     excludedFields: [
       "summary",
@@ -296,9 +427,23 @@ async function main() {
     ],
     impactPeriods: IMPACT_PERIODS,
     countsByImpactPeriod: sortedObject(countBy(rows, (row) => row.new_reward_impact_period)),
+    countsByCaptchaPeriod: Object.fromEntries(
+      Object.entries(rowsByCaptchaPeriod).map(([period, periodRows]) => [period, periodRows.length])
+    ),
+    countsByCaptchaPeriodStatus: sortedNestedObject(countNested(rows, (row) => row.captcha_period, (row) => row.lead_status)),
+    qualityProxyByCaptchaPeriod: Object.fromEntries(
+      Object.entries(rowsByCaptchaPeriod)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([period, periodRows]) => [period, qualityProxy(periodRows)])
+    ),
     countsByMonth: sortedObject(countBy(rows, (row) => monthKey(row.created_at))),
     countsByWeek: sortedObject(countBy(rows, (row) => isoWeekStart(row.created_at))),
+    completeWeeklyTrend: weeklyTrend(rows, websiteCampaignRows, startDate, endDate),
     countsByStatus: sortedObject(countBy(rows, (row) => row.lead_status)),
+    countsByServiceType: sortedObject(countBy(rows, (row) => row.service_type_inferred)),
+    websiteCampaignCountsByServiceType: sortedObject(countBy(websiteCampaignRows, (row) => row.service_type_inferred)),
+    countsByWeekServiceType: sortedNestedObject(countNested(rows, (row) => row.week_start, (row) => row.service_type_inferred)),
+    countsByWeekStatus: sortedNestedObject(countNested(rows, (row) => row.week_start, (row) => row.lead_status)),
     countsByCampaignOrSource: sortedObject(countBy(rows, (row) => row.campaign_id_or_source)),
     websiteCampaignCountsByWeek: sortedObject(countBy(websiteCampaignRows, (row) => isoWeekStart(row.created_at))),
     attempts,

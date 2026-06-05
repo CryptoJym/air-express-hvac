@@ -91,6 +91,10 @@ checks on 2026-06-02 show:
 - Production `/analytics.js` returns `404` and the live homepage exposes no
   GA4/GTM marker, even though repo-local source contains measurement ID
   `G-JZ7PY32EVX`.
+- Cloudflare Turnstile/CAPTCHA source was added locally on 2026-06-04, but
+  public form pages and `/intake-form.js` still serve older assets and
+  `/api/turnstile/config` returns HTTP 404. CAPTCHA is source-ready, not
+  verified live.
 - `/admin/` returns HTTP 200.
 - `/api/auth` returns HTTP 500 due to a missing live
   `OAUTH_GITHUB_CLIENT_ID` environment variable.

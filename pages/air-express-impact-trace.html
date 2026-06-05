@@ -330,12 +330,12 @@
     <div class="top">
       <div>
         <h1>Air Express Impact Trace</h1>
-        <p class="subtitle">Saved New Reward visibility signals are available, but complete attribution remains blocked until Google scopes, GA4 property selection, GBP proof, and ServiceTitan lead history are restored.</p>
+        <p class="subtitle">Saved New Reward visibility signals and ServiceTitan lead-count history are available, but complete attribution remains blocked until direct GSC/GA4 and ServiceTitan revenue joins are restored.</p>
       </div>
       <div class="chips" aria-label="Current report status">
         <span class="chip good">Saved snapshots</span>
         <span class="chip bad">Google scope blocked</span>
-        <span class="chip bad">Lead export blocked</span>
+        <span class="chip bad">Revenue join blocked</span>
         <span class="chip warn">Attribution incomplete</span>
       </div>
     </div>
@@ -474,10 +474,10 @@
                   <strong>GA4</strong>
                   <span class="state-pill warn">property_pending</span>
                   <p>Connected row exists, but propertyId is blank.</p>
-                </article><article class="provider bad">
+                </article><article class="provider neutral">
                   <strong>GBP</strong>
-                  <span class="state-pill bad">blocked_scope</span>
-                  <p>Missing business.manage OAuth scope.</p>
+                  <span class="state-pill neutral">not_included</span>
+                  <p>Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4.</p>
                 </article><article class="provider neutral">
                   <strong>ServiceTitan</strong>
                   <span class="state-pill neutral">api_history_pulled</span>
@@ -529,8 +529,8 @@
             <div class="legend-row" style="margin-top:10px">
               <span class="state-pill bad">GSC blocked</span>
               <span class="state-pill warn">GA4 pending</span>
-              <span class="state-pill warn">GBP pending</span>
-              <span class="state-pill bad">ST blocked</span>
+              <span class="state-pill neutral">GBP separate</span>
+              <span class="state-pill good">ST lead counts</span>
             </div>
           </article><article class="mobile-card ">
             <h3>Previous saved</h3>
@@ -558,8 +558,8 @@
             <div class="legend-row" style="margin-top:10px">
               <span class="state-pill bad">GSC blocked</span>
               <span class="state-pill warn">GA4 pending</span>
-              <span class="state-pill warn">GBP pending</span>
-              <span class="state-pill bad">ST blocked</span>
+              <span class="state-pill neutral">GBP separate</span>
+              <span class="state-pill good">ST lead counts</span>
             </div>
           </article><article class="mobile-card selected">
             <h3>Latest saved</h3>
@@ -587,8 +587,8 @@
             <div class="legend-row" style="margin-top:10px">
               <span class="state-pill bad">GSC blocked</span>
               <span class="state-pill warn">GA4 pending</span>
-              <span class="state-pill warn">GBP pending</span>
-              <span class="state-pill bad">ST blocked</span>
+              <span class="state-pill neutral">GBP separate</span>
+              <span class="state-pill good">ST lead counts</span>
             </div>
           </article>
         </div>
@@ -613,7 +613,7 @@
         </article>
         <article class="evidence-card bad">
           <h3>Blocked attribution</h3>
-          <p>Direct Google history, GA4 property history, GBP history, and ServiceTitan lead/revenue joins are not available yet.</p>
+          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Google Business Profile is separate from this refresh.</p>
         </article>
       </aside>
     </section>
@@ -649,9 +649,9 @@
               <td><span class="state-pill bad">blocked_scope</span></td>
               <td>Missing analytics.readonly OAuth scope.</td>
             </tr><tr>
-              <td>GBP</td>
-              <td><span class="state-pill bad">blocked_scope</span></td>
-              <td>Missing business.manage OAuth scope.</td>
+              <td>GBP (separate)</td>
+              <td><span class="state-pill neutral">not_included</span></td>
+              <td>Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4.</td>
             </tr>
           </tbody>
         </table>
@@ -703,7 +703,7 @@
     </section>
 
     <section class="footer-note">
-      Generated 2026-06-05T19:37:39.424Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct Google access, GA4 property selection, GBP proof, and ServiceTitan lead export remain approval/access gated. No provider mutation, deploy, public send, or production change is performed by this report.
+      Generated 2026-06-05T20:15:19.722Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
     </section>
   </main>
 
