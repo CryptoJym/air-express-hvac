@@ -7,6 +7,10 @@ const root = join(__dirname, "..");
 
 const CANONICAL_URL = "https://airexpressutah.com/";
 const LIVE_ANALYTICS_URL = "https://airexpressutah.com/analytics.js";
+const WWW_URL = "https://www.airexpressutah.com/";
+const WWW_ANALYTICS_URL = "https://www.airexpressutah.com/analytics.js";
+const APEX_TURNSTILE_CONFIG_URL = "https://airexpressutah.com/api/turnstile/config";
+const WWW_TURNSTILE_CONFIG_URL = "https://www.airexpressutah.com/api/turnstile/config";
 const APPROVED_GA4_ID = "G-JZ7PY32EVX";
 const APPROVED_GTM_CONTAINERS = [];
 const OUT_PATH = join(root, "data", "live-measurement-path-check.json");
@@ -164,6 +168,28 @@ async function fetchText(url) {
   }
 }
 
+async function fetchPublicTurnstileConfig(url) {
+  const response = await fetchText(url);
+  let payload = null;
+  try {
+    payload = response.text ? JSON.parse(response.text) : null;
+  } catch {
+    payload = null;
+  }
+
+  return {
+    url,
+    finalUrl: response.url,
+    ok: response.ok,
+    status: response.status,
+    headers: response.headers,
+    configured: payload?.configured === true,
+    missingKeys: Array.isArray(payload?.missingKeys) ? payload.missingKeys : [],
+    exposesSiteKey: typeof payload?.siteKey === "string" && payload.siteKey.length > 0,
+    error: response.error || "",
+  };
+}
+
 function checkLeadEventSource() {
   const intakeSource = existsSync(join(root, "intake-form.js")) ? read("intake-form.js") : "";
   const pageEvidence = LEAD_FORM_PAGES.map((file) => {
@@ -214,6 +240,13 @@ function classify({ local, live, leadEvent }) {
   if (live.homepage.markers.approvedGa4Present && live.homepage.sourceCount === 1 && leadEvent.status === "prepared_source_pending_live") {
     return "live_single_source_verified_pending_event_proof";
   }
+  if (
+    live.wwwHomepage?.markers?.approvedGa4Present
+    && live.wwwHomepage.sourceCount === 1
+    && !live.homepage.markers.approvedGa4Present
+  ) {
+    return "partial_live_www_only_canonical_pending";
+  }
   return "fixed_locally_pending_live";
 }
 
@@ -224,6 +257,10 @@ async function main() {
 
   const liveHomepage = await fetchText(CANONICAL_URL);
   const liveAnalytics = await fetchText(LIVE_ANALYTICS_URL);
+  const liveWwwHomepage = await fetchText(WWW_URL);
+  const liveWwwAnalytics = await fetchText(WWW_ANALYTICS_URL);
+  const liveApexTurnstileConfig = await fetchPublicTurnstileConfig(APEX_TURNSTILE_CONFIG_URL);
+  const liveWwwTurnstileConfig = await fetchPublicTurnstileConfig(WWW_TURNSTILE_CONFIG_URL);
 
   const local = {
     index: {
@@ -254,9 +291,31 @@ async function main() {
       headers: liveAnalytics.headers,
       markers: markerSummary(liveAnalytics.text),
     },
+    wwwHomepage: {
+      url: WWW_URL,
+      finalUrl: liveWwwHomepage.url,
+      ok: liveWwwHomepage.ok,
+      status: liveWwwHomepage.status,
+      headers: liveWwwHomepage.headers,
+      markers: markerSummary(liveWwwHomepage.text),
+    },
+    wwwAnalyticsJs: {
+      url: WWW_ANALYTICS_URL,
+      finalUrl: liveWwwAnalytics.url,
+      ok: liveWwwAnalytics.ok,
+      status: liveWwwAnalytics.status,
+      headers: liveWwwAnalytics.headers,
+      markers: markerSummary(liveWwwAnalytics.text),
+    },
+    turnstileConfig: {
+      apex: liveApexTurnstileConfig,
+      www: liveWwwTurnstileConfig,
+    },
   };
   live.homepage.sourceCount = sourceCount(live.homepage.markers);
   live.analyticsJs.sourceCount = sourceCount(live.analyticsJs.markers);
+  live.wwwHomepage.sourceCount = sourceCount(live.wwwHomepage.markers);
+  live.wwwAnalyticsJs.sourceCount = sourceCount(live.wwwAnalyticsJs.markers);
 
   const status = classify({ local, live, leadEvent });
   const evidence = {
@@ -281,6 +340,26 @@ async function main() {
             `Local source contains ${APPROVED_GA4_ID}, but live homepage source does not expose the approved GA4 marker and /analytics.js returned HTTP ${live.analyticsJs.status}.`,
           nextAction:
             "Approve the Air Express deploy, New Reward edge sync, or manual delivery path; then rerun npm run verify:live-measurement.",
+        }]
+        : []),
+      ...(status === "partial_live_www_only_canonical_pending"
+        ? [{
+          surface: "Split live host measurement source",
+          status,
+          evidence:
+            `www.airexpressutah.com exposes ${APPROVED_GA4_ID} and /analytics.js returned HTTP ${live.wwwAnalyticsJs.status}, but canonical ${CANONICAL_URL} does not expose the approved GA4 marker and /analytics.js returned HTTP ${live.analyticsJs.status}.`,
+          nextAction:
+            "Sync the canonical apex/New Reward edge path to the same delivery source as www, or move canonical routing to the verified Vercel host, then rerun npm run verify:live-measurement.",
+        }]
+        : []),
+      ...(!live.turnstileConfig.apex.configured || !live.turnstileConfig.www.configured
+        ? [{
+          surface: "Turnstile live configuration",
+          status: "blocked_turnstile_env_or_delivery",
+          evidence:
+            `Apex Turnstile config returned HTTP ${live.turnstileConfig.apex.status} with missing keys ${live.turnstileConfig.apex.missingKeys.join(",") || "not reported"}; www returned HTTP ${live.turnstileConfig.www.status} with missing keys ${live.turnstileConfig.www.missingKeys.join(",") || "not reported"}.`,
+          nextAction:
+            "Add approved Turnstile site/secret keys to the active production delivery environment and verify /api/turnstile/config returns configured=true on the canonical host before claiming CAPTCHA impact.",
         }]
         : []),
       ...(status === "blocked_local_coverage"

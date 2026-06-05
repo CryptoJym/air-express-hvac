@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-05T19:57:22.243Z",
+  "generatedAt": "2026-06-05T22:15:51.668Z",
   "evidenceClass": "live_measurement_path_read_only_check",
-  "status": "fixed_locally_pending_live",
+  "status": "partial_live_www_only_canonical_pending",
   "canonicalUrl": "https://airexpressutah.com/",
   "approvedGa4Id": "G-JZ7PY32EVX",
   "secretHandling": "Only public page status, public response headers, marker booleans, and verified measurement ids/container ids are stored. No cookies, tokens, provider credentials, form submissions, customer data, or raw HTML are written.",
@@ -451,6 +451,87 @@
         "gtmContainers": []
       },
       "sourceCount": 0
+    },
+    "wwwHomepage": {
+      "url": "https://www.airexpressutah.com/",
+      "finalUrl": "https://www.airexpressutah.com/",
+      "ok": true,
+      "status": 200,
+      "headers": {
+        "xNewRewardsEdgeWebsiteId": "",
+        "xNewRewardsEdgeActiveVersion": "",
+        "xNewRewardsEdgeRouteMode": "",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "markers": {
+        "approvedGa4Present": true,
+        "gtagLoaderPresent": true,
+        "gtagCallPresent": true,
+        "dataLayerPresent": true,
+        "googleAnalyticsTextPresent": false,
+        "analyticsJsReferencePresent": false,
+        "gtmContainers": []
+      },
+      "sourceCount": 1
+    },
+    "wwwAnalyticsJs": {
+      "url": "https://www.airexpressutah.com/analytics.js",
+      "finalUrl": "https://www.airexpressutah.com/analytics.js",
+      "ok": true,
+      "status": 200,
+      "headers": {
+        "xNewRewardsEdgeWebsiteId": "",
+        "xNewRewardsEdgeActiveVersion": "",
+        "xNewRewardsEdgeRouteMode": "",
+        "contentType": "application/javascript; charset=utf-8"
+      },
+      "markers": {
+        "approvedGa4Present": true,
+        "gtagLoaderPresent": true,
+        "gtagCallPresent": true,
+        "dataLayerPresent": true,
+        "googleAnalyticsTextPresent": false,
+        "analyticsJsReferencePresent": false,
+        "gtmContainers": []
+      },
+      "sourceCount": 1
+    },
+    "turnstileConfig": {
+      "apex": {
+        "url": "https://airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 404,
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+          "xNewRewardsEdgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+          "xNewRewardsEdgeRouteMode": "ZERO_REDIRECT",
+          "contentType": "text/plain; charset=utf-8"
+        },
+        "configured": false,
+        "missingKeys": [],
+        "exposesSiteKey": false,
+        "error": ""
+      },
+      "www": {
+        "url": "https://www.airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://www.airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 503,
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "",
+          "xNewRewardsEdgeActiveVersion": "",
+          "xNewRewardsEdgeRouteMode": "",
+          "contentType": "application/json; charset=utf-8"
+        },
+        "configured": false,
+        "missingKeys": [
+          "TURNSTILE_SITE_KEY",
+          "TURNSTILE_SECRET_KEY"
+        ],
+        "exposesSiteKey": false,
+        "error": ""
+      }
     }
   },
   "leadEvent": {
@@ -485,10 +566,16 @@
   },
   "blockers": [
     {
-      "surface": "Live Air Express measurement source",
-      "status": "fixed_locally_pending_live",
-      "evidence": "Local source contains G-JZ7PY32EVX, but live homepage source does not expose the approved GA4 marker and /analytics.js returned HTTP 404.",
-      "nextAction": "Approve the Air Express deploy, New Reward edge sync, or manual delivery path; then rerun npm run verify:live-measurement."
+      "surface": "Split live host measurement source",
+      "status": "partial_live_www_only_canonical_pending",
+      "evidence": "www.airexpressutah.com exposes G-JZ7PY32EVX and /analytics.js returned HTTP 200, but canonical https://airexpressutah.com/ does not expose the approved GA4 marker and /analytics.js returned HTTP 404.",
+      "nextAction": "Sync the canonical apex/New Reward edge path to the same delivery source as www, or move canonical routing to the verified Vercel host, then rerun npm run verify:live-measurement."
+    },
+    {
+      "surface": "Turnstile live configuration",
+      "status": "blocked_turnstile_env_or_delivery",
+      "evidence": "Apex Turnstile config returned HTTP 404 with missing keys not reported; www returned HTTP 503 with missing keys TURNSTILE_SITE_KEY,TURNSTILE_SECRET_KEY.",
+      "nextAction": "Add approved Turnstile site/secret keys to the active production delivery environment and verify /api/turnstile/config returns configured=true on the canonical host before claiming CAPTCHA impact."
     }
   ]
 }

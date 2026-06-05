@@ -28,7 +28,7 @@ were synced to GitHub under `CryptoJym/air-express-hvac`.
 - GitHub Pages report: `pages/issue-24-30-blocker-report.html`
 - Current result: #25 is complete; #24 and #26-#30 remain open because they
   require New Reward source mapping, Google read scopes, live delivery sync, or
-  ServiceTitan booked-job/revenue proof.
+  ServiceTitan lead-system health proof.
 
 ## Parent Issue: Air Express New Reward Onboarding Control Hub
 

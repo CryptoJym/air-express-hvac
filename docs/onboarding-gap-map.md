@@ -88,13 +88,16 @@ checks on 2026-06-02 show:
 - New Reward Cloudflare delivery is stale even though the live site is serving
   through the edge.
 - The live edge website id is `cmorqbs9j001r5nr1h25vosp8`.
-- Production `/analytics.js` returns `404` and the live homepage exposes no
-  GA4/GTM marker, even though repo-local source contains measurement ID
-  `G-JZ7PY32EVX`.
+- `www.airexpressutah.com` now serves the approved GA4 source
+  `G-JZ7PY32EVX` and `/analytics.js` returns HTTP 200 there, but canonical
+  `airexpressutah.com` still serves the older New Reward edge/origin path:
+  canonical `/analytics.js` returns HTTP 404 and the apex homepage exposes no
+  GA4/GTM marker.
 - Cloudflare Turnstile/CAPTCHA source was added locally on 2026-06-04, but
-  public form pages and `/intake-form.js` still serve older assets and
-  `/api/turnstile/config` returns HTTP 404. CAPTCHA is source-ready, not
-  verified live.
+  live activation is still blocked. `www.airexpressutah.com/api/turnstile/config`
+  reports missing `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`, while
+  canonical `airexpressutah.com/api/turnstile/config` returns HTTP 404.
+  CAPTCHA is source-ready, not active.
 - `/admin/` returns HTTP 200.
 - `/api/auth` returns HTTP 500 due to a missing live
   `OAUTH_GITHUB_CLIENT_ID` environment variable.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T19:57:21.923Z",
+  "generatedAt": "2026-06-05T22:15:53.320Z",
   "evidenceClass": "read_only_newrewards_configured_db_lookup",
   "envFiles": [
     "/Users/jamesbrady/.config/newrewards/.env",
@@ -150,10 +150,10 @@
     },
     "latestUpdatedAt": {
       "Client": "2026-06-05T15:53:08.953",
-      "Website": "2026-06-05T15:53:09.147",
-      "Ga4Connection": "2026-06-05T19:53:58.232",
-      "GscConnection": "2026-06-05T19:52:24.699",
-      "ProviderCredential": "2026-06-05T19:51:37.364"
+      "Website": "2026-06-05T21:55:46.511",
+      "Ga4Connection": "2026-06-05T22:03:33.353",
+      "GscConnection": "2026-06-05T22:03:30.628",
+      "ProviderCredential": "2026-06-05T22:03:30.946"
     }
   },
   "connectionAttempts": [
@@ -338,10 +338,10 @@
         },
         "latestUpdatedAt": {
           "Client": "2026-06-05T15:53:08.953",
-          "Website": "2026-06-05T15:53:09.147",
-          "Ga4Connection": "2026-06-05T19:53:58.232",
-          "GscConnection": "2026-06-05T19:52:24.699",
-          "ProviderCredential": "2026-06-05T19:51:37.364"
+          "Website": "2026-06-05T21:55:46.511",
+          "Ga4Connection": "2026-06-05T22:03:33.353",
+          "GscConnection": "2026-06-05T22:03:30.628",
+          "ProviderCredential": "2026-06-05T22:03:30.946"
         }
       },
       "summary": {
@@ -387,7 +387,7 @@
         "ga4ConnectionsFound": 0,
         "airExpressRowsFound": 0
       },
-      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-KgyuVu/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
+      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-S7sOLD/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
     }
   ],
   "targetedLookup": {

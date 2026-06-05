@@ -53,10 +53,6 @@ const REFRESH_COMMANDS = [
     purpose: "Refresh Google history pull state and impact report.",
   },
   {
-    script: "verify:servicetitan-export",
-    purpose: "Refresh ServiceTitan export/API readiness without provider mutation.",
-  },
-  {
     script: "build:content-readiness-report",
     purpose: "Refresh the separate #31 content readiness report.",
   },
@@ -135,6 +131,7 @@ function observedStatus() {
   const googleHistory = readJson("data/google-history/history-pull-status.json");
   const mapping = readJson("data/newreward-air-express-provider-readonly-recheck.json");
   const serviceTitan = readJson("data/servicetitan-export-access-check.json");
+  const serviceTitanLeadHistory = readJson("data/servicetitan-api-lead-history-summary.json");
   const siteFileManifest = readJson("data/site-file-manifest.json");
   const publicClaims = readJson("data/public-claim-register.json");
   const issueAlignment = readJson("data/issue-evidence-alignment-check.json");
@@ -149,6 +146,8 @@ function observedStatus() {
     gbpStatus: googleHistory?.gbp?.status || "",
     newRewardMappingStatus: mapping?.status || "",
     serviceTitanStatus: serviceTitan?.status || "",
+    serviceTitanLeadHistoryStatus: serviceTitanLeadHistory?.status || "",
+    serviceTitanLeadRows: serviceTitanLeadHistory?.rows || "",
     siteFileManifestStatus: siteFileManifest?.status || "",
     publicClaimsStatus: publicClaims?.status || "",
     issueEvidenceAlignmentStatus: issueAlignment?.status || "",
@@ -198,7 +197,7 @@ const payload = {
   },
   observed,
   nextAction:
-    "Use the observed statuses to update #24-#30. Current expected blockers are expired New Reward Google provider rows plus Google read scopes/property visibility, live owned-site delivery sync, and ServiceTitan booked-job/revenue proof.",
+    "Use the observed statuses to update #24-#30. Current expected blockers are expired New Reward Google provider rows plus Google read scopes/property visibility, canonical owned-site delivery sync, Turnstile config, and lead-system health proof. Booking and revenue joins are out of scope unless re-approved.",
 };
 
 writeFileSync(outPath, `${JSON.stringify(payload, null, 2)}\n`);

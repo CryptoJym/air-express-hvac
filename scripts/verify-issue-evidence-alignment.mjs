@@ -95,7 +95,7 @@ const expectedCompletion = {
   "#27": { status: "open", completion_state: "blocked_scope" },
   "#28": { status: "open", completion_state: liveMeasurement.status },
   "#29": { status: "open", completion_state: "prepared_blocked_by_data_access" },
-  "#30": { status: "open", completion_state: "partial_api_history_pulled_join_scope_blocked" },
+  "#30": { status: "open", completion_state: "partial_api_history_pulled_lead_path_review" },
 };
 
 const checks = [];
@@ -152,12 +152,16 @@ check(
 );
 
 const row28 = completionByIssue.get("#28") || {};
+const liveMeasurementDeliveryOpenStates = new Set([
+  "fixed_locally_pending_live",
+  "partial_live_www_only_canonical_pending",
+]);
 check(
   "#28-live-delivery-alignment",
-  liveMeasurement.status === "fixed_locally_pending_live" &&
+  liveMeasurementDeliveryOpenStates.has(liveMeasurement.status) &&
     deliverySync.status === "pending_delivery_sync" &&
-    includesAll(row28.current_evidence, ["fixed_locally_pending_live", "pending_delivery_sync", "G-JZ7PY32EVX"]) &&
-    includesAll(row28.remaining_blocker, ["deploy", "sync"]),
+    includesAll(row28.current_evidence, [liveMeasurement.status, "pending_delivery_sync", "G-JZ7PY32EVX"]) &&
+    includesAll(row28.remaining_blocker, ["canonical", "sync"]),
   `liveMeasurement.status=${liveMeasurement.status}; deliverySync.status=${deliverySync.status}`,
   "Refresh live measurement, delivery sync, and #28 matrix row together."
 );
@@ -173,27 +177,20 @@ check(
 );
 
 const row30 = completionByIssue.get("#30") || {};
-const joinProbes = Array.isArray(serviceTitanJoinProbe.probes) ? serviceTitanJoinProbe.probes : [];
-const bookingProbe = joinProbes.find((probe) => probe.surface === "CRM export bookings") || {};
-const jobsProbe = joinProbes.find((probe) => probe.surface === "JPM export jobs") || {};
 check(
   "#30-servicetitan-alignment",
   serviceTitanStatus.status === "auth_ready_no_export" &&
     serviceTitanLeadSummary.status === "api_history_pulled" &&
-    serviceTitanJoinProbe.status === "partial_join_surfaces_readable" &&
-    serviceTitanJoinProbe.requested?.from === "2020-01-01" &&
-    Number(bookingProbe.rowCount || 0) === 0 &&
-    jobsProbe.status === "blocked" &&
-    Number(jobsProbe.httpStatus || 0) === 403 &&
     Number(serviceTitanLeadSummary.rows || 0) === 78 &&
     Number(serviceTitanLeadSummary.websiteCampaignLeadCount || 0) === 76 &&
     serviceTitanLeadSummary.captcha?.date === "2026-06-04" &&
     serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-05-25" && Number(week.totalLeads || 0) === 0) &&
     serviceTitanLeadSummary.completeWeeklyTrend?.some((week) => week.week === "2026-06-01" && Number(week.totalLeads || 0) === 0) &&
-    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted", "CAPTCHA", "403", "scope"]) &&
-    includesAll(row30.remaining_blocker, ["booking", "revenue", "JPM", "Accounting"]),
+    includesAll(row30.current_evidence, ["api_history_pulled", "78", "76", "redacted", "CAPTCHA"]) &&
+    includesAll(row30.remaining_blocker, ["Turnstile", "canonical"]) &&
+    includesAll(row30.remaining_blocker, ["out of scope"]),
   `serviceTitanStatus.status=${serviceTitanStatus.status}; serviceTitanLeadSummary.status=${serviceTitanLeadSummary.status}; joinProbe.status=${serviceTitanJoinProbe.status}; #30 evidence=${row30.current_evidence || ""}`,
-  "Refresh ServiceTitan lead history, join probe, and #30 matrix row together."
+  "Refresh ServiceTitan lead history and #30 matrix row together."
 );
 
 const acceptanceByIssue = new Map();

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T21:20:36.380Z",
+  "generatedAt": "2026-06-05T22:15:59.616Z",
   "site": "https://airexpressutah.com",
   "legacySite": "https://airexpresshvac.net",
   "skillsUsed": [
@@ -13,7 +13,7 @@
     "technical": 100,
     "geo": 90,
     "messaging": 100,
-    "attribution": 25,
+    "attribution": 30,
     "accessibility": 100
   },
   "blockerRootCauses": [
@@ -22,20 +22,20 @@
       "area": "Attribution / New Reward",
       "status": "blocked",
       "issue": "Air Express GSC/GA4 source cannot be pulled through New Reward",
-      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console and GA4 read scopes. Fourth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Fifth, no approved Air Express GTM container id has been found. Sixth, no full ServiceTitan lead/revenue export is joined yet.",
-      "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console and GA4 read scopes. Fourth, live delivery is split: the www host has the newer GA4 source, while canonical apex is still on the older New Reward edge/origin path. Fifth, no approved Air Express GTM container id has been found. Sixth, Turnstile source is present but live production config is missing on www and absent on canonical apex.",
+      "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
       "workaround": "Checks used the authenticated Air Express New Reward setup, settings, and SEO workspace pages; repo-local source; prior reachable credential metadata; and public live-edge artifact checks. No provider connection, deploy, DNS, CRM, OAuth, or public mutation was completed.",
       "nextAction": "Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4 read access only within the approved stop gates. After read scopes and property visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path."
     },
     {
       "severity": "High",
       "area": "Attribution / Website",
-      "status": "fixed_locally_pending_live",
-      "issue": "GA4 tag is restored in repo-local source but not detected on the live homepage",
-      "rootCause": "The current repo source contains the approved Air Express GA4 measurement ID, but production is served through the existing deployment/New Reward edge path and has not been synced or redeployed from this lane.",
-      "evidence": "measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8",
-      "workaround": "Ran the dedicated live measurement diagnostic with public HTTP fetches and local source inspection only. No raw HTML, cookies, tokens, provider credentials, form submissions, or customer data were stored.",
-      "nextAction": "Approve the Air Express deploy, New Reward edge sync, or manual delivery path; then rerun npm run verify:live-measurement and confirm exactly one approved GA4/GTM source."
+      "status": "partial_live_www_only_canonical_pending",
+      "issue": "GA4 is live on www but missing from the canonical apex/New Reward edge path",
+      "rootCause": "The approved Vercel/www delivery path is serving the updated GA4 source, while canonical airexpressutah.com is still routed through the older New Reward edge/origin artifact without /analytics.js.",
+      "evidence": "measurement diagnostic=partial_live_www_only_canonical_pending; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; www homepage HTTP=200; www homepage GA4=yes; www /analytics.js HTTP=200; apex Turnstile configured=no; www Turnstile configured=no; edge website=cmorqbs9j001r5nr1h25vosp8",
+      "workaround": "Recorded public marker booleans and response headers only; no raw HTML, cookies, tokens, provider credentials, customer data, or successful form submissions were stored.",
+      "nextAction": "Sync canonical apex/New Reward edge delivery to the same source as www, or make the verified Vercel host the canonical route, then rerun npm run verify:live-measurement."
     },
     {
       "severity": "High",
@@ -10294,7 +10294,7 @@
   },
   "attribution": {
     "status": "blocked",
-    "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+    "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
     "auth": {
       "ok": false,
       "source": "local_gcloud",
@@ -10308,9 +10308,9 @@
       "expectedAccessAccount": "newrewardplatform@gmail.com",
       "expectedNewRewardAppAccount": "james@jamesbrady.org",
       "expectedGoogleProviderAccount": "newrewardplatform@gmail.com",
-      "summary": "Authenticated New Reward admin access previously reached the Air Express setup record, PR #3834 is merged/deployed, and PR #4105 is now merged/deployed for the GSC/GA4 bearer-token proxy path. The latest read-only configured NewRewards production env lookup still finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. The blocker is now narrower: GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly and analytics.readonly; GBP location/provider proof is still missing; the live homepage still lacks the GA4/GTM marker and /analytics.js is 404; and the live SEO workspace/provider UI still needs a fresh authenticated recheck after the #4105 deployment.",
-      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console and GA4 read scopes. Fourth, owned-site delivery automation is not wired or is manual-required, so the local GA4 source is not live. Fifth, no approved Air Express GTM container id has been found. Sixth, no full ServiceTitan lead/revenue export is joined yet.",
-      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+      "summary": "Authenticated New Reward admin access previously reached the Air Express setup record, PR #3834 is merged/deployed, and PR #4105 is now merged/deployed for the GSC/GA4 bearer-token proxy path. The latest read-only configured NewRewards production env lookup still finds the Air Express client, tenant, canonical primary website id cmorqbs9j001r5nr1h25vosp8, non-primary website records, and GSC/GA4 provider credential and connection rows under newrewardplatform@gmail.com. This does not prove the listing is wrong; it proves the usable Air Express history path is still stale or expired. GSC and GA4 rows exist for the canonical live website id, but both are expired; GA4 propertyId is null; the local Google token lacks webmasters.readonly and analytics.readonly; GBP location/provider proof is outside this GSC/GA4 pass; www.airexpressutah.com serves G-JZ7PY32EVX and /analytics.js, while canonical airexpressutah.com still lacks the GA4 marker and returns /analytics.js HTTP 404; live Turnstile config is missing or 404; and the live SEO workspace/provider UI still needs a fresh authenticated recheck after the #4105 deployment.",
+      "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console and GA4 read scopes. Fourth, live delivery is split: the www host has the newer GA4 source, while canonical apex is still on the older New Reward edge/origin path. Fifth, no approved Air Express GTM container id has been found. Sixth, Turnstile source is present but live production config is missing on www and absent on canonical apex.",
+      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
       "verified": [
         {
           "surface": "New Reward access guide",
@@ -10472,13 +10472,13 @@
     },
     "gsc": {
       "status": "blocked",
-      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
       "sites": [],
       "rows": []
     },
     "ga4": {
       "status": "blocked",
-      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+      "blocker": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
       "accounts": [],
       "rows": []
     },
@@ -10489,8 +10489,8 @@
       "locations": []
     },
     "liveMeasurement": {
-      "status": "fixed_locally_pending_live",
-      "evidence": "measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8",
+      "status": "partial_live_www_only_canonical_pending",
+      "evidence": "measurement diagnostic=partial_live_www_only_canonical_pending; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; www homepage HTTP=200; www homepage GA4=yes; www /analytics.js HTTP=200; apex Turnstile configured=no; www Turnstile configured=no; edge website=cmorqbs9j001r5nr1h25vosp8",
       "source": "data/live-measurement-path-check.json",
       "approvedGa4Id": "G-JZ7PY32EVX",
       "mutationBoundary": "Read-only public HTTP fetches and local source inspection only. No deploy, provider change, GTM publish, GA4 change, ServiceTitan lead, or production mutation is performed.",
@@ -10506,9 +10506,9 @@
     },
     "onSiteTag": {
       "detected": true,
-      "status": "fixed_locally_pending_live",
-      "evidence": "measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8",
-      "narrative": "The approved GA4 measurement ID G-JZ7PY32EVX is restored in repo-local source, but the dedicated live measurement diagnostic still shows no approved GA4/GTM source on the live homepage and live /analytics.js is not available.",
+      "status": "partial_live_www_only_canonical_pending",
+      "evidence": "measurement diagnostic=partial_live_www_only_canonical_pending; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; www homepage HTTP=200; www homepage GA4=yes; www /analytics.js HTTP=200; apex Turnstile configured=no; www Turnstile configured=no; edge website=cmorqbs9j001r5nr1h25vosp8",
+      "narrative": "The approved GA4 measurement ID G-JZ7PY32EVX is live on www.airexpressutah.com, but the canonical apex path still serves the New Reward edge/origin artifact without the GA4 marker or /analytics.js. Treat this as partial implementation until the canonical host is synced.",
       "sourceEvidence": [
         "index.html",
         "analytics.js"
@@ -10564,16 +10564,16 @@
       {
         "priority": "Critical",
         "issue": "Air Express GSC/GA4 attribution source is blocked in reachable New Reward systems",
-        "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker.",
+        "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
         "fix": "Use the New Reward app session under james@jamesbrady.org, repair the Air Express client/tenant/website credential mapping, connect the Google provider as newrewardplatform@gmail.com, then rerun this audit from that source."
       }
     ],
     "high": [
       {
         "priority": "High",
-        "issue": "GA4 tag restored locally but not verified live",
-        "evidence": "measurement diagnostic=fixed_locally_pending_live; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; edge website=cmorqbs9j001r5nr1h25vosp8",
-        "fix": "Deploy or sync the approved source path, then rerun npm run verify:live-measurement and verify GA4 Realtime/debug evidence."
+        "issue": "GA4 is live on www but missing from canonical apex",
+        "evidence": "measurement diagnostic=partial_live_www_only_canonical_pending; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; www homepage HTTP=200; www homepage GA4=yes; www /analytics.js HTTP=200; apex Turnstile configured=no; www Turnstile configured=no; edge website=cmorqbs9j001r5nr1h25vosp8",
+        "fix": "Sync canonical apex/New Reward edge delivery to the same source as www, or make the verified Vercel host canonical, then rerun npm run verify:live-measurement."
       },
       {
         "priority": "High",

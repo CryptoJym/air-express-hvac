@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-05T21:20:58.207Z",
+  "generatedAt": "2026-06-05T22:16:59.105Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {
-    "liveMeasurementStatus": "fixed_locally_pending_live",
+    "liveMeasurementStatus": "partial_live_www_only_canonical_pending",
     "deliverySyncStatus": "pending_delivery_sync",
     "googleHistoryStatus": "blocked",
     "gscStatus": "blocked_scope",
@@ -55,7 +55,7 @@
     {
       "id": "#28-completion-state",
       "status": "passed",
-      "evidence": "#28 row status=open, completion_state=fixed_locally_pending_live; expected open/fixed_locally_pending_live.",
+      "evidence": "#28 row status=open, completion_state=partial_live_www_only_canonical_pending; expected open/partial_live_www_only_canonical_pending.",
       "nextAction": "Update data/issue-24-30-completion-audit.csv for #28."
     },
     {
@@ -67,7 +67,7 @@
     {
       "id": "#30-completion-state",
       "status": "passed",
-      "evidence": "#30 row status=open, completion_state=partial_api_history_pulled_join_scope_blocked; expected open/partial_api_history_pulled_join_scope_blocked.",
+      "evidence": "#30 row status=open, completion_state=partial_api_history_pulled_lead_path_review; expected open/partial_api_history_pulled_lead_path_review.",
       "nextAction": "Update data/issue-24-30-completion-audit.csv for #30."
     },
     {
@@ -85,7 +85,7 @@
     {
       "id": "#28-live-delivery-alignment",
       "status": "passed",
-      "evidence": "liveMeasurement.status=fixed_locally_pending_live; deliverySync.status=pending_delivery_sync",
+      "evidence": "liveMeasurement.status=partial_live_www_only_canonical_pending; deliverySync.status=pending_delivery_sync",
       "nextAction": "Refresh live measurement, delivery sync, and #28 matrix row together."
     },
     {
@@ -97,8 +97,8 @@
     {
       "id": "#30-servicetitan-alignment",
       "status": "passed",
-      "evidence": "serviceTitanStatus.status=auth_ready_no_export; serviceTitanLeadSummary.status=api_history_pulled; joinProbe.status=partial_join_surfaces_readable; #30 evidence=data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens. data/servicetitan-attribution-join-probe.json records CRM export bookings readable with 0 rows from a 2020 cursor, while JPM export jobs and Accounting export invoices, invoice items, and payments return HTTP 403 scope validation failures.",
-      "nextAction": "Refresh ServiceTitan lead history, join probe, and #30 matrix row together."
+      "evidence": "serviceTitanStatus.status=auth_ready_no_export; serviceTitanLeadSummary.status=api_history_pulled; joinProbe.status=partial_join_surfaces_readable; #30 evidence=data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.",
+      "nextAction": "Refresh ServiceTitan lead history and #30 matrix row together."
     },
     {
       "id": "#25-acceptance-closure",

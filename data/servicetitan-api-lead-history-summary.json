@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T19:58:55.227Z",
+  "generatedAt": "2026-06-05T22:10:18.746Z",
   "evidenceClass": "servicetitan_api_lead_history_redacted",
   "status": "api_history_pulled",
   "requestedRange": {
@@ -9,7 +9,7 @@
   "endpoint": "ServiceTitan CRM v2 GET /leads",
   "sourceDocs": "https://developer.servicetitan.io/docs/apis/tenant-crm-v2/endpoints",
   "rows": 78,
-  "pagesFetched": 2,
+  "pagesFetched": 1,
   "reportedTotalCount": 78,
   "websiteCampaignIdPresent": true,
   "websiteCampaignLeadCount": 76,
@@ -19,8 +19,8 @@
     "timestamp": "2026-06-04T15:21:32-06:00",
     "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
     "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
-    "liveStatus": "source_added_pending_live_delivery_verification",
-    "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+    "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
+    "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
   },
   "piiExcluded": true,
   "secretHandling": "No credential values, access tokens, customer names, phones, emails, street addresses, lead summaries, lead URLs, raw notes, payment data, or raw ServiceTitan payloads are stored.",
@@ -111,7 +111,7 @@
       "converted": 1,
       "dismissedRate": 0.7051282051282052,
       "convertedRate": 0.01282051282051282,
-      "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+      "interpretation": "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
     },
     "source_captcha_day_or_after": {
       "total": 0,
@@ -504,15 +504,7 @@
       "page": 1,
       "status": 200,
       "ok": true,
-      "rowCount": 50,
-      "hasMore": true,
-      "totalCount": 0
-    },
-    {
-      "page": 2,
-      "status": 200,
-      "ok": true,
-      "rowCount": 28,
+      "rowCount": 78,
       "hasMore": false,
       "totalCount": 0
     }

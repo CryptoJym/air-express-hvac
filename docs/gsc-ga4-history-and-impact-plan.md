@@ -29,7 +29,7 @@ The result is split:
 - Google Business Profile was not attempted in this pass.
 - This means the missing bearer-token platform route is no longer the leading
   code blocker; the remaining blocker is GSC/GA4 product scope/property access,
-  live delivery, and ServiceTitan booked-job/revenue joins.
+  canonical live delivery, and live CAPTCHA/lead-path health.
 
 Current saved-data baseline:
 
@@ -118,14 +118,16 @@ Latest local audit state:
   outputs after the Google retry. Scores are technical `100`, GEO `90`,
   messaging `100`, accessibility `100`, attribution `25`.
 - The remaining high-severity findings are live/provider-state blockers:
-  live GA4/GTM marker not synced, one prepared sitemap URL not live, live
-  sitemap lastmod drift, live `llms.txt` drift, and edge-managed `robots.txt`
-  drift.
+  GA4 is live on `www.airexpressutah.com` but not canonical
+  `airexpressutah.com`, Turnstile is not configured in the active production
+  delivery path, one prepared sitemap URL is not live, live sitemap lastmod
+  drift remains, live `llms.txt` drift remains, and `robots.txt` is edge-managed.
 - `npm run verify:owned-site-delivery-sync` now writes
   `data/owned-site-delivery-sync-check.json` with a read-only local-vs-live
   artifact comparison. The latest status is `pending_delivery_sync`: local
-  `index.html` and `analytics.js` are ready, but live homepage and
-  `/analytics.js` are not serving the approved measurement source.
+  `index.html` and `analytics.js` are ready, the `www` host is serving GA4,
+  but canonical apex homepage and `/analytics.js` are not serving the approved
+  measurement source.
 
 Additional mailbox evidence under the James/New Reward app identity supports a
 source-of-truth split rather than a clean "Google assets are absent" conclusion:
@@ -374,20 +376,17 @@ Pulled ServiceTitan lead-count baseline:
   pump, 5 emergency repair, and 4 unclassified.
 - Latest weekly lead trend: 2026-05-18 had 15 leads; 2026-05-25 had 0 leads;
   2026-06-01 had 0 leads.
-- Booked-job and revenue proof remains blocked: the lead endpoint returned 0
-  booking IDs and no approved revenue fields.
-- Booking/revenue join probe: a read-only 2020-to-now export probe found CRM
-  export bookings readable with 0 rows, while JPM export jobs and Accounting
-  export invoices, invoice items, and payments returned HTTP 403 scope
-  validation failures. Root cause: the current ServiceTitan credential path can
-  read lead history, but it is not entitled to the jobs/accounting read scopes
-  required for booked-job or revenue attribution.
+- Booking and revenue joins are intentionally out of scope for this Air Express
+  report. The current ServiceTitan credential path is sufficient for redacted
+  lead-count history, which is the outcome context James asked to keep.
 - Stored fields exclude customer names, phone numbers, emails, street addresses,
   lead summaries, lead URLs, raw payloads, credential values, and tokens.
 - Cloudflare Turnstile/CAPTCHA source was added on 2026-06-04 in commit
-  `27cf80099165065e7f5bd0c0ca49d595326c4c44`, but live public form assets are
-  still older and `/api/turnstile/config` returns HTTP 404. Treat this as
-  `source_ready_pending_live_verification`, not verified live CAPTCHA impact.
+  `27cf80099165065e7f5bd0c0ca49d595326c4c44`, but live activation is blocked:
+  `www.airexpressutah.com/api/turnstile/config` reports missing
+  `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`, while canonical
+  `airexpressutah.com/api/turnstile/config` returns HTTP 404. Treat this as
+  source-ready but not active, not verified live CAPTCHA impact.
 - Post-CAPTCHA-source lead count is currently 0, so there is no post-live data
   yet to claim improved lead quality.
 
@@ -408,9 +407,9 @@ the April 24 lead-visibility milestone.
 The generated impact report now has a `Lead Proof Status` section. It records
 the API lead proof as `api_history_pulled`, the ServiceTitan auth state as
 `auth_ready_no_export`, the pulled lead counts, campaign `80365413`, the
-booking/revenue join probe state as `partial_join_surfaces_readable`, and the
-no-PII boundary. It still does not claim booked jobs, revenue, ROI, or full
-closed-won attribution.
+weekly zero-fill/CAPTCHA marker, and the no-PII boundary. It still does not
+claim booked jobs, revenue, ROI, or full closed-won attribution because that
+lane is outside the current requested scope.
 
 2026-06-03 redacted export import update: a local-only import path is prepared
 for owner-supplied ServiceTitan CSV evidence:
@@ -447,7 +446,9 @@ npm run verify:live-measurement
 ```
 
 It writes `data/live-measurement-path-check.json` with public marker booleans,
-edge headers, local GA4 source status, and prepared lead-event status. The
-current state is `fixed_locally_pending_live`: local `index.html` and
-`analytics.js` contain `G-JZ7PY32EVX`, but the live homepage still has zero
-approved GA4/GTM sources and production `/analytics.js` returns HTTP 404.
+edge headers, local GA4 source status, `www` host status, Turnstile config
+state, and prepared lead-event status. The current state is
+`partial_live_www_only_canonical_pending`: local source contains
+`G-JZ7PY32EVX`, `www.airexpressutah.com` serves it, but canonical
+`airexpressutah.com` still has zero approved GA4/GTM sources and canonical
+`/analytics.js` returns HTTP 404.

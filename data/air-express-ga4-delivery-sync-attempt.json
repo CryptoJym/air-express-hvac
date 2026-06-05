@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-06-05T22:07:18Z",
+  "evidenceClass": "air_express_ga4_delivery_sync_attempt",
+  "approvedBy": "James approved the GA4 analytics delivery sync in this thread.",
+  "status": "partial_live_www_only_canonical_pending",
+  "vercelDeployment": {
+    "id": "dpl_7TP4NdQ1Bgt18qFMupw5YJNrE9Vo",
+    "url": "https://option-n2d04yn86-utlyze-2f74afdb.vercel.app",
+    "aliases": [
+      "https://airexpressutah.com",
+      "https://www.airexpressutah.com"
+    ],
+    "legacyAliasesOmitted": true
+  },
+  "postDeployVerification": {
+    "www": {
+      "homepage": "https://www.airexpressutah.com/",
+      "ga4Id": "G-JZ7PY32EVX",
+      "ga4Present": true,
+      "analyticsJs": "https://www.airexpressutah.com/analytics.js",
+      "analyticsJsHttpStatus": 200,
+      "turnstileConfig": "https://www.airexpressutah.com/api/turnstile/config",
+      "turnstileConfigured": false,
+      "turnstileHttpStatus": 503,
+      "missingTurnstileKeys": [
+        "TURNSTILE_SITE_KEY",
+        "TURNSTILE_SECRET_KEY"
+      ],
+      "safeFormHealthCheck": {
+        "method": "POST application/x-www-form-urlencoded",
+        "endpoint": "https://www.airexpressutah.com/api/intake/contact",
+        "submittedCustomerData": false,
+        "captchaTokenSubmitted": false,
+        "httpStatus": 303,
+        "location": "/contact.html?intake=validation_error&fields=captcha",
+        "interpretation": "The www lead endpoint fails closed before ServiceTitan without a valid CAPTCHA token."
+      }
+    },
+    "canonicalApex": {
+      "homepage": "https://airexpressutah.com/",
+      "ga4Id": "G-JZ7PY32EVX",
+      "ga4Present": false,
+      "analyticsJs": "https://airexpressutah.com/analytics.js",
+      "analyticsJsHttpStatus": 404,
+      "turnstileConfig": "https://airexpressutah.com/api/turnstile/config",
+      "turnstileConfigured": false,
+      "turnstileHttpStatus": 404,
+      "edgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+      "edgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+      "edgeRouteMode": "ZERO_REDIRECT"
+    }
+  },
+  "rootCause": "The approved Vercel delivery made GA4 live on the www host, but canonical apex still resolves through the older New Reward edge/origin path that lacks analytics.js and Turnstile config. The active production environment also lacks Turnstile site/secret keys.",
+  "secretHandling": "No provider credentials, OAuth tokens, cookies, Turnstile secrets, raw HTML, ServiceTitan payloads, or customer data are stored.",
+  "nextAction": "Sync the canonical apex/New Reward edge path to the verified www/Vercel source or make the verified Vercel host canonical, add approved Turnstile site/secret keys, then rerun npm run verify:live-measurement and npm run verify:owned-site-delivery-sync."
+}

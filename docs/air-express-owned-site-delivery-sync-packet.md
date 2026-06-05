@@ -1,8 +1,8 @@
 # Air Express Owned-Site Delivery Sync Packet
 
-Generated: 2026-06-03T18:40:06.741Z
+Generated: 2026-06-05T22:15:53.084Z
 
-Status: prepared only. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy was performed by this packet.
+Status: prepared evidence packet. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy is performed by this packet.
 
 ## Objective
 
@@ -11,7 +11,7 @@ Move the locally prepared Air Express owned-site artifacts onto the live deliver
 ## Current State
 
 - Owned-site delivery status: `pending_delivery_sync`.
-- Live measurement status: `fixed_locally_pending_live`.
+- Live measurement status: `partial_live_www_only_canonical_pending`.
 - Site-file manifest status: `passed`.
 - Approved GA4 id: `G-JZ7PY32EVX`.
 - Live edge website id: `cmorqbs9j001r5nr1h25vosp8`.
@@ -19,6 +19,9 @@ Move the locally prepared Air Express owned-site artifacts onto the live deliver
 - Local public page measurement coverage: `120/120`.
 - Live homepage HTTP: `200`; approved GA4 present: `false`.
 - Live `/analytics.js` HTTP: `404`; approved GA4 present: `false`.
+- WWW homepage HTTP: `200`; approved GA4 present: `true`.
+- WWW `/analytics.js` HTTP: `200`; approved GA4 present: `true`.
+- Apex Turnstile configured: `false`; WWW Turnstile configured: `false`.
 - Approved GTM containers found locally: `none`.
 
 ## Artifact Sync Matrix
@@ -71,7 +74,7 @@ Expected pre-sync state from this packet:
 - `verify:site-file-manifest` status is `passed`.
 - `verify:public-claims` status is `passed`.
 - `verify:owned-site-delivery-sync` status is `pending_delivery_sync`.
-- `verify:live-measurement` status is `fixed_locally_pending_live`.
+- `verify:live-measurement` status is `partial_live_www_only_canonical_pending`.
 
 ## Post-Sync Verification
 
@@ -97,7 +100,7 @@ Expected post-sync proof for #28:
 
 #28 can close only when:
 
-- `npm run verify:live-measurement` reports a live approved measurement source instead of `fixed_locally_pending_live`.
+- `npm run verify:live-measurement` reports a canonical live approved measurement source instead of `partial_live_www_only_canonical_pending`.
 - `npm run verify:owned-site-delivery-sync` no longer reports P0 `homepage` or `analytics_js` as `pending_delivery_sync`.
 - `npm run audit:seo-geo-attribution` reflects the live measurement state.
 - The issue comment includes the exact command outputs, live website id, and any approved edge-managed exceptions for noncritical artifacts.

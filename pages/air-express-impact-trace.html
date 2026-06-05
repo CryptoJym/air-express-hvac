@@ -330,12 +330,12 @@
     <div class="top">
       <div>
         <h1>Air Express Impact Trace</h1>
-        <p class="subtitle">Saved New Reward visibility signals and ServiceTitan lead-count history are available, but complete attribution remains blocked until direct GSC/GA4 and ServiceTitan revenue joins are restored.</p>
+        <p class="subtitle">Saved New Reward visibility signals and ServiceTitan lead-count history are available, but complete attribution remains blocked until direct GSC/GA4 provider access and canonical live measurement are restored.</p>
       </div>
       <div class="chips" aria-label="Current report status">
         <span class="chip good">Saved snapshots</span>
         <span class="chip bad">Google scope blocked</span>
-        <span class="chip bad">Revenue join blocked</span>
+        <span class="chip warn">Lead system under review</span>
         <span class="chip warn">Attribution incomplete</span>
       </div>
     </div>
@@ -366,7 +366,7 @@
         </article>
         <article class="kpi">
           <h3>Attribution Score</h3>
-          <div class="metric">25</div>
+          <div class="metric">30</div>
           <p class="metric-note">Low because direct Google and lead joins are blocked.</p>
         </article>
       </aside>
@@ -481,7 +481,7 @@
                 </article><article class="provider warn">
                   <strong>ServiceTitan</strong>
                   <span class="state-pill warn">partial_join_surfaces_readable</span>
-                  <p>78 redacted lead row(s) pulled; 76 match the configured website campaign; 0 include booking ids. Join probe from 2020-01-01: CRM export bookings readable with 0 row(s); 4 booking/revenue surface(s) are scope-blocked.</p>
+                  <p>78 redacted lead row(s) pulled; 76 match the configured website campaign. Booking and revenue joins are intentionally out of scope.</p>
                 </article>
               </div>
             </div>
@@ -613,7 +613,7 @@
         </article>
         <article class="evidence-card bad">
           <h3>Blocked attribution</h3>
-          <p>Direct GSC/GA4 history and ServiceTitan booking/revenue joins are not available yet. Join probe from 2020-01-01: CRM export bookings readable with 0 row(s); 4 booking/revenue surface(s) are scope-blocked. Google Business Profile is separate from this refresh.</p>
+          <p>Direct GSC/GA4 history and canonical live measurement are not available yet. ServiceTitan lead-count history is pulled; booking and revenue joins are intentionally out of scope. Google Business Profile is separate from this refresh.</p>
         </article>
       </aside>
     </section>
@@ -630,7 +630,7 @@
         <strong>100</strong>
       </article><article class="score bad">
         <span>Attribution</span>
-        <strong>25</strong>
+        <strong>30</strong>
       </article>
     </section>
 
@@ -703,7 +703,7 @@
     </section>
 
     <section class="footer-note">
-      Generated 2026-06-05T21:20:29.262Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, live tag delivery, and ServiceTitan booking/revenue joins remain approval/access gated. The current ServiceTitan API key can pull lead counts, but JPM/accounting export scopes are still required for booked-job and revenue attribution. Google Business Profile is outside this refresh. No provider mutation, deploy, public send, or production change is performed by this report.
+      Generated 2026-06-05T22:16:14.705Z from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, canonical live tag delivery, and live CAPTCHA/lead-path health remain the current blockers. The current ServiceTitan API key can pull lead counts; booking and revenue joins are intentionally out of scope for this report. Google Business Profile is outside this refresh. No provider mutation, public send, or untracked production change is performed by this report.
     </section>
   </main>
 

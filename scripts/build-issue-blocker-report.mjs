@@ -214,7 +214,7 @@ const html = `<!doctype html>
       <article class="card"><h3>Closed</h3><div class="metric good">${closedCount}</div><p>#25 NewRewards provider resolver repair.</p></article>
       <article class="card"><h3>Open</h3><div class="metric bad">${openCount}</div><p>#24 and #26-#30 remain open with documented blockers.</p></article>
       <article class="card"><h3>Technical SEO</h3><div class="metric good">${escapeHtml(seoAudit.scores?.technical)}</div><p>Current local SEO/GEO attribution audit.</p></article>
-      <article class="card"><h3>Attribution</h3><div class="metric bad">${escapeHtml(seoAudit.scores?.attribution)}</div><p>Blocked by Google scopes, New Reward mapping, live tag sync, and ServiceTitan booking/revenue proof.</p></article>
+      <article class="card"><h3>Attribution</h3><div class="metric bad">${escapeHtml(seoAudit.scores?.attribution)}</div><p>Blocked by Google scopes, New Reward mapping, canonical live tag sync, and lead-path health proof.</p></article>
     </section>
 
     <h2>Current Diagnostics</h2>

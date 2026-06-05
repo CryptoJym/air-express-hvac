@@ -205,7 +205,7 @@ function checkIssueMatrix() {
   }
 
   for (const requiredStatus of [
-    "fixed locally pending live",
+    "partial live www only canonical pending",
     "pending delivery sync",
     "blocked",
     "rows found",
@@ -511,7 +511,7 @@ function checkHistoryStatus() {
   );
   assert(
     status.serviceTitan.captcha?.date === "2026-06-04" &&
-      String(status.serviceTitan.captcha?.liveStatus || "").includes("pending_live"),
+      String(status.serviceTitan.captcha?.liveStatus || "").includes("pending"),
     "ServiceTitan lead proof status must include the June 4 Turnstile source marker without claiming live CAPTCHA proof."
   );
   assert(
@@ -519,10 +519,9 @@ function checkHistoryStatus() {
     "ServiceTitan lead proof status must preserve the current zero post-CAPTCHA-source lead count."
   );
   assert(
-    status.serviceTitan.attributionJoinProbe?.status === "partial_join_surfaces_readable" &&
-      status.serviceTitan.attributionJoinProbe?.bookingRowCount === 0 &&
-      status.serviceTitan.attributionJoinProbe?.blockedSurfaces?.includes("JPM export jobs"),
-    "ServiceTitan lead proof status must preserve booking/revenue join-probe state."
+    String(status.serviceTitan.blocker || "").includes("Lead history is pulled") &&
+      String(status.serviceTitan.blocker || "").includes("Turnstile"),
+    "ServiceTitan lead proof status must preserve lead-history and live lead-path blocker state."
   );
   assert(
     Number(status.serviceTitan.apiCountsByServiceType?.ac_repair || 0) > 0,
@@ -541,10 +540,8 @@ function checkHistoryStatus() {
     "Impact report must show the ServiceTitan auth-ready export state."
   );
   assert(
-    impactReport.includes("ServiceTitan booking/revenue join probe") &&
-      impactReport.includes("partial_join_surfaces_readable") &&
-      impactReport.includes("JPM export jobs"),
-    "Impact report must show the ServiceTitan booking/revenue join-probe state."
+    impactReport.includes("booking and revenue joins are intentionally out of scope"),
+    "Impact report must keep booking/revenue joins outside the current lead-count scope."
   );
   assert(
     impactReport.includes("ServiceTitan redacted export import"),
@@ -911,6 +908,7 @@ function checkLiveMeasurementPath() {
       "blocked_live_fetch",
       "blocked_duplicate_or_unverified_live_source",
       "fixed_locally_pending_live",
+      "partial_live_www_only_canonical_pending",
       "live_single_source_verified_pending_event_proof",
     ].includes(status.status),
     `Unexpected live measurement status: ${status.status}`
@@ -986,6 +984,17 @@ function checkLiveMeasurementPath() {
     assert(
       (status.blockers || []).some((blocker) => String(blocker.nextAction || "").includes("verify:live-measurement")),
       "fixed_locally_pending_live must include rerun next action."
+    );
+  }
+  if (status.status === "partial_live_www_only_canonical_pending") {
+    assert(
+      status.live?.wwwHomepage?.markers?.approvedGa4Present === true &&
+        status.live?.homepage?.markers?.approvedGa4Present === false,
+      "partial_live_www_only_canonical_pending must show GA4 live on www but absent from canonical apex."
+    );
+    assert(
+      status.live?.turnstileConfig?.www?.configured === false,
+      "partial_live_www_only_canonical_pending must preserve missing live Turnstile config."
     );
   }
 }

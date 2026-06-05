@@ -52,7 +52,7 @@
     <h1>Air Express Issue 24-30 Blocker Report</h1>
     <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T21:20:29.296Z</span>
+      <span class="pill">Generated 2026-06-05T22:15:59.297Z</span>
       <span class="pill">Repo: CryptoJym/air-express-hvac</span>
       <span class="pill">No provider mutations attempted</span>
       <span class="pill">No Air Express production deploy attempted</span>
@@ -70,7 +70,7 @@
       <article class="card"><h3>Closed</h3><div class="metric good">1</div><p>#25 NewRewards provider resolver repair.</p></article>
       <article class="card"><h3>Open</h3><div class="metric bad">6</div><p>#24 and #26-#30 remain open with documented blockers.</p></article>
       <article class="card"><h3>Technical SEO</h3><div class="metric good">100</div><p>Current local SEO/GEO attribution audit.</p></article>
-      <article class="card"><h3>Attribution</h3><div class="metric bad">25</div><p>Blocked by Google scopes, New Reward mapping, live tag sync, and ServiceTitan booking/revenue proof.</p></article>
+      <article class="card"><h3>Attribution</h3><div class="metric bad">30</div><p>Blocked by Google scopes, New Reward mapping, canonical live tag sync, and lead-path health proof.</p></article>
     </section>
 
     <h2>Current Diagnostics</h2>
@@ -78,7 +78,7 @@
       <table>
         <thead><tr><th>Surface</th><th>Status</th><th>Evidence File</th></tr></thead>
         <tbody>
-          <tr><td>Live Measurement</td><td><span class="state prepared">fixed locally pending live</span></td><td><code>data/live-measurement-path-check.json</code></td></tr>
+          <tr><td>Live Measurement</td><td><span class="state partial">partial live www only canonical pending</span></td><td><code>data/live-measurement-path-check.json</code></td></tr>
           <tr><td>Delivery Sync</td><td><span class="state prepared">pending delivery sync</span></td><td><code>data/owned-site-delivery-sync-check.json</code></td></tr>
           <tr><td>Google History</td><td><span class="state blocked-state">blocked</span></td><td><code>data/google-history/history-pull-status.json</code></td></tr>
           <tr><td>New Reward Mapping</td><td><span class="state blocked-state">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
@@ -105,7 +105,7 @@
             <td><span class="state blocked-state">parent incomplete</span></td>
             <td>Issue comments updated; pages/new-reward-impact-report.html and pages/seo-geo-attribution-report.html regenerated; data/attribution-email-evidence.csv now preserves Gmail and Outlook root-cause evidence; data/public-claim-register.json records clean public-claim state; child issues #26-#30 remain open</td>
             <td>Local reports, source evidence map, history pull status, saved New Reward snapshot history, mailbox evidence ledger, public claim register, and blocker comments were refreshed without provider or production mutations</td>
-            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google GSC/GA4 read scopes/property proof, live sync, and ServiceTitan booked-job/revenue proof. GBP is a separate later lane in this refresh.</td>
+            <td>Child lanes #26-#30 still require GSC revoked/error repair, GA4 property selection, Google GSC/GA4 read scopes/property proof, canonical live sync, Turnstile config, and lead-system health proof. GBP is a separate later lane in this refresh.</td>
             <td>All child issues are closed or explicitly blocked with exact evidence; live report shows pulled history or narrowed provider-specific blockers</td>
             <td>Resolve #26, #27, #28, #29, and #30 in sequence</td>
           </tr>
@@ -115,7 +115,7 @@
             <td><span class="state complete">completed verified</span></td>
             <td>h3ro-dev/NewRewards PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f on 2026-06-03T13:33:04Z; targeted QA and production-preview gates were green; post-merge Air Express read-only provider recheck now returns rows_found for the canonical live website id cmorqbs9j001r5nr1h25vosp8.</td>
             <td>Provider credential resolver repair was merged/deployed outside this Air Express repo; local recheck confirms resolver code is no longer the remaining blocker.</td>
-            <td>No resolver-code action remains; GSC revoked/error state, missing local Google read scopes, GA4 property selection, live delivery sync, and ServiceTitan booked-job/revenue proof continue under #26-#30.</td>
+            <td>No resolver-code action remains; GSC revoked/error state, missing local Google read scopes, GA4 property selection, canonical delivery sync, Turnstile config, and lead-system health proof continue under #26-#30.</td>
             <td>Merged PR/deployment evidence remains attached and no regression appears in current NewRewards status checks</td>
             <td>Keep #25 closed and continue #26 through #30.</td>
           </tr>
@@ -142,12 +142,12 @@
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a></td>
             <td>open</td>
-            <td><span class="state prepared">fixed locally pending live</span></td>
-            <td>npm run verify:live-measurement writes data/live-measurement-path-check.json with status fixed_locally_pending_live; npm run verify:owned-site-delivery-sync writes data/owned-site-delivery-sync-check.json with status pending_delivery_sync; npm run verify:site-file-manifest writes data/site-file-manifest.json with status passed; docs/air-express-owned-site-delivery-sync-packet.md records P0 homepage and analytics.js delivery requirements plus local-but-not-live blog/first-hot-week-ac-checklist-utah.html; local public page coverage is 120/120; index.html and analytics.js include GA4 G-JZ7PY32EVX; Outlook evidence from April 24/27 confirms the same direct gtag id; intake-form.js prepares guarded generate_lead; contact.html request-estimate.html and schedule-service.html each load /analytics.js intake-form.js and data-intake-form; live homepage still lacks GA4/GTM and /analytics.js is 404</td>
-            <td>Local source restored and tests added; dedicated live measurement diagnostic performs read-only public marker checks, verifies no duplicate local measurement sources and no unapproved GTM containers, checks all three lead form paths individually, and stores no raw HTML; owned-site delivery sync now compares local homepage analytics.js llms.txt sitemap.xml and robots.txt against live edge hashes/status/markers without storing raw live HTML; site-file manifest verifies required publish artifacts sitemap/local HTML coverage generated blog outputs draft exclusion and local static references; delivery sync packet generated exact stop gates and post-sync commands; repo Gmail and Outlook searches found no approved Air Express GTM container id</td>
-            <td>Approved Air Express deploy, New Reward edge sync, or manual delivery path is required; approved GTM container id remains unknown</td>
-            <td>Live homepage exposes exactly one approved GA4 or verified GTM source and lead forms fire one verified generate_lead event without duplicate ServiceTitan records</td>
-            <td>Approve delivery path; if GTM is desired, first verify the exact GTM container id; rerun npm run prepare:delivery-sync-packet, npm run verify:site-file-manifest, npm run verify:owned-site-delivery-sync, and npm run verify:live-measurement before and after delivery</td>
+            <td><span class="state partial">partial live www only canonical pending</span></td>
+            <td>npm run verify:live-measurement writes data/live-measurement-path-check.json with status partial_live_www_only_canonical_pending; npm run verify:owned-site-delivery-sync writes data/owned-site-delivery-sync-check.json with status pending_delivery_sync; npm run verify:site-file-manifest writes data/site-file-manifest.json with status passed; docs/air-express-owned-site-delivery-sync-packet.md records P0 homepage and analytics.js delivery requirements plus local-but-not-live blog/first-hot-week-ac-checklist-utah.html; local public page coverage is 120/120; index.html and analytics.js include GA4 G-JZ7PY32EVX; www.airexpressutah.com now serves the approved GA4 source and /analytics.js HTTP 200; canonical airexpressutah.com still serves the older New Reward edge/origin path with no GA4 marker and /analytics.js HTTP 404; Turnstile config is not live/configured on the canonical path and www reports missing Turnstile env keys; intake-form.js prepares guarded generate_lead; contact.html request-estimate.html and schedule-service.html each load /analytics.js intake-form.js and data-intake-form in source</td>
+            <td>Local source restored and tests added; an approved Vercel production deploy made the updated GA4 source reachable on www; dedicated live measurement diagnostic performs public marker checks for apex and www, verifies no duplicate local measurement sources and no unapproved GTM containers, checks all three lead form paths locally, records public Turnstile config state without secrets, and stores no raw HTML; owned-site delivery sync compares local homepage analytics.js llms.txt sitemap.xml and robots.txt against live apex edge hashes/status/markers without storing raw live HTML; site-file manifest verifies required publish artifacts sitemap/local HTML coverage generated blog outputs draft exclusion and local static references; delivery sync packet generated exact stop gates and post-sync commands; repo Gmail and Outlook searches found no approved Air Express GTM container id</td>
+            <td>Canonical apex/New Reward edge sync is still required; Turnstile production env keys are missing from the active Vercel project; approved GTM container id remains unknown</td>
+            <td>Canonical live homepage exposes exactly one approved GA4 or verified GTM source and lead forms fire one verified generate_lead event without duplicate ServiceTitan records</td>
+            <td>Sync canonical apex/New Reward edge delivery to the verified www/Vercel source or make the verified Vercel host canonical; add approved Turnstile site/secret env keys; if GTM is desired, first verify the exact GTM container id; rerun npm run prepare:delivery-sync-packet, npm run verify:site-file-manifest, npm run verify:owned-site-delivery-sync, and npm run verify:live-measurement before and after delivery</td>
           </tr>
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/29">#29</a></td>
@@ -155,19 +155,19 @@
             <td><span class="state prepared">prepared blocked by data access</span></td>
             <td>pages/new-reward-impact-report.html generated with blocked state, a sanitized Google token scope inventory, an explicit verified/inferred/prepared/blocked/not_attempted evidence state model, saved New Reward snapshot evidence, ServiceTitan weekly lead trend, service-type mix, and CAPTCHA marker; direct GSC and GA4 histories are not pulled due missing local read scopes, while GBP is excluded from this refresh. Saved GSC snapshots show 24 records with latest 2026-05-06 to 2026-06-03 totals of 3,832 appearances and 5 clicks, and saved AI visibility shows 5,181 snapshots, 443 unique questions, 16 mentions, and 6 citations.</td>
             <td>History pull script and Pages report generated current blocker state with explicit GSC/GA4 missing scope metadata; npm run pull:newreward-attribution-history pulled saved New Reward snapshot history read-only; ServiceTitan API pull added current weekly/service/CAPTCHA-safe lead evidence; docs/air-express-google-readonly-reconnect-packet.md defines the output contract and pass/fail gates</td>
-            <td>Direct GSC/GA4 provider API read scopes, GA4 property selection, GSC revoked/error repair, and live tag delivery remain blocked; booked-job/revenue attribution remains unavailable from the current ServiceTitan lead endpoint.</td>
+            <td>Direct GSC/GA4 provider API read scopes, GA4 property selection, GSC revoked/error repair, canonical live tag delivery, and live CAPTCHA/lead-path health remain blocked; booking/revenue joins are intentionally out of scope.</td>
             <td>Report contains GSC and GA4 rows by period or narrowed provider/property blockers; source coverage and caveats are current; saved New Reward snapshot and ServiceTitan lead-trend sections remain traceable</td>
             <td>After #26 provider/UI recheck and #27 scoped access, rerun npm run pull:newreward-attribution-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run audit:seo-geo-attribution, and npm run verify:onboarding-evidence.</td>
           </tr>
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/30">#30</a></td>
             <td>open</td>
-            <td><span class="state partial">partial api history pulled join scope blocked</span></td>
-            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, 0 rows with booking ids, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens. data/servicetitan-attribution-join-probe.json records CRM export bookings readable with 0 rows from a 2020 cursor, while JPM export jobs and Accounting export invoices, invoice items, and payments return HTTP 403 scope validation failures.</td>
-            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, classified service type from fixed keywords without storing raw summaries, probed read-only CRM booking/JPM job/accounting export surfaces, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
-            <td>Booking job IDs and revenue attribution are still not proven; the lead endpoint returned 0 booking ids and no approved revenue fields; CRM export bookings is readable but empty from a 2020 cursor; JPM Jobs (Read) and Accounting invoice/payment read scopes are not granted to the current token; live Turnstile is not yet verified because public assets are older and /api/turnstile/config returns 404; direct GSC/GA4 history and live GA4 delivery are still blocked in #27-#29.</td>
-            <td>Impact report includes ServiceTitan lead counts by period, week, service type, CAPTCHA source marker, and the booking/revenue join-probe blocker with no customer PII; booked-job and revenue attribution either become joined through approved Jobs/Accounting scopes or an approved redacted export, or remain blocked with exact proof.</td>
-            <td>Use the pulled redacted lead history for lead-count trend comparison, request Job Planning and Management &gt; Jobs (Read) plus Accounting invoice/payment read scopes or import an approved redacted export, then rerun npm run probe:servicetitan-attribution-joins, npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run build:impact-trace-report, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
+            <td><span class="state partial">partial api history pulled lead path review</span></td>
+            <td>data/servicetitan-export-access-check.json records auth_ready_no_export using temp-only Vercel option-c production env evidence; data/servicetitan-api-lead-history-summary.json records api_history_pulled for 2026-01-01 through 2026-06-05 with 78 redacted lead rows, 76 configured website campaign rows, 47 after_ga4_lead_proof rows, 29 target_brief_to_ga4_lead_proof rows, 2 before_new_reward_target_brief rows, 55 dismissed, 22 open, 1 converted, service-type buckets, 0 leads in weeks 2026-05-25 and 2026-06-01, and 0 leads after the 2026-06-04 CAPTCHA/Turnstile source marker. data/servicetitan-api-lead-history-redacted.csv stores only safe lead id/date/week/campaign/status/service bucket/category fields and excludes customer PII, raw notes, raw payloads, lead URLs, credential values, and tokens.</td>
+            <td>Pulled Vercel option-c production env into a temp-only file, fixed the repo env parser for Vercel escaped newlines, requested a ServiceTitan token without storing it, queried CRM v2 GET /leads read-only, wrote only redacted rollups/safe fields, classified service type from fixed keywords without storing raw summaries, preserved the redacted CSV import lane, and kept customer names phones emails street addresses summaries raw payloads and credential material out of repo evidence.</td>
+            <td>Lead history is pulled; the remaining current blocker is live lead-system health: Turnstile source exists but active public config is missing on www and canonical apex returns 404, while direct GSC/GA4 history and canonical live GA4 delivery are still blocked in #27-#29. Booking and revenue joins are intentionally out of scope for this report.</td>
+            <td>Impact report includes ServiceTitan lead counts by period, week, service type, and CAPTCHA source marker with no customer PII; it does not claim booked jobs, revenue, ROI, or CAPTCHA quality improvement.</td>
+            <td>Use the pulled redacted lead history for lead-count trend comparison, repair live Turnstile/canonical delivery, then rerun npm run pull:servicetitan-lead-history, npm run pull:gsc-ga4-history -- --skip-gbp, npm run build:impact-trace-report, npm run build:pulse-report, and npm run verify:onboarding-evidence.</td>
           </tr>
         </tbody>
       </table>
@@ -183,9 +183,9 @@
           <tr><td>#25</td><td>4 / 4</td><td>0</td><td></td></tr>
           <tr><td>#26</td><td>1 / 4</td><td>3</td><td>New Reward SEO workspace route must be rechecked with the james@jamesbrady.org app session and must open without Client not found.</td></tr>
           <tr><td>#27</td><td>1 / 5</td><td>4</td><td>No scoped GSC read token or property visibility proof</td></tr>
-          <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Approved deploy edge sync or manual delivery path is required</td></tr>
+          <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Canonical apex/New Reward edge sync or canonical routing repair is required</td></tr>
           <tr><td>#29</td><td>1 / 5</td><td>4</td><td>No scoped local GSC read token or normalized query/page/device history; saved GSC snapshots are aggregate totals only</td></tr>
-          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Booking and revenue joins are not included in the lead endpoint response and require Jobs/Accounting scopes or an approved redacted export</td></tr>
+          <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Live lead-system health is still blocked by missing Turnstile config and split canonical/www delivery</td></tr>
         </tbody>
       </table>
     </div>
@@ -242,15 +242,15 @@
             <td>Air Express GSC/GA4 resolver repair</td>
             <td><span class="state blocked-state">merged live</span></td>
             <td>PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f and production deployment reached success; post-merge Air Express configured DB recheck now returns rows_found for canonical website cmorqbs9j001r5nr1h25vosp8 with expired GSC/GA4 provider rows under newrewardplatform@gmail.com.</td>
-            <td>Confirms #25 is complete and remaining Air Express blockers are expired provider rows, Google scopes/property visibility, live delivery sync, and ServiceTitan proof rather than resolver code.</td>
+            <td>Confirms #25 is complete and remaining Air Express blockers are expired provider rows, Google scopes/property visibility, canonical live delivery sync, and lead-path health rather than resolver code.</td>
             <td>Continue #26 through #30; do not reopen resolver work unless new evidence points back to code.</td>
           </tr>
           <tr>
             <td>Air Express Google provider bearer-token proxy repair</td>
             <td><span class="state blocked-state">merged deployed</span></td>
             <td>PR #4105 merged at bfa5fc67b2568fc337f1f5f4600a9e51b1525054 after adding explicit same-origin GSC/GA4/GBP proxy routes through the auth bridge; post-merge Vercel status reached success and Railway statuses reported success/no deployment needed for watched paths.</td>
-            <td>Confirms the missing bearer-token route-forwarding blocker has been repaired in New Reward. Remaining Air Express blockers are now Google read scopes/property selection, GBP location proof, live delivery sync, and ServiceTitan/revenue joins.</td>
-            <td> credential extraction</td>
+            <td>Confirms the missing bearer-token route-forwarding blocker has been repaired in New Reward. Remaining Air Express blockers are now Google read scopes/property selection, GBP location proof, canonical live delivery sync, and Turnstile/lead-path health.</td>
+            <td>Retry Air Express GSC/GA4/GBP reconnect from the authenticated New Reward app session for website cmorqbs9j001r5nr1h25vosp8; if it still fails, capture the exact provider route/status/error.</td>
           </tr>
         </tbody>
       </table>

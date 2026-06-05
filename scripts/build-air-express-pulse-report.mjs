@@ -232,12 +232,12 @@ const providerRows = [
     surface: "ServiceTitan",
     status: serviceTitanLeadSummary.status || serviceTitanStatus.status || "blocked_env",
     evidence: serviceTitanLeadSummary.status === "api_history_pulled"
-      ? `${serviceTitanLeadSummary.rows || 0} redacted lead row(s) pulled; ${serviceTitanLeadSummary.websiteCampaignLeadCount || 0} match the configured website campaign; booked/revenue proof remains pending.`
+      ? `${serviceTitanLeadSummary.rows || 0} redacted lead row(s) pulled; ${serviceTitanLeadSummary.websiteCampaignLeadCount || 0} match the configured website campaign; booking and revenue joins are intentionally out of scope.`
       : serviceTitanStatus.status === "blocked_env"
         ? "Local ServiceTitan export/API keys are not present in the approved env sources."
         : "ServiceTitan export status needs review.",
     nextAction: serviceTitanLeadSummary.status === "api_history_pulled"
-      ? "Use lead counts for trend comparison and keep revenue attribution blocked until booking/revenue joins are approved."
+      ? "Use lead counts for trend comparison and repair live CAPTCHA/canonical delivery before claiming lead-system impact."
       : "Import an approved redacted export or enable read-only export/API access.",
   },
 ];
@@ -306,7 +306,7 @@ const html = `<!doctype html>
   </header>
   <main>
     <section class="note">
-      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while direct GSC/GA4 read scopes, live GA4 delivery, and ServiceTitan booking/revenue joins remain required for hard attribution. Google Business Profile is not included in this pass.
+      This report is local evidence only. It does not claim live publication, live provider access, or revenue impact. Saved New Reward visibility snapshots are useful directional proof, while direct GSC/GA4 read scopes, canonical live GA4 delivery, and live lead-path health remain required for hard attribution. Google Business Profile is not included in this pass.
     </section>
 
     <h2>Strategy Decision</h2>
@@ -320,7 +320,7 @@ const html = `<!doctype html>
       <article class="card"><h3>Saved GSC Impressions</h3><div class="metric good">${formatInteger(latestGsc.total_impressions)}</div><p>${escapeHtml(latestGsc.dateRange?.start || "pending")} to ${escapeHtml(latestGsc.dateRange?.end || "pending")} from saved New Reward snapshots.</p></article>
       <article class="card"><h3>Saved GSC Clicks</h3><div class="metric good">${formatInteger(latestGsc.total_clicks)}</div><p>CTR ${formatPercent(latestGsc.average_ctr, 1)}; average position ${formatDecimal(latestGsc.average_position, 1)}.</p></article>
       <article class="card"><h3>Saved AI Mentions</h3><div class="metric warn">${formatInteger(totalAiMentions)}</div><p>Latest weekly saved row: ${formatInteger(latestAiWeek.mentions)} mentions and ${formatInteger(latestAiWeek.citations)} citations.</p></article>
-      <article class="card"><h3>Attribution Score</h3><div class="metric bad">${escapeHtml(attributionScore)}</div><p>Blocked until direct GSC/GA4 scopes, GA4 property/live tag, and ServiceTitan booking/revenue joins are restored.</p></article>
+      <article class="card"><h3>Attribution Score</h3><div class="metric bad">${escapeHtml(attributionScore)}</div><p>Blocked until direct GSC/GA4 scopes, GA4 property/live tag, and live lead-path health are restored.</p></article>
     </section>
 
     <h2>CAPTCHA / Lead Quality Marker</h2>
@@ -392,7 +392,7 @@ const html = `<!doctype html>
       <td>${escapeHtml(formatMix(row.serviceTypes))}</td>
       <td>${escapeHtml(formatMix(row.statuses))}</td>
       <td>${statePill(row.captchaPeriod)}</td>
-      <td>Lead-count trend only; booked-job and revenue joins remain pending.</td>
+      <td>Lead-count trend only; booking and revenue joins are outside this report scope.</td>
     </tr>`) : [`<tr><td>pending</td><td>0</td><td>0</td><td>none observed</td><td>none observed</td><td>${statePill("not_pulled")}</td><td>ServiceTitan API lead history has not been pulled.</td></tr>`])}
 
     <h2>ServiceTitan Service-Type Mix</h2>

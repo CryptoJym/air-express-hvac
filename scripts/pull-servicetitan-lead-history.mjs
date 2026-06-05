@@ -240,7 +240,7 @@ function qualityProxy(rows) {
     dismissedRate: total ? dismissed / total : 0,
     convertedRate: total ? converted / total : 0,
     interpretation: total
-      ? "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+      ? "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
       : "No leads in this period, so CAPTCHA quality effect cannot be measured yet.",
   };
 }
@@ -401,9 +401,9 @@ async function main() {
     bookedLeadCount: bookedRows.length,
     captcha: {
       ...CAPTCHA_SOURCE_INTRODUCED,
-      liveStatus: "source_added_pending_live_delivery_verification",
+      liveStatus: "source_added_live_turnstile_env_or_canonical_delivery_pending",
       interpretation:
-        "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet.",
+        "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet.",
     },
     piiExcluded: true,
     secretHandling:

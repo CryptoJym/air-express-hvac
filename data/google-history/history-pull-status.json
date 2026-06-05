@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T21:20:18.773Z",
+  "generatedAt": "2026-06-05T22:15:56.223Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
     "gscStartDate": "2026-01-01",
@@ -32,7 +32,7 @@
     {
       "state": "blocked",
       "meaning": "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
-      "currentUse": "GSC/GA4 history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join."
+      "currentUse": "GSC/GA4 history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification."
     },
     {
       "state": "not_attempted",
@@ -54,7 +54,7 @@
   },
   "source": {
     "status": "blocked",
-    "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, live delivery has not synced the local GA4 source, and ServiceTitan lead/revenue history is still not joined. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, live-delivery, and revenue-join blocker."
+    "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report."
   },
   "serviceTitan": {
     "status": "auth_ready_no_export",
@@ -357,8 +357,8 @@
       "timestamp": "2026-06-04T15:21:32-06:00",
       "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
       "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
-      "liveStatus": "source_added_pending_live_delivery_verification",
-      "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+      "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
+      "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
     },
     "qualityProxyByCaptchaPeriod": {
       "before_source_captcha": {
@@ -368,7 +368,7 @@
         "converted": 1,
         "dismissedRate": 0.7051282051282052,
         "convertedRate": 0.01282051282051282,
-        "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+        "interpretation": "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
       },
       "source_captcha_day_or_after": {
         "total": 0,
@@ -394,19 +394,19 @@
       ],
       "bookingRowCount": 0,
       "evidence": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked.",
-      "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
+      "nextAction": "Keep booking/revenue joins out of scope unless James re-approves that lane."
     },
     "campaignIds": [
       "80365413",
       "80365029"
     ],
     "piiExcluded": true,
-    "evidence": "Read-only ServiceTitan API pull returned 78 redacted lead row(s) from 2026-01-01 to 2026-06-05; 76 row(s) match configured website campaign 80365413; 0 row(s) include booking ids; customer PII and raw payloads are excluded.",
+    "evidence": "Read-only ServiceTitan API pull returned 78 redacted lead row(s) from 2026-01-01 to 2026-06-05; 76 row(s) match configured website campaign 80365413; customer PII and raw payloads are excluded.",
     "redactedImportStatus": "awaiting_input",
     "redactedImportEvidence": "Redacted ServiceTitan export import is awaiting_input; template data/servicetitan-redacted-export-template.csv is prepared.",
     "redactedImportNextAction": "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>. Use the template columns and remove customer PII before import.",
-    "blocker": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked. Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.",
-    "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields.",
+    "blocker": "Lead history is pulled. Current remaining lead-system questions are the missing post-May-18 lead weeks, missing live Turnstile configuration, and split canonical/www delivery path.",
+    "nextAction": "Use lead counts for trend comparison, repair live CAPTCHA/canonical delivery, and keep booking/revenue joins out of scope unless James re-approves that lane.",
     "exportEvidenceClass": "servicetitan_export_access_readiness_check",
     "authCheck": "token_request_succeeded_no_token_stored"
   },
@@ -621,7 +621,7 @@
   ],
   "clientFriendlySummary": {
     "status": "blocked_pending_google_reconnect",
-    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,747 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs booked-job/revenue proof before ROI claims.",
+    "plainEnglish": "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available. New Reward saved GSC evidence is available for 2026-05-06 to 2026-06-03: 3,832 appearances, 5 click(s), 0.1% CTR, and 2,193 captured query/page rows. Compared with the first saved GSC window, appearances changed +3,599, clicks changed +1, and captured row coverage changed +2,110. Most recent saved movement is +1,374 appearances, +1 click(s), and average position 45.4 to 38.0. Saved AI visibility evidence includes 5,181 answer snapshot(s), 443 unique question(s), 16 mention(s), 6 citation(s), 0.3% mention rate, and 0.1% citation rate. Latest saved AI week 2026-06-01 records 3 mention(s) and 2 citation(s). Compared with the prior saved AI week, mentions changed -2 and citations changed -2; treat the latest week as partial if the run set is still in flight. Cloudflare AI traffic observability shows 2,747 saved AI-traffic request(s), but this is crawl/traffic context, not lead or revenue proof. No saved New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows are available for Air Express yet. GA4 trend attribution still needs the Air Express GA4 property selected in New Reward and canonical live measurement repaired. ServiceTitan lead-count history is available; booking and revenue joins are intentionally out of scope for this report.",
     "googleSearch": {
       "status": "saved_snapshot_available",
       "clicks": 5,
@@ -689,7 +689,7 @@
         "citationRate": 0,
         "completedAt": "2026-06-01T17:06:29.302"
       },
-      "nextAction": "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics plus booked-job/revenue joins are available."
+      "nextAction": "Use saved AI visibility snapshots for trend context; keep Google provider and canonical live-measurement caveats until owned analytics is available."
     },
     "leadProof": {
       "status": "api_history_pulled",
@@ -974,8 +974,8 @@
         "timestamp": "2026-06-04T15:21:32-06:00",
         "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
         "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
-        "liveStatus": "source_added_pending_live_delivery_verification",
-        "interpretation": "Use this as the source-code marker only. If there are no leads on/after the source date, do not claim CAPTCHA changed lead quality yet."
+        "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
+        "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
       },
       "qualityProxyByCaptchaPeriod": {
         "before_source_captcha": {
@@ -985,7 +985,7 @@
           "converted": 1,
           "dismissedRate": 0.7051282051282052,
           "convertedRate": 0.01282051282051282,
-          "interpretation": "Status mix is a lead-quality proxy only; revenue/booked-job proof is not present in this endpoint."
+          "interpretation": "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
         },
         "source_captcha_day_or_after": {
           "total": 0,
@@ -1011,13 +1011,13 @@
         ],
         "bookingRowCount": 0,
         "evidence": "Read-only join probe from 2020-01-01 found CRM export bookings readable with 0 row(s), while JPM export jobs (403), Accounting export invoices (403), Accounting export invoice items (403), Accounting export payments (403) remain blocked.",
-        "nextAction": "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
+        "nextAction": "Keep booking/revenue joins out of scope unless James re-approves that lane."
       },
-      "caveat": "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined."
+      "caveat": "This report intentionally uses lead-count history only. Booking and revenue joins are out of scope for the current Air Express report."
     }
   },
   "newRewardSnapshotHistory": {
-    "generatedAt": "2026-06-05T17:42:40.264Z",
+    "generatedAt": "2026-06-05T22:08:09.459Z",
     "status": "saved_snapshot_history_available",
     "evidenceClass": "read_only_newreward_saved_snapshot_history",
     "secretHandling": "No database URL, OAuth token, encrypted credential, customer PII, or full AI response text is printed or stored.",

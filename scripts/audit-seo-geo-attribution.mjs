@@ -660,10 +660,14 @@ function liveMeasurementEvidenceSummary(check) {
 
   const liveHomepage = check.live?.homepage || {};
   const liveAnalytics = check.live?.analyticsJs || {};
+  const liveWwwHomepage = check.live?.wwwHomepage || {};
+  const liveWwwAnalytics = check.live?.wwwAnalyticsJs || {};
+  const turnstileConfig = check.live?.turnstileConfig || {};
   const localIndex = check.local?.index?.markers || {};
   const localAnalytics = check.local?.analyticsJs?.markers || {};
   const localCoverage = check.local?.pageCoverage || {};
   const liveMarkers = liveHomepage.markers || {};
+  const liveWwwMarkers = liveWwwHomepage.markers || {};
   const liveContainers = Array.isArray(liveMarkers.gtmContainers)
     ? liveMarkers.gtmContainers.join(", ") || "none"
     : "unknown";
@@ -683,6 +687,15 @@ function liveMeasurementEvidenceSummary(check) {
     `live homepage GA4=${liveMarkers.approvedGa4Present ? "yes" : "no"}`,
     `live GTM containers=${liveContainers}`,
     `live /analytics.js HTTP=${liveAnalytics.status ?? "unknown"}`,
+    `www homepage HTTP=${liveWwwHomepage.status ?? "unknown"}`,
+    `www homepage GA4=${liveWwwMarkers.approvedGa4Present ? "yes" : "no"}`,
+    `www /analytics.js HTTP=${liveWwwAnalytics.status ?? "unknown"}`,
+    turnstileConfig.apex
+      ? `apex Turnstile configured=${turnstileConfig.apex.configured ? "yes" : "no"}`
+      : "",
+    turnstileConfig.www
+      ? `www Turnstile configured=${turnstileConfig.www.configured ? "yes" : "no"}`
+      : "",
     liveHomepage.headers?.xNewRewardsEdgeWebsiteId
       ? `edge website=${liveHomepage.headers.xNewRewardsEdgeWebsiteId}`
       : "",
@@ -731,6 +744,9 @@ function liveMeasurementNarrative(check) {
 
   if (check.status === "fixed_locally_pending_live") {
     return `The approved GA4 measurement ID ${check.approvedGa4Id || "G-JZ7PY32EVX"} is restored in repo-local source, but the dedicated live measurement diagnostic still shows no approved GA4/GTM source on the live homepage and live /analytics.js is not available.`;
+  }
+  if (check.status === "partial_live_www_only_canonical_pending") {
+    return `The approved GA4 measurement ID ${check.approvedGa4Id || "G-JZ7PY32EVX"} is live on www.airexpressutah.com, but the canonical apex path still serves the New Reward edge/origin artifact without the GA4 marker or /analytics.js. Treat this as partial implementation until the canonical host is synced.`;
   }
   if (check.status === "live_single_source_verified_pending_event_proof") {
     return "The live homepage exposes one approved measurement source; conversion-event proof still needs GA4 DebugView/Realtime or an approved non-duplicating test lead.";
@@ -799,6 +815,17 @@ function buildRootCauseMap(context) {
       evidence: liveMeasurementEvidenceSummary(liveMeasurementCheck),
       workaround: "Ran the dedicated live measurement diagnostic with public HTTP fetches and local source inspection only. No raw HTML, cookies, tokens, provider credentials, form submissions, or customer data were stored.",
       nextAction: "Approve the Air Express deploy, New Reward edge sync, or manual delivery path; then rerun npm run verify:live-measurement and confirm exactly one approved GA4/GTM source.",
+    });
+  } else if (liveMeasurementCheck?.status === "partial_live_www_only_canonical_pending") {
+    add({
+      severity: "High",
+      area: "Attribution / Website",
+      status: "partial_live_www_only_canonical_pending",
+      issue: "GA4 is live on www but missing from the canonical apex/New Reward edge path",
+      rootCause: "The approved Vercel/www delivery path is serving the updated GA4 source, while canonical airexpressutah.com is still routed through the older New Reward edge/origin artifact without /analytics.js.",
+      evidence: liveMeasurementEvidenceSummary(liveMeasurementCheck),
+      workaround: "Recorded public marker booleans and response headers only; no raw HTML, cookies, tokens, provider credentials, customer data, or successful form submissions were stored.",
+      nextAction: "Sync canonical apex/New Reward edge delivery to the same source as www, or make the verified Vercel host the canonical route, then rerun npm run verify:live-measurement.",
     });
   } else if (liveMeasurementCheck?.status === "blocked_duplicate_or_unverified_live_source") {
     add({
@@ -1434,6 +1461,13 @@ async function main() {
       evidence: liveMeasurementEvidenceSummary(liveMeasurementCheck),
       fix: "Deploy or sync the approved source path, then rerun npm run verify:live-measurement and verify GA4 Realtime/debug evidence.",
     });
+  } else if (liveMeasurementCheck?.status === "partial_live_www_only_canonical_pending") {
+    high.push({
+      priority: "High",
+      issue: "GA4 is live on www but missing from canonical apex",
+      evidence: liveMeasurementEvidenceSummary(liveMeasurementCheck),
+      fix: "Sync canonical apex/New Reward edge delivery to the same source as www, or make the verified Vercel host canonical, then rerun npm run verify:live-measurement.",
+    });
   } else if (liveMeasurementCheck?.status === "blocked_duplicate_or_unverified_live_source") {
     critical.push({
       priority: "Critical",
@@ -1622,12 +1656,16 @@ async function main() {
   const tagScore = liveOnSiteTagEvidence.length ? 35 : onSiteTagEvidence.length ? 20 : 0;
   const liveMeasurementHasLiveSource =
     liveMeasurementCheck?.status === "live_single_source_verified_pending_event_proof";
+  const liveMeasurementHasPartialLiveSource =
+    liveMeasurementCheck?.status === "partial_live_www_only_canonical_pending";
   const liveMeasurementHasLocalSource =
     liveMeasurementCheck?.local?.index?.markers?.approvedGa4Present === true
     || liveMeasurementCheck?.local?.analyticsJs?.markers?.approvedGa4Present === true;
   const effectiveTagScore = liveMeasurementCheck
     ? liveMeasurementHasLiveSource
       ? 35
+      : liveMeasurementHasPartialLiveSource
+      ? 25
       : liveMeasurementHasLocalSource
       ? 20
       : 0
@@ -1784,7 +1822,7 @@ async function main() {
         : null,
       onSiteTag: {
         detected: liveMeasurementCheck
-          ? liveMeasurementHasLiveSource || liveMeasurementHasLocalSource
+          ? liveMeasurementHasLiveSource || liveMeasurementHasPartialLiveSource || liveMeasurementHasLocalSource
           : Boolean(measurementTagEvidence.length),
         status: liveMeasurementCheck
           ? liveMeasurementCheck.status

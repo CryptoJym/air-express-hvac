@@ -57,6 +57,9 @@ function main() {
 
   const liveHomepage = measurement.live?.homepage || {};
   const liveAnalytics = measurement.live?.analyticsJs || {};
+  const liveWwwHomepage = measurement.live?.wwwHomepage || {};
+  const liveWwwAnalytics = measurement.live?.wwwAnalyticsJs || {};
+  const turnstileConfig = measurement.live?.turnstileConfig || {};
   const pageCoverage = measurement.local?.pageCoverage || {};
   const pendingDeployFailures = audit.liveStatus?.pendingDeployFailures || [];
   const liveArtifactRows = artifactRows(delivery);
@@ -65,7 +68,7 @@ function main() {
 
 Generated: ${now}
 
-Status: prepared only. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy was performed by this packet.
+Status: prepared evidence packet. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy is performed by this packet.
 
 ## Objective
 
@@ -82,6 +85,9 @@ Move the locally prepared Air Express owned-site artifacts onto the live deliver
 - Local public page measurement coverage: \`${pageCoverage.pagesWithAnyApprovedSource?.length || 0}/${pageCoverage.totalPages || 0}\`.
 - Live homepage HTTP: \`${liveHomepage.status || "unknown"}\`; approved GA4 present: \`${Boolean(liveHomepage.markers?.approvedGa4Present)}\`.
 - Live \`/analytics.js\` HTTP: \`${liveAnalytics.status || "unknown"}\`; approved GA4 present: \`${Boolean(liveAnalytics.markers?.approvedGa4Present)}\`.
+- WWW homepage HTTP: \`${liveWwwHomepage.status || "unknown"}\`; approved GA4 present: \`${Boolean(liveWwwHomepage.markers?.approvedGa4Present)}\`.
+- WWW \`/analytics.js\` HTTP: \`${liveWwwAnalytics.status || "unknown"}\`; approved GA4 present: \`${Boolean(liveWwwAnalytics.markers?.approvedGa4Present)}\`.
+- Apex Turnstile configured: \`${Boolean(turnstileConfig.apex?.configured)}\`; WWW Turnstile configured: \`${Boolean(turnstileConfig.www?.configured)}\`.
 - Approved GTM containers found locally: \`${(pageCoverage.approvedGtmContainers || []).join(", ") || "none"}\`.
 
 ## Artifact Sync Matrix
@@ -138,8 +144,8 @@ Expected pre-sync state from this packet:
 
 - \`verify:site-file-manifest\` status is \`passed\`.
 - \`verify:public-claims\` status is \`passed\`.
-- \`verify:owned-site-delivery-sync\` status is \`pending_delivery_sync\`.
-- \`verify:live-measurement\` status is \`fixed_locally_pending_live\`.
+- \`verify:owned-site-delivery-sync\` status is \`${delivery.status}\`.
+- \`verify:live-measurement\` status is \`${measurement.status}\`.
 
 ## Post-Sync Verification
 
@@ -165,7 +171,7 @@ Expected post-sync proof for #28:
 
 #28 can close only when:
 
-- \`npm run verify:live-measurement\` reports a live approved measurement source instead of \`fixed_locally_pending_live\`.
+- \`npm run verify:live-measurement\` reports a canonical live approved measurement source instead of \`${measurement.status}\`.
 - \`npm run verify:owned-site-delivery-sync\` no longer reports P0 \`homepage\` or \`analytics_js\` as \`pending_delivery_sync\`.
 - \`npm run audit:seo-geo-attribution\` reflects the live measurement state.
 - The issue comment includes the exact command outputs, live website id, and any approved edge-managed exceptions for noncritical artifacts.

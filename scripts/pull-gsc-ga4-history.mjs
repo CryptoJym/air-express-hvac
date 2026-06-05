@@ -89,7 +89,7 @@ const EVIDENCE_STATE_MODEL = [
     state: "blocked",
     meaning: "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
     currentUse:
-        "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and ServiceTitan booked-job/revenue join.",
+        "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification.",
   },
   {
     state: "not_attempted",
@@ -903,7 +903,7 @@ function buildClientFriendlySummary({
 
   const plainEnglish = hasGsc || hasGa4
     ? [
-      "Air Express visibility can now be discussed from pulled Google data, with the lead caveat that ServiceTitan export history is still needed before making ROI claims.",
+      "Air Express visibility can now be discussed from pulled Google data, with ServiceTitan lead-count history used as the current outcome context.",
       trendSignals.length
         ? trendSignals.join(" ")
         : "The pulled data is available, but the trend window is too thin to make a strong directional statement yet.",
@@ -960,7 +960,7 @@ function buildClientFriendlySummary({
       qualityProxyByCaptchaPeriod: serviceTitan.qualityProxyByCaptchaPeriod,
       attributionJoinProbe: serviceTitan.attributionJoinProbe,
       caveat:
-        "Do not claim booked jobs, revenue, or ROI until an approved booking/revenue ServiceTitan endpoint or redacted export is joined.",
+        "This report intentionally uses lead-count history only. Booking and revenue joins are out of scope for the current Air Express report.",
     },
   };
 }
@@ -995,17 +995,17 @@ function loadServiceTitanLeadProof() {
     ? `Imported ${importedRows.length} approved redacted ServiceTitan lead row(s), with ${importedLeadCount} listed lead id(s), safe campaign/source fields, and customer PII excluded.`
     : `Redacted ServiceTitan export import is ${importStatus}; template ${redactedImportStatus.templatePath || "data/servicetitan-redacted-export-template.csv"} is prepared.`;
   const apiEvidence = apiLeadCount
-    ? `Read-only ServiceTitan API pull returned ${apiLeadCount} redacted lead row(s) from ${apiSummary.requestedRange?.startDate || "unknown"} to ${apiSummary.requestedRange?.endDate || "unknown"}; ${websiteCampaignLeadCount} row(s) match configured website campaign ${campaignIds.includes("80365413") ? "80365413" : "unknown"}; ${bookedLeadCount} row(s) include booking ids; customer PII and raw payloads are excluded.`
+    ? `Read-only ServiceTitan API pull returned ${apiLeadCount} redacted lead row(s) from ${apiSummary.requestedRange?.startDate || "unknown"} to ${apiSummary.requestedRange?.endDate || "unknown"}; ${websiteCampaignLeadCount} row(s) match configured website campaign ${campaignIds.includes("80365413") ? "80365413" : "unknown"}; customer PII and raw payloads are excluded.`
     : "";
   const joinProbes = Array.isArray(joinProbe.probes) ? joinProbe.probes : [];
   const bookingProbe = joinProbes.find((probe) => probe.surface === "CRM export bookings") || null;
   const blockedJoinSurfaces = joinProbes.filter((probe) => probe.status === "blocked");
   const joinProbeEvidence = joinProbe.status
     ? `Read-only join probe from ${joinProbe.requested?.from || "unknown"} found CRM export bookings readable with ${Number(bookingProbe?.rowCount || 0)} row(s), while ${blockedJoinSurfaces.map((probe) => `${probe.surface} (${probe.httpStatus})`).join(", ") || "no join surfaces"} remain blocked.`
-    : "No ServiceTitan booking/revenue join probe has been recorded yet.";
+    : "No ServiceTitan booking/revenue join probe is required for this lead-count report.";
   const joinProbeNextAction = joinProbe.status
-    ? "Request JPM Jobs (Read) plus Accounting Invoices, Invoice Items, and Payments (Read), or import an owner-approved redacted export with safe booking/revenue fields."
-    : "Run npm run probe:servicetitan-attribution-joins with approved read-only credentials before claiming booking or revenue attribution.";
+    ? "Keep booking/revenue joins out of scope unless James re-approves that lane."
+    : "Keep booking/revenue joins out of scope unless James re-approves that lane.";
 
   return {
     status: exportStatus.status || "unknown",
@@ -1046,13 +1046,11 @@ function loadServiceTitanLeadProof() {
       redactedImportStatus.nextAction ||
       "Import an approved redacted export with npm run import:servicetitan-redacted-export -- --input <csv>.",
     blocker: apiLeadCount
-      ? joinProbe.status
-        ? `${joinProbeEvidence} Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields.`
-        : "Lead history is pulled, but booked-job and revenue attribution remain unproven because the lead endpoint returned no booking ids and no approved revenue fields."
+      ? "Lead history is pulled. Current remaining lead-system questions are the missing post-May-18 lead weeks, missing live Turnstile configuration, and split canonical/www delivery path."
       : firstBlocker?.evidence || "Full ServiceTitan history is not available from current local evidence.",
     nextAction:
       apiLeadCount
-        ? joinProbeNextAction
+        ? "Use lead counts for trend comparison, repair live CAPTCHA/canonical delivery, and keep booking/revenue joins out of scope unless James re-approves that lane."
         : firstBlocker?.nextAction ||
           "Provide approved read-only ServiceTitan export/API access or a redacted screenshot/export packet before joining leads by period.",
     exportEvidenceClass: exportStatus.evidenceClass || "",
@@ -1166,7 +1164,7 @@ function applySavedSnapshotSummary(clientSummary, snapshotHistory) {
         : null,
       nextAction:
         aiMetrics?.rows
-          ? "Use saved AI visibility snapshots for trend context; keep Google/ServiceTitan attribution caveats until owned analytics plus booked-job/revenue joins are available."
+          ? "Use saved AI visibility snapshots for trend context; keep Google provider and canonical live-measurement caveats until owned analytics is available."
           : "Use saved AI visibility snapshots for trend context; pull score metrics when available.",
     };
   }
@@ -1229,7 +1227,7 @@ function applySavedSnapshotSummary(clientSummary, snapshotHistory) {
     clientSummary.plainEnglish = [
       "The direct local Google API pull is still blocked by local token scopes, but saved New Reward snapshot evidence is now available.",
       savedBits.join(" "),
-      "GA4 trend attribution still needs the Air Express GA4 property selected in New Reward, and ServiceTitan still needs booked-job/revenue proof before ROI claims.",
+      "GA4 trend attribution still needs the Air Express GA4 property selected in New Reward and canonical live measurement repaired. ServiceTitan lead-count history is available; booking and revenue joins are intentionally out of scope for this report.",
     ].join(" ");
   }
 
@@ -1411,11 +1409,11 @@ function renderReport({
         : "No AI traffic ROI rollups pulled yet.",
     ],
     [
-      "First-party lead/revenue joins",
+      "First-party New Reward lead/outcome joins",
       leadOutcomeRows ? "saved_outcome_rows_available" : "blocked_no_saved_outcome_rows",
       leadOutcomeRows
-        ? `${formatInteger(leadOutcomeRows)} safe grouped lead/revenue outcome row(s) found in New Reward Lead* tables.`
-        : `No New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows were found for the Air Express tenant/client/website ids. ${formatInteger(observabilityRows)} non-outcome observability row(s) were found, mostly Cloudflare AI traffic snapshots; these do not prove leads or revenue.`,
+        ? `${formatInteger(leadOutcomeRows)} safe grouped lead/outcome row(s) found in New Reward Lead* tables.`
+        : `No New Reward LeadTouchpoint, LeadFormSubmission, LeadOpportunity, or LeadRevenueEvent rows were found for the Air Express tenant/client/website ids. ${formatInteger(observabilityRows)} non-outcome observability row(s) were found, mostly Cloudflare AI traffic snapshots; these do not prove leads.`,
     ],
   ];
   const gscTrend = newRewardSnapshots?.gscSnapshotTrend || [];
@@ -1835,14 +1833,14 @@ function renderReport({
 
     <h2>Lead Proof Status</h2>
     <p>ServiceTitan evidence is stored only as sanitized counts, lead IDs where already approved in prior proof, campaign/source fields, and blockers. Customer names, phone numbers, emails, street addresses, raw notes, payment data, and credential values are excluded.</p>
-    ${table(["New Reward table", "Rows", "First seen", "Last seen", "Join read"], leadJoinRows.length ? leadJoinRows : [["pending", "0", "", "", "No saved lead/touchpoint/revenue join rows found."]])}
+    ${table(["New Reward table", "Rows", "First seen", "Last seen", "Join read"], leadJoinRows.length ? leadJoinRows : [["pending", "0", "", "", "No saved lead/touchpoint outcome rows found."]])}
     ${table(["Source", "State", "Evidence", "Next action"], [
       [
         "ServiceTitan lead history",
         htmlEscape(serviceTitan.priorProofStatus),
         htmlEscape(serviceTitan.evidence),
         serviceTitan.apiLeadCount
-          ? "Use for lead-count trend comparison only; do not treat it as booked-job or revenue proof."
+          ? "Use for lead-count trend comparison only; booking and revenue joins are intentionally out of scope."
           : "Use this as partial historical proof only; do not treat it as a full export, booking report, or revenue report.",
       ],
       [
@@ -1850,12 +1848,6 @@ function renderReport({
         htmlEscape(serviceTitan.status),
         htmlEscape(serviceTitan.blocker),
         htmlEscape(serviceTitan.nextAction),
-      ],
-      [
-        "ServiceTitan booking/revenue join probe",
-        htmlEscape(serviceTitan.attributionJoinProbe?.status || "not_attempted"),
-        htmlEscape(serviceTitan.attributionJoinProbe?.evidence || "No booking/revenue join probe recorded."),
-        htmlEscape(serviceTitan.attributionJoinProbe?.nextAction || "Run the read-only join probe or import an approved redacted export before ROI claims."),
       ],
       [
         "ServiceTitan redacted export import",
@@ -1874,7 +1866,7 @@ function renderReport({
     ${table(["Service type", "Redacted leads", "Website campaign"], serviceTitanServiceRows.length ? serviceTitanServiceRows : [["pending", "0", "0"]])}
 
     <h2>CAPTCHA / Lead Quality Marker</h2>
-    <p>Cloudflare Turnstile source was added on ${htmlEscape(serviceTitan.captcha?.date || "pending")} in commit ${htmlEscape(serviceTitan.captcha?.commit || "pending")}. Live delivery is still separately gated, so do not claim CAPTCHA changed lead quality until post-live lead data exists.</p>
+    <p>Cloudflare Turnstile source was added on ${htmlEscape(serviceTitan.captcha?.date || "pending")} in commit ${htmlEscape(serviceTitan.captcha?.commit || "pending")}. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and the ServiceTitan API has no leads after that source marker, so do not claim CAPTCHA changed lead quality yet.</p>
     ${table(["Period", "Lead count", "Dismissed", "Open", "Converted", "Dismissed rate", "Interpretation"], captchaQualityRows)}
 
     <h2>Blockers And Next Actions</h2>
