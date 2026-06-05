@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:04:41.484Z",
+  "generatedAt": "2026-06-05T23:19:19.210Z",
   "evidenceClass": "seo_geo_deep_dive",
   "scope": [
     "metadata",
@@ -47,12 +47,12 @@
     },
     "directGoogle": {
       "gsc": {
-        "status": "blocked_scope",
-        "evidence": "Missing webmasters.readonly OAuth scope."
+        "status": "blocked_local_token_scope",
+        "evidence": "Local gcloud token lacks webmasters.readonly; New Reward provider row is revoked with connection error for sc-domain:airexpressutah.com."
       },
       "ga4": {
-        "status": "blocked_scope",
-        "evidence": "Missing analytics.readonly OAuth scope."
+        "status": "blocked_local_token_scope",
+        "evidence": "Local gcloud token lacks analytics.readonly; New Reward GA4 provider row is expired, connection EXPIRED, propertyId present=false."
       },
       "gbp": {
         "status": "not_included",
@@ -528,7 +528,7 @@
       "bucket": "tagging",
       "severity": "high",
       "title": "Restore live tagging and attribution joins after source access is repaired",
-      "evidence": "Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=not_included; attribution score remains blocked at 30.",
+      "evidence": "Current direct Google status is GSC=blocked_local_token_scope, GA4=blocked_local_token_scope, GBP=not_included; attribution score remains blocked at 30.",
       "acceptance": "Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.",
       "trackingIssue": "Existing: #24, #27, #28, #29, #30"
     },

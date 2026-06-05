@@ -23,13 +23,13 @@
     h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
     h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; overflow-wrap: anywhere; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; white-space: normal; overflow-wrap: anywhere; }
     a { color: var(--blue); }
     .meta, .grid { display: grid; gap: 12px; }
     .meta { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 18px; }
     .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; min-width: 0; overflow-wrap: anywhere; }
     .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
     .pill, .state { display: inline-block; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 750; white-space: nowrap; }
     .pill { border: 1px solid var(--line); background: var(--white); }
@@ -40,12 +40,12 @@
     .prepared-state { background: var(--blue); color: var(--white); }
     .blocked-state { background: var(--bad); color: var(--white); }
     .neutral-state { background: var(--muted); color: var(--white); }
-    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; }
-    .decision { padding: 14px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; max-width: 980px; }
+    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; overflow-wrap: anywhere; }
+    .decision { padding: 14px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; max-width: 980px; overflow-wrap: anywhere; }
     .muted { color: var(--muted); }
-    .scroll { overflow-x: auto; }
+    .scroll { overflow-x: auto; max-width: 100%; }
     table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; overflow-wrap: anywhere; word-break: break-word; }
     th { background: var(--panel); font-size: 13px; }
   </style>
 </head>
@@ -54,7 +54,7 @@
     <h1>Air Express Pulse And Revenue Visibility Report</h1>
     <p>Pages-only weekly control surface for local HVAC signals, SEO/GEO strategy, competitor/entity baseline, visibility metrics, revenue hypotheses, and proof gates.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T22:51:17.572Z</span>
+      <span class="pill">Generated 2026-06-05T23:21:39.629Z</span>
       <span class="pill">Issue #36 growth lane</span>
       <span class="pill">No public publish or provider mutation</span>
       <span class="pill">Directional until attribution joins are restored</span>
@@ -258,9 +258,9 @@
       <td>2026-06-01</td>
       <td>3,832 impressions / 5 clicks / avg position 38.03</td>
       <td>5,181 snapshots / 16 mentions / 6 citations</td>
-      <td>blocked_scope sessions; forms blocked_live_tag</td>
+      <td>blocked_local_token_scope_and_provider_reconnect sessions; forms blocked_live_tag</td>
       <td>api_history_pulled_78_total_76_website_campaign_0_current_week_0_post_captcha_source; booked out_of_scope; revenue out_of_scope</td>
-      <td><span class="state good-state">saved_snapshot_available_attribution_blocked</span><br>Saved New Reward snapshot and ServiceTitan redacted lead-count evidence are available; direct GSC/GA4 pulls, canonical live GA4 delivery, and live Turnstile/lead-path health remain blocked or partial. Booking and revenue joins are outside this report scope. GBP is excluded from this refresh.</td>
+      <td><span class="state good-state">saved_snapshot_available_attribution_blocked</span><br>Saved New Reward snapshot and ServiceTitan redacted lead-count evidence are available; direct GSC/GA4 pulls are blocked by local token scopes plus New Reward provider reconnect/property selection, canonical live GA4 delivery, and live Turnstile/lead-path health remain blocked or partial. Booking and revenue joins are outside this report scope. GBP is excluded from this refresh.</td>
     </tr>
     </tbody>
   </table></div>
@@ -745,13 +745,13 @@
     <tbody>
       <tr>
       <td>GSC</td>
-      <td><span class="state blocked-state">blocked_scope</span></td>
-      <td>Missing webmasters.readonly OAuth scope.</td>
+      <td><span class="state blocked-state">blocked_local_token_scope</span></td>
+      <td>Local gcloud token lacks webmasters.readonly; New Reward provider row is revoked with connection error for sc-domain:airexpressutah.com.</td>
       <td>Reconnect or repair GSC for the canonical Air Express website id, then rerun history pulls.</td>
     </tr>
       <tr>
       <td>GA4</td>
-      <td><span class="state blocked-state">blocked_scope</span></td>
+      <td><span class="state blocked-state">blocked_local_token_scope</span></td>
       <td>GA4 provider evidence is expired / EXPIRED and propertyId remains blank or scope-gated.</td>
       <td>Select the GA4 property/web stream containing G-JZ7PY32EVX and verify live delivery.</td>
     </tr>
@@ -816,10 +816,10 @@
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/27">#27</a><br>Restore read-only Google provider access for Air Express GSC, GA4, and GBP</td>
       <td>google_access</td>
-      <td><span class="state blocked-state">blocked_scope</span><br>not_complete_external_access_needed</td>
-      <td>pages/new-reward-impact-report.html; data/google-history/history-pull-status.json</td>
-      <td>Current refresh is scoped to GSC/GA4: newrewardplatform@gmail.com local token lacks webmasters.readonly and analytics.readonly; GBP remains a separate later lane</td>
-      <td>Complete scoped read-only reconnect or New Reward UI reconnect for GSC/GA4, then rerun pull:gsc-ga4-history -- --skip-gbp and report refreshes</td>
+      <td><span class="state blocked-state">blocked_local_token_scope_and_provider_reconnect</span><br>not_complete_external_access_needed</td>
+      <td>pages/new-reward-impact-report.html; data/google-history/history-pull-status.json; data/newreward-air-express-provider-readonly-recheck.json</td>
+      <td>Current refresh is scoped to GSC/GA4: newrewardplatform@gmail.com local token lacks webmasters.readonly and analytics.readonly; New Reward provider rows exist but GSC is revoked/error and GA4 is expired/EXPIRED with propertyId null; GBP remains a separate later lane</td>
+      <td>Complete scoped read-only reconnect or New Reward UI reconnect for GSC/GA4 against website cmorqbs9j001r5nr1h25vosp8, select the GA4 property/web stream containing G-JZ7PY32EVX, then rerun pull:gsc-ga4-history -- --skip-gbp and report refreshes</td>
     </tr>
       <tr>
       <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a><br>Sync canonical Air Express GA4 and activate Turnstile safely</td>

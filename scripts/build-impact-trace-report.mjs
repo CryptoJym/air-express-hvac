@@ -161,7 +161,7 @@ const googleScopeLabel = includeGbpInReport
 const providerRows = [
   {
     surface: "GSC",
-    state: rootCause.gsc?.connectionStatus || historyStatus.gsc?.status || "blocked_scope",
+    state: rootCause.gsc?.connectionStatus || historyStatus.gsc?.status || "blocked_local_token_scope",
     evidence: rootCause.gsc
       ? `${rootCause.gsc.credentialStatus || "unknown"} / ${rootCause.gsc.connectionStatus || "unknown"}`
       : historyStatus.gsc?.evidence || "Missing Search Console scope.",

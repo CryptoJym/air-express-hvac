@@ -1,17 +1,16 @@
 {
-  "generatedAt": "2026-06-05T23:04:41.493Z",
+  "generatedAt": "2026-06-05T23:18:51.730Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
     "gscStartDate": "2025-02-05",
     "ga4StartDate": "2020-01-01",
-    "gbpStartDate": "2025-02-05",
+    "gbpStartDate": null,
     "endDate": "2026-06-03",
     "explicitGscProperty": "",
     "explicitGa4PropertyId": "",
     "includedGoogleSurfaces": [
       "gsc",
-      "ga4",
-      "gbp"
+      "ga4"
     ]
   },
   "evidenceStates": [
@@ -33,7 +32,7 @@
     {
       "state": "blocked",
       "meaning": "Cannot complete without access, scope, source mapping, live delivery, or owner/export proof.",
-      "currentUse": "GSC/GA4/GBP history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification."
+      "currentUse": "GSC/GA4 history pull, expired Air Express provider reconnect, live measurement sync, and lead-system health verification."
     },
     {
       "state": "not_attempted",
@@ -42,16 +41,16 @@
     }
   ],
   "gsc": {
-    "status": "blocked_scope",
-    "evidence": "Missing webmasters.readonly OAuth scope."
+    "status": "blocked_local_token_scope",
+    "evidence": "Local gcloud token lacks webmasters.readonly; New Reward provider row is revoked with connection error for sc-domain:airexpressutah.com."
   },
   "ga4": {
-    "status": "blocked_scope",
-    "evidence": "Missing analytics.readonly OAuth scope."
+    "status": "blocked_local_token_scope",
+    "evidence": "Local gcloud token lacks analytics.readonly; New Reward GA4 provider row is expired, connection EXPIRED, propertyId present=false."
   },
   "gbp": {
-    "status": "blocked_scope",
-    "evidence": "Missing business.manage OAuth scope."
+    "status": "not_included",
+    "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
   },
   "source": {
     "status": "blocked",
@@ -411,24 +410,56 @@
     "exportEvidenceClass": "servicetitan_export_access_readiness_check",
     "authCheck": "token_request_succeeded_no_token_stored"
   },
+  "newRewardProvider": {
+    "status": "rows_found",
+    "canonicalWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+    "canonicalWebsiteStatus": "verified",
+    "providerEmail": "newrewardplatform@gmail.com",
+    "gsc": {
+      "credentialStatus": "revoked",
+      "connectionStatus": "error",
+      "siteUrl": "sc-domain:airexpressutah.com",
+      "tokenExpiresAt": "2026-06-03T23:22:59.758"
+    },
+    "ga4": {
+      "credentialStatus": "expired",
+      "connectionStatus": "EXPIRED",
+      "propertyIdPresent": false,
+      "tokenExpiresAt": "2026-06-03T23:23:50.638"
+    },
+    "blockers": [
+      {
+        "surface": "gsc_provider",
+        "status": "provider_expired",
+        "evidence": "GSC credential cmovx4dgo000o5nlkvdn9wd79 is revoked; connection cmpymwqgm00xv5mo5h3spvjfg is error; siteUrl=sc-domain:airexpressutah.com.",
+        "nextAction": "Refresh/reconnect Search Console as newrewardplatform@gmail.com after the UI confirms website id cmorqbs9j001r5nr1h25vosp8."
+      },
+      {
+        "surface": "ga4_provider",
+        "status": "provider_expired",
+        "evidence": "GA4 credential cmovx4t46000q5nlkn8ix3aup is expired; connection cmovx4t7n000s5nlki14jmb69 is EXPIRED.",
+        "nextAction": "Refresh/reconnect GA4 as newrewardplatform@gmail.com after the UI confirms website id cmorqbs9j001r5nr1h25vosp8."
+      },
+      {
+        "surface": "ga4_property",
+        "status": "blocked_missing_property_id",
+        "evidence": "GA4 connection cmovx4t7n000s5nlki14jmb69 has no propertyId and the provider credential has no providerPropertyId.",
+        "nextAction": "Select the GA4 property/web stream containing measurement id G-JZ7PY32EVX."
+      }
+    ]
+  },
   "blockers": [
     {
-      "surface": "Search Console OAuth scope",
-      "status": "blocked",
-      "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/webmasters.readonly.",
-      "nextAction": "Run read-only re-auth for newrewardplatform@gmail.com with Search Console scope, then rerun npm run pull:gsc-ga4-history."
+      "surface": "Search Console local token / New Reward provider",
+      "status": "blocked_local_token_scope_and_provider_reconnect",
+      "evidence": "The local gcloud token for newrewardplatform@gmail.com lacks https://www.googleapis.com/auth/webmasters.readonly. New Reward rows exist for canonical website cmorqbs9j001r5nr1h25vosp8, but the Air Express GSC credential is revoked and connection is error.",
+      "nextAction": "Either re-authorize this machine for direct history pulls, or reconnect Search Console inside New Reward as newrewardplatform@gmail.com for website cmorqbs9j001r5nr1h25vosp8."
     },
     {
-      "surface": "GA4 OAuth scope",
-      "status": "blocked",
-      "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/analytics.readonly.",
-      "nextAction": "Run read-only re-auth for newrewardplatform@gmail.com with Analytics readonly scope, then rerun npm run pull:gsc-ga4-history."
-    },
-    {
-      "surface": "Google Business Profile OAuth scope",
-      "status": "blocked",
-      "evidence": "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/business.manage.",
-      "nextAction": "Run approved read-only re-auth for newrewardplatform@gmail.com with Business Profile scope, confirm Air Express location visibility, then rerun npm run pull:gsc-ga4-history."
+      "surface": "GA4 local token / New Reward provider",
+      "status": "blocked_local_token_scope_and_provider_reconnect",
+      "evidence": "The local gcloud token for newrewardplatform@gmail.com lacks https://www.googleapis.com/auth/analytics.readonly. New Reward rows exist for canonical website cmorqbs9j001r5nr1h25vosp8, but the Air Express GA4 credential is expired, connection is EXPIRED, and propertyId present=false.",
+      "nextAction": "Either re-authorize this machine for direct history pulls, or reconnect GA4 inside New Reward as newrewardplatform@gmail.com and select the property/web stream containing G-JZ7PY32EVX for website cmorqbs9j001r5nr1h25vosp8."
     }
   ],
   "tokenRepairAttempt": {
@@ -437,14 +468,13 @@
     "status": "blocked_interactive_oauth_code_gate",
     "account": "newrewardplatform@gmail.com",
     "secretHandling": "No access tokens, refresh tokens, OAuth URLs, verification codes, recovery prompts, cookies, passwords, or credential files are stored in this artifact.",
-    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC, GA4, and GBP history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
+    "rootCause": "The active local Google account is newrewardplatform@gmail.com, but both accessible local token sources lack the product-specific read scopes required for Air Express GSC and GA4 history. A scoped ADC repair flow can be started, but it stops at an interactive OAuth verification-code gate that must be completed outside chat.",
     "currentTokenState": {
       "email": "newrewardplatform@gmail.com",
       "present": true,
       "missingRequiredScopes": [
         "https://www.googleapis.com/auth/webmasters.readonly",
-        "https://www.googleapis.com/auth/analytics.readonly",
-        "https://www.googleapis.com/auth/business.manage"
+        "https://www.googleapis.com/auth/analytics.readonly"
       ],
       "visibleScopeClasses": [
         "accounts.reauth",
@@ -470,7 +500,7 @@
         "nextAction": "Include cloud-platform along with the product read scopes in the local ADC repair command."
       },
       {
-        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, GBP, openid, and userinfo.email scopes",
+        "action": "Ran gcloud ADC reauth with cloud-platform plus GSC, GA4, openid, and userinfo.email scopes",
         "result": "blocked_interactive_oauth_code_gate",
         "evidence": "The command produced a browser OAuth URL and waited for a verification code. The process was stopped before any code, token, or credential material was entered or stored.",
         "nextAction": "James should complete the OAuth flow locally, not in chat, then rerun npm run pull:gsc-ga4-history."
@@ -488,14 +518,18 @@
         "nextAction": "Continue using the Air Express verifier evidence for canonical website/provider state until the New Reward app route is rechecked."
       }
     ],
-    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/business.manage,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
+    "safeReconnectCommand": "gcloud auth application-default login newrewardplatform@gmail.com --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly,openid,https://www.googleapis.com/auth/userinfo.email --disable-quota-project",
     "providerState": {
       "canonicalWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
       "gsc": "Provider row exists for sc-domain:airexpressutah.com under newrewardplatform@gmail.com, but validation is revoked and the legacy connection status is error.",
       "ga4": "Provider row exists under newrewardplatform@gmail.com, but propertyId is null and the Air Express property containing G-JZ7PY32EVX still needs selection.",
       "gbp": "No Air Express account/location-specific proof is available from the current local evidence."
     },
-    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4/GBP through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution."
+    "nextAction": "Complete the scoped ADC OAuth flow locally or reconnect GSC/GA4 through the New Reward UI against website cmorqbs9j001r5nr1h25vosp8, then rerun npm run pull:gsc-ga4-history and npm run audit:seo-geo-attribution.",
+    "requiredScopes": {
+      "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
+      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
+    }
   },
   "token": {
     "ok": true,
@@ -507,13 +541,11 @@
     "scopeCount": 8,
     "requiredScopes": {
       "gsc": "https://www.googleapis.com/auth/webmasters.readonly",
-      "ga4": "https://www.googleapis.com/auth/analytics.readonly",
-      "gbp": "https://www.googleapis.com/auth/business.manage"
+      "ga4": "https://www.googleapis.com/auth/analytics.readonly"
     },
     "missingRequiredScopes": [
       "https://www.googleapis.com/auth/webmasters.readonly",
-      "https://www.googleapis.com/auth/analytics.readonly",
-      "https://www.googleapis.com/auth/business.manage"
+      "https://www.googleapis.com/auth/analytics.readonly"
     ],
     "visibleScopes": [
       "https://www.googleapis.com/auth/accounts.reauth",
@@ -536,8 +568,7 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly",
-          "https://www.googleapis.com/auth/business.manage"
+          "https://www.googleapis.com/auth/analytics.readonly"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -560,8 +591,7 @@
         "scopeCount": 8,
         "missingRequiredScopes": [
           "https://www.googleapis.com/auth/webmasters.readonly",
-          "https://www.googleapis.com/auth/analytics.readonly",
-          "https://www.googleapis.com/auth/business.manage"
+          "https://www.googleapis.com/auth/analytics.readonly"
         ],
         "visibleScopes": [
           "https://www.googleapis.com/auth/accounts.reauth",
@@ -1025,7 +1055,7 @@
     }
   },
   "newRewardSnapshotHistory": {
-    "generatedAt": "2026-06-05T22:45:59.114Z",
+    "generatedAt": "2026-06-05T23:13:43.399Z",
     "status": "saved_snapshot_history_available",
     "evidenceClass": "read_only_newreward_saved_snapshot_history",
     "secretHandling": "No database URL, OAuth token, encrypted credential, customer PII, or full AI response text is printed or stored.",

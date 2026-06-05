@@ -434,6 +434,31 @@ function scopedTokenRepairAttempt(attempt, { includeGbp = true } = {}) {
   return scopedAttempt;
 }
 
+function summarizeProviderRecheck(recheck = {}) {
+  const rootCause = recheck.rootCauseSummary || {};
+  const gsc = rootCause.gsc || {};
+  const ga4 = rootCause.ga4 || {};
+  return {
+    status: recheck.status || "not_checked",
+    canonicalWebsiteId: rootCause.canonicalWebsiteId || "",
+    canonicalWebsiteStatus: rootCause.canonicalWebsiteStatus || "",
+    providerEmail: rootCause.providerEmail || "",
+    gsc: {
+      credentialStatus: gsc.credentialStatus || "",
+      connectionStatus: gsc.connectionStatus || "",
+      siteUrl: gsc.siteUrl || "",
+      tokenExpiresAt: gsc.tokenExpiresAt || "",
+    },
+    ga4: {
+      credentialStatus: ga4.credentialStatus || "",
+      connectionStatus: ga4.connectionStatus || "",
+      propertyIdPresent: Boolean(ga4.propertyId),
+      tokenExpiresAt: ga4.tokenExpiresAt || "",
+    },
+    blockers: Array.isArray(rootCause.blockers) ? rootCause.blockers : [],
+  };
+}
+
 async function getBestToken(account) {
   const candidates = [];
   for (const source of ["gcloud", "adc"]) {
@@ -1257,7 +1282,7 @@ function formatMix(object = {}) {
 }
 
 function table(headers, rows) {
-  return `<table><thead><tr>${headers.map((header) => `<th>${htmlEscape(header)}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  return `<div class="scroll"><table><thead><tr>${headers.map((header) => `<th>${htmlEscape(header)}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 }
 
 function renderReport({
@@ -1275,6 +1300,7 @@ function renderReport({
   serviceTitan,
   clientSummary,
   newRewardSnapshots,
+  newRewardProvider,
   tokenRepairAttempt,
 }) {
   const includeGbpInReport = gbp.status !== "not_included";
@@ -1671,9 +1697,35 @@ function renderReport({
       ["Selected source", htmlEscape(token.source || ""), "Token source selected for this read-only pull attempt."],
       ["Selected email", htmlEscape(token.email || ""), "Google account returned by tokeninfo."],
       ["Visible scopes", htmlEscape((token.visibleScopes || []).join(", ")), "Sanitized OAuth scope names only; no token values are stored."],
-      ["Missing required scopes", htmlEscape((token.missingRequiredScopes || []).join(", ")), `Scopes required before ${googleSurfaceLabel} history can be pulled.`],
+      ["Local token missing product scopes", htmlEscape((token.missingRequiredScopes || []).join(", ")), `Product scopes absent from this machine-local token before direct ${googleSurfaceLabel} API history can be pulled. This is not proof that New Reward lacks saved provider rows.`],
     ]
     : [["Token", "not available", "No usable local token was available."]];
+  const providerRows = [
+    [
+      "Canonical website",
+      htmlEscape(newRewardProvider?.canonicalWebsiteId || "pending"),
+      htmlEscape(newRewardProvider?.canonicalWebsiteStatus || "unknown"),
+      "Provider reconnects should target this Air Express website id.",
+    ],
+    [
+      "Provider account",
+      htmlEscape(newRewardProvider?.providerEmail || "unknown"),
+      "expected Google provider",
+      "This is the New Reward saved-provider identity, separate from the local gcloud/ADC token.",
+    ],
+    [
+      "Search Console",
+      htmlEscape(newRewardProvider?.gsc?.siteUrl || "unknown property"),
+      htmlEscape(`${newRewardProvider?.gsc?.credentialStatus || "unknown"} / ${newRewardProvider?.gsc?.connectionStatus || "unknown"}`),
+      "Reconnect or refresh this provider row before expecting normalized GSC query/page/device sync.",
+    ],
+    [
+      "GA4",
+      htmlEscape(`propertyId present=${Boolean(newRewardProvider?.ga4?.propertyIdPresent)}`),
+      htmlEscape(`${newRewardProvider?.ga4?.credentialStatus || "unknown"} / ${newRewardProvider?.ga4?.connectionStatus || "unknown"}`),
+      "Select the GA4 property or web stream containing G-JZ7PY32EVX.",
+    ],
+  ];
   const tokenRepairSummaryRows = tokenRepairAttempt
     ? [
       ["Status", htmlEscape(tokenRepairAttempt.status || ""), htmlEscape(
@@ -1705,22 +1757,23 @@ function renderReport({
   <style>
     :root { color-scheme: light; --ink: #16202a; --muted: #5c6875; --line: #d8e0e8; --blue: #0b679f; --green: #2f734d; --red: #a63a35; --panel: #f6f8fb; --white: #fff; }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.48; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.48; overflow-x: hidden; }
     header, main { padding-left: clamp(18px, 5vw, 56px); padding-right: clamp(18px, 5vw, 56px); }
     header { padding-top: 34px; padding-bottom: 24px; border-bottom: 1px solid var(--line); background: #eef5f8; }
     main { padding-top: 24px; padding-bottom: 56px; }
     h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 48px); letter-spacing: 0; }
     h2 { margin: 30px 0 12px; font-size: 21px; letter-spacing: 0; }
-    p { max-width: 980px; color: var(--muted); margin: 0 0 12px; }
+    p { max-width: 980px; color: var(--muted); margin: 0 0 12px; overflow-wrap: anywhere; }
     .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: var(--white); font-size: 13px; }
     .blocked { border-left: 4px solid var(--red); background: #fff4f2; padding: 12px 14px; color: var(--ink); }
     .ready { border-left: 4px solid var(--green); background: #f0f8f3; padding: 12px 14px; color: var(--ink); }
-    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); margin: 14px 0 24px; }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    .scroll { overflow-x: auto; max-width: 100%; margin: 14px 0 24px; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); table-layout: fixed; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; overflow-wrap: anywhere; word-break: break-word; }
     th { background: var(--panel); font-size: 13px; }
-    code { background: var(--panel); border: 1px solid var(--line); padding: 1px 4px; }
-    @media (max-width: 860px) { table { display: block; overflow-x: auto; white-space: nowrap; } }
+    code { background: var(--panel); border: 1px solid var(--line); padding: 1px 4px; white-space: normal; overflow-wrap: anywhere; }
+    @media (max-width: 860px) { table { min-width: 680px; table-layout: auto; } }
   </style>
 </head>
 <body>
@@ -1819,6 +1872,10 @@ function renderReport({
     <p>This table records only token metadata from Google tokeninfo. It does not store access tokens, refresh tokens, cookies, or recovery material.</p>
     ${table(["Field", "Value", "Meaning"], tokenRows)}
 
+    <h2>New Reward Saved Provider Rows</h2>
+    <p>This is the separate app-side provider state found by the read-only New Reward recheck. These rows explain why the correct Google account can still need a New Reward reconnect or GA4 property selection.</p>
+    ${table(["Surface", "Value", "State", "Read"], providerRows)}
+
     <h2>Google Token Repair Attempt</h2>
     <p>This section records only sanitized repair evidence. It does not store OAuth URLs, verification codes, token values, credential files, cookies, passwords, or recovery material.</p>
     ${table(["Field", "State", "Evidence", "Next action"], tokenRepairSummaryRows)}
@@ -1904,6 +1961,8 @@ async function main() {
   const token = tokenSelection.selected;
   const blockers = [];
   const sourceCheck = readJson(join(root, "data/newreward-attribution-source-check.json"), {});
+  const providerRecheck = readJson(join(root, "data/newreward-air-express-provider-readonly-recheck.json"), {});
+  const providerSummary = summarizeProviderRecheck(providerRecheck);
   const source = {
     status: sourceCheck.status || "unknown",
     evidence: scopeTextForCurrentPass(
@@ -1945,6 +2004,7 @@ async function main() {
     gbp: { status: "blocked", evidence: "" },
     source,
     serviceTitan,
+    newRewardProvider: providerSummary,
     blockers,
     tokenRepairAttempt,
   };
@@ -1987,14 +2047,14 @@ async function main() {
 
     if (!scopes.hasGsc && !force) {
       blockers.push({
-        surface: "Search Console OAuth scope",
-        status: "blocked",
-        evidence: "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/webmasters.readonly.",
-        nextAction: `Run read-only re-auth for ${account} with Search Console scope, then rerun npm run pull:gsc-ga4-history.`,
+        surface: "Search Console local token / New Reward provider",
+        status: "blocked_local_token_scope_and_provider_reconnect",
+        evidence: `The local ${token.source} token for ${account} lacks https://www.googleapis.com/auth/webmasters.readonly. New Reward rows exist for canonical website ${providerSummary.canonicalWebsiteId || "unknown"}, but the Air Express GSC credential is ${providerSummary.gsc.credentialStatus || "unknown"} and connection is ${providerSummary.gsc.connectionStatus || "unknown"}.`,
+        nextAction: `Either re-authorize this machine for direct history pulls, or reconnect Search Console inside New Reward as ${account} for website ${providerSummary.canonicalWebsiteId || "cmorqbs9j001r5nr1h25vosp8"}.`,
       });
       status.gsc = {
-        status: "blocked_scope",
-        evidence: "Missing webmasters.readonly OAuth scope.",
+        status: "blocked_local_token_scope",
+        evidence: `Local ${token.source} token lacks webmasters.readonly; New Reward provider row is ${providerSummary.gsc.credentialStatus || "unknown"} with connection ${providerSummary.gsc.connectionStatus || "unknown"} for ${providerSummary.gsc.siteUrl || "unknown site"}.`,
       };
     } else {
       const sites = await listGscSites(token.token);
@@ -2051,14 +2111,14 @@ async function main() {
 
     if (!scopes.hasGa4 && !force) {
       blockers.push({
-        surface: "GA4 OAuth scope",
-        status: "blocked",
-        evidence: "Active gcloud account exists, but token lacks https://www.googleapis.com/auth/analytics.readonly.",
-        nextAction: `Run read-only re-auth for ${account} with Analytics readonly scope, then rerun npm run pull:gsc-ga4-history.`,
+        surface: "GA4 local token / New Reward provider",
+        status: "blocked_local_token_scope_and_provider_reconnect",
+        evidence: `The local ${token.source} token for ${account} lacks https://www.googleapis.com/auth/analytics.readonly. New Reward rows exist for canonical website ${providerSummary.canonicalWebsiteId || "unknown"}, but the Air Express GA4 credential is ${providerSummary.ga4.credentialStatus || "unknown"}, connection is ${providerSummary.ga4.connectionStatus || "unknown"}, and propertyId present=${providerSummary.ga4.propertyIdPresent}.`,
+        nextAction: `Either re-authorize this machine for direct history pulls, or reconnect GA4 inside New Reward as ${account} and select the property/web stream containing G-JZ7PY32EVX for website ${providerSummary.canonicalWebsiteId || "cmorqbs9j001r5nr1h25vosp8"}.`,
       });
       status.ga4 = {
-        status: "blocked_scope",
-        evidence: "Missing analytics.readonly OAuth scope.",
+        status: "blocked_local_token_scope",
+        evidence: `Local ${token.source} token lacks analytics.readonly; New Reward GA4 provider row is ${providerSummary.ga4.credentialStatus || "unknown"}, connection ${providerSummary.ga4.connectionStatus || "unknown"}, propertyId present=${providerSummary.ga4.propertyIdPresent}.`,
       };
     } else {
       const properties = await listGa4Properties(token.token);
@@ -2126,14 +2186,14 @@ async function main() {
       };
     } else if (!scopes.hasGbp && !force) {
       blockers.push({
-        surface: "Google Business Profile OAuth scope",
-        status: "blocked",
+        surface: "Google Business Profile local token",
+        status: "blocked_local_token_scope",
         evidence: `Active gcloud account exists, but token lacks ${GBP_SCOPE}.`,
         nextAction: `Run approved read-only re-auth for ${account} with Business Profile scope, confirm Air Express location visibility, then rerun npm run pull:gsc-ga4-history.`,
       });
       status.gbp = {
-        status: "blocked_scope",
-        evidence: "Missing business.manage OAuth scope.",
+        status: "blocked_local_token_scope",
+        evidence: "Local token lacks business.manage OAuth scope. This does not prove current Air Express GBP owner/manager access.",
       };
     } else {
       const accounts = await listGbpAccounts(token.token);
@@ -2247,6 +2307,7 @@ async function main() {
       serviceTitan: status.serviceTitan,
       clientSummary: status.clientFriendlySummary,
       newRewardSnapshots,
+      newRewardProvider: providerSummary,
       tokenRepairAttempt,
     }),
   );

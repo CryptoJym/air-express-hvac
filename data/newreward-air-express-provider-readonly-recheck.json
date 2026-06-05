@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:54:03.331Z",
+  "generatedAt": "2026-06-05T23:19:04.654Z",
   "evidenceClass": "read_only_newrewards_configured_db_lookup",
   "envFiles": [
     "/Users/jamesbrady/.config/newrewards/.env",
@@ -387,7 +387,7 @@
         "ga4ConnectionsFound": 0,
         "airExpressRowsFound": 0
       },
-      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-pQbTxE/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
+      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-MYEB58/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
     }
   ],
   "targetedLookup": {

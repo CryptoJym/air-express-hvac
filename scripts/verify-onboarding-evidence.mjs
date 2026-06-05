@@ -555,8 +555,8 @@ function checkHistoryStatus() {
   );
 
   if (status.status === "blocked") {
-    assert(status.gsc?.status === "blocked_scope", `Expected GSC blocked_scope, received ${status.gsc?.status}.`);
-    assert(status.ga4?.status === "blocked_scope", `Expected GA4 blocked_scope, received ${status.ga4?.status}.`);
+    assert(status.gsc?.status === "blocked_local_token_scope", `Expected GSC blocked_local_token_scope, received ${status.gsc?.status}.`);
+    assert(status.ga4?.status === "blocked_local_token_scope", `Expected GA4 blocked_local_token_scope, received ${status.ga4?.status}.`);
     assert(status.gbp?.status === "not_included", `Expected GBP not_included for current GSC/GA4 refresh, received ${status.gbp?.status}.`);
     assert(
       status.token?.requiredScopes?.gsc === "https://www.googleapis.com/auth/webmasters.readonly",
@@ -594,6 +594,13 @@ function checkHistoryStatus() {
     assert(
       status.blockers?.some((blocker) => String(blocker.evidence || "").includes("analytics.readonly")),
       "Missing GA4 readonly scope blocker evidence."
+    );
+    assert(
+      impactReport.includes("New Reward Saved Provider Rows") &&
+        impactReport.includes("propertyId present=false") &&
+        impactReport.includes("revoked / error") &&
+        impactReport.includes("expired / EXPIRED"),
+      "Impact report must show the separate New Reward saved-provider row state."
     );
     assert(
       !status.blockers?.some((blocker) => String(blocker.evidence || "").includes("business.manage")),

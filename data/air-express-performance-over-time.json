@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:06:32.525Z",
+  "generatedAt": "2026-06-05T23:19:19.432Z",
   "evidenceClass": "air_express_performance_over_time_report",
   "secretHandling": "Only aggregate saved visibility metrics, redacted ServiceTitan counts, public marker booleans, and audit statuses are stored. No tokens, credentials, customer PII, raw lead notes, cookies, or raw HTML are stored.",
   "status": "prepared_with_provider_and_delivery_blockers",
@@ -13,16 +13,16 @@
   ],
   "directGoogleStatus": {
     "gsc": {
-      "status": "blocked_scope",
-      "evidence": "Missing webmasters.readonly OAuth scope."
+      "status": "blocked_local_token_scope",
+      "evidence": "Local gcloud token lacks webmasters.readonly; New Reward provider row is revoked with connection error for sc-domain:airexpressutah.com."
     },
     "ga4": {
-      "status": "blocked_scope",
-      "evidence": "Missing analytics.readonly OAuth scope."
+      "status": "blocked_local_token_scope",
+      "evidence": "Local gcloud token lacks analytics.readonly; New Reward GA4 provider row is expired, connection EXPIRED, propertyId present=false."
     },
     "gbp": {
-      "status": "blocked_scope",
-      "evidence": "Missing business.manage OAuth scope."
+      "status": "not_included",
+      "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
     },
     "status": "blocked"
   },
@@ -1082,7 +1082,7 @@
         "bucket": "tagging",
         "severity": "high",
         "title": "Restore live tagging and attribution joins after source access is repaired",
-        "evidence": "Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=not_included; attribution score remains blocked at 30.",
+        "evidence": "Current direct Google status is GSC=blocked_local_token_scope, GA4=blocked_local_token_scope, GBP=not_included; attribution score remains blocked at 30.",
         "acceptance": "Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.",
         "trackingIssue": "Existing: #24, #27, #28, #29, #30"
       },

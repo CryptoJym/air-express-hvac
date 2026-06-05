@@ -267,13 +267,13 @@ const html = `<!doctype html>
     h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
     h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 980px; overflow-wrap: anywhere; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; white-space: normal; overflow-wrap: anywhere; }
     a { color: var(--blue); }
     .meta, .grid { display: grid; gap: 12px; }
     .meta { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 18px; }
     .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; min-width: 0; overflow-wrap: anywhere; }
     .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
     .pill, .state { display: inline-block; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 750; white-space: nowrap; }
     .pill { border: 1px solid var(--line); background: var(--white); }
@@ -284,12 +284,12 @@ const html = `<!doctype html>
     .prepared-state { background: var(--blue); color: var(--white); }
     .blocked-state { background: var(--bad); color: var(--white); }
     .neutral-state { background: var(--muted); color: var(--white); }
-    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; }
-    .decision { padding: 14px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; max-width: 980px; }
+    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 980px; overflow-wrap: anywhere; }
+    .decision { padding: 14px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; max-width: 980px; overflow-wrap: anywhere; }
     .muted { color: var(--muted); }
-    .scroll { overflow-x: auto; }
+    .scroll { overflow-x: auto; max-width: 100%; }
     table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; overflow-wrap: anywhere; word-break: break-word; }
     th { background: var(--panel); font-size: 13px; }
   </style>
 </head>

@@ -163,7 +163,7 @@ The report should compare:
 
 Pass only if:
 
-- `history-pull-status.json` is no longer globally `blocked_scope`.
+- `history-pull-status.json` is no longer globally `blocked_local_token_scope`.
 - GSC rows are pulled or the blocker identifies the exact missing property.
 - GA4 rows are pulled or the blocker identifies the exact missing property or
   property ID mismatch.

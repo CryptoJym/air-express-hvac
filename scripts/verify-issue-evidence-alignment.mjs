@@ -92,7 +92,7 @@ const expectedCompletion = {
   "#24": { status: "open", completion_state: "parent_incomplete" },
   "#25": { status: "closed", completion_state: "completed_verified" },
   "#26": { status: "open", completion_state: "partial_mapping_found_provider_mixed" },
-  "#27": { status: "open", completion_state: "blocked_scope" },
+  "#27": { status: "open", completion_state: "blocked_local_token_scope_and_provider_reconnect" },
   "#28": { status: "open", completion_state: liveMeasurement.status },
   "#29": { status: "open", completion_state: "prepared_blocked_by_data_access" },
   "#30": { status: "open", completion_state: "partial_api_history_pulled_lead_path_review" },
@@ -143,10 +143,10 @@ const row27 = completionByIssue.get("#27") || {};
 check(
   "#27-google-scope-alignment",
   historyStatus.status === "blocked" &&
-    historyStatus.gsc?.status === "blocked_scope" &&
-    historyStatus.ga4?.status === "blocked_scope" &&
+    historyStatus.gsc?.status === "blocked_local_token_scope" &&
+    historyStatus.ga4?.status === "blocked_local_token_scope" &&
     historyStatus.gbp?.status === "not_included" &&
-    includesAll(row27.current_evidence, ["webmasters.readonly", "analytics.readonly", "not_included"]),
+    includesAll(row27.current_evidence, ["webmasters.readonly", "analytics.readonly", "not_included", "revoked", "expired", "propertyId null"]),
   `history status=${historyStatus.status}; gsc=${historyStatus.gsc?.status}; ga4=${historyStatus.ga4?.status}; gbp=${historyStatus.gbp?.status}`,
   "Refresh the Google history pull and #27 matrix row together."
 );
