@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T19:37:23.026Z",
+  "generatedAt": "2026-06-05T22:54:33.489Z",
   "evidenceClass": "seo_geo_deep_dive",
   "scope": [
     "metadata",
@@ -16,7 +16,7 @@
     "technical": 100,
     "geo": 90,
     "messaging": 100,
-    "attribution": 25,
+    "attribution": 30,
     "accessibility": 100
   },
   "visibility": {
@@ -55,8 +55,8 @@
         "evidence": "Missing analytics.readonly OAuth scope."
       },
       "gbp": {
-        "status": "blocked_scope",
-        "evidence": "Missing business.manage OAuth scope."
+        "status": "not_included",
+        "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
       }
     },
     "attributionStatus": "blocked"
@@ -66,110 +66,18 @@
     "missingTitle": [],
     "longTitle": [],
     "missingDescription": [],
-    "shortDescription": [
-      {
-        "file": "ducting.html",
-        "length": 90,
-        "description": "Ducting and ductwork services in Lehi, UT from Air Express HVAC — serving Utah since 1996."
-      },
-      {
-        "file": "other-products.html",
-        "length": 90,
-        "description": "HVAC products and accessories in Lehi, UT from Air Express HVAC — serving Utah since 1996."
-      },
-      {
-        "file": "other-services-tests.html",
-        "length": 97,
-        "description": "HVAC testing and additional services in Lehi, UT from Air Express HVAC — serving Utah since 1996."
-      },
-      {
-        "file": "other-services.html",
-        "length": 92,
-        "description": "Additional HVAC services from Air Express HVAC in Lehi, UT. Call (801) 766-8585 for details."
-      },
-      {
-        "file": "privacy-policy.html",
-        "length": 83,
-        "description": "Air Express HVAC privacy policy. How we collect, use, and protect your information."
-      },
-      {
-        "file": "request-estimate.html",
-        "length": 95,
-        "description": "Get a free HVAC estimate from Air Express HVAC in Lehi, UT. No obligation. Call (801) 766-8585."
-      },
-      {
-        "file": "schedule-service.html",
-        "length": 94,
-        "description": "Schedule your HVAC service appointment with Air Express HVAC in Lehi, UT. Call (801) 766-8585."
-      }
-    ],
+    "shortDescription": [],
     "missingCanonical": [],
-    "missingSchema": [
-      "blog/index.html",
-      "resources.html"
-    ],
-    "missingTwitterCard": [
-      "ac-inspection.html",
-      "ac-installation-eagle-mountain-ut.html",
-      "ac-installation-saratoga-springs-ut.html",
-      "ac-installation.html",
-      "ac-maintenance.html",
-      "ac-repair-saratoga-springs-ut.html",
-      "ac-repair.html",
-      "ac-replacement.html",
-      "ac-tune-up.html",
-      "accessibility.html",
-      "air-duct-cleaning.html",
-      "air-purifiers.html",
-      "all-services.html",
-      "blog/index.html",
-      "ductless.html",
-      "fireplace.html",
-      "furnace-installation.html",
-      "furnace-maintenance.html",
-      "furnace-repair-saratoga-springs-ut.html",
-      "furnace-repair.html",
-      "furnace.html",
-      "heat-pump.html",
-      "heating-installation-eagle-mountain-ut.html",
-      "heating-installation-saratoga-springs-ut.html",
-      "heating-installation.html",
-      "heating-maintenance.html",
-      "heating-repair.html",
-      "heating-replacement.html",
-      "heating-tune-up.html",
-      "indoor-air-quality.html",
-      "maintenance-plan.html",
-      "new-construction.html",
-      "other-services.html",
-      "privacy-policy.html",
-      "request-estimate.html",
-      "resources.html",
-      "schedule-service.html",
-      "service-area-alpine.html",
-      "service-area-american-fork.html",
-      "service-area-bluffdale.html",
-      "service-area-draper.html",
-      "service-area-eagle-mountain.html",
-      "service-area-highland.html",
-      "service-area-orem.html",
-      "service-area-pleasant-grove.html",
-      "service-area-provo.html",
-      "service-area-sandy.html",
-      "service-area-saratoga-springs.html",
-      "service-area-south-jordan.html",
-      "service-area-west-jordan.html",
-      "terms-of-service.html",
-      "water-heater.html",
-      "who-we-serve.html"
-    ],
+    "missingSchema": [],
+    "missingTwitterCard": [],
     "h1Issues": [],
     "schemaErrors": [],
     "schemaTypeCounts": {
       "LocalBusiness": 110,
       "BreadcrumbList": 21,
       "FAQPage": 21,
-      "BlogPosting": 7
+      "BlogPosting": 7,
+      "CollectionPage": 2
     }
   },
   "blog": {
@@ -194,11 +102,11 @@
         "title": "First Hot Week in Utah: AC Checks to Do Before the Rush",
         "draft": "false",
         "date": "2026-06-03",
-        "wordCount": 776,
-        "questionHeadingCount": 0,
+        "wordCount": 898,
+        "questionHeadingCount": 1,
         "tableLineCount": 0,
-        "internalLinkCount": 4,
-        "externalLinkCount": 0,
+        "internalLinkCount": 6,
+        "externalLinkCount": 1,
         "generated": true
       },
       {
@@ -206,11 +114,11 @@
         "title": "Geothermal in Utah: Brutally Honest About When It Makes Sense",
         "draft": "false",
         "date": "2026-05-01",
-        "wordCount": 1654,
-        "questionHeadingCount": 0,
+        "wordCount": 1760,
+        "questionHeadingCount": 1,
         "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 2,
+        "externalLinkCount": 1,
         "generated": true
       },
       {
@@ -230,11 +138,11 @@
         "title": "The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)",
         "draft": "false",
         "date": "2026-03-01",
-        "wordCount": 1870,
-        "questionHeadingCount": 0,
+        "wordCount": 1963,
+        "questionHeadingCount": 1,
         "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 3,
+        "externalLinkCount": 1,
         "generated": true
       },
       {
@@ -242,11 +150,11 @@
         "title": "What HVAC Actually Costs in Utah (Real Numbers, No Games)",
         "draft": "false",
         "date": "2026-04-20",
-        "wordCount": 1846,
-        "questionHeadingCount": 0,
+        "wordCount": 1945,
+        "questionHeadingCount": 1,
         "tableLineCount": 62,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 3,
+        "externalLinkCount": 1,
         "generated": true
       },
       {
@@ -266,11 +174,11 @@
         "title": "What Indoor Air Quality Actually Means at 4,500 Feet",
         "draft": "false",
         "date": "2026-05-20",
-        "wordCount": 1432,
-        "questionHeadingCount": 0,
+        "wordCount": 1565,
+        "questionHeadingCount": 1,
         "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 3,
+        "externalLinkCount": 3,
         "generated": true
       },
       {
@@ -278,11 +186,11 @@
         "title": "Spring AC Prep: What We Actually Check Before Utah Hits 100°F",
         "draft": "false",
         "date": "2026-04-15",
-        "wordCount": 1348,
-        "questionHeadingCount": 0,
+        "wordCount": 1438,
+        "questionHeadingCount": 1,
         "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 2,
+        "externalLinkCount": 1,
         "generated": true
       },
       {
@@ -326,11 +234,11 @@
         "title": "Furnace Not Heating? Ten Things to Check Before You Call Us",
         "draft": "false",
         "date": "2026-01-15",
-        "wordCount": 1855,
-        "questionHeadingCount": 10,
+        "wordCount": 1947,
+        "questionHeadingCount": 11,
         "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
+        "internalLinkCount": 3,
+        "externalLinkCount": 1,
         "generated": true
       }
     ],
@@ -348,30 +256,6 @@
         "generated": false
       },
       {
-        "file": "first-hot-week-ac-checklist-utah.md",
-        "title": "First Hot Week in Utah: AC Checks to Do Before the Rush",
-        "draft": "false",
-        "date": "2026-06-03",
-        "wordCount": 776,
-        "questionHeadingCount": 0,
-        "tableLineCount": 0,
-        "internalLinkCount": 4,
-        "externalLinkCount": 0,
-        "generated": true
-      },
-      {
-        "file": "geothermal-guide.md",
-        "title": "Geothermal in Utah: Brutally Honest About When It Makes Sense",
-        "draft": "false",
-        "date": "2026-05-01",
-        "wordCount": 1654,
-        "questionHeadingCount": 0,
-        "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
-        "generated": true
-      },
-      {
         "file": "heat-pump-vs-furnace-utah.md",
         "title": "Heat Pump vs. Furnace in Utah: The Honest Comparison",
         "draft": "true",
@@ -384,30 +268,6 @@
         "generated": false
       },
       {
-        "file": "hvac-buying-guide.md",
-        "title": "The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)",
-        "draft": "false",
-        "date": "2026-03-01",
-        "wordCount": 1870,
-        "questionHeadingCount": 0,
-        "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
-        "generated": true
-      },
-      {
-        "file": "hvac-cost-guide.md",
-        "title": "What HVAC Actually Costs in Utah (Real Numbers, No Games)",
-        "draft": "false",
-        "date": "2026-04-20",
-        "wordCount": 1846,
-        "questionHeadingCount": 0,
-        "tableLineCount": 62,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
-        "generated": true
-      },
-      {
         "file": "hvac-glossary.md",
         "title": "The Plain-English HVAC Glossary for Utah Homeowners",
         "draft": "true",
@@ -418,30 +278,6 @@
         "internalLinkCount": 21,
         "externalLinkCount": 0,
         "generated": false
-      },
-      {
-        "file": "indoor-air-quality-utah.md",
-        "title": "What Indoor Air Quality Actually Means at 4,500 Feet",
-        "draft": "false",
-        "date": "2026-05-20",
-        "wordCount": 1432,
-        "questionHeadingCount": 0,
-        "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
-        "generated": true
-      },
-      {
-        "file": "spring-ac-prep.md",
-        "title": "Spring AC Prep: What We Actually Check Before Utah Hits 100°F",
-        "draft": "false",
-        "date": "2026-04-15",
-        "wordCount": 1348,
-        "questionHeadingCount": 0,
-        "tableLineCount": 0,
-        "internalLinkCount": 0,
-        "externalLinkCount": 0,
-        "generated": true
       },
       {
         "file": "summer-energy-efficiency.md",
@@ -478,18 +314,81 @@
         "internalLinkCount": 3,
         "externalLinkCount": 6,
         "generated": false
-      },
+      }
+    ],
+    "weakPublishedExtractability": [],
+    "weakDraftExtractability": [
       {
-        "file": "winter-heating-troubleshooting.md",
-        "title": "Furnace Not Heating? Ten Things to Check Before You Call Us",
-        "draft": "false",
-        "date": "2026-01-15",
-        "wordCount": 1855,
-        "questionHeadingCount": 10,
+        "file": "fall-furnace-prep.md",
+        "title": "The Fall Furnace Checklist We Actually Do Before Utah Winter Hits",
+        "draft": "true",
+        "date": "2026-10-01",
+        "wordCount": 1548,
+        "questionHeadingCount": 0,
         "tableLineCount": 0,
         "internalLinkCount": 0,
         "externalLinkCount": 0,
-        "generated": true
+        "generated": false
+      },
+      {
+        "file": "heat-pump-vs-furnace-utah.md",
+        "title": "Heat Pump vs. Furnace in Utah: The Honest Comparison",
+        "draft": "true",
+        "date": "2026-07-01",
+        "wordCount": 1470,
+        "questionHeadingCount": 1,
+        "tableLineCount": 0,
+        "internalLinkCount": 0,
+        "externalLinkCount": 0,
+        "generated": false
+      },
+      {
+        "file": "hvac-glossary.md",
+        "title": "The Plain-English HVAC Glossary for Utah Homeowners",
+        "draft": "true",
+        "date": "2026-08-01",
+        "wordCount": 2916,
+        "questionHeadingCount": 0,
+        "tableLineCount": 0,
+        "internalLinkCount": 21,
+        "externalLinkCount": 0,
+        "generated": false
+      },
+      {
+        "file": "summer-energy-efficiency.md",
+        "title": "Why Your Utah AC Runs All Day in July (and What Actually Helps)",
+        "draft": "true",
+        "date": "2026-06-10",
+        "wordCount": 1346,
+        "questionHeadingCount": 0,
+        "tableLineCount": 0,
+        "internalLinkCount": 0,
+        "externalLinkCount": 0,
+        "generated": false
+      },
+      {
+        "file": "thermostat-settings-utah-heat-wave.md",
+        "title": "Thermostat Settings That Actually Help During a Utah Heat Wave",
+        "draft": "true",
+        "date": "2026-06-07",
+        "wordCount": 646,
+        "questionHeadingCount": 0,
+        "tableLineCount": 0,
+        "internalLinkCount": 4,
+        "externalLinkCount": 2,
+        "generated": false
+      },
+      {
+        "file": "wildfire-smoke-hvac-filter-utah.md",
+        "title": "Wildfire Smoke Days in Utah: How to Use Your HVAC System Wisely",
+        "draft": "true",
+        "date": "2026-06-05",
+        "wordCount": 599,
+        "questionHeadingCount": 0,
+        "tableLineCount": 0,
+        "internalLinkCount": 3,
+        "externalLinkCount": 6,
+        "generated": false
       }
     ]
   },
@@ -607,22 +506,13 @@
   ],
   "recommendedIssues": [
     {
-      "key": "metadata-descriptions-social-tags",
-      "bucket": "metadata",
-      "severity": "medium",
-      "title": "Tighten Air Express metadata descriptions, schema coverage, and social tags",
-      "evidence": "7 pages have short or truncated descriptions; 2 pages have no JSON-LD schema; 53 pages have no Twitter card tag.",
-      "acceptance": "Descriptions are complete for flagged pages; resources/blog index schema is added or explicitly excluded; Twitter card tags are normalized or intentionally omitted with evidence.",
-      "trackingIssue": "https://github.com/CryptoJym/air-express-hvac/issues/32"
-    },
-    {
-      "key": "blog-geo-extractability",
+      "key": "draft-blog-geo-extractability",
       "bucket": "blogging",
-      "severity": "high",
-      "title": "Upgrade Air Express blog posts for GEO extractability and internal-link authority",
-      "evidence": "13 content/blog posts lack at least one extractability signal: question headings, internal links, or external citations.",
-      "acceptance": "Priority posts include natural-language answer headings, useful internal links, appropriate external/official citations, and article schema remains valid after rebuild.",
-      "trackingIssue": "https://github.com/CryptoJym/air-express-hvac/issues/33"
+      "severity": "low",
+      "title": "Prepare draft Air Express posts for GEO extractability before publishing",
+      "evidence": "6 draft/future content/blog posts still need question headings, internal links, or external citations before release.",
+      "acceptance": "Draft posts are upgraded before publication; current published posts keep question headings, internal links, external citations, and valid article schema.",
+      "trackingIssue": "Future content prep"
     },
     {
       "key": "citation-backlink-cleanup",
@@ -638,7 +528,7 @@
       "bucket": "tagging",
       "severity": "high",
       "title": "Restore live tagging and attribution joins after source access is repaired",
-      "evidence": "Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=blocked_scope; attribution score remains blocked at 25.",
+      "evidence": "Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=not_included; attribution score remains blocked at 30.",
       "acceptance": "Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.",
       "trackingIssue": "Existing: #24, #27, #28, #29, #30"
     },

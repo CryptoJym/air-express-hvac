@@ -85,6 +85,13 @@ function unique(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function displayEnvPath(filePath = "") {
+  if (filePath.startsWith("/var/folders/") || filePath.startsWith("/tmp/")) {
+    return "[temporary-env-file]";
+  }
+  return filePath;
+}
+
 function envPresence(names, sourceEnv = process.env) {
   return names.map((name) => ({
     name,
@@ -103,10 +110,11 @@ function buildEnvSources(envFiles) {
 
   for (const filePath of envFiles) {
     const exists = existsSync(filePath);
+    const displayPath = displayEnvPath(filePath);
     sources.push({
-      label: filePath,
+      label: displayPath,
       type: "env_file",
-      path: filePath,
+      path: displayPath,
       exists,
       env: exists ? parseEnvFile(filePath) : {},
     });
@@ -234,7 +242,7 @@ async function main() {
     optionalEnv: optional,
     envSourceSearch: {
       scannedFiles: envFiles.map((filePath) => ({
-        path: filePath,
+        path: displayEnvPath(filePath),
         exists: existsSync(filePath),
       })),
       sourcePresence: envSources.map(sourcePresenceReport),

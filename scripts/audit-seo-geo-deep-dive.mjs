@@ -318,12 +318,33 @@ function summarizeBlog() {
       post.internalLinkCount === 0 ||
       post.externalLinkCount === 0,
     ),
+    weakPublishedExtractability: posts.filter((post) =>
+      post.draft !== "true" &&
+      (post.questionHeadingCount === 0 ||
+        post.internalLinkCount === 0 ||
+        post.externalLinkCount === 0),
+    ),
+    weakDraftExtractability: posts.filter((post) =>
+      post.draft === "true" &&
+      (post.questionHeadingCount === 0 ||
+        post.internalLinkCount === 0 ||
+        post.externalLinkCount === 0),
+    ),
   };
 }
 
 function issueRows({ metadata, blog, attribution }) {
-  return [
-    {
+  const rows = [];
+  const metadataIssueCount =
+    metadata.shortDescription.length +
+    metadata.missingSchema.length +
+    metadata.missingTwitterCard.length;
+  const weakPublished = blog.weakPublishedExtractability || [];
+  const weakDrafts = blog.weakDraftExtractability || [];
+  const attributionScore = readJson("data/seo-geo-attribution-audit.json").scores?.attribution ?? "pending";
+
+  if (metadataIssueCount > 0) {
+    rows.push({
       key: "metadata-descriptions-social-tags",
       bucket: "metadata",
       severity: "medium",
@@ -331,16 +352,32 @@ function issueRows({ metadata, blog, attribution }) {
       evidence: `${metadata.shortDescription.length} pages have short or truncated descriptions; ${metadata.missingSchema.length} pages have no JSON-LD schema; ${metadata.missingTwitterCard.length} pages have no Twitter card tag.`,
       acceptance: "Descriptions are complete for flagged pages; resources/blog index schema is added or explicitly excluded; Twitter card tags are normalized or intentionally omitted with evidence.",
       trackingIssue: "https://github.com/CryptoJym/air-express-hvac/issues/32",
-    },
-    {
+    });
+  }
+
+  if (weakPublished.length > 0) {
+    rows.push({
       key: "blog-geo-extractability",
       bucket: "blogging",
       severity: "high",
       title: "Upgrade Air Express blog posts for GEO extractability and internal-link authority",
-      evidence: `${blog.weakExtractability.length} content/blog posts lack at least one extractability signal: question headings, internal links, or external citations.`,
+      evidence: `${weakPublished.length} published content/blog posts lack at least one extractability signal: question headings, internal links, or external citations.`,
       acceptance: "Priority posts include natural-language answer headings, useful internal links, appropriate external/official citations, and article schema remains valid after rebuild.",
       trackingIssue: "https://github.com/CryptoJym/air-express-hvac/issues/33",
-    },
+    });
+  } else if (weakDrafts.length > 0) {
+    rows.push({
+      key: "draft-blog-geo-extractability",
+      bucket: "blogging",
+      severity: "low",
+      title: "Prepare draft Air Express posts for GEO extractability before publishing",
+      evidence: `${weakDrafts.length} draft/future content/blog posts still need question headings, internal links, or external citations before release.`,
+      acceptance: "Draft posts are upgraded before publication; current published posts keep question headings, internal links, external citations, and valid article schema.",
+      trackingIssue: "Future content prep",
+    });
+  }
+
+  rows.push(
     {
       key: "citation-backlink-cleanup",
       bucket: "backlinks",
@@ -355,7 +392,7 @@ function issueRows({ metadata, blog, attribution }) {
       bucket: "tagging",
       severity: "high",
       title: "Restore live tagging and attribution joins after source access is repaired",
-      evidence: `Current direct Google status is GSC=${attribution.gsc?.status || "unknown"}, GA4=${attribution.ga4?.status || "unknown"}, GBP=${attribution.gbp?.status || "unknown"}; attribution score remains blocked at 25.`,
+      evidence: `Current direct Google status is GSC=${attribution.gsc?.status || "unknown"}, GA4=${attribution.ga4?.status || "unknown"}, GBP=${attribution.gbp?.status || "unknown"}; attribution score remains blocked at ${attributionScore}.`,
       acceptance: "Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.",
       trackingIssue: "Existing: #24, #27, #28, #29, #30",
     },
@@ -368,7 +405,9 @@ function issueRows({ metadata, blog, attribution }) {
       acceptance: "At least two proof-backed pages or sections are prepared with approved client evidence, dated source links, claim-safe wording, and inclusion rules for llms.txt/sitemap after live verification.",
       trackingIssue: "https://github.com/CryptoJym/air-express-hvac/issues/35",
     },
-  ];
+  );
+
+  return rows;
 }
 
 const htmlFiles = publicHtmlFiles();

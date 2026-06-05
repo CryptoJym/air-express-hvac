@@ -21,6 +21,12 @@ We write three or four HVAC quotes a week for Utah homeowners who are about to s
 
 This is the guide we wish they'd read first. It's long. Read the short version at the bottom if you don't have time for the whole thing.
 
+## What should Utah homeowners compare before choosing HVAC equipment?
+
+Compare the house before you compare the brand. The Department of Energy explains that [central air conditioners](https://www.energy.gov/energysaver/central-air-conditioning) work through the full supply-and-return duct system, which is why equipment choice, duct condition, airflow, and thermostat behavior all matter together. A high-efficiency unit attached to poor ductwork is still a poor system.
+
+For Air Express customers, that means the buying conversation usually starts with [HVAC installation](/hvac-installation.html), duct condition, [AC replacement](/ac-replacement.html), furnace age, and whether a [heat pump](/heat-pump.html) or dual-fuel setup makes sense for the home.
+
 ## Step one: figure out what you actually need, not what you think you need
 
 The biggest mistake we see is people deciding on a brand before they've looked at the house.

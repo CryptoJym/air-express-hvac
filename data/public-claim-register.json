@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:15:50.538Z",
+  "generatedAt": "2026-06-05T22:53:56.456Z",
   "status": "passed",
   "scope": "Local public HTML claim scan. No provider mutation, public profile edit, external send, deploy, token use, or customer data access.",
   "sourceNote": "Public sources are recorded as proof references, but this command does not fetch or mutate external providers.",
@@ -57,7 +57,7 @@
         },
         {
           "file": "ac-inspection.html",
-          "line": 119,
+          "line": 123,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
         },
         {
@@ -67,7 +67,7 @@
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 198,
+          "line": 202,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
         },
         {
@@ -152,7 +152,7 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 130,
+          "line": 134,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
         },
         {
@@ -162,7 +162,7 @@
         },
         {
           "file": "ac-installation.html",
-          "line": 119,
+          "line": 123,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
         },
         {
@@ -172,7 +172,7 @@
         },
         {
           "file": "ac-maintenance.html",
-          "line": 119,
+          "line": 123,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">4.9★</span> <span class=\"service-stat-label\">280+ rev"
         },
         {
@@ -268,12 +268,12 @@
         },
         {
           "file": "ac-inspection.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 199,
+          "line": 203,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -293,17 +293,17 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 131,
+          "line": 135,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "ac-installation.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "ac-maintenance.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -328,17 +328,17 @@
         },
         {
           "file": "ac-repair-saratoga-springs-ut.html",
-          "line": 199,
+          "line": 203,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "ac-repair.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "ac-replacement.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -348,12 +348,12 @@
         },
         {
           "file": "ac-tune-up.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "air-duct-cleaning.html",
-          "line": 125,
+          "line": 129,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -363,12 +363,12 @@
         },
         {
           "file": "air-purifiers.html",
-          "line": 125,
+          "line": 129,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "all-services.html",
-          "line": 119,
+          "line": 123,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -388,7 +388,7 @@
         },
         {
           "file": "ductless.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -413,17 +413,17 @@
         },
         {
           "file": "fireplace.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "furnace-installation.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "furnace-maintenance.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
@@ -448,17 +448,17 @@
         },
         {
           "file": "furnace-repair-saratoga-springs-ut.html",
-          "line": 151,
+          "line": 155,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "furnace-repair.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         },
         {
           "file": "furnace.html",
-          "line": 120,
+          "line": 124,
           "snippet": "num\">4.9★</span> <span class=\"service-stat-label\">280+ reviews</span> </div> <div class=\"service-sta"
         }
       ]
@@ -467,7 +467,7 @@
       "id": "business_started_1996",
       "label": "Since 1996",
       "status": "public_source_supported",
-      "occurrenceCount": 206,
+      "occurrenceCount": 210,
       "failIfPresent": false,
       "proof": "BBB profile records Business Started and Business Started Locally as 6/12/1996.",
       "source": "https://www.bbb.org/us/ut/lehi/profile/residential-air-conditioning-contractors/air-express-heating-and-air-conditioning-inc-1166-22004264",
@@ -479,7 +479,7 @@
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 190,
+          "line": 194,
           "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
         },
         {
@@ -519,7 +519,7 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 122,
+          "line": 126,
           "snippet": "clean.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
         },
         {
@@ -569,12 +569,12 @@
         },
         {
           "file": "ac-repair-saratoga-springs-ut.html",
-          "line": 190,
+          "line": 194,
           "snippet": "ur way.</h1> <p class=\"service-hero-sub\">Family-owned since 1996 and based in Lehi — 15 minutes west of our shop. We show up when we s"
         },
         {
           "file": "ac-repair-saratoga-springs-ut.html",
-          "line": 233,
+          "line": 237,
           "snippet": "prings</h3> <ul> <li>thirty years serving Saratoga Springs and Utah Valley since 1996</li> <li>NATE-certified technicians with humidity"
         },
         {
@@ -629,12 +629,12 @@
         },
         {
           "file": "all-services.html",
-          "line": 108,
+          "line": 112,
           "snippet": "<p class=\"service-hero-eyebrow\">EVERYTHING WE DO · UTAH · SINCE 1996</p> <h1>Everything we do,<br>under one roof.</h1>"
         },
         {
           "file": "all-services.html",
-          "line": 110,
+          "line": 114,
           "snippet": "One crew, one phone number, one family name that's been on the truck since 1996.</p> <a href=\"contact.html\" class=\"service-hero-cta\">"
         },
         {
@@ -705,12 +705,12 @@
         },
         {
           "file": "ac-inspection.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 206,
+          "line": 210,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
@@ -730,17 +730,17 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 138,
+          "line": 142,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "ac-installation.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "ac-maintenance.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
@@ -765,22 +765,22 @@
         },
         {
           "file": "ac-repair-saratoga-springs-ut.html",
-          "line": 206,
+          "line": 210,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "ac-repair.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "ac-repair.html",
-          "line": 194,
+          "line": 198,
           "snippet": "one; padding: 0;\"> <li style=\"margin: 12px 0;\">nearly 30 years fixing Utah HVAC systems</li> <li style=\"margin: 12px"
         },
         {
           "file": "ac-replacement.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
@@ -790,12 +790,12 @@
         },
         {
           "file": "ac-tune-up.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "air-duct-cleaning.html",
-          "line": 132,
+          "line": 136,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
@@ -805,27 +805,27 @@
         },
         {
           "file": "air-purifiers.html",
-          "line": 132,
+          "line": 136,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "air-purifiers.html",
-          "line": 191,
+          "line": 195,
           "snippet": "<h3>The Air Express Difference</h3> <p>nearly 30 years installing air quality solutions across Utah County. We test every sy"
         },
         {
           "file": "all-services.html",
-          "line": 126,
+          "line": 130,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "all-services.html",
-          "line": 197,
+          "line": 201,
           "snippet": "tified</h3> <p>License #96-324211-550. EPA certified. 30 years serving Utah County.</p> </div> </section>"
         },
         {
           "file": "blog/geothermal-guide.html",
-          "line": 165,
+          "line": 168,
           "snippet": "ce. But with a $15,000-25,000 price premium, the payback period is 15-30 years.</p> <p>That&#39;s longer than a lot of homeowners plan to stay in a"
         },
         {
@@ -850,7 +850,7 @@
         },
         {
           "file": "ductless.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
@@ -875,12 +875,12 @@
         },
         {
           "file": "fireplace.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         },
         {
           "file": "furnace-installation.html",
-          "line": 127,
+          "line": 131,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">30 yr</span> <span class=\"service-stat-label\">family-ow"
         }
       ]
@@ -896,17 +896,17 @@
       "occurrences": [
         {
           "file": "ac-inspection.html",
-          "line": 131,
+          "line": 135,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 210,
+          "line": 214,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 297,
+          "line": 301,
           "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
         },
         {
@@ -986,22 +986,22 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 142,
+          "line": 146,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 225,
+          "line": 229,
           "snippet": "t a Free Estimate</a></p> <p><a href=\"emergency.html\">24/7 Emergency Service</a></p> </div> <div class=\""
         },
         {
           "file": "ac-installation.html",
-          "line": 131,
+          "line": 135,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
         },
         {
           "file": "ac-maintenance.html",
-          "line": 131,
+          "line": 135,
           "snippet": "ss=\"service-stat\"> <span class=\"service-stat-num\">24/7</span> <span class=\"service-stat-label\">emergency"
         },
         {
@@ -1117,27 +1117,27 @@
       "occurrences": [
         {
           "file": "ac-inspection.html",
-          "line": 226,
+          "line": 230,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "ac-installation.html",
-          "line": 216,
+          "line": 220,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "ac-maintenance.html",
-          "line": 216,
+          "line": 220,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "ac-repair.html",
-          "line": 212,
+          "line": 216,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "ac-replacement.html",
-          "line": 216,
+          "line": 220,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1147,12 +1147,12 @@
         },
         {
           "file": "ac-tune-up.html",
-          "line": 216,
+          "line": 220,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "air-duct-cleaning.html",
-          "line": 206,
+          "line": 210,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1162,12 +1162,12 @@
         },
         {
           "file": "air-purifiers.html",
-          "line": 206,
+          "line": 210,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "ductless.html",
-          "line": 200,
+          "line": 204,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1187,27 +1187,27 @@
         },
         {
           "file": "fireplace.html",
-          "line": 200,
+          "line": 204,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "furnace-installation.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "furnace-maintenance.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "furnace-repair.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "furnace.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1217,27 +1217,27 @@
         },
         {
           "file": "heat-pump.html",
-          "line": 236,
+          "line": 240,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "heating-installation.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "heating-maintenance.html",
-          "line": 199,
+          "line": 203,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "heating-repair.html",
-          "line": 219,
+          "line": 223,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "heating-replacement.html",
-          "line": 200,
+          "line": 204,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1247,12 +1247,12 @@
         },
         {
           "file": "heating-tune-up.html",
-          "line": 200,
+          "line": 204,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
           "file": "indoor-air-quality.html",
-          "line": 206,
+          "line": 210,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         },
         {
@@ -1272,7 +1272,7 @@
         },
         {
           "file": "water-heater.html",
-          "line": 206,
+          "line": 210,
           "snippet": "n't charge you for repairs we didn't do. If financing helps, we offer 0% APR options through trusted lenders.</p> <div class=\"trus"
         }
       ]
@@ -1298,12 +1298,12 @@
         },
         {
           "file": "ac-inspection.html",
-          "line": 242,
+          "line": 246,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "ac-installation-eagle-mountain-ut.html",
-          "line": 293,
+          "line": 297,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
@@ -1368,17 +1368,17 @@
         },
         {
           "file": "ac-installation-saratoga-springs-ut.html",
-          "line": 221,
+          "line": 225,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "ac-installation.html",
-          "line": 232,
+          "line": 236,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "ac-maintenance.html",
-          "line": 232,
+          "line": 236,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
@@ -1458,17 +1458,17 @@
         },
         {
           "file": "ac-repair-saratoga-springs-ut.html",
-          "line": 306,
+          "line": 310,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "ac-repair.html",
-          "line": 228,
+          "line": 232,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "ac-replacement.html",
-          "line": 232,
+          "line": 236,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
@@ -1478,12 +1478,12 @@
         },
         {
           "file": "ac-tune-up.html",
-          "line": 232,
+          "line": 236,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         },
         {
           "file": "accessibility.html",
-          "line": 123,
+          "line": 127,
           "snippet": "ontent\"> <div class=\"footer-section\"> <h3>License #96-324211-550 | Contact Us</h3> <p><strong>(801) 766-8585</strong><"
         }
       ]

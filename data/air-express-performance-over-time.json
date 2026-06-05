@@ -1,0 +1,813 @@
+{
+  "generatedAt": "2026-06-05T22:54:33.731Z",
+  "evidenceClass": "air_express_performance_over_time_report",
+  "secretHandling": "Only aggregate saved visibility metrics, redacted ServiceTitan counts, public marker booleans, and audit statuses are stored. No tokens, credentials, customer PII, raw lead notes, cookies, or raw HTML are stored.",
+  "status": "prepared_with_provider_and_delivery_blockers",
+  "trackedSources": [
+    "New Reward saved GSC aggregate snapshots",
+    "New Reward saved AI visibility snapshots",
+    "New Reward Cloudflare AI traffic rollups",
+    "ServiceTitan redacted lead-count history",
+    "Repo-local and public live measurement checks",
+    "Repo-local SEO/GEO/AEO audit outputs"
+  ],
+  "directGoogleStatus": {
+    "gsc": {
+      "status": "blocked_scope",
+      "evidence": "Missing webmasters.readonly OAuth scope."
+    },
+    "ga4": {
+      "status": "blocked_scope",
+      "evidence": "Missing analytics.readonly OAuth scope."
+    },
+    "gbp": {
+      "status": "not_included",
+      "evidence": "Google Business Profile was intentionally excluded from this pull; current Air Express attribution refresh is scoped to GSC and GA4."
+    },
+    "status": "blocked"
+  },
+  "gsc": {
+    "distinctWindows": 12,
+    "first": {
+      "id": "cmowfioo33bcv5nqql5zmwo5a",
+      "date": "2026-05-08T00:00:00",
+      "createdAt": "2026-05-08T04:42:49.827",
+      "dateRange": {
+        "end": "2026-05-08",
+        "start": "2026-04-10"
+      },
+      "row_count": 83,
+      "websiteId": "cmorqbs9j001r5nr1h25vosp8",
+      "average_ctr": 0.0171673819742489,
+      "total_clicks": 4,
+      "average_position": 3.16738197424893,
+      "connectionStatus": "connected",
+      "total_impressions": 233
+    },
+    "previous": {
+      "id": "cmpgj1tdd014u5mmxaut50hil",
+      "date": "2026-05-22T06:15:18.457",
+      "createdAt": "2026-05-22T06:17:04.753",
+      "dateRange": {
+        "end": "2026-05-22",
+        "start": "2026-04-24"
+      },
+      "row_count": 1422,
+      "websiteId": "cmorqbs9j001r5nr1h25vosp8",
+      "average_ctr": 0.0016273393002441,
+      "total_clicks": 4,
+      "average_position": 45.4255492270138,
+      "connectionStatus": "connected",
+      "total_impressions": 2458
+    },
+    "latest": {
+      "id": "cmpyn5nx303at5mo5cj66d2y6",
+      "date": "2026-06-03T22:24:08.295",
+      "createdAt": "2026-06-03T22:31:53.943",
+      "dateRange": {
+        "end": "2026-06-03",
+        "start": "2026-05-06"
+      },
+      "row_count": 2193,
+      "websiteId": "cmorqbs9j001r5nr1h25vosp8",
+      "average_ctr": 0.00130480167014614,
+      "total_clicks": 5,
+      "average_position": 38.0334029227557,
+      "connectionStatus": "connected",
+      "total_impressions": 3832
+    },
+    "firstToLatest": {
+      "impressions": 3599,
+      "clicks": 1,
+      "rows": 2110,
+      "ctr": -0.015862580304102758,
+      "averagePosition": 34.866020948506765
+    },
+    "previousToLatest": {
+      "impressions": 1374,
+      "clicks": 1,
+      "rows": 771,
+      "ctr": -0.00032253763009796005,
+      "averagePosition": -7.392146304258105
+    }
+  },
+  "ai": {
+    "summary": {
+      "rows": 5181,
+      "mentions": 16,
+      "citations": 6,
+      "engine_count": 7,
+      "unique_queries": 443,
+      "last_snapshot_at": "2026-06-01T17:02:01.632",
+      "first_snapshot_at": "2026-03-18T18:48:29.4"
+    },
+    "byEngine": [
+      {
+        "engine": "perplexity",
+        "mentions": 16,
+        "citations": 6,
+        "snapshots": 1061
+      },
+      {
+        "engine": "google_ai",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 1042
+      },
+      {
+        "engine": "grok",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 1030
+      },
+      {
+        "engine": "chatgpt",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 1022
+      },
+      {
+        "engine": "claude",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 1006
+      },
+      {
+        "engine": "google_ai_overview",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 10
+      },
+      {
+        "engine": "copilot",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 10
+      }
+    ],
+    "byWeek": [
+      {
+        "week": "2026-03-16",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 70,
+        "unique_queries": 10
+      },
+      {
+        "week": "2026-04-27",
+        "mentions": 1,
+        "citations": 0,
+        "snapshots": 244,
+        "unique_queries": 49
+      },
+      {
+        "week": "2026-05-04",
+        "mentions": 7,
+        "citations": 0,
+        "snapshots": 1545,
+        "unique_queries": 241
+      },
+      {
+        "week": "2026-05-11",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 245,
+        "unique_queries": 49
+      },
+      {
+        "week": "2026-05-18",
+        "mentions": 0,
+        "citations": 0,
+        "snapshots": 245,
+        "unique_queries": 49
+      },
+      {
+        "week": "2026-05-25",
+        "mentions": 5,
+        "citations": 4,
+        "snapshots": 1665,
+        "unique_queries": 68
+      },
+      {
+        "week": "2026-06-01",
+        "mentions": 3,
+        "citations": 2,
+        "snapshots": 1167,
+        "unique_queries": 52
+      }
+    ],
+    "topMentionedQuestions": [
+      {
+        "query": "How do I compare cooling providers on family owned and locally rooted 1996 in Lehi, UT?",
+        "mentions": 4,
+        "citations": 3,
+        "last_seen": "2026-06-01T16:54:44.345",
+        "snapshots": 73,
+        "first_seen": "2026-05-25T08:05:46.188"
+      },
+      {
+        "query": "How can I compare cooling providers in Lehi, UT?",
+        "mentions": 1,
+        "citations": 1,
+        "last_seen": "2026-06-01T16:55:30.66",
+        "snapshots": 58,
+        "first_seen": "2026-05-29T20:37:49.161"
+      },
+      {
+        "query": "Who are trusted cooling providers for furnace failure in Lehi, UT?",
+        "mentions": 1,
+        "citations": 1,
+        "last_seen": "2026-05-25T20:40:06.73",
+        "snapshots": 24,
+        "first_seen": "2026-05-25T08:03:17.474"
+      },
+      {
+        "query": "How do I compare cooling providers for poor indoor air quality in Lehi, UT?",
+        "mentions": 1,
+        "citations": 1,
+        "last_seen": "2026-05-25T19:54:58.112",
+        "snapshots": 11,
+        "first_seen": "2026-05-25T08:07:51.451"
+      },
+      {
+        "query": "How can I verify a cooling provider is qualified and reputable in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-06-01T16:50:45.896",
+        "snapshots": 55,
+        "first_seen": "2026-05-29T20:34:23.101"
+      },
+      {
+        "query": "How can I compare heating and cooling providers in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T20:01:48.051",
+        "snapshots": 25,
+        "first_seen": "2026-05-07T04:32:26.07"
+      },
+      {
+        "query": "Why does one room stay hot in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T07:45:29.841",
+        "snapshots": 5,
+        "first_seen": "2026-05-07T07:44:31.364"
+      },
+      {
+        "query": "How do I compare HVAC repair versus full replacement in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T07:48:33.604",
+        "snapshots": 5,
+        "first_seen": "2026-05-07T07:48:11.168"
+      },
+      {
+        "query": "Why is my HVAC so noisy at night in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T04:31:30.737",
+        "snapshots": 5,
+        "first_seen": "2026-05-07T04:31:00.485"
+      },
+      {
+        "query": "What proof should I ask for before hiring a cooling provider for emergency repair stress with young children or elderly in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-04-29T22:25:54.524",
+        "snapshots": 5,
+        "first_seen": "2026-04-29T22:25:33.945"
+      },
+      {
+        "query": "Why does my house feel humid even with the AC on in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T04:30:21.391",
+        "snapshots": 5,
+        "first_seen": "2026-05-07T04:29:37.292"
+      },
+      {
+        "query": "Who are trusted way to find an HVAC companies in Lehi, UT?",
+        "mentions": 1,
+        "citations": 0,
+        "last_seen": "2026-05-07T07:51:01.39",
+        "snapshots": 5,
+        "first_seen": "2026-05-07T07:50:11.06"
+      }
+    ],
+    "traffic": [
+      {
+        "snapshots": 36,
+        "zone_name": "airexpressutah.com",
+        "metric_source": "cloudflare_graphql_ai_traffic_v1",
+        "total_requests": 2747,
+        "last_window_end": "2026-06-05T12:00:00",
+        "allowed_requests": 2588,
+        "first_window_start": "2026-05-27T12:00:00",
+        "successful_requests": 2588,
+        "unsuccessful_requests": 61,
+        "total_data_transfer_bytes": 58755433
+      }
+    ]
+  },
+  "serviceTitan": {
+    "status": "api_history_pulled",
+    "rows": 78,
+    "websiteCampaignLeadCount": 76,
+    "bookedLeadCount": 0,
+    "countsByMonth": {
+      "2026-01": 1,
+      "2026-02": 1,
+      "2026-04": 44,
+      "2026-05": 32
+    },
+    "countsByWeek": {
+      "2026-01-05": 1,
+      "2026-02-16": 1,
+      "2026-04-13": 13,
+      "2026-04-20": 22,
+      "2026-04-27": 9,
+      "2026-05-04": 6,
+      "2026-05-11": 11,
+      "2026-05-18": 15
+    },
+    "countsByImpactPeriod": {
+      "after_ga4_lead_proof": 47,
+      "before_new_reward_target_brief": 2,
+      "target_brief_to_ga4_lead_proof": 29
+    },
+    "countsByStatus": {
+      "Converted": 1,
+      "Dismissed": 55,
+      "Open": 22
+    },
+    "countsByServiceType": {
+      "ac_repair": 13,
+      "air_quality": 10,
+      "emergency_repair": 5,
+      "heat_pump": 7,
+      "heating_furnace": 9,
+      "maintenance_tuneup": 13,
+      "other": 17,
+      "unclassified_summary": 4
+    },
+    "qualityProxyByCaptchaPeriod": {
+      "before_source_captcha": {
+        "total": 78,
+        "dismissed": 55,
+        "open": 22,
+        "converted": 1,
+        "dismissedRate": 0.7051282051282052,
+        "convertedRate": 0.01282051282051282,
+        "interpretation": "Status mix is a lead-quality proxy only; booking and revenue joins are outside the current report scope."
+      },
+      "source_captcha_day_or_after": {
+        "total": 0,
+        "dismissed": 0,
+        "open": 0,
+        "converted": 0,
+        "dismissedRate": 0,
+        "convertedRate": 0,
+        "interpretation": "No leads in this period, so CAPTCHA quality effect cannot be measured yet."
+      }
+    },
+    "weeklyTrend": [
+      {
+        "week": "2026-01-05",
+        "totalLeads": 1,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 1
+        }
+      },
+      {
+        "week": "2026-01-12",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-01-19",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-01-26",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-02",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-09",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-02-16",
+        "totalLeads": 1,
+        "websiteCampaignLeads": 1,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 1
+        }
+      },
+      {
+        "week": "2026-02-23",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-02",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-09",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-16",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-23",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-03-30",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-04-06",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-04-13",
+        "totalLeads": 13,
+        "websiteCampaignLeads": 13,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 3,
+          "air_quality": 5,
+          "emergency_repair": 1,
+          "maintenance_tuneup": 1,
+          "other": 2,
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 13
+        }
+      },
+      {
+        "week": "2026-04-20",
+        "totalLeads": 22,
+        "websiteCampaignLeads": 22,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 7,
+          "air_quality": 1,
+          "emergency_repair": 1,
+          "heat_pump": 2,
+          "maintenance_tuneup": 6,
+          "other": 5
+        },
+        "statuses": {
+          "Dismissed": 22
+        }
+      },
+      {
+        "week": "2026-04-27",
+        "totalLeads": 9,
+        "websiteCampaignLeads": 9,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "air_quality": 1,
+          "emergency_repair": 1,
+          "heat_pump": 3,
+          "heating_furnace": 2,
+          "other": 1
+        },
+        "statuses": {
+          "Converted": 1,
+          "Dismissed": 8
+        }
+      },
+      {
+        "week": "2026-05-04",
+        "totalLeads": 6,
+        "websiteCampaignLeads": 6,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "heating_furnace": 3,
+          "maintenance_tuneup": 1,
+          "other": 1
+        },
+        "statuses": {
+          "Dismissed": 6
+        }
+      },
+      {
+        "week": "2026-05-11",
+        "totalLeads": 11,
+        "websiteCampaignLeads": 10,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "ac_repair": 1,
+          "air_quality": 1,
+          "heating_furnace": 2,
+          "maintenance_tuneup": 3,
+          "other": 3,
+          "unclassified_summary": 1
+        },
+        "statuses": {
+          "Dismissed": 4,
+          "Open": 7
+        }
+      },
+      {
+        "week": "2026-05-18",
+        "totalLeads": 15,
+        "websiteCampaignLeads": 15,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {
+          "air_quality": 2,
+          "emergency_repair": 2,
+          "heat_pump": 2,
+          "heating_furnace": 2,
+          "maintenance_tuneup": 2,
+          "other": 5
+        },
+        "statuses": {
+          "Open": 15
+        }
+      },
+      {
+        "week": "2026-05-25",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "before_source_captcha_week",
+        "serviceTypes": {},
+        "statuses": {}
+      },
+      {
+        "week": "2026-06-01",
+        "totalLeads": 0,
+        "websiteCampaignLeads": 0,
+        "captchaPeriod": "source_captcha_week_or_after",
+        "serviceTypes": {},
+        "statuses": {}
+      }
+    ],
+    "captcha": {
+      "date": "2026-06-04",
+      "timestamp": "2026-06-04T15:21:32-06:00",
+      "commit": "27cf80099165065e7f5bd0c0ca49d595326c4c44",
+      "evidence": "Git history shows Cloudflare Turnstile source added in commit 27cf800 on 2026-06-04; live delivery remains separately verified.",
+      "liveStatus": "source_added_live_turnstile_env_or_canonical_delivery_pending",
+      "interpretation": "Use this as the source-code marker only. Current live checks show the public CAPTCHA config is not healthy on the active delivery paths, and there are no leads on/after the source date, so do not claim CAPTCHA changed lead quality yet."
+    }
+  },
+  "liveMeasurement": {
+    "status": "partial_live_www_only_canonical_pending",
+    "canonicalHasGa4": false,
+    "wwwHasGa4": true,
+    "apexAnalyticsJsStatus": 404,
+    "wwwAnalyticsJsStatus": 200,
+    "turnstile": {
+      "apex": {
+        "url": "https://airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 404,
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+          "xNewRewardsEdgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+          "xNewRewardsEdgeRouteMode": "ZERO_REDIRECT",
+          "contentType": "text/plain; charset=utf-8"
+        },
+        "configured": false,
+        "missingKeys": [],
+        "exposesSiteKey": false,
+        "error": ""
+      },
+      "www": {
+        "url": "https://www.airexpressutah.com/api/turnstile/config",
+        "finalUrl": "https://www.airexpressutah.com/api/turnstile/config",
+        "ok": false,
+        "status": 503,
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "",
+          "xNewRewardsEdgeActiveVersion": "",
+          "xNewRewardsEdgeRouteMode": "",
+          "contentType": "application/json; charset=utf-8"
+        },
+        "configured": false,
+        "missingKeys": [
+          "TURNSTILE_SITE_KEY",
+          "TURNSTILE_SECRET_KEY"
+        ],
+        "exposesSiteKey": false,
+        "error": ""
+      }
+    }
+  },
+  "audit": {
+    "scores": {
+      "technical": 100,
+      "geo": 90,
+      "messaging": 100,
+      "attribution": 30,
+      "accessibility": 100
+    },
+    "blockerRootCauses": [
+      {
+        "severity": "Critical",
+        "area": "Attribution / New Reward",
+        "status": "blocked",
+        "issue": "Air Express GSC/GA4 source cannot be pulled through New Reward",
+        "rootCause": "There are now separate confirmed breaks. First, the platform bearer-token forwarding path was repaired by NewRewards PR #4105, so missing bearer-token behavior should be retested from an authenticated New Reward app session. Second, the corrected read-only NewRewards source proves the canonical client and website mapping exists, but GSC and GA4 provider rows for cmorqbs9j001r5nr1h25vosp8 are expired and GA4 propertyId is null. Third, local Google credentials for newrewardplatform@gmail.com have identity/cloud/admin scopes but lack Search Console and GA4 read scopes. Fourth, live delivery is split: the www host has the newer GA4 source, while canonical apex is still on the older New Reward edge/origin path. Fifth, no approved Air Express GTM container id has been found. Sixth, Turnstile source is present but live production config is missing on www and absent on canonical apex.",
+        "evidence": "Air Express GSC/GA4 direct history cannot be loaded yet because the available Google token lacks required read scopes, the New Reward GSC/GA4 provider rows for canonical website cmorqbs9j001r5nr1h25vosp8 are expired, GA4 propertyId is null, and canonical live delivery has not synced the current GA4/CAPTCHA source. This is not evidence that the Google assets do not exist; it is an access, scope, property-selection, provider-state, and canonical-delivery blocker. ServiceTitan lead-count history is available and booking/revenue joins are intentionally out of scope for the current report.",
+        "workaround": "Checks used the authenticated Air Express New Reward setup, settings, and SEO workspace pages; repo-local source; prior reachable credential metadata; and public live-edge artifact checks. No provider connection, deploy, DNS, CRM, OAuth, or public mutation was completed.",
+        "nextAction": "Use the New Reward app session under james@jamesbrady.org to recheck the Air Express SEO workspace and provider cards, confirm the UI targets cmorqbs9j001r5nr1h25vosp8, then refresh/reconnect newrewardplatform@gmail.com for GSC/GA4 read access only within the approved stop gates. After read scopes and property visibility are proven, rerun npm run pull:gsc-ga4-history and then sync /analytics.js through an approved delivery path."
+      },
+      {
+        "severity": "High",
+        "area": "Attribution / Website",
+        "status": "partial_live_www_only_canonical_pending",
+        "issue": "GA4 is live on www but missing from the canonical apex/New Reward edge path",
+        "rootCause": "The approved Vercel/www delivery path is serving the updated GA4 source, while canonical airexpressutah.com is still routed through the older New Reward edge/origin artifact without /analytics.js.",
+        "evidence": "measurement diagnostic=partial_live_www_only_canonical_pending; approved GA4=G-JZ7PY32EVX; local index GA4=yes; local analytics.js GA4=yes; local public page coverage=120/120; local unapproved GTM containers=0; live homepage HTTP=200; live homepage GA4=no; live GTM containers=none; live /analytics.js HTTP=404; www homepage HTTP=200; www homepage GA4=yes; www /analytics.js HTTP=200; apex Turnstile configured=no; www Turnstile configured=no; edge website=cmorqbs9j001r5nr1h25vosp8",
+        "workaround": "Recorded public marker booleans and response headers only; no raw HTML, cookies, tokens, provider credentials, customer data, or successful form submissions were stored.",
+        "nextAction": "Sync canonical apex/New Reward edge delivery to the same source as www, or make the verified Vercel host the canonical route, then rerun npm run verify:live-measurement."
+      },
+      {
+        "severity": "High",
+        "area": "GEO / AI artifacts",
+        "status": "blocked_by_source_split",
+        "issue": "Live /llms.txt does not match the repo-local llms.txt",
+        "rootCause": "Production /llms.txt is served by the New Reward edge managed path, so the local repo artifact is prepared but not the live source of truth.",
+        "evidence": "Live /llms.txt status 200; edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/llms.txt; websiteId=cmorqbs9j001r5nr1h25vosp8.",
+        "workaround": "Fetched live /llms.txt and compared content hashes without changing the edge artifact.",
+        "nextAction": "Sync the Air Express llms.txt through the New Reward edge source or route production to the repo artifact."
+      },
+      {
+        "severity": "Medium",
+        "area": "GEO / Robots",
+        "status": "prepared_with_live_difference",
+        "issue": "Live robots.txt differs from repo-local robots.txt",
+        "rootCause": "Production robots.txt appears to be managed by the New Reward edge/workspace platform while the repo has a simpler local file.",
+        "evidence": "Live robots.txt status 200, edge=no.",
+        "workaround": "Fetched live robots.txt read-only and compared content hashes.",
+        "nextAction": "Decide whether the edge robots policy or repo robots file is canonical, then document/sync the chosen source."
+      },
+      {
+        "severity": "High",
+        "area": "Technical SEO / Live sitemap",
+        "status": "fixed_locally_pending_deploy",
+        "issue": "Live sitemap still contains non-ISO blog lastmod values",
+        "rootCause": "Production is serving a previously generated sitemap; local generator fixes do not affect production until an approved deploy or edge sync.",
+        "evidence": "10 live lastmod values are invalid; sample: Thu Oct 01 2026 00:00:00 GMT+0000 (Coordinated Universal Time) | Sat Aug 01 2026 00:00:00 GMT+0000 (Coordinated Universal Time) | Wed Jul 01 2026 00:00:00 GMT+0000 (Coordinated Universal Time).",
+        "workaround": "Verified live sitemap read-only and left production unchanged.",
+        "nextAction": "After review, deploy/sync the regenerated sitemap through the approved launch path and recheck live sitemap.xml."
+      }
+    ],
+    "deepDiveIssues": [
+      {
+        "key": "draft-blog-geo-extractability",
+        "bucket": "blogging",
+        "severity": "low",
+        "title": "Prepare draft Air Express posts for GEO extractability before publishing",
+        "evidence": "6 draft/future content/blog posts still need question headings, internal links, or external citations before release.",
+        "acceptance": "Draft posts are upgraded before publication; current published posts keep question headings, internal links, external citations, and valid article schema.",
+        "trackingIssue": "Future content prep"
+      },
+      {
+        "key": "citation-backlink-cleanup",
+        "bucket": "backlinks",
+        "severity": "high",
+        "title": "Create Air Express backlink and local citation cleanup ledger",
+        "evidence": "10 public citation surfaces were observed; several show legacy domain, alternate phone, reputation, missing website, or claim-status risks.",
+        "acceptance": "Citation ledger records surface, URL, observed NAP/website/rating state, owner/claim status, requested fix, proof date, and whether a backlink/citation is usable for reporting.",
+        "trackingIssue": "https://github.com/CryptoJym/air-express-hvac/issues/34"
+      },
+      {
+        "key": "tagging-live-attribution",
+        "bucket": "tagging",
+        "severity": "high",
+        "title": "Restore live tagging and attribution joins after source access is repaired",
+        "evidence": "Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=not_included; attribution score remains blocked at 30.",
+        "acceptance": "Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.",
+        "trackingIssue": "Existing: #24, #27, #28, #29, #30"
+      },
+      {
+        "key": "authority-proof-pages",
+        "bucket": "geo",
+        "severity": "medium",
+        "title": "Build proof-backed authority surfaces for AI and local-service citations",
+        "evidence": "Public sources include dealer, directory, trade, and utility/regulatory mentions, but current site content does not convert those into approved proof pages or dated authority references.",
+        "acceptance": "At least two proof-backed pages or sections are prepared with approved client evidence, dated source links, claim-safe wording, and inclusion rules for llms.txt/sitemap after live verification.",
+        "trackingIssue": "https://github.com/CryptoJym/air-express-hvac/issues/35"
+      }
+    ]
+  },
+  "interpretation": [
+    {
+      "finding": "Visibility expanded in saved Search Console snapshots.",
+      "evidence": "First saved window to latest saved window: impressions +3599, clicks +1, captured rows +2110, CTR 1.7% to 0.1%, average position 3.2 to 38.0.",
+      "attributionRead": "This is visibility proof from saved New Reward snapshots, not full direct GSC query/page history until provider scopes are repaired."
+    },
+    {
+      "finding": "AI visibility exists, but all observed mentions and citations are concentrated in Perplexity.",
+      "evidence": "5,181 snapshots, 16 mentions, 6 citations, 443 unique questions.",
+      "attributionRead": "Improve engine diversity by strengthening answer-ready service pages, blog Q&A headings, citations, and competitor prompt sets."
+    },
+    {
+      "finding": "Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.",
+      "evidence": "78 redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.",
+      "attributionRead": "Do not claim CAPTCHA caused the drop or quality improvement yet. Source CAPTCHA was added June 4, but live Turnstile config and canonical delivery are still unhealthy."
+    },
+    {
+      "finding": "Attribution is the weak score, not base SEO.",
+      "evidence": "Latest audit scores: technical 100, GEO 90, messaging 100, attribution 30.",
+      "attributionRead": "The next revenue-proof step is provider scope/property repair plus canonical delivery sync, not more local-only SEO cleanup."
+    }
+  ],
+  "recommendedActions": [
+    {
+      "priority": "P0",
+      "action": "Repair canonical delivery so apex serves the same approved GA4 and /analytics.js source as www.",
+      "state": "partial_live_www_only_canonical_pending",
+      "proof": "Rerun npm run verify:live-measurement and require canonical homepage GA4=true and apex /analytics.js HTTP 200."
+    },
+    {
+      "priority": "P0",
+      "action": "Restore read-only GSC/GA4 scopes or reconnect through the New Reward app for website cmorqbs9j001r5nr1h25vosp8.",
+      "state": "blocked",
+      "proof": "Rerun npm run pull:gsc-ga4-history and require direct GSC/GA4 histories or exact provider/property blocker output."
+    },
+    {
+      "priority": "P0",
+      "action": "Configure Turnstile on the active production delivery path before interpreting lead-quality changes.",
+      "state": "blocked_turnstile_env_or_delivery",
+      "proof": "Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof."
+    },
+    {
+      "priority": "P1",
+      "action": "Improve GEO/AEO extractability and prompt coverage across service pages and weekly blog reporting.",
+      "state": "source_updates_prepared",
+      "proof": "Rerun npm run audit:seo-geo-deep-dive and require fewer metadata/blog extractability issues."
+    }
+  ]
+}

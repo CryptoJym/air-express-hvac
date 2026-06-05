@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:16:59.105Z",
+  "generatedAt": "2026-06-05T22:54:10.727Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {

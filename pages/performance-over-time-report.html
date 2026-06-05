@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express Performance Over Time</title>
+  <style>
+    :root { --ink:#162231; --muted:#5e6b78; --line:#d9e2ea; --panel:#f6f9fb; --good:#287549; --warn:#9f5d00; --bad:#b33434; --blue:#0d66a2; --white:#fff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--white); line-height: 1.45; }
+    header { padding: 34px clamp(18px, 5vw, 58px) 24px; background: #eef6fb; border-bottom: 1px solid var(--line); }
+    main { padding: 24px clamp(18px, 5vw, 58px) 56px; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); max-width: 1040px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    a { color: var(--blue); }
+    .meta, .grid { display: grid; gap: 12px; }
+    .meta { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 18px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--white); min-height: 120px; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 700; background: var(--white); }
+    .metric { font-size: 34px; font-weight: 750; margin: 2px 0 4px; }
+    .good { color: var(--good); } .warn { color: var(--warn); } .bad { color: var(--bad); }
+    .note { padding: 12px 14px; border-left: 4px solid var(--warn); background: #fff8ec; color: var(--ink); max-width: 1040px; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--white); }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { background: var(--panel); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Express Performance Over Time</h1>
+    <p>Private Pages report for visibility, leads, attribution readiness, and GEO/AEO optimization evidence. This is a reporting/control page, not a public site page.</p>
+    <div class="meta">
+      <span class="pill">Generated 2026-06-05T22:54:33.731Z</span>
+      <span class="pill">No secrets or customer PII</span>
+      <span class="pill">Direct GSC/GA4: blocked</span>
+      <span class="pill">Live measurement: partial_live_www_only_canonical_pending</span>
+    </div>
+  </header>
+  <main>
+    <section class="note">The current evidence supports a clear trend story, but not full revenue attribution yet. Saved visibility improved, ServiceTitan lead counts are available, and the weak point is still live/provider attribution: direct Google scopes, canonical GA4 delivery, Turnstile config, and outcome joins.</section>
+
+    <h2>Executive Read</h2>
+    <section class="grid">
+      <article class="card"><h3>Saved Google Appearances</h3><div class="metric good">3,832</div><p>+3599 from first saved window.</p></article>
+      <article class="card"><h3>ServiceTitan Leads</h3><div class="metric good">78</div><p>76 website campaign rows; 0 booked lead ids available.</p></article>
+      <article class="card"><h3>AI Mentions</h3><div class="metric warn">16</div><p>6 citations from 5,181 saved AI snapshots.</p></article>
+      <article class="card"><h3>Attribution Score</h3><div class="metric bad">30</div><p>Base SEO is strong; proof-quality attribution is the constraint.</p></article>
+    </section>
+
+    <h2>What Changed</h2>
+    <div class="scroll"><table><thead><tr><th>Finding</th><th>Evidence</th><th>Attribution read</th></tr></thead><tbody><tr><td>Visibility expanded in saved Search Console snapshots.</td><td>First saved window to latest saved window: impressions +3599, clicks +1, captured rows +2110, CTR 1.7% to 0.1%, average position 3.2 to 38.0.</td><td>This is visibility proof from saved New Reward snapshots, not full direct GSC query/page history until provider scopes are repaired.</td></tr>
+<tr><td>AI visibility exists, but all observed mentions and citations are concentrated in Perplexity.</td><td>5,181 snapshots, 16 mentions, 6 citations, 443 unique questions.</td><td>Improve engine diversity by strengthening answer-ready service pages, blog Q&amp;A headings, citations, and competitor prompt sets.</td></tr>
+<tr><td>Lead volume appears in a tight April/May window and then drops to zero in the latest tracked weeks.</td><td>78 redacted ServiceTitan leads from January 1 to June 5; weeks of May 25 and June 1 both show 0 leads.</td><td>Do not claim CAPTCHA caused the drop or quality improvement yet. Source CAPTCHA was added June 4, but live Turnstile config and canonical delivery are still unhealthy.</td></tr>
+<tr><td>Attribution is the weak score, not base SEO.</td><td>Latest audit scores: technical 100, GEO 90, messaging 100, attribution 30.</td><td>The next revenue-proof step is provider scope/property repair plus canonical delivery sync, not more local-only SEO cleanup.</td></tr></tbody></table></div>
+
+    <h2>Saved GSC Trend</h2>
+    <p>These are saved New Reward aggregate Search Console snapshots. Query/page/device history remains blocked until the Google provider path is repaired.</p>
+    <div class="scroll"><table><thead><tr><th>Window</th><th>Date range</th><th>Appearances</th><th>Clicks</th><th>CTR</th><th>Avg position</th><th>Rows</th></tr></thead><tbody><tr><td>First saved</td><td>2026-04-10 to 2026-05-08</td><td>233</td><td>4</td><td>1.7%</td><td>3.2</td><td>83</td></tr>
+<tr><td>Previous saved</td><td>2026-04-24 to 2026-05-22</td><td>2,458</td><td>4</td><td>0.2%</td><td>45.4</td><td>1,422</td></tr>
+<tr><td>Latest saved</td><td>2026-05-06 to 2026-06-03</td><td>3,832</td><td>5</td><td>0.1%</td><td>38.0</td><td>2,193</td></tr></tbody></table></div>
+
+    <h2>AI Visibility By Engine</h2>
+    <p>Observed mentions and citations are still concentrated in Perplexity. Other engines need better entity, service-area, answer, and citation signals.</p>
+    <div class="scroll"><table><thead><tr><th>Engine</th><th>Snapshots</th><th>Mentions</th><th>Citations</th><th>Mention rate</th><th>Citation rate</th></tr></thead><tbody><tr><td>perplexity</td><td>1,061</td><td>16</td><td>6</td><td>1.5%</td><td>0.6%</td></tr>
+<tr><td>google_ai</td><td>1,042</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>grok</td><td>1,030</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>chatgpt</td><td>1,022</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>claude</td><td>1,006</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>google_ai_overview</td><td>10</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr>
+<tr><td>copilot</td><td>10</td><td>0</td><td>0</td><td>0.0%</td><td>0.0%</td></tr></tbody></table></div>
+
+    <h2>AI Visibility By Week</h2>
+    <div class="scroll"><table><thead><tr><th>Week</th><th>Snapshots</th><th>Unique questions</th><th>Mentions</th><th>Citations</th></tr></thead><tbody><tr><td>2026-03-16</td><td>70</td><td>10</td><td>0</td><td>0</td></tr>
+<tr><td>2026-04-27</td><td>244</td><td>49</td><td>1</td><td>0</td></tr>
+<tr><td>2026-05-04</td><td>1,545</td><td>241</td><td>7</td><td>0</td></tr>
+<tr><td>2026-05-11</td><td>245</td><td>49</td><td>0</td><td>0</td></tr>
+<tr><td>2026-05-18</td><td>245</td><td>49</td><td>0</td><td>0</td></tr>
+<tr><td>2026-05-25</td><td>1,665</td><td>68</td><td>5</td><td>4</td></tr>
+<tr><td>2026-06-01</td><td>1,167</td><td>52</td><td>3</td><td>2</td></tr></tbody></table></div>
+
+    <h2>Lead Counts By Week</h2>
+    <p>CAPTCHA source was added June 4, 2026. Since live Turnstile config is still unhealthy and there are zero leads after the source marker, the report should not claim quality improvement from CAPTCHA yet.</p>
+    <div class="scroll"><table><thead><tr><th>Week</th><th>Total leads</th><th>Website campaign</th><th>Status mix</th><th>Service mix</th><th>CAPTCHA period</th></tr></thead><tbody><tr><td>2026-01-05</td><td>1</td><td>0</td><td>Dismissed: 1</td><td>unclassified_summary: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-01-12</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-01-19</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-01-26</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-02-02</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-02-09</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-02-16</td><td>1</td><td>1</td><td>Dismissed: 1</td><td>unclassified_summary: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-02-23</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-03-02</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-03-09</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-03-16</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-03-23</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-03-30</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-04-06</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-04-13</td><td>13</td><td>13</td><td>Dismissed: 13</td><td>ac_repair: 3, air_quality: 5, emergency_repair: 1, maintenance_tuneup: 1, other: 2, unclassified_summary: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-04-20</td><td>22</td><td>22</td><td>Dismissed: 22</td><td>ac_repair: 7, air_quality: 1, emergency_repair: 1, heat_pump: 2, maintenance_tuneup: 6, other: 5</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-04-27</td><td>9</td><td>9</td><td>Converted: 1, Dismissed: 8</td><td>ac_repair: 1, air_quality: 1, emergency_repair: 1, heat_pump: 3, heating_furnace: 2, other: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-05-04</td><td>6</td><td>6</td><td>Dismissed: 6</td><td>ac_repair: 1, heating_furnace: 3, maintenance_tuneup: 1, other: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-05-11</td><td>11</td><td>10</td><td>Dismissed: 4, Open: 7</td><td>ac_repair: 1, air_quality: 1, heating_furnace: 2, maintenance_tuneup: 3, other: 3, unclassified_summary: 1</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-05-18</td><td>15</td><td>15</td><td>Open: 15</td><td>air_quality: 2, emergency_repair: 2, heat_pump: 2, heating_furnace: 2, maintenance_tuneup: 2, other: 5</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-05-25</td><td>0</td><td>0</td><td>none</td><td>none</td><td>before_source_captcha_week</td></tr>
+<tr><td>2026-06-01</td><td>0</td><td>0</td><td>none</td><td>none</td><td>source_captcha_week_or_after</td></tr></tbody></table></div>
+
+    <h2>Why Leads Changed</h2>
+    <section class="grid">
+      <article class="card"><h3>Likely Demand Window</h3><p>April and May concentrate the observed ServiceTitan lead volume, which lines up with the first cooling demand window in Utah County.</p></article>
+      <article class="card"><h3>Attribution Gap</h3><p>Direct GA4 and normalized GSC rows are still missing, so we cannot cleanly separate organic, paid, direct, AI, and referral effects.</p></article>
+      <article class="card"><h3>Lead Path Risk</h3><p>Canonical apex is missing approved GA4 and /analytics.js; Turnstile config is missing/404/503 on live paths.</p></article>
+      <article class="card"><h3>Quality Caveat</h3><p>Status mix is a proxy only: Converted: 1, Dismissed: 55, Open: 22.</p></article>
+    </section>
+
+    <h2>GEO/AEO Audit Actions</h2>
+    <div class="scroll"><table><thead><tr><th>Severity</th><th>Bucket</th><th>Issue</th><th>Evidence</th><th>Acceptance</th></tr></thead><tbody><tr><td>low</td><td>blogging</td><td>Prepare draft Air Express posts for GEO extractability before publishing</td><td>6 draft/future content/blog posts still need question headings, internal links, or external citations before release.</td><td>Draft posts are upgraded before publication; current published posts keep question headings, internal links, external citations, and valid article schema.</td></tr>
+<tr><td>high</td><td>backlinks</td><td>Create Air Express backlink and local citation cleanup ledger</td><td>10 public citation surfaces were observed; several show legacy domain, alternate phone, reputation, missing website, or claim-status risks.</td><td>Citation ledger records surface, URL, observed NAP/website/rating state, owner/claim status, requested fix, proof date, and whether a backlink/citation is usable for reporting.</td></tr>
+<tr><td>high</td><td>tagging</td><td>Restore live tagging and attribution joins after source access is repaired</td><td>Current direct Google status is GSC=blocked_scope, GA4=blocked_scope, GBP=not_included; attribution score remains blocked at 30.</td><td>Live page exposes the approved single GA4 path, direct GSC/GA4/GBP history or exact provider blockers are visible in reports, and ServiceTitan joins are added or blocked with exact proof.</td></tr>
+<tr><td>medium</td><td>geo</td><td>Build proof-backed authority surfaces for AI and local-service citations</td><td>Public sources include dealer, directory, trade, and utility/regulatory mentions, but current site content does not convert those into approved proof pages or dated authority references.</td><td>At least two proof-backed pages or sections are prepared with approved client evidence, dated source links, claim-safe wording, and inclusion rules for llms.txt/sitemap after live verification.</td></tr></tbody></table></div>
+
+    <h2>Next Actions</h2>
+    <div class="scroll"><table><thead><tr><th>Priority</th><th>Action</th><th>State</th><th>Proof</th></tr></thead><tbody><tr><td>P0</td><td>Repair canonical delivery so apex serves the same approved GA4 and /analytics.js source as www.</td><td>partial_live_www_only_canonical_pending</td><td>Rerun npm run verify:live-measurement and require canonical homepage GA4=true and apex /analytics.js HTTP 200.</td></tr>
+<tr><td>P0</td><td>Restore read-only GSC/GA4 scopes or reconnect through the New Reward app for website cmorqbs9j001r5nr1h25vosp8.</td><td>blocked</td><td>Rerun npm run pull:gsc-ga4-history and require direct GSC/GA4 histories or exact provider/property blocker output.</td></tr>
+<tr><td>P0</td><td>Configure Turnstile on the active production delivery path before interpreting lead-quality changes.</td><td>blocked_turnstile_env_or_delivery</td><td>Canonical /api/turnstile/config returns configured=true; then perform an approved, non-duplicating live lead-path proof.</td></tr>
+<tr><td>P1</td><td>Improve GEO/AEO extractability and prompt coverage across service pages and weekly blog reporting.</td><td>source_updates_prepared</td><td>Rerun npm run audit:seo-geo-deep-dive and require fewer metadata/blog extractability issues.</td></tr></tbody></table></div>
+  </main>
+</body>
+</html>

@@ -20,6 +20,12 @@ That is when small problems show up: a clogged filter, weak airflow upstairs, an
 
 Here is the first-hot-week checklist we would run at our own house.
 
+## What should I check first before a Utah heat wave?
+
+Start with airflow. The U.S. Department of Energy's [air conditioner maintenance guidance](https://www.energy.gov/energysaver/air-conditioner-maintenance) puts filters, coils, fins, and condensate drains at the center of efficient cooling, which matches what we see in Utah homes every summer. If the filter is dirty, the outdoor unit is blocked, or the condensate drain is backing up, the system can look like it has a bigger mechanical failure than it really does.
+
+For a homeowner in Lehi or Utah County, the practical first pass is simple: check the filter, clear the outdoor unit, run the AC before the hottest afternoon, and schedule [AC maintenance](/ac-maintenance.html) or [AC repair](/ac-repair.html) if the air is warm, weak, noisy, or icy.
+
 ## Start with the filter
 
 Pull the furnace or return-air filter and look at it in decent light. If it is gray, bowed, dusty, or hard to see through, replace it before the AC runs hard for the week.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:15:59.616Z",
+  "generatedAt": "2026-06-05T22:54:11.194Z",
   "site": "https://airexpressutah.com",
   "legacySite": "https://airexpresshvac.net",
   "skillsUsed": [
@@ -2323,7 +2323,7 @@
       "h1s": [
         "First Hot Week in Utah: AC Checks to Do Before the Rush"
       ],
-      "h2Count": 7,
+      "h2Count": 8,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2359,6 +2359,9 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/energysaver/air-conditioner-maintenance",
+        "/ac-maintenance.html",
+        "/ac-repair.html",
         "/ac-repair.html",
         "/ac-maintenance.html",
         "/ac-tune-up.html",
@@ -2411,7 +2414,7 @@
       "h1s": [
         "Geothermal in Utah: Brutally Honest About When It Makes Sense"
       ],
-      "h2Count": 8,
+      "h2Count": 9,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2447,6 +2450,9 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/sites/prod/files/guide_to_geothermal_heat_pumps.pdf",
+        "/heat-pump.html",
+        "/hvac-installation.html",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -2495,7 +2501,7 @@
       "h1s": [
         "The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)"
       ],
-      "h2Count": 10,
+      "h2Count": 11,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2531,6 +2537,10 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/energysaver/central-air-conditioning",
+        "/hvac-installation.html",
+        "/ac-replacement.html",
+        "/heat-pump.html",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -2579,7 +2589,7 @@
       "h1s": [
         "What HVAC Actually Costs in Utah (Real Numbers, No Games)"
       ],
-      "h2Count": 13,
+      "h2Count": 14,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2615,6 +2625,10 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/energysaver/central-air-conditioning",
+        "/ac-replacement.html",
+        "/heating-replacement.html",
+        "/heat-pump.html",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -2775,7 +2789,9 @@
       "emailDomainReferences": [
         "office@airexpresshvac.net"
       ],
-      "schemaTypes": [],
+      "schemaTypes": [
+        "CollectionPage"
+      ],
       "schemaParseErrors": [],
       "issues": []
     },
@@ -2791,7 +2807,7 @@
       "h1s": [
         "What Indoor Air Quality Actually Means at 4,500 Feet"
       ],
-      "h2Count": 8,
+      "h2Count": 9,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2827,6 +2843,12 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.epa.gov/indoor-air-quality-iaq/what-merv-rating",
+        "https://www.epa.gov/indoor-air-quality-iaq/air-cleaners-and-air-filters-home",
+        "/air-filters.html",
+        "/humidification.html",
+        "/ventilation.html",
+        "https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -2875,7 +2897,7 @@
       "h1s": [
         "Spring AC Prep: What We Actually Check Before Utah Hits 100°F"
       ],
-      "h2Count": 9,
+      "h2Count": 10,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2911,6 +2933,9 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/energysaver/air-conditioner-maintenance",
+        "/ac-maintenance.html",
+        "/ac-repair.html",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -2959,7 +2984,7 @@
       "h1s": [
         "Furnace Not Heating? Ten Things to Check Before You Call Us"
       ],
-      "h2Count": 13,
+      "h2Count": 14,
       "images": [
         {
           "src": "/images/air-logo.webp",
@@ -2995,6 +3020,10 @@
         "/contact.html",
         "/",
         "/resources.html",
+        "https://www.energy.gov/energysaver/home-heating-systems",
+        "/heating-repair.html",
+        "/furnace-repair.html",
+        "/emergency.html",
         "/contact.html",
         "/resources.html",
         "/contact.html",
@@ -3519,8 +3548,8 @@
       "url": "https://airexpressutah.com/ducting.html",
       "title": "Ducting Services | Air Express HVAC",
       "titleLength": 35,
-      "description": "Ducting and ductwork services in Lehi, UT from Air Express HVAC — serving Utah since 1996.",
-      "descriptionLength": 90,
+      "description": "Ducting and ductwork services in Lehi, UT from Air Express HVAC, including airflow checks, duct repair, and comfort fixes for Utah County homes.",
+      "descriptionLength": 144,
       "canonical": "https://airexpressutah.com/ducting.html",
       "ogUrl": "https://airexpressutah.com/ducting.html",
       "h1s": [
@@ -7624,8 +7653,8 @@
       "url": "https://airexpressutah.com/other-products.html",
       "title": "HVAC Products &amp; Accessories | Air Express HVAC",
       "titleLength": 50,
-      "description": "HVAC products and accessories in Lehi, UT from Air Express HVAC — serving Utah since 1996.",
-      "descriptionLength": 90,
+      "description": "HVAC products and accessories in Lehi, UT from Air Express HVAC, including thermostats, filters, humidifiers, air cleaners, and comfort upgrades.",
+      "descriptionLength": 145,
       "canonical": "https://airexpressutah.com/other-products.html",
       "ogUrl": "https://airexpressutah.com/other-products.html",
       "h1s": [
@@ -7702,8 +7731,8 @@
       "url": "https://airexpressutah.com/other-services-tests.html",
       "title": "HVAC Testing &amp; Services | Air Express HVAC",
       "titleLength": 46,
-      "description": "HVAC testing and additional services in Lehi, UT from Air Express HVAC — serving Utah since 1996.",
-      "descriptionLength": 97,
+      "description": "HVAC testing and additional services in Lehi, UT from Air Express HVAC, including airflow, safety, comfort, and system performance checks.",
+      "descriptionLength": 138,
       "canonical": "https://airexpressutah.com/other-services-tests.html",
       "ogUrl": "https://airexpressutah.com/other-services-tests.html",
       "h1s": [
@@ -7780,8 +7809,8 @@
       "url": "https://airexpressutah.com/other-services.html",
       "title": "Other HVAC Services | Air Express HVAC",
       "titleLength": 38,
-      "description": "Additional HVAC services from Air Express HVAC in Lehi, UT. Call (801) 766-8585 for details.",
-      "descriptionLength": 92,
+      "description": "Additional HVAC services from Air Express HVAC in Lehi, UT, including comfort troubleshooting, specialty repairs, and system support.",
+      "descriptionLength": 133,
       "canonical": "https://airexpressutah.com/other-services.html",
       "ogUrl": "https://airexpressutah.com/other-services.html",
       "h1s": [
@@ -7861,8 +7890,8 @@
       "url": "https://airexpressutah.com/privacy-policy.html",
       "title": "Privacy Policy | Air Express HVAC",
       "titleLength": 33,
-      "description": "Air Express HVAC privacy policy. How we collect, use, and protect your information.",
-      "descriptionLength": 83,
+      "description": "Air Express HVAC privacy policy for website visitors, estimate requests, service forms, and communications with our Lehi, Utah team.",
+      "descriptionLength": 132,
       "canonical": "https://airexpressutah.com/privacy-policy.html",
       "ogUrl": "https://airexpressutah.com/privacy-policy.html",
       "h1s": [
@@ -7939,8 +7968,8 @@
       "url": "https://airexpressutah.com/request-estimate.html",
       "title": "Request a Free Estimate | Air Express HVAC",
       "titleLength": 42,
-      "description": "Get a free HVAC estimate from Air Express HVAC in Lehi, UT. No obligation. Call (801) 766-8585.",
-      "descriptionLength": 95,
+      "description": "Request a free HVAC estimate from Air Express HVAC in Lehi, UT for AC, furnace, heat pump, maintenance, and indoor air quality work.",
+      "descriptionLength": 132,
       "canonical": "https://airexpressutah.com/request-estimate.html",
       "ogUrl": "https://airexpressutah.com/request-estimate.html",
       "h1s": [
@@ -8234,7 +8263,9 @@
       "emailDomainReferences": [
         "office@airexpresshvac.net"
       ],
-      "schemaTypes": [],
+      "schemaTypes": [
+        "CollectionPage"
+      ],
       "schemaParseErrors": [],
       "issues": []
     },
@@ -8324,8 +8355,8 @@
       "url": "https://airexpressutah.com/schedule-service.html",
       "title": "Schedule HVAC Service | Air Express HVAC",
       "titleLength": 40,
-      "description": "Schedule your HVAC service appointment with Air Express HVAC in Lehi, UT. Call (801) 766-8585.",
-      "descriptionLength": 94,
+      "description": "Schedule HVAC service with Air Express HVAC in Lehi, UT for AC repair, heating repair, maintenance, tune-ups, and comfort issues.",
+      "descriptionLength": 129,
       "canonical": "https://airexpressutah.com/schedule-service.html",
       "ogUrl": "https://airexpressutah.com/schedule-service.html",
       "h1s": [
@@ -10195,14 +10226,15 @@
     "duplicateDescriptions": []
   },
   "schema": {
-    "pagesWithSchema": 117,
+    "pagesWithSchema": 119,
     "schemaTypes": [
       "BlogPosting",
       "BreadcrumbList",
+      "CollectionPage",
       "FAQPage",
       "LocalBusiness"
     ],
-    "summary": "117/119 public HTML files include JSON-LD. Types seen: BlogPosting, BreadcrumbList, FAQPage, LocalBusiness."
+    "summary": "119/119 public HTML files include JSON-LD. Types seen: BlogPosting, BreadcrumbList, CollectionPage, FAQPage, LocalBusiness."
   },
   "geo": {
     "robotsSummary": "Important content is allowed via User-agent: *, while admin and API paths are blocked. No explicit AI crawler allow/block policy is present.",

@@ -19,6 +19,10 @@
     <meta property="og:image" content="https://airexpressutah.com/images/about-hero-utah.webp">
     <meta property="og:site_name" content="Air Express HVAC">
     <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{metaTitle}}">
+    <meta name="twitter:description" content="{{metaDescription}}">
+    <meta name="twitter:image" content="https://airexpressutah.com/images/about-hero-utah.webp">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,6 +34,31 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="alternate" type="application/rss+xml" title="Air Express HVAC — Field Notes" href="/blog/rss.xml">
     <script src="/analytics.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "{{metaTitle}}",
+        "description": "{{metaDescription}}",
+        "url": "{{canonicalUrl}}",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Air Express HVAC",
+            "url": "https://airexpressutah.com"
+        },
+        "about": {
+            "@type": "Blog",
+            "name": "Air Express Field Notes",
+            "url": "https://airexpressutah.com/blog/index.html",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Air Express HVAC",
+                "telephone": "(801) 766-8585",
+                "url": "https://airexpressutah.com"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
 <a href="#main" class="skip-nav">Skip to main content</a>

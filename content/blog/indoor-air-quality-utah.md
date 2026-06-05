@@ -23,6 +23,12 @@ We've been servicing HVAC systems in Utah County since 1996. The indoor air issu
 
 This is the Utah version.
 
+## What IAQ upgrade should Utah homeowners check first?
+
+Start with filtration that the HVAC system can actually support. The EPA explains [MERV ratings](https://www.epa.gov/indoor-air-quality-iaq/what-merv-rating) as a way to compare how well filters capture small particles, and its [home air cleaner guidance](https://www.epa.gov/indoor-air-quality-iaq/air-cleaners-and-air-filters-home) notes that HVAC filters and portable air cleaners can both help when used correctly. For many Utah homes, the best first move is not a gadget. It is a properly sized media filter cabinet, the right MERV rating, and a replacement schedule the homeowner will actually follow.
+
+After filtration, we usually look at [air filters](/air-filters.html), [humidification](/humidification.html), [ventilation](/ventilation.html), and whether the home should be tested for radon. The EPA recommends action at 4 pCi/L and says homeowners should also consider fixing levels between 2 and 4 pCi/L in its [radon action level guidance](https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean).
+
 ## The inversion problem is actually an indoor problem too.
 
 During Utah winter inversions — those weeks when a layer of warm air sits on top of a layer of cold air and traps pollution in the valley — the outside air can get genuinely bad. Particulate matter (PM2.5) readings go red. The news tells you to stay indoors.

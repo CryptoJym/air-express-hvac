@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:15:50.052Z",
+  "generatedAt": "2026-06-05T22:53:56.187Z",
   "status": "passed",
   "scope": "Local source and generated artifact manifest only. No production fetch, provider access, deploy, or public channel mutation.",
   "summary": {
@@ -14,7 +14,7 @@
     "blogSourceCount": 13,
     "draftLeakCount": 0,
     "missingGeneratedPostCount": 0,
-    "checkedLocalReferenceCount": 6447,
+    "checkedLocalReferenceCount": 6465,
     "missingLocalReferenceCount": 0
   },
   "requiredArtifacts": [
@@ -172,7 +172,7 @@
     }
   ],
   "localReferences": {
-    "checkedCount": 6447,
+    "checkedCount": 6465,
     "missing": []
   },
   "failures": []

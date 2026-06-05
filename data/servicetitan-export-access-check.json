@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:15:35.191Z",
+  "generatedAt": "2026-06-05T22:56:18.811Z",
   "evidenceClass": "servicetitan_export_access_readiness_check",
   "status": "auth_ready_no_export",
   "secretHandling": "Only environment variable presence, local source labels, public endpoint names, and sanitized error text are stored. Credential values, access tokens, customer names, phones, emails, addresses, and raw lead payloads are not printed or written.",
@@ -56,7 +56,7 @@
   "envSourceSearch": {
     "scannedFiles": [
       {
-        "path": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
+        "path": "[temporary-env-file]",
         "exists": true
       },
       {
@@ -164,9 +164,9 @@
         ]
       },
       {
-        "label": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
+        "label": "[temporary-env-file]",
         "type": "env_file",
-        "path": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
+        "path": "[temporary-env-file]",
         "exists": true,
         "requiredEnv": [
           {
@@ -867,14 +867,14 @@
       }
     ],
     "keySources": {
-      "SERVICETITAN_ENV": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_TENANT_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_APP_KEY": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_CLIENT_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_CLIENT_SECRET": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_API_BASE_URL": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_AUTH_URL": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env",
-      "SERVICETITAN_LEAD_CAMPAIGN_ID": "/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/tmp.MpypINSIGJ/option-c-production.env"
+      "SERVICETITAN_ENV": "[temporary-env-file]",
+      "SERVICETITAN_TENANT_ID": "[temporary-env-file]",
+      "SERVICETITAN_APP_KEY": "[temporary-env-file]",
+      "SERVICETITAN_CLIENT_ID": "[temporary-env-file]",
+      "SERVICETITAN_CLIENT_SECRET": "[temporary-env-file]",
+      "SERVICETITAN_API_BASE_URL": "[temporary-env-file]",
+      "SERVICETITAN_AUTH_URL": "[temporary-env-file]",
+      "SERVICETITAN_LEAD_CAMPAIGN_ID": "[temporary-env-file]"
     }
   },
   "publicConfig": {

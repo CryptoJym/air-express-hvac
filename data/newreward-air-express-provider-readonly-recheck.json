@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T22:15:53.320Z",
+  "generatedAt": "2026-06-05T22:54:03.331Z",
   "evidenceClass": "read_only_newrewards_configured_db_lookup",
   "envFiles": [
     "/Users/jamesbrady/.config/newrewards/.env",
@@ -151,7 +151,7 @@
     "latestUpdatedAt": {
       "Client": "2026-06-05T15:53:08.953",
       "Website": "2026-06-05T21:55:46.511",
-      "Ga4Connection": "2026-06-05T22:03:33.353",
+      "Ga4Connection": "2026-06-05T22:44:29.622",
       "GscConnection": "2026-06-05T22:03:30.628",
       "ProviderCredential": "2026-06-05T22:03:30.946"
     }
@@ -339,7 +339,7 @@
         "latestUpdatedAt": {
           "Client": "2026-06-05T15:53:08.953",
           "Website": "2026-06-05T21:55:46.511",
-          "Ga4Connection": "2026-06-05T22:03:33.353",
+          "Ga4Connection": "2026-06-05T22:44:29.622",
           "GscConnection": "2026-06-05T22:03:30.628",
           "ProviderCredential": "2026-06-05T22:03:30.946"
         }
@@ -387,7 +387,7 @@
         "ga4ConnectionsFound": 0,
         "airExpressRowsFound": 0
       },
-      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-S7sOLD/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
+      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-pQbTxE/lookup.sql:154: ERROR:  relation \"Website\" does not exist\nLINE 14:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
     }
   ],
   "targetedLookup": {
