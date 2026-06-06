@@ -1,17 +1,34 @@
 {
-  "generatedAt": "2026-06-05T22:07:18Z",
+  "generatedAt": "2026-06-06T14:12:11Z",
   "evidenceClass": "air_express_ga4_delivery_sync_attempt",
-  "approvedBy": "James approved the GA4 analytics delivery sync in this thread.",
+  "approvedBy": "James approved deploy/provider mutations in this thread and asked Codex to do everything it can without waiting on him.",
   "status": "partial_live_www_only_canonical_pending",
-  "vercelDeployment": {
-    "id": "dpl_7TP4NdQ1Bgt18qFMupw5YJNrE9Vo",
-    "url": "https://option-n2d04yn86-utlyze-2f74afdb.vercel.app",
-    "aliases": [
-      "https://airexpressutah.com",
-      "https://www.airexpressutah.com"
-    ],
-    "legacyAliasesOmitted": true
+  "latestVercelDeployment": {
+    "attemptedAt": "2026-06-06T14:07:00Z",
+    "id": "dpl_3zREVjP951aP1UvcJ8HwSYk668Li",
+    "url": "https://option-veionqt7y-utlyze-2f74afdb.vercel.app",
+    "inspectorUrl": "https://vercel.com/utlyze-2f74afdb/option-c/3zREVjP951aP1UvcJ8HwSYk668Li",
+    "readyState": "READY",
+    "target": "production",
+    "scope": "utlyze-2f74afdb",
+    "project": "option-c",
+    "buildVerification": "Vercel build ran the npm prevercel-build lifecycle and blog build successfully before deployment.",
+    "deploymentUrlNote": "The raw deployment URL is Vercel-protected and can return HTTP 401, but assigned public aliases can serve the deployment."
   },
+  "aliasAttempts": [
+    {
+      "host": "www.airexpressutah.com",
+      "scope": "utlyze-2f74afdb",
+      "status": "succeeded",
+      "result": "Vercel reported https://www.airexpressutah.com now points to option-veionqt7y-utlyze-2f74afdb.vercel.app."
+    },
+    {
+      "host": "airexpressutah.com",
+      "scope": "utlyze-2f74afdb",
+      "status": "succeeded_in_vercel_but_not_effective_live",
+      "result": "Vercel reported https://airexpressutah.com now points to option-veionqt7y-utlyze-2f74afdb.vercel.app, but public HTTP still resolves through the New Reward edge worker."
+    }
+  ],
   "postDeployVerification": {
     "www": {
       "homepage": "https://www.airexpressutah.com/",
@@ -19,21 +36,12 @@
       "ga4Present": true,
       "analyticsJs": "https://www.airexpressutah.com/analytics.js",
       "analyticsJsHttpStatus": 200,
-      "turnstileConfig": "https://www.airexpressutah.com/api/turnstile/config",
-      "turnstileConfigured": false,
-      "turnstileHttpStatus": 503,
-      "missingTurnstileKeys": [
-        "TURNSTILE_SITE_KEY",
-        "TURNSTILE_SECRET_KEY"
-      ],
-      "safeFormHealthCheck": {
-        "method": "POST application/x-www-form-urlencoded",
-        "endpoint": "https://www.airexpressutah.com/api/intake/contact",
-        "submittedCustomerData": false,
-        "captchaTokenSubmitted": false,
-        "httpStatus": 303,
-        "location": "/contact.html?intake=validation_error&fields=captcha",
-        "interpretation": "The www lead endpoint fails closed before ServiceTitan without a valid CAPTCHA token."
+      "artifactHashParity": {
+        "analytics.js": "matches_repo_local",
+        "agent.json": "matches_repo_local",
+        "catalog.json": "matches_repo_local",
+        "llms.txt": "matches_repo_local",
+        "robots.txt": "matches_repo_local"
       }
     },
     "canonicalApex": {
@@ -42,15 +50,20 @@
       "ga4Present": false,
       "analyticsJs": "https://airexpressutah.com/analytics.js",
       "analyticsJsHttpStatus": 404,
-      "turnstileConfig": "https://airexpressutah.com/api/turnstile/config",
-      "turnstileConfigured": false,
-      "turnstileHttpStatus": 404,
       "edgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
       "edgeActiveVersion": "v20260601032350-675731b8-57d4bf",
-      "edgeRouteMode": "ZERO_REDIRECT"
+      "edgeRouteMode": "ZERO_REDIRECT",
+      "edgeServedBy": "origin",
+      "interpretation": "Vercel production and aliases are not enough to change canonical apex while Cloudflare/New Reward edge routing remains active."
+    },
+    "aiArtifacts": {
+      "canonicalAgentJson": "live_new_reward_edge_artifact_differs_from_repo",
+      "canonicalCatalogJson": "live_new_reward_edge_artifact_differs_from_repo",
+      "wwwAgentJson": "matches_repo_local",
+      "wwwCatalogJson": "matches_repo_local"
     }
   },
-  "rootCause": "The approved Vercel delivery made GA4 live on the www host, but canonical apex still resolves through the older New Reward edge/origin path that lacks analytics.js and Turnstile config. The active production environment also lacks Turnstile site/secret keys.",
+  "rootCause": "The approved Vercel deployment made the source-current site and AI artifacts live on www, but canonical airexpressutah.com is still intercepted by the older New Reward Cloudflare edge/origin path. The remaining production blocker is New Reward edge/Cloudflare routing or edge package publish, not the Air Express repo source or Vercel build.",
   "secretHandling": "No provider credentials, OAuth tokens, cookies, Turnstile secrets, raw HTML, ServiceTitan payloads, or customer data are stored.",
-  "nextAction": "Sync the canonical apex/New Reward edge path to the verified www/Vercel source or make the verified Vercel host canonical, add approved Turnstile site/secret keys, then rerun npm run verify:live-measurement and npm run verify:owned-site-delivery-sync."
+  "nextAction": "Use the authenticated New Reward edge publish-and-verify path for website cmorqbs9j001r5nr1h25vosp8, or update Cloudflare routing so canonical apex serves the verified Vercel source. Then rerun npm run verify:live-measurement and npm run verify:owned-site-delivery-sync."
 }

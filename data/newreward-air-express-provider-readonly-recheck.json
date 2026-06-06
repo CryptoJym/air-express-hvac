@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T14:06:37.261Z",
+  "generatedAt": "2026-06-06T14:15:43.208Z",
   "evidenceClass": "read_only_newrewards_configured_db_lookup",
   "envFiles": [
     "/Users/jamesbrady/.config/newrewards/.env",
@@ -166,10 +166,10 @@
       "Client": "2026-06-05T15:53:08.953",
       "Website": "2026-06-06T08:00:02.925",
       "Ga4Connection": "2026-06-05T22:44:29.622",
-      "GscConnection": "2026-06-06T08:00:02.854",
+      "GscConnection": "2026-06-06T14:10:55.984",
       "ArtifactVersion": "2026-06-05T05:07:12.242",
       "DeploymentPackage": "2026-06-05T05:07:15.156",
-      "ProviderCredential": "2026-06-06T08:00:03.065",
+      "ProviderCredential": "2026-06-06T14:10:56.206",
       "DeploymentPackageReview": "2026-06-04T23:42:45.077",
       "CloudflareEdgeDeployment": "2026-06-05T16:29:18.522",
       "CloudflareEdgeInstallation": "2026-06-05T15:53:07.645"
@@ -453,10 +453,10 @@
           "Client": "2026-06-05T15:53:08.953",
           "Website": "2026-06-06T08:00:02.925",
           "Ga4Connection": "2026-06-05T22:44:29.622",
-          "GscConnection": "2026-06-06T08:00:02.854",
+          "GscConnection": "2026-06-06T14:10:55.984",
           "ArtifactVersion": "2026-06-05T05:07:12.242",
           "DeploymentPackage": "2026-06-05T05:07:15.156",
-          "ProviderCredential": "2026-06-06T08:00:03.065",
+          "ProviderCredential": "2026-06-06T14:10:56.206",
           "DeploymentPackageReview": "2026-06-04T23:42:45.077",
           "CloudflareEdgeDeployment": "2026-06-05T16:29:18.522",
           "CloudflareEdgeInstallation": "2026-06-05T15:53:07.645"
@@ -526,7 +526,7 @@
         "artifactVersionsFound": 0,
         "airExpressRowsFound": 0
       },
-      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-dtPn3G/lookup.sql:378: ERROR:  relation \"Website\" does not exist\nLINE 21:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
+      "blocker": "psql:/var/folders/77/0wn__q4x0jx28_8llcdmwqwr0000gn/T/air-express-newreward-map-BCcEvC/lookup.sql:378: ERROR:  relation \"Website\" does not exist\nLINE 21:       'Website', (SELECT count(*) FROM \"Website\"),\n                                                ^\n"
     }
   ],
   "targetedLookup": {

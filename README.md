@@ -3,13 +3,14 @@
 This repository is the Air Express HVAC website and New Reward onboarding
 control hub.
 
-Current verified operating state as of 2026-06-05:
+Current verified operating state as of 2026-06-06:
 
 - Canonical site: `https://airexpressutah.com`
 - Legacy web domain: `https://airexpresshvac.net` redirects to the canonical
   site.
 - Cloudflare nameservers are active for `airexpressutah.com`.
-- New Rewards edge headers are present on the live canonical site.
+- New Rewards edge headers are present on the live canonical apex site, while
+  `https://www.airexpressutah.com` is serving the verified Vercel source.
 - `/admin/` loads, but `/api/auth` returns HTTP 500 because the live OAuth
   client ID is missing.
 - GSC/GA4/GBP attribution remains blocked by expired New Reward GSC/GA4
@@ -20,8 +21,8 @@ Current verified operating state as of 2026-06-05:
   `newrewardplatform@gmail.com` from inside that app session.
 - The SEO/GEO attribution report is refreshed locally at
   [pages/seo-geo-attribution-report.html](pages/seo-geo-attribution-report.html).
-  Current scores are technical `100`, GEO `90`, messaging `100`, attribution
-  `25`, and accessibility `100`.
+  Current scores are technical `100`, GEO `100`, messaging `100`, attribution
+  `30`, and accessibility `100`.
 - The New Reward impact report and GSC/GA4 pull status are refreshed locally at
   [pages/new-reward-impact-report.html](pages/new-reward-impact-report.html)
   and [data/google-history/history-pull-status.json](data/google-history/history-pull-status.json).
@@ -49,20 +50,25 @@ Current verified operating state as of 2026-06-05:
   confirms that the #25 resolver repair is not the remaining gate.
 - The live GA4/GTM measurement path is checked locally at
   [data/live-measurement-path-check.json](data/live-measurement-path-check.json);
-  current status is `fixed_locally_pending_live`, with local public page
-  coverage `120/120`, local GA4 present, no approved GTM container id found,
-  and live homepage/`/analytics.js` still missing the marker.
+  current status is `partial_live_www_only_canonical_pending`, with local
+  public page coverage `120/120`, `www.airexpressutah.com` exposing the
+  approved GA4 source and `/analytics.js`, no approved GTM container id found,
+  and canonical `https://airexpressutah.com/` still missing the marker because
+  the active New Reward edge/origin path is not synced.
 - Owned-site delivery sync is checked locally at
   [data/owned-site-delivery-sync-check.json](data/owned-site-delivery-sync-check.json);
-  current status is `pending_delivery_sync`. Local `index.html` and
-  `analytics.js` contain the approved GA4 source, while live
-  `https://airexpressutah.com/` and `/analytics.js` still need an approved
-  deploy, New Reward edge sync, or manual artifact sync.
+  current status is `pending_delivery_sync`. Vercel production deployment
+  `dpl_3zREVjP951aP1UvcJ8HwSYk668Li` is ready, and `www.airexpressutah.com`
+  now matches repo-local `analytics.js`, `agent.json`, `catalog.json`,
+  `llms.txt`, and `robots.txt`; canonical `https://airexpressutah.com/` still
+  needs an authenticated New Reward edge publish/sync or approved Cloudflare
+  routing change.
 - The owned-site delivery handoff packet is prepared at
   [docs/air-express-owned-site-delivery-sync-packet.md](docs/air-express-owned-site-delivery-sync-packet.md).
-  It lists the P0 homepage and `analytics.js` sync requirements, noncritical
-  `llms.txt`/sitemap/robots drift, the prepared blog URL that is local but not
-  live, stop gates, and post-sync verification commands for #28.
+  It lists the P0 canonical homepage and `analytics.js` sync requirements,
+  noncritical `llms.txt`/`agent.json`/`catalog.json`/sitemap/robots drift, the
+  prepared blog URL that is local but not live, stop gates, and post-sync
+  verification commands for #28.
 - Local site-file completeness is checked at
   [data/site-file-manifest.json](data/site-file-manifest.json); current status
   is `passed`. It verifies required publish artifacts, sitemap/local HTML

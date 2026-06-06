@@ -1,7 +1,7 @@
 # Air Express GSC/GA4 History And New Reward Impact Plan
 
 Date: 2026-06-02
-Last updated: 2026-06-05
+Last updated: 2026-06-06
 
 ## Goal
 
@@ -10,6 +10,22 @@ compare performance across New Reward operating milestones. Google Business
 Profile is a separate later lane and is not included in the current pull.
 
 ## Current Finding
+
+2026-06-06 delivery retry: Vercel production deploy
+`dpl_3zREVjP951aP1UvcJ8HwSYk668Li` completed successfully for project
+`option-c` under scope `utlyze-2f74afdb`, and the aliases for
+`www.airexpressutah.com` and `airexpressutah.com` were submitted through
+Vercel. Public verification shows the `www` host now matches repo-local
+`analytics.js`, `agent.json`, `catalog.json`, `llms.txt`, and `robots.txt`, and
+the approved GA4 id `G-JZ7PY32EVX` is present there.
+
+The canonical apex still serves New Reward edge/origin version
+`v20260601032350-675731b8-57d4bf` for website
+`cmorqbs9j001r5nr1h25vosp8`; `https://airexpressutah.com/analytics.js`
+returns 404 and the homepage does not expose the approved GA4 marker. The
+current delivery blocker is therefore the authenticated New Reward edge
+publish/sync path or an approved Cloudflare route change, not missing local
+source, Vercel build failure, or absence of the GA4 source file.
 
 2026-06-05 retry: after NewRewards PR #4105 merged and deployed the
 GSC/GA4/GBP same-origin auth proxy fix, the Air Express local history pull was
@@ -115,13 +131,17 @@ Latest local audit state:
   `data/seo-geo-attribution-audit.json` and
   `pages/seo-geo-attribution-report.html`.
 - `npm run audit:seo-geo-attribution` on 2026-06-05 regenerated the same
-  outputs after the Google retry. Scores are technical `100`, GEO `90`,
+  outputs after the Google retry. Scores were technical `100`, GEO `90`,
   messaging `100`, accessibility `100`, attribution `25`.
+- `npm run audit:seo-geo-attribution` on 2026-06-06 regenerated the same
+  outputs after the AI artifact/source update and Vercel delivery retry.
+  Scores are technical `100`, GEO `100`, messaging `100`, accessibility `100`,
+  attribution `30`.
 - The remaining high-severity findings are live/provider-state blockers:
   GA4 is live on `www.airexpressutah.com` but not canonical
   `airexpressutah.com`, Turnstile is not configured in the active production
-  delivery path, one prepared sitemap URL is not live, live sitemap lastmod
-  drift remains, live `llms.txt` drift remains, and `robots.txt` is edge-managed.
+  delivery path, one prepared sitemap URL is not live, and canonical edge
+  artifacts still drift from the repo-local AI/search package.
 - `npm run verify:owned-site-delivery-sync` now writes
   `data/owned-site-delivery-sync-check.json` with a read-only local-vs-live
   artifact comparison. The latest status is `pending_delivery_sync`: local
