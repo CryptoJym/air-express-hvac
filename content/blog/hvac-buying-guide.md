@@ -1,9 +1,11 @@
 ---
 title: "The Utah Homeowner's HVAC Buying Guide (From Someone Who Writes the Quotes)"
+seoTitle: "Utah HVAC Buying Guide | Air Express HVAC"
 slug: hvac-buying-guide
 date: 2026-03-01
 author: The Air Express Team
 category: "Buying Guides"
+seoDescription: "A Utah HVAC buying guide from installers who quote and install the systems, with practical sizing, ductwork, brand, and budget advice."
 excerpt: "Most HVAC buying guides are written by marketing departments. This one's written by the people who actually install the systems — and see which ones fail after five years."
 image: /images/hvac-buying-guide.webp
 tags:
@@ -18,6 +20,12 @@ draft: false
 We write three or four HVAC quotes a week for Utah homeowners who are about to spend $8,000-20,000 on a new system. And we've learned something uncomfortable: most of them have been shopping for a week or two, reading the same articles and watching the same YouTube videos, and they show up with a head full of beliefs that are either wrong, dated, or missing the Utah-specific context that actually matters.
 
 This is the guide we wish they'd read first. It's long. Read the short version at the bottom if you don't have time for the whole thing.
+
+## What should Utah homeowners compare before choosing HVAC equipment?
+
+Compare the house before you compare the brand. The Department of Energy explains that [central air conditioners](https://www.energy.gov/energysaver/central-air-conditioning) work through the full supply-and-return duct system, which is why equipment choice, duct condition, airflow, and thermostat behavior all matter together. A high-efficiency unit attached to poor ductwork is still a poor system.
+
+For Air Express customers, that means the buying conversation usually starts with [HVAC installation](/hvac-installation.html), duct condition, [AC replacement](/ac-replacement.html), furnace age, and whether a [heat pump](/heat-pump.html) or dual-fuel setup makes sense for the home.
 
 ## Step one: figure out what you actually need, not what you think you need
 

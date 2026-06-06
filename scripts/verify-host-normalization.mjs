@@ -8,8 +8,21 @@ const runbookPath = "docs/air-express-launch-runbook.md";
 const tomorrowChecklistPath = "docs/air-express-tomorrow-checklist.md";
 const selfPath = "scripts/verify-host-normalization.mjs";
 const allowedTokenByFile = new Map([
+  ["README.md", new Set(["https://airexpresshvac.net"])],
   [runbookPath, new Set(["https://airexpresshvac.net"])],
   [tomorrowChecklistPath, new Set(["https://airexpresshvac.net", "https://www.airexpresshvac.net"])],
+  ["docs/research-report.md", new Set(["https://airexpresshvac.net"])],
+  ["docs/source-evidence-map.md", new Set(["https://airexpresshvac.net", "https://www.airexpresshvac.net"])],
+  ["llms.txt", new Set(["https://airexpresshvac.net"])],
+  ["data/newreward-attribution-source-check.json", new Set(["https://airexpresshvac.net"])],
+  ["data/newreward-air-express-provider-readonly-recheck.json", new Set(["https://www.airexpresshvac.net"])],
+  ["data/seo-geo-attribution-audit.json", new Set(["https://airexpresshvac.net"])],
+  ["data/seo-geo-deep-dive-audit.json", new Set(["https://www.airexpresshvac.net"])],
+  ["pages/air-express-pulse-report.html", new Set(["https://airexpresshvac.net"])],
+  ["pages/seo-geo-deep-dive-report.html", new Set(["https://www.airexpresshvac.net"])],
+  ["scripts/audit-seo-geo-attribution.mjs", new Set(["https://airexpresshvac.net"])],
+  ["scripts/audit-seo-geo-deep-dive.mjs", new Set(["https://www.airexpresshvac.net"])],
+  ["scripts/pull-gsc-ga4-history.mjs", new Set(["https://airexpresshvac.net", "https://www.airexpresshvac.net"])],
   ["scripts/verify-cutover.mjs", new Set(["https://airexpresshvac.net"])],
   ["tests/unit/cutover-verification.test.js", new Set(["https://airexpresshvac.net"])],
 ]);

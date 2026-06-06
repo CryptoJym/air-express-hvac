@@ -38,6 +38,12 @@ The equipment is also quieter (no outdoor condenser running), longer-lived (25-5
 
 On paper, it's a no-brainer.
 
+## Is geothermal eligible for tax credits in Utah?
+
+Often, yes. The Department of Energy's [geothermal heat pump guide](https://www.energy.gov/sites/prod/files/guide_to_geothermal_heat_pumps.pdf) describes geothermal as eligible for a federal tax credit, but the real decision still comes down to your house, your land, your utility mix, and your timeline. A credit can make the math better; it does not automatically make geothermal the right system for a standard suburban lot.
+
+That is why we compare geothermal against [heat pumps](/heat-pump.html), [HVAC installation](/hvac-installation.html), and dual-fuel options instead of quoting it in a vacuum. The best answer is the one that fits the load calculation and the customer's plan for the home.
+
 ## The install cost is the problem
 
 In Utah, a typical 3-4 ton geothermal system installed in a new home runs **$28,000-50,000**, depending on the ground loop type (vertical drill wells vs horizontal trenches), soil conditions, system size, and local drilling rates.

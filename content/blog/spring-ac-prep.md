@@ -23,6 +23,12 @@ So spring AC prep in Utah isn't really about "spring." It's about getting ahead 
 
 Here's what we actually do when a customer calls us for a pre-summer tune-up. Not a marketing checklist — the real one.
 
+## What is the most important spring AC prep step?
+
+Airflow is the first thing to protect. The Department of Energy's [air conditioner maintenance page](https://www.energy.gov/energysaver/air-conditioner-maintenance) calls out filters, coils, fins, and condensate drains because those are the pieces that quietly reduce efficiency before the system fully fails. That is exactly why our spring walkthrough starts with the outdoor condenser, the indoor filter, airflow at registers, and condensate drainage.
+
+If something sounds wrong during the 20-minute test, schedule [AC maintenance](/ac-maintenance.html) or [AC repair](/ac-repair.html) before the first hot week fills the calendar.
+
 ## Hose off the outdoor unit.
 
 The outdoor condenser — that metal box sitting on a slab on the side of your house — has been collecting stuff all winter. Cottonwood fluff. Dirt. Dead leaves jammed into the fins. Little bits of grass clippings from the fall mowing. All of that is going to choke the airflow the first time you turn the AC on.

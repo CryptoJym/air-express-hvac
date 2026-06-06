@@ -11,7 +11,7 @@ tags:
   - reference
   - hvac
   - utah
-draft: false
+draft: true
 ---
 
 When you call us for a quote, we try to explain things in plain English. When you read the quote later, the plain English is gone and replaced with terms like "AFUE," "MERV-13," "modulating gas valve," and "evaporator coil TXV." That's not because we're trying to confuse you — it's because the equipment manufacturers stamp the technical terms on the cabinet and the building inspector wants to see them on the permit.

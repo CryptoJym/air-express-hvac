@@ -1,9 +1,11 @@
 ---
 title: "What Indoor Air Quality Actually Means at 4,500 Feet"
+seoTitle: "Indoor Air Quality at Utah Altitude | Air Express HVAC"
 slug: indoor-air-quality-utah
 date: 2026-05-20
 author: The Air Express Team
 category: "Indoor Air Quality"
+seoDescription: "Utah's inversion winters and dry summers make indoor air different. Learn what filtration and whole-home air quality upgrades actually help."
 excerpt: "Utah's inversion winters and dry summers make indoor air a different problem than anywhere else. Here's what actually works — and what doesn't — at Wasatch Front altitude."
 image: /images/filtration-utah.webp
 tags:
@@ -20,6 +22,12 @@ Here's the thing nobody told you when you moved to Utah: the air inside your hou
 We've been servicing HVAC systems in Utah County since 1996. The indoor air issues we actually see in Lehi, Eagle Mountain, and Saratoga Springs are specific to this place — the altitude, the winter inversion, the red-dirt summers, the hard water, the construction methods used in the last twenty years of Utah new builds. A lot of the air-quality advice you read online was written for humid climates and doesn't apply up here.
 
 This is the Utah version.
+
+## What IAQ upgrade should Utah homeowners check first?
+
+Start with filtration that the HVAC system can actually support. The EPA explains [MERV ratings](https://www.epa.gov/indoor-air-quality-iaq/what-merv-rating) as a way to compare how well filters capture small particles, and its [home air cleaner guidance](https://www.epa.gov/indoor-air-quality-iaq/air-cleaners-and-air-filters-home) notes that HVAC filters and portable air cleaners can both help when used correctly. For many Utah homes, the best first move is not a gadget. It is a properly sized media filter cabinet, the right MERV rating, and a replacement schedule the homeowner will actually follow.
+
+After filtration, we usually look at [air filters](/air-filters.html), [humidification](/humidification.html), [ventilation](/ventilation.html), and whether the home should be tested for radon. The EPA recommends action at 4 pCi/L and says homeowners should also consider fixing levels between 2 and 4 pCi/L in its [radon action level guidance](https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean).
 
 ## The inversion problem is actually an indoor problem too.
 

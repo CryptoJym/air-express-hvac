@@ -4,14 +4,22 @@ import test from "node:test";
 import {
   buildIntakeLeadPayload,
   buildIntakeNotificationEmailPayload,
+  inspectIntakeNotificationConfig,
   loadIntakeNotificationConfig,
   normalizeIntakeSubmission,
+  sendIntakeNotificationEmail,
   sanitizeRelativeReturnPath,
 } from "../../api/_lib/intake.js";
+import {
+  inspectTurnstileConfig,
+  verifyTurnstileToken,
+} from "../../api/_lib/turnstile.js";
 
 const CONTACT_MODULE_URL = "../../api/intake/contact.js";
 const ESTIMATE_MODULE_URL = "../../api/intake/estimate.js";
 const SCHEDULE_MODULE_URL = "../../api/intake/schedule.js";
+const TURNSTILE_CONFIG_MODULE_URL = "../../api/turnstile/config.js";
+const VALID_TURNSTILE_TOKEN = "valid-turnstile-token";
 
 function buildFormData(entries) {
   const formData = new FormData();
@@ -67,6 +75,7 @@ const serviceTitanMockState = {
   leadStatus: 200,
   resendRequests: [],
   resendStatus: 202,
+  turnstileRequests: [],
 };
 
 const originalFetch = globalThis.fetch;
@@ -104,12 +113,58 @@ globalThis.fetch = async (input, init = {}) => {
     );
   }
 
+  if (url === "https://challenges.cloudflare.com/turnstile/v0/siteverify") {
+    const body = new URLSearchParams(init.body);
+    serviceTitanMockState.turnstileRequests.push({
+      secret: body.get("secret"),
+      response: body.get("response"),
+      remoteip: body.get("remoteip"),
+    });
+
+    const success = body.get("response") === VALID_TURNSTILE_TOKEN;
+    return createServiceTitanResponse(JSON.stringify({
+      success,
+      "error-codes": success ? [] : ["invalid-input-response"],
+    }));
+  }
+
   throw new Error(`Unexpected fetch call: ${url}`);
 };
 
 process.on("exit", () => {
   globalThis.fetch = originalFetch;
 });
+
+function addValidTurnstileToken(entries) {
+  return {
+    ...entries,
+    "cf-turnstile-response": VALID_TURNSTILE_TOKEN,
+  };
+}
+
+function resetMockState() {
+  serviceTitanMockState.calls.length = 0;
+  serviceTitanMockState.leadRequests.length = 0;
+  serviceTitanMockState.leadStatus = 200;
+  serviceTitanMockState.resendRequests.length = 0;
+  serviceTitanMockState.resendStatus = 202;
+  serviceTitanMockState.turnstileRequests.length = 0;
+}
+
+function buildServiceTitanEnv(overrides = {}) {
+  return {
+    SERVICETITAN_ENV: "integration",
+    SERVICETITAN_TENANT_ID: "4378713196",
+    SERVICETITAN_APP_KEY: "app-key",
+    SERVICETITAN_CLIENT_ID: "client-id",
+    SERVICETITAN_CLIENT_SECRET: "client-secret",
+    SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
+    SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
+    SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+    TURNSTILE_SECRET_KEY: "turnstile-secret",
+    ...overrides,
+  };
+}
 
 test("sanitizeRelativeReturnPath rejects open redirects", () => {
   assert.equal(
@@ -136,34 +191,106 @@ test("endpoint wrappers export callable handlers", async () => {
   }
 });
 
-test("contact wrapper normalizes unknown service values and submits a lead", async () => {
-  serviceTitanMockState.calls.length = 0;
-  serviceTitanMockState.leadRequests.length = 0;
-  serviceTitanMockState.leadStatus = 200;
-  serviceTitanMockState.resendRequests.length = 0;
-  serviceTitanMockState.resendStatus = 202;
+test("Turnstile config inspection requires site and secret keys", () => {
+  assert.deepEqual(inspectTurnstileConfig({}), {
+    configured: false,
+    siteKeyConfigured: false,
+    secretKeyConfigured: false,
+    missingKeys: ["TURNSTILE_SITE_KEY", "TURNSTILE_SECRET_KEY"],
+  });
+  assert.deepEqual(
+    inspectTurnstileConfig({
+      CLOUDFLARE_TURNSTILE_SITE_KEY: "site-key",
+      CLOUDFLARE_TURNSTILE_SECRET_KEY: "secret-key",
+    }),
+    {
+      configured: true,
+      siteKeyConfigured: true,
+      secretKeyConfigured: true,
+      missingKeys: [],
+    }
+  );
+});
+
+test("Turnstile config endpoint exposes only the public site key", async () => {
   const restoreEnv = setProcessEnv({
-    SERVICETITAN_ENV: "integration",
-    SERVICETITAN_TENANT_ID: "4378713196",
-    SERVICETITAN_APP_KEY: "app-key",
-    SERVICETITAN_CLIENT_ID: "client-id",
-      SERVICETITAN_CLIENT_SECRET: "client-secret",
-      SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
-      SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
-      SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
-      RESEND_API_KEY: undefined,
-      INTAKE_NOTIFICATION_FROM: undefined,
-      INTAKE_NOTIFICATION_TO: undefined,
-      INTAKE_NOTIFICATION_CC: undefined,
-      INTAKE_NOTIFICATION_BCC: undefined,
+    TURNSTILE_SITE_KEY: "public-site-key",
+    TURNSTILE_SECRET_KEY: "secret-key",
+  });
+
+  try {
+    const { default: turnstileConfigHandler, config } = await import(TURNSTILE_CONFIG_MODULE_URL);
+    const response = await turnstileConfigHandler(new Request("https://air-express.local/api/turnstile/config"));
+    const body = await response.json();
+
+    assert.equal(config?.runtime, "edge");
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("Cache-Control"), "no-store");
+    assert.deepEqual(body, {
+      configured: true,
+      siteKey: "public-site-key",
     });
+  } finally {
+    restoreEnv();
+  }
+});
+
+test("Turnstile config endpoint fails closed when the secret is missing", async () => {
+  const restoreEnv = setProcessEnv({
+    TURNSTILE_SITE_KEY: "public-site-key",
+    TURNSTILE_SECRET_KEY: undefined,
+  });
+
+  try {
+    const { default: turnstileConfigHandler } = await import(TURNSTILE_CONFIG_MODULE_URL);
+    const response = await turnstileConfigHandler(new Request("https://air-express.local/api/turnstile/config"));
+    const body = await response.json();
+
+    assert.equal(response.status, 503);
+    assert.deepEqual(body, {
+      configured: false,
+      missingKeys: ["TURNSTILE_SECRET_KEY"],
+    });
+  } finally {
+    restoreEnv();
+  }
+});
+
+test("verifyTurnstileToken calls Cloudflare Siteverify with the remote IP", async () => {
+  resetMockState();
+  const result = await verifyTurnstileToken(VALID_TURNSTILE_TOKEN, {
+    env: {
+      TURNSTILE_SECRET_KEY: "turnstile-secret",
+    },
+    remoteIp: "203.0.113.10",
+  });
+
+  assert.deepEqual(result.errorCodes, []);
+  assert.equal(result.success, true);
+  assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
+  assert.deepEqual(serviceTitanMockState.turnstileRequests[0], {
+    secret: "turnstile-secret",
+    response: VALID_TURNSTILE_TOKEN,
+    remoteip: "203.0.113.10",
+  });
+});
+
+test("contact wrapper normalizes unknown service values and submits a lead", async () => {
+  resetMockState();
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv({
+    RESEND_API_KEY: undefined,
+    INTAKE_NOTIFICATION_FROM: undefined,
+    INTAKE_NOTIFICATION_TO: undefined,
+    INTAKE_NOTIFICATION_CC: undefined,
+    INTAKE_NOTIFICATION_BCC: undefined,
+  }));
 
   try {
     const { default: contactHandler } = await import(CONTACT_MODULE_URL);
     const response = await contactHandler(
       buildRequest(
         "/api/intake/contact",
-        buildFormData({
+        buildFormData(addValidTurnstileToken({
           name: "Jordan Example",
           email: "jordan@example.com",
           phone: "(801) 555-0100",
@@ -171,12 +298,17 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
           message: "The AC is blowing warm air.",
           return_to: "https://evil.example.com/hijack",
           source_path: "/contact.html",
-        })
+          trace_id: "trace-123\nextra",
+          utm_source: "google",
+          utm_medium: "organic",
+          utm_campaign: "summer-ac",
+        }))
       )
     );
 
     assert.equal(response.status, 303);
     assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
     assert.equal(serviceTitanMockState.resendRequests.length, 0);
     assert.equal(serviceTitanMockState.leadRequests[0].campaignId, 80365413);
@@ -188,6 +320,8 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
     assert.match(serviceTitanMockState.leadRequests[0].body, /Requested Service: Something Else/);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Source Page: \/contact.html/);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Submitted At:/);
+    assert.match(serviceTitanMockState.leadRequests[0].body, /Trace ID: trace-123 extra/);
+    assert.match(serviceTitanMockState.leadRequests[0].body, /Attribution:\nutm_source: google\nutm_medium: organic\nutm_campaign: summer-ac/);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Message:\nThe AC is blowing warm air\./);
     assert.match(serviceTitanMockState.leadRequests[0].followUpDate, /^\d{4}-\d{2}-\d{2}T/);
   } finally {
@@ -196,11 +330,7 @@ test("contact wrapper normalizes unknown service values and submits a lead", asy
 });
 
 test("estimate wrapper redirects deterministically on validation failure", async () => {
-  serviceTitanMockState.calls.length = 0;
-  serviceTitanMockState.leadRequests.length = 0;
-  serviceTitanMockState.leadStatus = 200;
-  serviceTitanMockState.resendRequests.length = 0;
-  serviceTitanMockState.resendStatus = 202;
+  resetMockState();
   const { default: estimateHandler } = await import(ESTIMATE_MODULE_URL);
   const response = await estimateHandler(
     buildRequest(
@@ -222,29 +352,74 @@ test("estimate wrapper redirects deterministically on validation failure", async
   );
 });
 
+test("contact wrapper rejects missing Turnstile token before ServiceTitan", async () => {
+  resetMockState();
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv());
+
+  try {
+    const { default: contactHandler } = await import(CONTACT_MODULE_URL);
+    const response = await contactHandler(
+      buildRequest(
+        "/api/intake/contact",
+        buildFormData({
+          name: "Jordan Example",
+          email: "jordan@example.com",
+          phone: "(801) 555-0100",
+          service: "maintenance-tune-up",
+        })
+      )
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("Location"), "/contact.html?intake=validation_error&fields=captcha");
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 0);
+    assert.equal(serviceTitanMockState.leadRequests.length, 0);
+    assert.equal(serviceTitanMockState.resendRequests.length, 0);
+  } finally {
+    restoreEnv();
+  }
+});
+
+test("contact wrapper rejects invalid Turnstile token before ServiceTitan", async () => {
+  resetMockState();
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv());
+
+  try {
+    const { default: contactHandler } = await import(CONTACT_MODULE_URL);
+    const response = await contactHandler(
+      buildRequest(
+        "/api/intake/contact",
+        buildFormData({
+          name: "Jordan Example",
+          email: "jordan@example.com",
+          phone: "(801) 555-0100",
+          service: "maintenance-tune-up",
+          "cf-turnstile-response": "invalid-turnstile-token",
+        })
+      )
+    );
+
+    assert.equal(response.status, 303);
+    assert.equal(response.headers.get("Location"), "/contact.html?intake=validation_error&fields=captcha");
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
+    assert.equal(serviceTitanMockState.leadRequests.length, 0);
+    assert.equal(serviceTitanMockState.resendRequests.length, 0);
+  } finally {
+    restoreEnv();
+  }
+});
+
 test("schedule wrapper includes preferred date and redirects on upstream error", async () => {
-  serviceTitanMockState.calls.length = 0;
-  serviceTitanMockState.leadRequests.length = 0;
+  resetMockState();
   serviceTitanMockState.leadStatus = 500;
-  serviceTitanMockState.resendRequests.length = 0;
-  serviceTitanMockState.resendStatus = 202;
-  const restoreEnv = setProcessEnv({
-    SERVICETITAN_ENV: "integration",
-    SERVICETITAN_TENANT_ID: "4378713196",
-    SERVICETITAN_APP_KEY: "app-key",
-    SERVICETITAN_CLIENT_ID: "client-id",
-      SERVICETITAN_CLIENT_SECRET: "client-secret",
-      SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
-      SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
-      SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
-    });
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv());
 
   try {
     const { default: scheduleHandler } = await import(SCHEDULE_MODULE_URL);
     const response = await scheduleHandler(
       buildRequest(
         "/api/intake/schedule",
-        buildFormData({
+        buildFormData(addValidTurnstileToken({
           name: "Jordan Example",
           phone: "(801) 555-0100",
           address: "123 Main St, Lehi, UT",
@@ -252,10 +427,11 @@ test("schedule wrapper includes preferred date and redirects on upstream error",
           preferred_date: "2026-04-20",
           preferred_time: "Morning (8am-12pm)",
           notes: "Please call before arrival.",
-        })
+        }))
       )
     );
 
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
     assert.equal(serviceTitanMockState.resendRequests.length, 0);
     assert.match(serviceTitanMockState.leadRequests[0].body, /Preferred Date: 2026-04-20/);
@@ -340,6 +516,9 @@ test("buildIntakeLeadPayload uses live CRM field names and defaults follow-up da
       phone: "(801) 555-0100",
       service: "maintenance-tune-up",
       message: "Please call back soon.",
+      trace_id: "trace-maint-1",
+      utm_source: "local-service-ad",
+      utm_medium: "cpc",
     }),
     {
       now: () => new Date("2026-04-13T20:15:30.000Z"),
@@ -358,6 +537,9 @@ test("buildIntakeLeadPayload uses live CRM field names and defaults follow-up da
   assert.equal(payload.summary, "Air Express Website Lead - Maintenance / Tune-Up");
   assert.match(payload.body, /Form Type: contact/);
   assert.match(payload.body, /Requested Service: Maintenance \/ Tune-Up/);
+  assert.match(payload.body, /Trace ID: trace-maint-1/);
+  assert.match(payload.body, /utm_source: local-service-ad/);
+  assert.match(payload.body, /utm_medium: cpc/);
   assert.equal(payload.leadCustomerName, "Jordan Example");
   assert.equal(payload.leadEmail, "jordan@example.com");
   assert.equal(payload.leadPhone, "(801) 555-0100");
@@ -403,6 +585,70 @@ test("loadIntakeNotificationConfig returns null until all required email env var
   );
 });
 
+test("inspectIntakeNotificationConfig reports the missing notification env keys", () => {
+  assert.deepEqual(inspectIntakeNotificationConfig({}), {
+    configured: false,
+    missingKeys: [
+      "RESEND_API_KEY",
+      "INTAKE_NOTIFICATION_FROM",
+      "INTAKE_NOTIFICATION_TO",
+    ],
+  });
+  assert.deepEqual(
+    inspectIntakeNotificationConfig({
+      RESEND_API_KEY: "",
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    }),
+    {
+      configured: false,
+      missingKeys: ["RESEND_API_KEY"],
+    }
+  );
+  assert.deepEqual(
+    inspectIntakeNotificationConfig({
+      RESEND_API_KEY: "re_123",
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    }),
+    {
+      configured: true,
+      missingKeys: [],
+    }
+  );
+});
+
+test("sendIntakeNotificationEmail explains why notification delivery is skipped", async () => {
+  const submission = normalizeIntakeSubmission(
+    "contact",
+    buildFormData({
+      name: "Jordan Example",
+      email: "jordan@example.com",
+      phone: "(801) 555-0100",
+      service: "maintenance-tune-up",
+    }),
+    {
+      now: () => new Date("2026-04-13T20:15:30.000Z"),
+    }
+  );
+
+  const result = await sendIntakeNotificationEmail(submission, {
+    env: {
+      INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
+      INTAKE_NOTIFICATION_TO: "office@example.com",
+    },
+    fetchImpl: () => {
+      throw new Error("fetch should not be called when notification config is incomplete");
+    },
+  });
+
+  assert.deepEqual(result, {
+    skipped: true,
+    reason: "not_configured",
+    missingKeys: ["RESEND_API_KEY"],
+  });
+});
+
 test("buildIntakeNotificationEmailPayload includes reply-to and recipient lists", () => {
   const submission = normalizeIntakeSubmission(
     "contact",
@@ -435,42 +681,31 @@ test("buildIntakeNotificationEmailPayload includes reply-to and recipient lists"
 });
 
 test("contact wrapper sends a notification email after a successful ServiceTitan lead", async () => {
-  serviceTitanMockState.calls.length = 0;
-  serviceTitanMockState.leadRequests.length = 0;
-  serviceTitanMockState.leadStatus = 200;
-  serviceTitanMockState.resendRequests.length = 0;
-  serviceTitanMockState.resendStatus = 202;
-  const restoreEnv = setProcessEnv({
-    SERVICETITAN_ENV: "integration",
-    SERVICETITAN_TENANT_ID: "4378713196",
-    SERVICETITAN_APP_KEY: "app-key",
-    SERVICETITAN_CLIENT_ID: "client-id",
-    SERVICETITAN_CLIENT_SECRET: "client-secret",
-    SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
-    SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
-    SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+  resetMockState();
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv({
     RESEND_API_KEY: "re_123",
     INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
     INTAKE_NOTIFICATION_TO: "office@example.com",
-  });
+  }));
 
   try {
     const { default: contactHandler } = await import(CONTACT_MODULE_URL);
     const response = await contactHandler(
       buildRequest(
         "/api/intake/contact",
-        buildFormData({
+        buildFormData(addValidTurnstileToken({
           name: "Jordan Example",
           email: "jordan@example.com",
           phone: "(801) 555-0100",
           service: "maintenance-tune-up",
           message: "Please call back soon.",
-        })
+        }))
       )
     );
 
     assert.equal(response.status, 303);
     assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
     assert.equal(serviceTitanMockState.resendRequests.length, 1);
     assert.equal(
@@ -492,41 +727,31 @@ test("contact wrapper sends a notification email after a successful ServiceTitan
 });
 
 test("contact wrapper still succeeds when the notification email provider fails", async () => {
-  serviceTitanMockState.calls.length = 0;
-  serviceTitanMockState.leadRequests.length = 0;
-  serviceTitanMockState.leadStatus = 200;
-  serviceTitanMockState.resendRequests.length = 0;
+  resetMockState();
   serviceTitanMockState.resendStatus = 503;
-  const restoreEnv = setProcessEnv({
-    SERVICETITAN_ENV: "integration",
-    SERVICETITAN_TENANT_ID: "4378713196",
-    SERVICETITAN_APP_KEY: "app-key",
-    SERVICETITAN_CLIENT_ID: "client-id",
-    SERVICETITAN_CLIENT_SECRET: "client-secret",
-    SERVICETITAN_API_BASE_URL: "https://api-integration.servicetitan.io",
-    SERVICETITAN_AUTH_URL: "https://auth-integration.servicetitan.io/connect/token",
-    SERVICETITAN_LEAD_CAMPAIGN_ID: "80365413",
+  const restoreEnv = setProcessEnv(buildServiceTitanEnv({
     RESEND_API_KEY: "re_123",
     INTAKE_NOTIFICATION_FROM: "Air Express <alerts@example.com>",
     INTAKE_NOTIFICATION_TO: "office@example.com",
-  });
+  }));
 
   try {
     const { default: contactHandler } = await import(CONTACT_MODULE_URL);
     const response = await contactHandler(
       buildRequest(
         "/api/intake/contact",
-        buildFormData({
+        buildFormData(addValidTurnstileToken({
           name: "Jordan Example",
           email: "jordan@example.com",
           phone: "(801) 555-0100",
           service: "maintenance-tune-up",
-        })
+        }))
       )
     );
 
     assert.equal(response.status, 303);
     assert.equal(response.headers.get("Location"), "/contact.html?intake=success");
+    assert.equal(serviceTitanMockState.turnstileRequests.length, 1);
     assert.equal(serviceTitanMockState.leadRequests.length, 1);
     assert.equal(serviceTitanMockState.resendRequests.length, 1);
   } finally {

@@ -301,12 +301,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airexpressutah.com/geothermal-guide.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://airexpressutah.com/heat-pump.html</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -415,19 +409,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airexpressutah.com/hvac-buying-guide.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://airexpressutah.com/hvac-company.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/hvac-cost-guide.html</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -452,18 +434,6 @@
   </url>
   <url>
     <loc>https://airexpressutah.com/hvac-service.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/hvac-terminology.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/hvac-troubleshooter.html</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -667,12 +637,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airexpressutah.com/summer-energy-efficiency.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://airexpressutah.com/terms-of-service.html</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>yearly</changefreq>
@@ -703,70 +667,52 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airexpressutah.com/winter-heating-troubleshooting.html</loc>
-    <lastmod>2026-04-06</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://airexpressutah.com/blog/index.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- BLOG_POSTS_START -->
   <url>
-    <loc>https://airexpressutah.com/blog/fall-furnace-prep.html</loc>
-    <lastmod>Wed Sep 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/blog/hvac-glossary.html</loc>
-    <lastmod>Fri Jul 31 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/blog/heat-pump-vs-furnace-utah.html</loc>
-    <lastmod>Tue Jun 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airexpressutah.com/blog/summer-energy-efficiency.html</loc>
-    <lastmod>Tue Jun 09 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <loc>https://airexpressutah.com/blog/first-hot-week-ac-checklist-utah.html</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/indoor-air-quality-utah.html</loc>
-    <lastmod>Tue May 19 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/geothermal-guide.html</loc>
-    <lastmod>Thu Apr 30 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/hvac-cost-guide.html</loc>
-    <lastmod>Sun Apr 19 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <lastmod>2026-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/spring-ac-prep.html</loc>
-    <lastmod>Tue Apr 14 2026 18:00:00 GMT-0600 (Mountain Daylight Time)</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/hvac-buying-guide.html</loc>
-    <lastmod>Sat Feb 28 2026 17:00:00 GMT-0700 (Mountain Standard Time)</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://airexpressutah.com/blog/winter-heating-troubleshooting.html</loc>
-    <lastmod>Wed Jan 14 2026 17:00:00 GMT-0700 (Mountain Standard Time)</lastmod>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

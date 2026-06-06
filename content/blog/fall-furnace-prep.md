@@ -12,7 +12,7 @@ tags:
   - maintenance
   - utah
   - lehi
-draft: false
+draft: true
 ---
 
 Every October, the same call comes in.

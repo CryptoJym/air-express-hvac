@@ -47,6 +47,9 @@ const SITE_NAME = "Air Express HVAC";
 const FEED_TITLE = "Air Express HVAC — Field Notes";
 const FEED_DESCRIPTION =
   "Utah-specific heating and cooling advice from the Air Express HVAC team in Lehi.";
+const INCLUDE_DRAFTS = ["1", "true", "yes"].includes(
+  String(process.env.BLOG_INCLUDE_DRAFTS || "").toLowerCase()
+);
 
 // Configure marked for plain, semantic HTML output.
 // `headerIds` and `mangle` were removed in marked v5+; we now use the
@@ -59,16 +62,27 @@ marked.setOptions({
   breaks: false,
 });
 
+function buildMetaTitle(title) {
+  const branded = `${title} | ${SITE_NAME}`;
+  if (branded.length <= 65) {
+    return branded;
+  }
+  if (title.length <= 65) {
+    return title;
+  }
+  return `${title.slice(0, 62).trimEnd()}...`;
+}
+
 /**
  * Read a single markdown file and return parsed post metadata + rendered body.
- * Returns null if the post is marked draft in production.
+ * Returns null if the post is marked draft, unless BLOG_INCLUDE_DRAFTS=1.
  */
 function readPost(filePath) {
   const raw = fs.readFileSync(filePath, "utf8");
   const parsed = matter(raw);
   const fm = parsed.data;
 
-  if (fm.draft === true && process.env.NODE_ENV === "production") {
+  if (fm.draft === true && !INCLUDE_DRAFTS) {
     return null;
   }
 
@@ -97,7 +111,9 @@ function readPost(filePath) {
   const bodyHtml = marked.parse(parsed.content);
   const dateObj = new Date(fm.date);
   const isoDate = dateObj.toISOString();
+  const sitemapDate = isoDate.slice(0, 10);
   const displayDate = dateObj.toLocaleDateString("en-US", {
+    timeZone: "UTC",
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -109,8 +125,10 @@ function readPost(filePath) {
 
   return {
     title: fm.title,
+    metaTitle: fm.seoTitle || buildMetaTitle(fm.title),
+    metaDescription: fm.seoDescription || fm.excerpt,
     slug: fm.slug,
-    date: fm.date,
+    date: sitemapDate,
     isoDate,
     displayDate,
     author: fm.author || "The Air Express Team",
@@ -200,6 +218,20 @@ function renderPostCard(post) {
             </article>`;
 }
 
+function removeStalePostPages(posts) {
+  const expected = new Set(posts.map((post) => `${post.slug}.html`));
+  expected.add("index.html");
+
+  if (!fs.existsSync(BLOG_OUT_DIR)) return;
+
+  for (const fileName of fs.readdirSync(BLOG_OUT_DIR)) {
+    if (!fileName.endsWith(".html")) continue;
+    if (expected.has(fileName)) continue;
+    fs.unlinkSync(path.join(BLOG_OUT_DIR, fileName));
+    console.log(`[build-blog] removed stale ${fileName}`);
+  }
+}
+
 function generateRss(posts) {
   const items = posts
     .map((post) => {
@@ -207,7 +239,7 @@ function generateRss(posts) {
       <title><![CDATA[${post.title}]]></title>
       <link>${SITE_URL}/blog/${post.slug}.html</link>
       <guid>${SITE_URL}/blog/${post.slug}.html</guid>
-      <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+      <pubDate>${new Date(post.isoDate).toUTCString()}</pubDate>
       <description><![CDATA[${post.excerpt}]]></description>
       <author>noreply@airexpresshvac.net (${post.author})</author>
       <category>${post.category}</category>
@@ -260,6 +292,7 @@ function main() {
 
   // Ensure output dir
   fs.mkdirSync(BLOG_OUT_DIR, { recursive: true });
+  removeStalePostPages(posts);
 
   // Render each post
   for (const post of posts) {
@@ -280,9 +313,22 @@ function main() {
     postCards,
     header: chrome.header,
     footer: chrome.footer,
+    metaTitle: "Air Express Field Notes | HVAC Blog",
+    metaDescription:
+      "Utah-specific heating and cooling field notes from Air Express technicians serving Lehi, Utah County, and nearby homes.",
+    canonicalUrl: `${SITE_URL}/blog/index.html`,
+  });
+  const resourcesHtml = fillTemplate(indexTemplate, {
+    postCards,
+    header: chrome.header,
+    footer: chrome.footer,
+    metaTitle: "HVAC Resources | Air Express HVAC",
+    metaDescription:
+      "Browse Air Express HVAC resources, local field notes, maintenance checklists, and Utah-specific heating and cooling advice.",
+    canonicalUrl: `${SITE_URL}/resources.html`,
   });
   fs.writeFileSync(path.join(BLOG_OUT_DIR, "index.html"), indexHtml);
-  fs.writeFileSync(RESOURCES_HTML, indexHtml);
+  fs.writeFileSync(RESOURCES_HTML, resourcesHtml);
   console.log(`[build-blog] ✓ blog/index.html + resources.html`);
 
   // RSS
