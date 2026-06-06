@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T00:00:05.390Z",
+  "generatedAt": "2026-06-06T13:53:22.385Z",
   "site": "https://airexpressutah.com",
   "legacySite": "https://airexpresshvac.net",
   "skillsUsed": [
@@ -11,7 +11,7 @@
   ],
   "scores": {
     "technical": 100,
-    "geo": 90,
+    "geo": 100,
     "messaging": 100,
     "attribution": 30,
     "accessibility": 100
@@ -56,6 +56,16 @@
       "evidence": "Live robots.txt status 200, edge=no.",
       "workaround": "Fetched live robots.txt read-only and compared content hashes.",
       "nextAction": "Decide whether the edge robots policy or repo robots file is canonical, then document/sync the chosen source."
+    },
+    {
+      "severity": "Medium",
+      "area": "GEO / AI artifacts",
+      "status": "prepared_source_pending_live_sync",
+      "issue": "Repo-local AI entity and service artifacts are prepared but production is not fully synced",
+      "rootCause": "The Air Express source package now includes public-safe AI discovery artifacts, while the live New Reward edge path either does not serve them yet or serves a different edge-managed artifact.",
+      "evidence": "Live drift: agent.json, .well-known/agent.json, catalog.json",
+      "workaround": "Prepared and validated source artifacts locally, then checked live artifact URLs read-only without mutating edge delivery.",
+      "nextAction": "Sync the Air Express repo source or New Reward edge-managed artifacts so /agent.json, /.well-known/agent.json, /catalog.json, /llms.txt, and /robots.txt resolve from the same approved source."
     },
     {
       "severity": "High",
@@ -122,7 +132,7 @@
       "finalUrl": "https://airexpressutah.com/robots.txt",
       "contentType": "text/plain; charset=utf-8",
       "hash": "b686011b1504745e5772d76c1fb4c7eecb61f56f034c8b6c1f779f43c1e5fb1d",
-      "localHash": "9449818c23688479e50fc3dcedd021c577af039265cf69fc2c1a20779df51932",
+      "localHash": "91c04162fa5cb098d4e95f76793b2cd0b61a8ca3a7b88419e48d7ca43d64539e",
       "byteLength": 508,
       "matchesLocal": false,
       "invalidLastmodCount": 0,
@@ -138,7 +148,7 @@
       "finalUrl": "https://airexpressutah.com/llms.txt",
       "contentType": "text/plain; charset=utf-8",
       "hash": "2c8f46d0e198a27c5827edcf97852fdfa59f21913d33f08c250b438a3aadee46",
-      "localHash": "a4765b478b36449bedaaadacf5230b92c0b7c7c96737deeccbd37ed9b623e950",
+      "localHash": "b1f97f1eaa061e9e7bfc6887270f16fe56fe5c192b30558887aae39c91033f7e",
       "byteLength": 3110,
       "matchesLocal": false,
       "invalidLastmodCount": 0,
@@ -169,6 +179,54 @@
         "Wed Apr 15 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
       ],
       "edgeSummary": "edge=v20260601032350-675731b8-57d4bf; servedBy=origin; managedPath=none; websiteId=cmorqbs9j001r5nr1h25vosp8",
+      "error": ""
+    },
+    "agent": {
+      "name": "agent.json",
+      "url": "https://airexpressutah.com/agent.json",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://airexpressutah.com/agent.json",
+      "contentType": "application/json; charset=utf-8",
+      "hash": "19f32fc353c59f1d7635aae3da6c32dc519f85cdae9c721db99a31652cbb0d93",
+      "localHash": "edb1ed5f8a98f4a48b5cf4315720088592246c585defe544766b6d1479909102",
+      "byteLength": 1619,
+      "matchesLocal": false,
+      "invalidLastmodCount": 0,
+      "invalidLastmodSamples": [],
+      "edgeSummary": "edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/agent.json; websiteId=cmorqbs9j001r5nr1h25vosp8",
+      "error": ""
+    },
+    "wellKnownAgent": {
+      "name": ".well-known/agent.json",
+      "url": "https://airexpressutah.com/.well-known/agent.json",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://airexpressutah.com/.well-known/agent.json",
+      "contentType": "application/json; charset=utf-8",
+      "hash": "19f32fc353c59f1d7635aae3da6c32dc519f85cdae9c721db99a31652cbb0d93",
+      "localHash": "c86a8824cc37db9c0a109bd118384a5591e53728afc354e13bd08e15cb0696e3",
+      "byteLength": 1619,
+      "matchesLocal": false,
+      "invalidLastmodCount": 0,
+      "invalidLastmodSamples": [],
+      "edgeSummary": "edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/.well-known/agent.json; websiteId=cmorqbs9j001r5nr1h25vosp8",
+      "error": ""
+    },
+    "catalog": {
+      "name": "catalog.json",
+      "url": "https://airexpressutah.com/catalog.json",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://airexpressutah.com/catalog.json",
+      "contentType": "application/json; charset=utf-8",
+      "hash": "24382ddfd022b3d65bd7cb2d6074eff5c3b2e33351da1284ec3aeb5291638b61",
+      "localHash": "8d167810956cd70a0d1f8d6a583d1b49c3c2c5982719bb7faed850ed03ed6ddd",
+      "byteLength": 25868,
+      "matchesLocal": false,
+      "invalidLastmodCount": 0,
+      "invalidLastmodSamples": [],
+      "edgeSummary": "edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/catalog.json; websiteId=cmorqbs9j001r5nr1h25vosp8",
       "error": ""
     }
   },
@@ -10237,11 +10295,43 @@
     "summary": "119/119 public HTML files include JSON-LD. Types seen: BlogPosting, BreadcrumbList, CollectionPage, FAQPage, LocalBusiness."
   },
   "geo": {
-    "robotsSummary": "Important content is allowed via User-agent: *, while admin and API paths are blocked. No explicit AI crawler allow/block policy is present.",
+    "robotsSummary": "Important content is allowed via User-agent: *, admin/API/private paths are blocked, and major AI crawler discovery paths are explicitly allowed.",
     "llmsTxt": {
       "exists": true,
       "liveMatchesLocal": false,
       "liveEdgeSummary": "edge=v20260601032350-675731b8-57d4bf; servedBy=worker; managedPath=/llms.txt; websiteId=cmorqbs9j001r5nr1h25vosp8"
+    },
+    "aiArtifacts": {
+      "required": [
+        {
+          "path": "agent.json",
+          "url": "https://airexpressutah.com/agent.json",
+          "exists": true,
+          "validJson": true,
+          "liveOk": true,
+          "liveStatus": 200,
+          "liveMatchesLocal": false
+        },
+        {
+          "path": ".well-known/agent.json",
+          "url": "https://airexpressutah.com/.well-known/agent.json",
+          "exists": true,
+          "validJson": true,
+          "liveOk": true,
+          "liveStatus": 200,
+          "liveMatchesLocal": false
+        },
+        {
+          "path": "catalog.json",
+          "url": "https://airexpressutah.com/catalog.json",
+          "exists": true,
+          "validJson": true,
+          "liveOk": true,
+          "liveStatus": 200,
+          "liveMatchesLocal": false
+        }
+      ],
+      "summary": "3/3 required AI-readable JSON artifacts are valid in source."
     },
     "extractabilitySummary": "The site has broad service and service-area coverage. GEO improvements should focus on llms.txt, clearer answer blocks, stronger proof/authority signals, and measurement links."
   },
@@ -10633,6 +10723,12 @@
       }
     ],
     "medium": [
+      {
+        "priority": "Medium",
+        "issue": "Live AI artifacts differ from repo-local source",
+        "evidence": "agent.json, .well-known/agent.json, catalog.json",
+        "fix": "Sync the repo-local AI artifacts or document the edge-managed source of truth."
+      },
       {
         "priority": "Medium",
         "issue": "Live robots.txt differs from repo-local robots.txt",

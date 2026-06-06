@@ -11,6 +11,9 @@ const outPath = path.join(rootDir, "data", "site-file-manifest.json");
 const REQUIRED_ARTIFACTS = [
   "index.html",
   "analytics.js",
+  "agent.json",
+  ".well-known/agent.json",
+  "catalog.json",
   "intake-form.js",
   "styles.css",
   "robots.txt",
@@ -51,6 +54,16 @@ function readFile(relativePath) {
 
 function sha256(source = "") {
   return createHash("sha256").update(source).digest("hex");
+}
+
+function validateJsonArtifact(relativePath) {
+  if (!fs.existsSync(path.join(rootDir, relativePath))) return null;
+  try {
+    JSON.parse(readFile(relativePath));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function walkFiles(directory = rootDir, files = []) {
@@ -201,6 +214,9 @@ function main() {
     sha256: fs.existsSync(path.join(rootDir, artifactPath))
       ? sha256(fs.readFileSync(path.join(rootDir, artifactPath)))
       : "",
+    validJson: artifactPath.endsWith(".json")
+      ? validateJsonArtifact(artifactPath)
+      : null,
   }));
   const blogSources = blogSourceManifest();
   const draftLeaks = blogSources.filter((entry) => entry.status === "draft_leaked");
@@ -209,6 +225,7 @@ function main() {
 
   const failures = [
     ...requiredArtifacts.filter((entry) => !entry.exists).map((entry) => `missing required artifact ${entry.path}`),
+    ...requiredArtifacts.filter((entry) => entry.exists && entry.validJson === false).map((entry) => `invalid JSON artifact ${entry.path}`),
     ...sitemapMissingLocal.map((entry) => `sitemap URL missing local file ${entry}`),
     ...localHtmlNotInSitemap.map((entry) => `public HTML missing from sitemap ${entry}`),
     ...duplicatedSitemapPaths.map((entry) => `duplicate sitemap URL ${entry}`),

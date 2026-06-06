@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-05T23:59:57.402Z",
+  "generatedAt": "2026-06-06T13:53:22.841Z",
   "status": "passed",
   "scope": "Local source and generated artifact manifest only. No production fetch, provider access, deploy, or public channel mutation.",
   "summary": {
-    "requiredArtifacts": 8,
+    "requiredArtifacts": 11,
     "missingRequiredArtifacts": 0,
     "sitemapUrlCount": 119,
     "publicHtmlCount": 119,
@@ -21,42 +21,68 @@
     {
       "path": "index.html",
       "exists": true,
-      "sha256": "8b56a4e732d3167ab7ea4932160911883e3606aa92f30838c650c6104c966ffa"
+      "sha256": "8b56a4e732d3167ab7ea4932160911883e3606aa92f30838c650c6104c966ffa",
+      "validJson": null
     },
     {
       "path": "analytics.js",
       "exists": true,
-      "sha256": "aaa0a80c628a55909e014cf8c7472c819cf6d0f2f87a0ceaa4a2dc7746eada85"
+      "sha256": "aaa0a80c628a55909e014cf8c7472c819cf6d0f2f87a0ceaa4a2dc7746eada85",
+      "validJson": null
+    },
+    {
+      "path": "agent.json",
+      "exists": true,
+      "sha256": "edb1ed5f8a98f4a48b5cf4315720088592246c585defe544766b6d1479909102",
+      "validJson": true
+    },
+    {
+      "path": ".well-known/agent.json",
+      "exists": true,
+      "sha256": "c86a8824cc37db9c0a109bd118384a5591e53728afc354e13bd08e15cb0696e3",
+      "validJson": true
+    },
+    {
+      "path": "catalog.json",
+      "exists": true,
+      "sha256": "8d167810956cd70a0d1f8d6a583d1b49c3c2c5982719bb7faed850ed03ed6ddd",
+      "validJson": true
     },
     {
       "path": "intake-form.js",
       "exists": true,
-      "sha256": "dad8e115eda74897ab8732262a642b1b4128a82864ff4a32f60945fbe9d6e994"
+      "sha256": "dad8e115eda74897ab8732262a642b1b4128a82864ff4a32f60945fbe9d6e994",
+      "validJson": null
     },
     {
       "path": "styles.css",
       "exists": true,
-      "sha256": "45545778281b2d8da21d632b6105b2f12e06ba07299781892c9e8e85352904ef"
+      "sha256": "45545778281b2d8da21d632b6105b2f12e06ba07299781892c9e8e85352904ef",
+      "validJson": null
     },
     {
       "path": "robots.txt",
       "exists": true,
-      "sha256": "9449818c23688479e50fc3dcedd021c577af039265cf69fc2c1a20779df51932"
+      "sha256": "91c04162fa5cb098d4e95f76793b2cd0b61a8ca3a7b88419e48d7ca43d64539e",
+      "validJson": null
     },
     {
       "path": "sitemap.xml",
       "exists": true,
-      "sha256": "e74b3c8efc2ab6afb9d6ce9dae9ba4ba001d5b518237b129cbfc266a68d3eb00"
+      "sha256": "e74b3c8efc2ab6afb9d6ce9dae9ba4ba001d5b518237b129cbfc266a68d3eb00",
+      "validJson": null
     },
     {
       "path": "llms.txt",
       "exists": true,
-      "sha256": "a4765b478b36449bedaaadacf5230b92c0b7c7c96737deeccbd37ed9b623e950"
+      "sha256": "b1f97f1eaa061e9e7bfc6887270f16fe56fe5c192b30558887aae39c91033f7e",
+      "validJson": null
     },
     {
       "path": "vercel.json",
       "exists": true,
-      "sha256": "0e176ea56fe07253124196782d99f21ee263b3b43db79aa766c62dd0a06ede39"
+      "sha256": "0e176ea56fe07253124196782d99f21ee263b3b43db79aa766c62dd0a06ede39",
+      "validJson": true
     }
   ],
   "sitemap": {

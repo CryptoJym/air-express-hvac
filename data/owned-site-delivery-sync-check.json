@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:59:59.447Z",
+  "generatedAt": "2026-06-06T13:53:24.318Z",
   "evidenceClass": "owned_site_delivery_sync_read_only_check",
   "status": "pending_delivery_sync",
   "canonicalOrigin": "https://airexpressutah.com",
@@ -125,8 +125,8 @@
       "expectedMarkers": [],
       "local": {
         "exists": true,
-        "bytes": 4313,
-        "sha256": "a4765b478b36449bedaaadacf5230b92c0b7c7c96737deeccbd37ed9b623e950",
+        "bytes": 5907,
+        "sha256": "b1f97f1eaa061e9e7bfc6887270f16fe56fe5c192b30558887aae39c91033f7e",
         "markers": {
           "approvedGa4Present": false,
           "gtagLoaderPresent": false,
@@ -221,8 +221,8 @@
       "expectedMarkers": [],
       "local": {
         "exists": true,
-        "bytes": 147,
-        "sha256": "9449818c23688479e50fc3dcedd021c577af039265cf69fc2c1a20779df51932",
+        "bytes": 612,
+        "sha256": "91c04162fa5cb098d4e95f76793b2cd0b61a8ca3a7b88419e48d7ca43d64539e",
         "markers": {
           "approvedGa4Present": false,
           "gtagLoaderPresent": false,

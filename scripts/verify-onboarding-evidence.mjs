@@ -1118,9 +1118,12 @@ function checkSiteFileManifest() {
   assert(manifest.summary?.missingLocalReferenceCount === 0, "Site file manifest found missing local static references.");
 
   const artifacts = new Map((manifest.requiredArtifacts || []).map((artifact) => [artifact.path, artifact]));
-  for (const requiredArtifact of ["index.html", "analytics.js", "intake-form.js", "styles.css", "robots.txt", "sitemap.xml", "llms.txt", "vercel.json"]) {
+  for (const requiredArtifact of ["index.html", "analytics.js", "agent.json", ".well-known/agent.json", "catalog.json", "intake-form.js", "styles.css", "robots.txt", "sitemap.xml", "llms.txt", "vercel.json"]) {
     assert(artifacts.get(requiredArtifact)?.exists === true, `Site file manifest missing ${requiredArtifact}.`);
     assert(artifacts.get(requiredArtifact)?.sha256, `Site file manifest missing sha256 for ${requiredArtifact}.`);
+    if (requiredArtifact.endsWith(".json")) {
+      assert(artifacts.get(requiredArtifact)?.validJson === true, `Site file manifest has invalid JSON for ${requiredArtifact}.`);
+    }
   }
 
   const blogSources = new Map((manifest.blogSources || []).map((entry) => [entry.slug, entry]));

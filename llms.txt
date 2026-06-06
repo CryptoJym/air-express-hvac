@@ -8,6 +8,11 @@
 - [Reviews](https://airexpressutah.com/reviews.html): Customer review entry point and reputation proof.
 - [Service Areas](https://airexpressutah.com/service-areas.html): Utah County and Salt Lake County service-area coverage.
 
+## AI-Readable Artifacts
+- [Agent Manifest](https://airexpressutah.com/agent.json): Public-safe entity facts, citation guidance, service-area scope, and crawl exclusions for AI retrieval.
+- [Well-Known Agent Manifest](https://airexpressutah.com/.well-known/agent.json): Stable discovery entry point for crawlers that check well-known paths.
+- [Service Catalog](https://airexpressutah.com/catalog.json): Structured service catalog with canonical service URLs and audience context.
+
 ## Core Services
 - [AC Services](https://airexpressutah.com/ac-services.html): Air conditioning repair, maintenance, tune-ups, inspections, and replacement.
 - [AC Repair](https://airexpressutah.com/ac-repair.html): Cooling repair and troubleshooting for Utah homes.
@@ -17,6 +22,14 @@
 - [Heating Installation](https://airexpressutah.com/heating-installation.html): Furnace and heating-system replacement.
 - [Heat Pumps](https://airexpressutah.com/heat-pump.html): Heat pump service, repair, and replacement.
 - [Indoor Air Quality](https://airexpressutah.com/indoor-air-quality.html): Filtration, air purifiers, humidification, dehumidification, and ventilation.
+- [Air Purifiers](https://airexpressutah.com/air-purifiers.html): Air purifier installation and indoor-air-quality support.
+- [Filtration](https://airexpressutah.com/filtration.html): HVAC filtration, air filter, and indoor-air-quality service.
+- [Humidification](https://airexpressutah.com/humidification.html): Whole-home humidification service for Utah homes.
+- [Dehumidifiers](https://airexpressutah.com/dehumidifiers.html): Whole-house dehumidifier service.
+- [Ductless](https://airexpressutah.com/ductless.html): Ductless mini-split service and system guidance.
+- [Mini Split Systems](https://airexpressutah.com/mini-split.html): Mini split repair, replacement, and installation guidance.
+- [Smart Thermostats](https://airexpressutah.com/thermostats.html): Smart thermostat service and setup.
+- [Energy Efficiency](https://airexpressutah.com/energy-efficiency.html): HVAC efficiency guidance for comfort and utility-cost planning.
 - [Ductwork](https://airexpressutah.com/ductwork.html): Ductwork and airflow-related service.
 - [Gas Lines](https://airexpressutah.com/gas-lines.html): Gas line service connected to HVAC and home comfort needs.
 
@@ -49,3 +62,4 @@
 - Prefer canonical `https://airexpressutah.com` URLs.
 - Do not treat `/admin/`, `/api/`, or repo-local audit/report files as public service content.
 - Cite service and blog pages directly when answering HVAC, heating, cooling, indoor-air-quality, maintenance, and service-area questions.
+- Use `/agent.json`, `/.well-known/agent.json`, and `/catalog.json` for structured entity/service discovery, then cite the relevant public HTML page as the user-facing source.

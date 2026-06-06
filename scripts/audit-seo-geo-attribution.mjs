@@ -31,6 +31,20 @@ function readOptionalJson(path) {
   }
 }
 
+function jsonArtifactStatus(path) {
+  const absolute = join(root, path);
+  if (!existsSync(absolute)) {
+    return { path, exists: false, validJson: false, sha256: "", error: "missing" };
+  }
+  const text = readFileSync(absolute, "utf8");
+  try {
+    JSON.parse(text);
+    return { path, exists: true, validJson: true, sha256: sha256(text), error: "" };
+  } catch (error) {
+    return { path, exists: true, validJson: false, sha256: sha256(text), error: error.message };
+  }
+}
+
 function walk(dir, files = []) {
   const excludedDirs = ["node_modules", ".git", "output"].map((name) => join(dir, name));
   const args = [
@@ -777,6 +791,7 @@ function buildRootCauseMap(context) {
     accessibilityGrouped,
     liveArtifacts,
     llmsTxt,
+    aiArtifacts = [],
     localLlmsHash,
     localRobotsHash,
     publicClaimRegister,
@@ -911,6 +926,31 @@ function buildRootCauseMap(context) {
       evidence: `Live robots.txt status ${liveRobots.status}, edge=${liveRobots.newRewardsEdge ? "yes" : "no"}.`,
       workaround: "Fetched live robots.txt read-only and compared content hashes.",
       nextAction: "Decide whether the edge robots policy or repo robots file is canonical, then document/sync the chosen source.",
+    });
+  }
+
+  const preparedAiArtifacts = aiArtifacts.filter((artifact) => artifact.exists && artifact.validJson);
+  const missingLiveAiArtifacts = preparedAiArtifacts.filter((artifact) => {
+    const liveArtifact = liveArtifacts?.[artifact.key];
+    return liveArtifact && !liveArtifact.ok;
+  });
+  const driftedLiveAiArtifacts = preparedAiArtifacts.filter((artifact) => {
+    const liveArtifact = liveArtifacts?.[artifact.key];
+    return liveArtifact?.ok && liveArtifact.matchesLocal === false;
+  });
+  if (missingLiveAiArtifacts.length || driftedLiveAiArtifacts.length) {
+    add({
+      severity: "Medium",
+      area: "GEO / AI artifacts",
+      status: "prepared_source_pending_live_sync",
+      issue: "Repo-local AI entity and service artifacts are prepared but production is not fully synced",
+      rootCause: "The Air Express source package now includes public-safe AI discovery artifacts, while the live New Reward edge path either does not serve them yet or serves a different edge-managed artifact.",
+      evidence: [
+        missingLiveAiArtifacts.length ? `Not live: ${missingLiveAiArtifacts.map((artifact) => artifact.path).join(", ")}` : "",
+        driftedLiveAiArtifacts.length ? `Live drift: ${driftedLiveAiArtifacts.map((artifact) => artifact.path).join(", ")}` : "",
+      ].filter(Boolean).join("; "),
+      workaround: "Prepared and validated source artifacts locally, then checked live artifact URLs read-only without mutating edge delivery.",
+      nextAction: "Sync the Air Express repo source or New Reward edge-managed artifacts so /agent.json, /.well-known/agent.json, /catalog.json, /llms.txt, and /robots.txt resolve from the same approved source.",
     });
   }
 
@@ -1247,6 +1287,7 @@ function renderReport(audit) {
     <div class="grid">
       <article class="card"><h3>Robots</h3><p>${htmlEscape(audit.geo.robotsSummary)}</p></article>
       <article class="card"><h3>llms.txt</h3><p>${audit.geo.llmsTxt.exists ? "Present." : "Missing. Add a concise llms.txt for AI crawler guidance and key service pages."}</p></article>
+      <article class="card"><h3>AI Artifacts</h3><p>${audit.geo.aiArtifacts.summary}</p></article>
       <article class="card"><h3>Schema</h3><p>${htmlEscape(audit.schema.summary)}</p></article>
       <article class="card"><h3>Content Extractability</h3><p>${htmlEscape(audit.geo.extractabilitySummary)}</p></article>
     </div>
@@ -1323,16 +1364,34 @@ async function main() {
   const robots = read("robots.txt");
   const llmsTxt = existsSync(join(root, "llms.txt"));
   const localLlmsText = llmsTxt ? read("llms.txt") : "";
+  const aiArtifacts = [
+    { key: "agent", name: "agent.json", path: "agent.json", url: `${baseUrl}/agent.json` },
+    { key: "wellKnownAgent", name: ".well-known/agent.json", path: ".well-known/agent.json", url: `${baseUrl}/.well-known/agent.json` },
+    { key: "catalog", name: "catalog.json", path: "catalog.json", url: `${baseUrl}/catalog.json` },
+  ].map((artifact) => {
+    const status = jsonArtifactStatus(artifact.path);
+    return {
+      ...artifact,
+      ...status,
+      localText: status.exists ? read(artifact.path) : "",
+    };
+  });
+  const validAiArtifacts = aiArtifacts.filter((artifact) => artifact.exists && artifact.validJson);
   const liveResults = await mapLimit(sitemapUrls, 8, fetchStatus);
   const liveArtifactResults = await mapLimit([
-    { name: "robots.txt", url: `${baseUrl}/robots.txt`, localText: robots },
-    { name: "llms.txt", url: `${baseUrl}/llms.txt`, localText: localLlmsText },
-    { name: "sitemap.xml", url: `${baseUrl}/sitemap.xml`, localText: sitemapXml },
+    { key: "robots", name: "robots.txt", url: `${baseUrl}/robots.txt`, localText: robots },
+    { key: "llms", name: "llms.txt", url: `${baseUrl}/llms.txt`, localText: localLlmsText },
+    { key: "sitemap", name: "sitemap.xml", url: `${baseUrl}/sitemap.xml`, localText: sitemapXml },
+    ...aiArtifacts.map((artifact) => ({
+      key: artifact.key,
+      name: artifact.name,
+      url: artifact.url,
+      localText: artifact.localText,
+    })),
   ], 2, async (artifact) => ({ ...artifact, result: await fetchTextArtifact(artifact.url) }));
-  const liveArtifacts = Object.fromEntries(liveArtifactResults.map(({ name, localText, result }) => {
+  const liveArtifacts = Object.fromEntries(liveArtifactResults.map(({ key, name, localText, result }) => {
     const localHash = localText ? sha256(localText) : "";
     const matchesLocal = localHash && result.hash ? localHash === result.hash : null;
-    const key = name === "robots.txt" ? "robots" : name === "llms.txt" ? "llms" : "sitemap";
     const liveLastmods = [...(result.text || "").matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1].trim());
     const liveInvalidLastmods = liveLastmods.filter((value) => !/^\d{4}-\d{2}-\d{2}(T[\d:.+-]+Z?)?$/.test(value));
     return [key, {
@@ -1608,6 +1667,53 @@ async function main() {
       fix: "Add an llms.txt that lists canonical service, area, proof, and blog pages for AI crawlers.",
     });
   }
+  const missingAiArtifacts = aiArtifacts.filter((artifact) => !artifact.exists);
+  const invalidAiArtifacts = aiArtifacts.filter((artifact) => artifact.exists && !artifact.validJson);
+  const liveMissingAiArtifacts = aiArtifacts
+    .filter((artifact) => {
+      const liveArtifact = liveArtifacts[artifact.key];
+      return artifact.exists && artifact.validJson && liveArtifact && !liveArtifact.ok;
+    });
+  const liveDriftedAiArtifacts = aiArtifacts
+    .filter((artifact) => {
+      const liveArtifact = liveArtifacts[artifact.key];
+      return artifact.exists && artifact.validJson && liveArtifact?.ok && liveArtifact.matchesLocal === false;
+    });
+  if (missingAiArtifacts.length) {
+    high.push({
+      priority: "High",
+      issue: "AI-readable entity/service artifacts are missing",
+      evidence: missingAiArtifacts.map((artifact) => artifact.path).join(", "),
+      fix: "Add public-safe JSON artifacts for entity facts, well-known agent discovery, and service catalog extraction.",
+    });
+  }
+  if (invalidAiArtifacts.length) {
+    high.push({
+      priority: "High",
+      issue: "AI-readable JSON artifacts are invalid",
+      evidence: invalidAiArtifacts.map((artifact) => `${artifact.path}: ${artifact.error}`).join("; "),
+      fix: "Repair JSON syntax before deploying or syncing the artifacts.",
+    });
+  }
+  if (liveMissingAiArtifacts.length) {
+    medium.push({
+      priority: "Medium",
+      issue: "Prepared AI artifacts are not live yet",
+      evidence: liveMissingAiArtifacts.map((artifact) => {
+        const liveArtifact = liveArtifacts[artifact.key];
+        return `${artifact.path}: live status ${liveArtifact?.status || "unknown"}`;
+      }).join("; "),
+      fix: "Deploy or sync the prepared agent/catalog artifacts through the approved delivery path, then rerun this audit.",
+    });
+  }
+  if (liveDriftedAiArtifacts.length) {
+    medium.push({
+      priority: "Medium",
+      issue: "Live AI artifacts differ from repo-local source",
+      evidence: liveDriftedAiArtifacts.map((artifact) => artifact.path).join(", "),
+      fix: "Sync the repo-local AI artifacts or document the edge-managed source of truth.",
+    });
+  }
   if (llmsTxt && liveArtifacts.llms?.ok && liveArtifacts.llms.matchesLocal === false) {
     high.push({
       priority: "High",
@@ -1651,7 +1757,16 @@ async function main() {
   }
 
   const technicalScore = Math.round((scoreFromIssues(metaIssuePages.length + brokenInternalLinks.length + sitemapMissingLocal.length + liveBrokenFailures.length, pages.length + 10) + (liveBrokenFailures.length ? 70 : 100)) / 2);
-  const geoScore = Math.round((schemaPages.length / Math.max(pages.length, 1)) * 25 + (llmsTxt ? 25 : 0) + (/User-agent:\s*\*/i.test(robots) ? 25 : 0) + 15);
+  const aiCrawlerPolicyPresent = /User-agent:\s*(?:GPTBot|OAI-SearchBot|ChatGPT-User|ClaudeBot|Claude-SearchBot|PerplexityBot|Google-Extended)/i.test(robots);
+  const privatePathPolicyPresent = /Disallow:\s*\/admin\//i.test(robots) && /Disallow:\s*\/api\//i.test(robots);
+  const geoScore = Math.round(
+    (schemaPages.length / Math.max(pages.length, 1)) * 25
+    + (llmsTxt ? 20 : 0)
+    + (validAiArtifacts.length / Math.max(aiArtifacts.length, 1)) * 20
+    + (/User-agent:\s*\*/i.test(robots) ? 10 : 0)
+    + (aiCrawlerPolicyPresent ? 15 : 0)
+    + (privatePathPolicyPresent ? 10 : 0),
+  );
   const messagingScore = Math.max(0, 100 - legacyReferences.length * 5 - duplicateTitles.length * 2);
   const tagScore = liveOnSiteTagEvidence.length ? 35 : onSiteTagEvidence.length ? 20 : 0;
   const liveMeasurementHasLiveSource =
@@ -1694,6 +1809,7 @@ async function main() {
     accessibilityGrouped,
     liveArtifacts,
     llmsTxt,
+    aiArtifacts,
     localLlmsHash: liveArtifacts.llms?.localHash || "",
     localRobotsHash: liveArtifacts.robots?.localHash || "",
     publicClaimRegister,
@@ -1752,12 +1868,26 @@ async function main() {
     },
     geo: {
       robotsSummary: robots.includes("Disallow: /admin/") && robots.includes("Disallow: /api/")
-        ? "Important content is allowed via User-agent: *, while admin and API paths are blocked. No explicit AI crawler allow/block policy is present."
+        ? aiCrawlerPolicyPresent
+          ? "Important content is allowed via User-agent: *, admin/API/private paths are blocked, and major AI crawler discovery paths are explicitly allowed."
+          : "Important content is allowed via User-agent: *, while admin and API paths are blocked. No explicit AI crawler allow/block policy is present."
         : "Robots policy needs manual review.",
       llmsTxt: {
         exists: llmsTxt,
         liveMatchesLocal: liveArtifacts.llms?.matchesLocal ?? null,
         liveEdgeSummary: liveArtifacts.llms?.edgeSummary || "",
+      },
+      aiArtifacts: {
+        required: aiArtifacts.map((artifact) => ({
+          path: artifact.path,
+          url: artifact.url,
+          exists: artifact.exists,
+          validJson: artifact.validJson,
+          liveOk: liveArtifacts[artifact.key]?.ok ?? null,
+          liveStatus: liveArtifacts[artifact.key]?.status ?? null,
+          liveMatchesLocal: liveArtifacts[artifact.key]?.matchesLocal ?? null,
+        })),
+        summary: `${validAiArtifacts.length}/${aiArtifacts.length} required AI-readable JSON artifacts are valid in source.`,
       },
       extractabilitySummary: "The site has broad service and service-area coverage. GEO improvements should focus on llms.txt, clearer answer blocks, stronger proof/authority signals, and measurement links.",
     },

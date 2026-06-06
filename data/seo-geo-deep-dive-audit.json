@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:58:02.949Z",
+  "generatedAt": "2026-06-06T13:53:40.850Z",
   "evidenceClass": "seo_geo_deep_dive",
   "scope": [
     "metadata",
@@ -14,7 +14,7 @@
   ],
   "scores": {
     "technical": 100,
-    "geo": 90,
+    "geo": 100,
     "messaging": 100,
     "attribution": 30,
     "accessibility": 100
