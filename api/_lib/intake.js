@@ -2,6 +2,11 @@ import {
   getServiceTitanConfig,
   serviceTitanAuthorizedRequest,
 } from "./servicetitan-client.js";
+import {
+  getRequestIp,
+  readTurnstileToken,
+  verifyTurnstileToken,
+} from "./turnstile.js";
 
 export const INTAKE_FORMS = Object.freeze({
   contact: Object.freeze({
@@ -97,6 +102,14 @@ const INTAKE_NOTIFICATION_ENV_KEYS = Object.freeze({
 });
 
 const DEFAULT_LEAD_FOLLOW_UP_DELAY_MS = 24 * 60 * 60 * 1000;
+const ATTRIBUTION_FIELD_NAMES = Object.freeze([
+  "trace_id",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+]);
 
 function readStringField(formData, name) {
   const value = formData.get(name);
@@ -104,6 +117,18 @@ function readStringField(formData, name) {
     return "";
   }
   return value.trim();
+}
+
+function readAttributionField(formData, name) {
+  return readStringField(formData, name).replace(/[\r\n\t]+/g, " ").slice(0, 120);
+}
+
+function normalizeAttributionFields(formData) {
+  return Object.fromEntries(
+    ATTRIBUTION_FIELD_NAMES
+      .map((fieldName) => [fieldName, readAttributionField(formData, fieldName)])
+      .filter(([, value]) => value)
+  );
 }
 
 function isSafeRelativePath(value) {
@@ -179,6 +204,18 @@ function buildSummaryLines(submission) {
     `Submitted At: ${submission.submittedAt}`,
   ];
 
+  if (submission.attribution?.trace_id) {
+    lines.push(`Trace ID: ${submission.attribution.trace_id}`);
+  }
+
+  const utmLines = Object.entries(submission.attribution || {})
+    .filter(([key]) => key.startsWith("utm_"))
+    .map(([key, value]) => `${key}: ${value}`);
+  if (utmLines.length) {
+    lines.push("Attribution:");
+    lines.push(...utmLines);
+  }
+
   if (submission.formType === "schedule" && submission.preferredDate) {
     lines.push(`Preferred Date: ${submission.preferredDate}`);
   }
@@ -230,6 +267,32 @@ function parseEmailListEnv(value) {
     .split(/[,\n;]/)
     .map((entry) => entry.trim())
     .filter(Boolean);
+}
+
+export function inspectIntakeNotificationConfig(env = process.env) {
+  const resendApiKey = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey].trim()
+    : "";
+  const from = typeof env?.[INTAKE_NOTIFICATION_ENV_KEYS.from] === "string"
+    ? env[INTAKE_NOTIFICATION_ENV_KEYS.from].trim()
+    : "";
+  const to = parseEmailListEnv(env?.[INTAKE_NOTIFICATION_ENV_KEYS.to]);
+  const missingKeys = [];
+
+  if (!resendApiKey) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.resendApiKey);
+  }
+  if (!from) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.from);
+  }
+  if (to.length === 0) {
+    missingKeys.push(INTAKE_NOTIFICATION_ENV_KEYS.to);
+  }
+
+  return Object.freeze({
+    configured: missingKeys.length === 0,
+    missingKeys: Object.freeze(missingKeys),
+  });
 }
 
 export function loadIntakeNotificationConfig(env = process.env) {
@@ -312,6 +375,7 @@ export function normalizeIntakeSubmission(formType, formData, { now = () => new 
     service,
     preferredDate,
     preferredTime,
+    attribution: normalizeAttributionFields(formData),
     freeformNotes: normalizeFreeformNotes(formData),
     missingFields,
   };
@@ -430,7 +494,12 @@ export async function sendIntakeNotificationEmail(
 ) {
   const notificationConfig = loadIntakeNotificationConfig(env);
   if (!notificationConfig) {
-    return { skipped: true, reason: "not_configured" };
+    const diagnostics = inspectIntakeNotificationConfig(env);
+    return {
+      skipped: true,
+      reason: "not_configured",
+      missingKeys: diagnostics.missingKeys,
+    };
   }
   if (typeof fetchImpl !== "function") {
     throw new Error("A fetch implementation is required to send intake notification email.");
@@ -469,6 +538,7 @@ export function createIntakeHandler({
   defaultReturnTo = INTAKE_FORMS[formType]?.defaultReturnTo,
   submitLead = defaultSubmitLead,
   notifySubmission = sendIntakeNotificationEmail,
+  verifyChallenge = verifyTurnstileToken,
   now = () => new Date(),
 } = {}) {
   if (!INTAKE_FORMS[formType]) {
@@ -499,6 +569,41 @@ export function createIntakeHandler({
       });
     }
 
+    let challengeResult;
+    try {
+      challengeResult = await verifyChallenge(readTurnstileToken(formData), {
+        remoteIp: getRequestIp(request),
+      });
+    } catch (error) {
+      console.error(`[intake:${formType}] Turnstile verification request failed`, error);
+      return redirectResponse(submission.returnTo || defaultReturnTo, {
+        intake: RESULT_QUERY_VALUES.upstreamError,
+      });
+    }
+
+    if (!challengeResult?.success) {
+      if (challengeResult?.reason === "not_configured") {
+        const missingKeys = Array.isArray(challengeResult.missingKeys)
+          ? ` missing_keys=${challengeResult.missingKeys.join(",")}`
+          : "";
+        console.error(`[intake:${formType}] Turnstile verification is not configured.${missingKeys}`);
+        return redirectResponse(submission.returnTo || defaultReturnTo, {
+          intake: RESULT_QUERY_VALUES.upstreamError,
+        });
+      }
+
+      const errorCodes = Array.isArray(challengeResult?.errorCodes)
+        && challengeResult.errorCodes.length > 0
+        ? ` error_codes=${challengeResult.errorCodes.join(",")}`
+        : "";
+      const reason = challengeResult?.reason || "unknown";
+      console.warn(`[intake:${formType}] Turnstile verification rejected submission: ${reason}${errorCodes}`);
+      return redirectResponse(submission.returnTo || defaultReturnTo, {
+        intake: RESULT_QUERY_VALUES.validationError,
+        fields: "captcha",
+      });
+    }
+
     try {
       await submitLead(submission);
     } catch (error) {
@@ -511,7 +616,10 @@ export function createIntakeHandler({
     try {
       const notificationResult = await notifySubmission(submission);
       if (notificationResult?.skipped) {
-        console.warn(`[intake:${formType}] Intake notification skipped: ${notificationResult.reason}`);
+        const missingKeys = Array.isArray(notificationResult.missingKeys)
+          ? ` missing_keys=${notificationResult.missingKeys.join(",")}`
+          : "";
+        console.warn(`[intake:${formType}] Intake notification skipped: ${notificationResult.reason}${missingKeys}`);
       } else {
         console.info(`[intake:${formType}] Intake notification sent`);
       }

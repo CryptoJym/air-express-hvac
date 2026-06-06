@@ -80,7 +80,7 @@
           "value": "airexpresshvac.net"
         }
       ],
-      "destination": "https://airexpressutah.com/:path*",
+      "destination": "https://airexpressutah.com/",
       "permanent": true
     },
     {
@@ -92,7 +92,7 @@
           "value": "www.airexpresshvac.net"
         }
       ],
-      "destination": "https://airexpressutah.com/:path*",
+      "destination": "https://airexpressutah.com/",
       "permanent": true
     },
     {

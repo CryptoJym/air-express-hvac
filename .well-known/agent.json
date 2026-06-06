@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://airexpressutah.com/.well-known/agent.json",
+  "name": "Air Express HVAC agent manifest entry point",
+  "url": "https://airexpressutah.com/.well-known/agent.json",
+  "mainEntity": {
+    "@type": "LocalBusiness",
+    "@id": "https://airexpressutah.com/#localbusiness",
+    "name": "Air Express HVAC",
+    "alternateName": "Air Express Heating & Air Conditioning",
+    "url": "https://airexpressutah.com/",
+    "telephone": "+1-801-766-8585",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "628 E State St Ste 1",
+      "addressLocality": "Lehi",
+      "addressRegion": "UT",
+      "postalCode": "84043",
+      "addressCountry": "US"
+    }
+  },
+  "sameAs": [
+    "https://airexpressutah.com/agent.json",
+    "https://airexpressutah.com/catalog.json",
+    "https://airexpressutah.com/llms.txt"
+  ],
+  "dateModified": "2026-06-06",
+  "inLanguage": "en-US"
+}

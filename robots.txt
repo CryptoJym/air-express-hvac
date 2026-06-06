@@ -1,5 +1,26 @@
+# AI-optimized robots.txt for Air Express HVAC
 User-agent: *
 Allow: /
+Disallow: /.backup/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /option-c/
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Amazonbot
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /agent.json
+Allow: /.well-known/agent.json
+Allow: /catalog.json
 Disallow: /.backup/
 Disallow: /admin/
 Disallow: /api/

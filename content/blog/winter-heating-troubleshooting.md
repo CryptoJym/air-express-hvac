@@ -23,6 +23,12 @@ We're going to drive out either way — we always do — but probably half the e
 
 This is the checklist we walk through with people on the phone before we dispatch a truck. If you get to the end and nothing here works, definitely call — something real is wrong. But try these first.
 
+## What is safe to check before calling for furnace repair?
+
+Check homeowner-level items only: thermostat mode, furnace switch, breaker, filter, obvious gas shutoff position, condensate water, and a blocked exterior vent. The Department of Energy's [home heating guidance](https://www.energy.gov/energysaver/home-heating-systems) recommends filter replacement, clear registers, and proper thermostat settings as basic heating-efficiency steps, but anything involving gas, combustion, electrical components, or the heat exchanger should move to a technician.
+
+If the basic checklist does not solve it, schedule [heating repair](/heating-repair.html), [furnace repair](/furnace-repair.html), or [emergency HVAC service](/emergency.html) instead of forcing resets over and over.
+
 ## 1. Is the thermostat actually set to heat?
 
 Start here. We're not insulting you. We've walked into houses where a toddler flipped the switch, a guest "adjusted" it, or the thermostat got bumped during cleaning. Modern smart thermostats can also reset themselves after a power blip.

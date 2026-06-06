@@ -1,0 +1,260 @@
+{
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "@id": "https://airexpressutah.com/catalog.json#services",
+  "name": "Air Express HVAC service catalog",
+  "url": "https://airexpressutah.com/catalog.json",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://airexpressutah.com/#localbusiness",
+    "name": "Air Express HVAC",
+    "url": "https://airexpressutah.com/",
+    "telephone": "+1-801-766-8585",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "628 E State St Ste 1",
+      "addressLocality": "Lehi",
+      "addressRegion": "UT",
+      "postalCode": "84043",
+      "addressCountry": "US"
+    }
+  },
+  "areaServed": [
+    "Lehi UT",
+    "Eagle Mountain UT",
+    "Saratoga Springs UT",
+    "Orem UT",
+    "Provo UT",
+    "Sandy UT",
+    "Alpine UT",
+    "Draper UT",
+    "Highland UT",
+    "Bluffdale UT",
+    "West Jordan UT",
+    "South Jordan UT",
+    "Pleasant Grove UT",
+    "Utah County UT",
+    "Salt Lake County UT"
+  ],
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Air Conditioning Services",
+        "serviceType": "AC repair, maintenance, tune-ups, inspections, and replacement",
+        "url": "https://airexpressutah.com/ac-services.html",
+        "audience": "Homeowners, property managers, builders, and light-commercial customers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "AC Repair",
+        "serviceType": "Cooling diagnostics, troubleshooting, and repair",
+        "url": "https://airexpressutah.com/ac-repair.html",
+        "audience": "Utah homeowners and property managers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "AC Installation",
+        "serviceType": "Air conditioner replacement and new AC installation",
+        "url": "https://airexpressutah.com/ac-installation.html",
+        "audience": "Homeowners, builders, and replacement-system buyers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Heating Services",
+        "serviceType": "Furnace, heat pump, and emergency heating service",
+        "url": "https://airexpressutah.com/heating-services.html",
+        "audience": "Residential and light-commercial customers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Furnace Repair",
+        "serviceType": "Furnace repair, diagnostics, and cold-weather service",
+        "url": "https://airexpressutah.com/furnace-repair.html",
+        "audience": "Utah homeowners and property managers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Heating Installation",
+        "serviceType": "Furnace and heating-system replacement",
+        "url": "https://airexpressutah.com/heating-installation.html",
+        "audience": "Homeowners, builders, and replacement-system buyers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Heat Pump Service",
+        "serviceType": "Heat pump service, repair, and replacement",
+        "url": "https://airexpressutah.com/heat-pump.html",
+        "audience": "Utah homeowners comparing efficient heating and cooling options"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Indoor Air Quality",
+        "serviceType": "Filtration, air purifiers, humidification, dehumidification, and ventilation",
+        "url": "https://airexpressutah.com/indoor-air-quality.html",
+        "audience": "Homeowners focused on comfort, air quality, allergies, and airflow"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Air Purifiers",
+        "serviceType": "Air purifier installation and indoor-air-quality support",
+        "url": "https://airexpressutah.com/air-purifiers.html",
+        "audience": "Homeowners focused on filtration, dust, allergies, smoke, and indoor air quality"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Filtration",
+        "serviceType": "HVAC filtration, air filter, and indoor-air-quality service",
+        "url": "https://airexpressutah.com/filtration.html",
+        "audience": "Homeowners improving air quality and HVAC system protection"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Humidification",
+        "serviceType": "Whole-home humidification service",
+        "url": "https://airexpressutah.com/humidification.html",
+        "audience": "Utah homeowners managing dry winter air and comfort"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Whole House Dehumidifiers",
+        "serviceType": "Whole-house dehumidifier service",
+        "url": "https://airexpressutah.com/dehumidifiers.html",
+        "audience": "Homeowners managing moisture, comfort, and indoor air quality"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Ductless Mini-Split Systems",
+        "serviceType": "Ductless mini-split service and system guidance",
+        "url": "https://airexpressutah.com/ductless.html",
+        "audience": "Homeowners, additions, garages, and rooms needing targeted comfort"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Mini Split Systems",
+        "serviceType": "Mini split repair, replacement, and installation guidance",
+        "url": "https://airexpressutah.com/mini-split.html",
+        "audience": "Homeowners comparing ductless heating and cooling options"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Smart Thermostats",
+        "serviceType": "Smart thermostat service and setup",
+        "url": "https://airexpressutah.com/thermostats.html",
+        "audience": "Homeowners improving comfort control and efficiency"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Energy Efficiency",
+        "serviceType": "HVAC efficiency guidance for comfort and utility-cost planning",
+        "url": "https://airexpressutah.com/energy-efficiency.html",
+        "audience": "Homeowners planning efficient repair, replacement, and maintenance decisions"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Ductwork",
+        "serviceType": "Ductwork and airflow-related HVAC service",
+        "url": "https://airexpressutah.com/ductwork.html",
+        "audience": "Homeowners, builders, and light-commercial customers"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Gas Lines",
+        "serviceType": "Gas line service connected to HVAC and home comfort needs",
+        "url": "https://airexpressutah.com/gas-lines.html",
+        "audience": "Homeowners and project managers needing HVAC-adjacent gas line support"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Emergency HVAC Service",
+        "serviceType": "Heating and cooling service requests for urgent comfort issues",
+        "url": "https://airexpressutah.com/emergency-hvac.html",
+        "audience": "Customers with urgent heating or cooling failures"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "HVAC Maintenance",
+        "serviceType": "Seasonal HVAC maintenance, inspections, and tune-ups",
+        "url": "https://airexpressutah.com/maintenance.html",
+        "audience": "Homeowners and property managers planning preventive service"
+      }
+    }
+  ],
+  "supportingPages": [
+    "https://airexpressutah.com/service-areas.html",
+    "https://airexpressutah.com/residential.html",
+    "https://airexpressutah.com/commercial.html",
+    "https://airexpressutah.com/light-commercial.html",
+    "https://airexpressutah.com/multifamily.html",
+    "https://airexpressutah.com/new-construction.html",
+    "https://airexpressutah.com/air-purifiers.html",
+    "https://airexpressutah.com/filtration.html",
+    "https://airexpressutah.com/humidification.html",
+    "https://airexpressutah.com/dehumidifiers.html",
+    "https://airexpressutah.com/ductless.html",
+    "https://airexpressutah.com/mini-split.html",
+    "https://airexpressutah.com/thermostats.html",
+    "https://airexpressutah.com/energy-efficiency.html",
+    "https://airexpressutah.com/blog/"
+  ],
+  "dateModified": "2026-06-06",
+  "inLanguage": "en-US"
+}

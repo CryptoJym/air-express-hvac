@@ -29,6 +29,12 @@ A few caveats upfront:
 
 With that out of the way:
 
+## Are these numbers a quote or a planning range?
+
+They are planning ranges. A real quote still needs a load calculation, equipment match, duct review, permit requirements, and the condition of the existing system. The Department of Energy's [central air conditioning overview](https://www.energy.gov/energysaver/central-air-conditioning) is useful background because it explains why the indoor duct system and air handler are part of the cooling result, not just the outdoor condenser.
+
+Use this guide to sanity-check bids for [AC replacement](/ac-replacement.html), [heating replacement](/heating-replacement.html), [heat pumps](/heat-pump.html), ductwork, thermostats, and indoor air quality add-ons. Then use an on-site estimate to pin down the actual scope.
+
 ## Furnace replacement
 
 A typical 80,000-100,000 BTU gas furnace replacement in a Utah home with existing ductwork:
