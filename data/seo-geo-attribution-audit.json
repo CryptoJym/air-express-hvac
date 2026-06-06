@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T13:53:22.385Z",
+  "generatedAt": "2026-06-06T14:08:31.249Z",
   "site": "https://airexpressutah.com",
   "legacySite": "https://airexpresshvac.net",
   "skillsUsed": [
@@ -10620,7 +10620,7 @@
     },
     "deliverySync": {
       "status": "pending_delivery_sync",
-      "evidence": "delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json",
+      "evidence": "delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, agent_json:live_drift, well_known_agent_json:live_drift, catalog_json:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json",
       "source": "data/owned-site-delivery-sync-check.json",
       "approvedGa4Id": "G-JZ7PY32EVX",
       "mutationBoundary": "Read-only local source inspection and public HTTP fetches only. No deploy, edge sync, provider change, GTM publish, GA4 change, ServiceTitan lead, DNS change, or production mutation is performed.",
@@ -10700,7 +10700,7 @@
       {
         "priority": "High",
         "issue": "Owned-site delivery sync is pending for critical measurement artifacts",
-        "evidence": "delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json",
+        "evidence": "delivery diagnostic=pending_delivery_sync; approved GA4=G-JZ7PY32EVX; artifacts=homepage:pending_delivery_sync, analytics_js:pending_delivery_sync, llms_txt:live_drift, agent_json:live_drift, well_known_agent_json:live_drift, catalog_json:live_drift, sitemap_xml:live_drift, robots_txt:live_drift; source=data/owned-site-delivery-sync-check.json",
         "fix": "Approve the Air Express deploy, New Reward edge sync, or manual artifact sync; then rerun npm run verify:owned-site-delivery-sync and npm run verify:live-measurement."
       },
       {

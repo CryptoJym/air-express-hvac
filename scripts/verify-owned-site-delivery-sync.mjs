@@ -36,6 +36,27 @@ const ARTIFACTS = [
     expectedMarkers: [],
   },
   {
+    name: "agent_json",
+    localPath: "agent.json",
+    liveUrl: `${CANONICAL_ORIGIN}/agent.json`,
+    critical: false,
+    expectedMarkers: [],
+  },
+  {
+    name: "well_known_agent_json",
+    localPath: ".well-known/agent.json",
+    liveUrl: `${CANONICAL_ORIGIN}/.well-known/agent.json`,
+    critical: false,
+    expectedMarkers: [],
+  },
+  {
+    name: "catalog_json",
+    localPath: "catalog.json",
+    liveUrl: `${CANONICAL_ORIGIN}/catalog.json`,
+    critical: false,
+    expectedMarkers: [],
+  },
+  {
     name: "sitemap_xml",
     localPath: "sitemap.xml",
     liveUrl: `${CANONICAL_ORIGIN}/sitemap.xml`,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T13:53:24.318Z",
+  "generatedAt": "2026-06-06T14:06:36.983Z",
   "evidenceClass": "owned_site_delivery_sync_read_only_check",
   "status": "pending_delivery_sync",
   "canonicalOrigin": "https://airexpressutah.com",
@@ -165,6 +165,150 @@
       }
     },
     {
+      "name": "agent_json",
+      "status": "live_drift",
+      "critical": false,
+      "localPath": "agent.json",
+      "liveUrl": "https://airexpressutah.com/agent.json",
+      "expectedMarkers": [],
+      "local": {
+        "exists": true,
+        "bytes": 3461,
+        "sha256": "edb1ed5f8a98f4a48b5cf4315720088592246c585defe544766b6d1479909102",
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "live": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://airexpressutah.com/agent.json",
+        "bytes": 1619,
+        "sha256": "19f32fc353c59f1d7635aae3da6c32dc519f85cdae9c721db99a31652cbb0d93",
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+          "xNewRewardsEdgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+          "xNewRewardsEdgeRouteMode": "ZERO_REDIRECT",
+          "contentType": "application/json; charset=utf-8"
+        },
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "markerCheck": {
+        "missingLocalMarkers": [],
+        "missingLiveMarkers": [],
+        "unapprovedLocalGtm": [],
+        "unapprovedLiveGtm": []
+      }
+    },
+    {
+      "name": "well_known_agent_json",
+      "status": "live_drift",
+      "critical": false,
+      "localPath": ".well-known/agent.json",
+      "liveUrl": "https://airexpressutah.com/.well-known/agent.json",
+      "expectedMarkers": [],
+      "local": {
+        "exists": true,
+        "bytes": 956,
+        "sha256": "c86a8824cc37db9c0a109bd118384a5591e53728afc354e13bd08e15cb0696e3",
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "live": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://airexpressutah.com/.well-known/agent.json",
+        "bytes": 1619,
+        "sha256": "19f32fc353c59f1d7635aae3da6c32dc519f85cdae9c721db99a31652cbb0d93",
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+          "xNewRewardsEdgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+          "xNewRewardsEdgeRouteMode": "ZERO_REDIRECT",
+          "contentType": "application/json; charset=utf-8"
+        },
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "markerCheck": {
+        "missingLocalMarkers": [],
+        "missingLiveMarkers": [],
+        "unapprovedLocalGtm": [],
+        "unapprovedLiveGtm": []
+      }
+    },
+    {
+      "name": "catalog_json",
+      "status": "live_drift",
+      "critical": false,
+      "localPath": "catalog.json",
+      "liveUrl": "https://airexpressutah.com/catalog.json",
+      "expectedMarkers": [],
+      "local": {
+        "exists": true,
+        "bytes": 8957,
+        "sha256": "8d167810956cd70a0d1f8d6a583d1b49c3c2c5982719bb7faed850ed03ed6ddd",
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "live": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://airexpressutah.com/catalog.json",
+        "bytes": 25868,
+        "sha256": "24382ddfd022b3d65bd7cb2d6074eff5c3b2e33351da1284ec3aeb5291638b61",
+        "headers": {
+          "xNewRewardsEdgeWebsiteId": "cmorqbs9j001r5nr1h25vosp8",
+          "xNewRewardsEdgeActiveVersion": "v20260601032350-675731b8-57d4bf",
+          "xNewRewardsEdgeRouteMode": "ZERO_REDIRECT",
+          "contentType": "application/json; charset=utf-8"
+        },
+        "markers": {
+          "approvedGa4Present": false,
+          "gtagLoaderPresent": false,
+          "gtagCallPresent": false,
+          "dataLayerPresent": false,
+          "analyticsJsReferencePresent": false,
+          "gtmContainers": []
+        }
+      },
+      "markerCheck": {
+        "missingLocalMarkers": [],
+        "missingLiveMarkers": [],
+        "unapprovedLocalGtm": [],
+        "unapprovedLiveGtm": []
+      }
+    },
+    {
       "name": "sitemap_xml",
       "status": "live_drift",
       "critical": false,
@@ -278,6 +422,24 @@
       "artifact": "llms_txt",
       "status": "live_drift",
       "evidence": "llms.txt and https://airexpressutah.com/llms.txt differ or have a local/source marker problem.",
+      "nextAction": "After the critical measurement path is live, sync this artifact or record the approved edge-managed exception."
+    },
+    {
+      "artifact": "agent_json",
+      "status": "live_drift",
+      "evidence": "agent.json and https://airexpressutah.com/agent.json differ or have a local/source marker problem.",
+      "nextAction": "After the critical measurement path is live, sync this artifact or record the approved edge-managed exception."
+    },
+    {
+      "artifact": "well_known_agent_json",
+      "status": "live_drift",
+      "evidence": ".well-known/agent.json and https://airexpressutah.com/.well-known/agent.json differ or have a local/source marker problem.",
+      "nextAction": "After the critical measurement path is live, sync this artifact or record the approved edge-managed exception."
+    },
+    {
+      "artifact": "catalog_json",
+      "status": "live_drift",
+      "evidence": "catalog.json and https://airexpressutah.com/catalog.json differ or have a local/source marker problem.",
       "nextAction": "After the critical measurement path is live, sync this artifact or record the approved edge-managed exception."
     },
     {

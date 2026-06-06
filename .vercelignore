@@ -1,0 +1,9 @@
+.git/
+.vercel/
+node_modules/
+memory/
+output/
+playwright-report/
+test-results/
+.env
+.env.*

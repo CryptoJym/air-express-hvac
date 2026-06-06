@@ -1,6 +1,6 @@
 # Air Express Owned-Site Delivery Sync Packet
 
-Generated: 2026-06-06T13:53:24.436Z
+Generated: 2026-06-06T14:06:37.102Z
 
 Status: prepared evidence packet. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy is performed by this packet.
 
@@ -50,6 +50,9 @@ Interpretation: the read-only New Reward source currently shows the canonical ed
 | P0 | homepage | index.html | https://airexpressutah.com/ | pending_delivery_sync | 8b56a4e732d3... | 200 | 04e813924c7c... | cmorqbs9j001r5nr1h25vosp8 | Approve the Air Express delivery path through deploy, New Reward edge sync, or manual artifact sync; then rerun npm run verify:owned-site-delivery-sync and npm run verify:live-measurement. |
 | P0 | analytics_js | analytics.js | https://airexpressutah.com/analytics.js | pending_delivery_sync | aaa0a80c628a... | 404 |  | cmorqbs9j001r5nr1h25vosp8 | Approve the Air Express delivery path through deploy, New Reward edge sync, or manual artifact sync; then rerun npm run verify:owned-site-delivery-sync and npm run verify:live-measurement. |
 | P1 | llms_txt | llms.txt | https://airexpressutah.com/llms.txt | live_drift | b1f97f1eaa06... | 200 | 2c8f46d0e198... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
+| P1 | agent_json | agent.json | https://airexpressutah.com/agent.json | live_drift | edb1ed5f8a98... | 200 | 19f32fc353c5... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
+| P1 | well_known_agent_json | .well-known/agent.json | https://airexpressutah.com/.well-known/agent.json | live_drift | c86a8824cc37... | 200 | 19f32fc353c5... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
+| P1 | catalog_json | catalog.json | https://airexpressutah.com/catalog.json | live_drift | 8d167810956c... | 200 | 24382ddfd022... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
 | P1 | sitemap_xml | sitemap.xml | https://airexpressutah.com/sitemap.xml | live_drift | e74b3c8efc2a... | 200 | d7e5e8ef1ab8... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
 | P1 | robots_txt | robots.txt | https://airexpressutah.com/robots.txt | live_drift | 91c04162fa5c... | 200 | b686011b1504... | cmorqbs9j001r5nr1h25vosp8 | After the critical measurement path is live, sync this artifact or record the approved edge-managed exception. |
 
