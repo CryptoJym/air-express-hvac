@@ -86,6 +86,7 @@ function escapeHtml(value) {
 function statusClass(completionState) {
   if (/completed|closed/.test(completionState)) return "complete";
   if (/partial/.test(completionState)) return "partial";
+  if (/rows_found|no_db_blocker|passed|live/.test(completionState)) return "complete";
   if (/pending|prepared|local/.test(completionState)) return "prepared";
   return "blocked-state";
 }
@@ -127,6 +128,7 @@ const serviceTitanStatus = readJson("data/servicetitan-export-access-check.json"
 const serviceTitanJoinProbe = readJson("data/servicetitan-attribution-join-probe.json");
 const siteManifest = readJson("data/site-file-manifest.json");
 const publicClaims = readJson("data/public-claim-register.json");
+const edgeDelivery = mappingStatus.rootCauseSummary?.edgeDelivery || {};
 
 const closedCount = completionRows.filter((row) => row.status === "closed").length;
 const openCount = completionRows.filter((row) => row.status === "open").length;
@@ -134,12 +136,25 @@ const openCount = completionRows.filter((row) => row.status === "open").length;
 const diagnosticCards = [
   ["Live Measurement", liveMeasurement.status, "data/live-measurement-path-check.json"],
   ["Delivery Sync", deliverySync.status, "data/owned-site-delivery-sync-check.json"],
+  ["New Reward Edge", edgeDelivery.status || "unknown", "data/newreward-air-express-provider-readonly-recheck.json"],
   ["Google History", historyStatus.status, "data/google-history/history-pull-status.json"],
   ["New Reward Mapping", mappingStatus.status, "data/newreward-air-express-provider-readonly-recheck.json"],
   ["ServiceTitan Export", serviceTitanStatus.status, "data/servicetitan-export-access-check.json"],
   ["ServiceTitan Join Probe", serviceTitanJoinProbe.status, "data/servicetitan-attribution-join-probe.json"],
   ["Site Manifest", siteManifest.status, "data/site-file-manifest.json"],
   ["Public Claims", publicClaims.status, "data/public-claim-register.json"],
+];
+
+const edgeRows = [
+  ["Canonical Website", edgeDelivery.canonicalWebsiteId || "unknown"],
+  ["Access / Deployment", `${edgeDelivery.accessStatus || "unknown"} / ${edgeDelivery.deploymentStatus || "unknown"}`],
+  ["Route Mode", edgeDelivery.routeMode || "unknown"],
+  ["Active Version", edgeDelivery.activeVersionId || "unknown"],
+  ["Active Artifact", edgeDelivery.activeArtifact ? `${edgeDelivery.activeArtifact.deploymentPackageId || "unknown"}; ${edgeDelivery.activeArtifact.artifactCount || 0} artifact(s)` : "not found"],
+  ["Latest Deployment", edgeDelivery.latestDeployment ? `${edgeDelivery.latestDeployment.status || "unknown"} at ${edgeDelivery.latestDeployment.createdAt || "unknown"}` : "not found"],
+  ["Latest Verification", edgeDelivery.latestVerification ? `${edgeDelivery.latestVerification.status || "unknown"} at ${edgeDelivery.latestVerification.createdAt || "unknown"}` : "not found"],
+  ["Latest Ready Package", edgeDelivery.latestReadyPackage ? `${edgeDelivery.latestReadyPackage.status || "unknown"} ${edgeDelivery.latestReadyPackage.title || ""}` : "not found"],
+  ["Next Action", edgeDelivery.nextAction || "Recheck the New Reward edge source."],
 ];
 
 const html = `<!doctype html>
@@ -223,6 +238,17 @@ const html = `<!doctype html>
         <thead><tr><th>Surface</th><th>Status</th><th>Evidence File</th></tr></thead>
         <tbody>
           ${diagnosticCards.map(([surface, status, evidence]) => `<tr><td>${escapeHtml(surface)}</td><td><span class="state ${statusClass(status)}">${statusLabel(status)}</span></td><td><code>${escapeHtml(evidence)}</code></td></tr>`).join("\n          ")}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>New Reward Edge Delivery State</h2>
+    <p>Read-only New Reward rows are compared against live HTTP checks. If these rows are healthy but live HTTP still lacks GA4, #28 remains a canonical artifact publish/sync problem.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Field</th><th>Read-only Evidence</th></tr></thead>
+        <tbody>
+          ${edgeRows.map(([field, value]) => `<tr><td>${escapeHtml(field)}</td><td>${escapeHtml(value)}</td></tr>`).join("\n          ")}
         </tbody>
       </table>
     </div>

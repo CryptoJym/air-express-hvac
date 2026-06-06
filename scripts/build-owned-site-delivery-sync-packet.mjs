@@ -48,11 +48,34 @@ function table(headers, rows) {
   ].join("\n");
 }
 
+function edgeRows(edgeDelivery = {}) {
+  const active = edgeDelivery.activeArtifact || {};
+  const latestDeployment = edgeDelivery.latestDeployment || {};
+  const latestVerification = edgeDelivery.latestVerification || {};
+  const latestPackage = edgeDelivery.latestReadyPackage || {};
+  const latestReview = edgeDelivery.latestReview || {};
+  return [
+    ["Read-only edge status", edgeDelivery.status || "unknown"],
+    ["Installation", edgeDelivery.installationId || "unknown"],
+    ["Access / deployment", `${edgeDelivery.accessStatus || "unknown"} / ${edgeDelivery.deploymentStatus || "unknown"}`],
+    ["Route mode", edgeDelivery.routeMode || "unknown"],
+    ["Active version", edgeDelivery.activeVersionId || "unknown"],
+    ["Active package", active.deploymentPackageId || "unknown"],
+    ["Artifact count", String(active.artifactCount ?? "unknown")],
+    ["Active version latest", String(Boolean(edgeDelivery.activeVersionIsLatest))],
+    ["Latest deployment", latestDeployment.id ? `${latestDeployment.status || "unknown"} at ${latestDeployment.createdAt || "unknown"}` : "not found"],
+    ["Latest verification", latestVerification.id ? `${latestVerification.status || "unknown"} at ${latestVerification.createdAt || "unknown"}` : "not found"],
+    ["Latest ready package", latestPackage.id ? `${latestPackage.status || "unknown"} ${latestPackage.packageType || ""} ${latestPackage.title || ""}` : "not found"],
+    ["Latest review", latestReview.id ? `${latestReview.status || "unknown"} for package ${latestReview.packageId || "unknown"}` : "not found"],
+  ];
+}
+
 function main() {
   const delivery = readJson("data/owned-site-delivery-sync-check.json");
   const measurement = readJson("data/live-measurement-path-check.json");
   const manifest = readJson("data/site-file-manifest.json");
   const audit = readJson("data/seo-geo-attribution-audit.json");
+  const mapping = readJson("data/newreward-air-express-provider-readonly-recheck.json");
   const now = new Date().toISOString();
 
   const liveHomepage = measurement.live?.homepage || {};
@@ -63,6 +86,7 @@ function main() {
   const pageCoverage = measurement.local?.pageCoverage || {};
   const pendingDeployFailures = audit.liveStatus?.pendingDeployFailures || [];
   const liveArtifactRows = artifactRows(delivery);
+  const edgeDelivery = mapping.rootCauseSummary?.edgeDelivery || {};
 
   const body = `# Air Express Owned-Site Delivery Sync Packet
 
@@ -89,6 +113,12 @@ Move the locally prepared Air Express owned-site artifacts onto the live deliver
 - WWW \`/analytics.js\` HTTP: \`${liveWwwAnalytics.status || "unknown"}\`; approved GA4 present: \`${Boolean(liveWwwAnalytics.markers?.approvedGa4Present)}\`.
 - Apex Turnstile configured: \`${Boolean(turnstileConfig.apex?.configured)}\`; WWW Turnstile configured: \`${Boolean(turnstileConfig.www?.configured)}\`.
 - Approved GTM containers found locally: \`${(pageCoverage.approvedGtmContainers || []).join(", ") || "none"}\`.
+
+## New Reward Edge Read-Only State
+
+${table(["Field", "Value"], edgeRows(edgeDelivery))}
+
+Interpretation: the read-only New Reward source currently shows the canonical edge installation as \`${edgeDelivery.accessStatus || "unknown"}\` / \`${edgeDelivery.deploymentStatus || "unknown"}\`, with active version \`${edgeDelivery.activeVersionId || "unknown"}\`. Live HTTP remains the source of truth for #28, and the canonical apex still lacks the approved GA4 marker, so the safe fix is an authenticated New Reward edge publish/republish or another approved canonical delivery sync followed by live verification.
 
 ## Artifact Sync Matrix
 

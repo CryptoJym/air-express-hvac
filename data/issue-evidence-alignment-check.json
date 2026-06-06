@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:24:46.328Z",
+  "generatedAt": "2026-06-06T00:00:05.130Z",
   "status": "passed",
   "scope": "Repo-local issue evidence alignment only. No provider mutation, OAuth consent, deploy, ServiceTitan action, external send, token access, or customer data access.",
   "observed": {
@@ -85,7 +85,7 @@
     {
       "id": "#28-live-delivery-alignment",
       "status": "passed",
-      "evidence": "liveMeasurement.status=partial_live_www_only_canonical_pending; deliverySync.status=pending_delivery_sync",
+      "evidence": "liveMeasurement.status=partial_live_www_only_canonical_pending; deliverySync.status=pending_delivery_sync; edge=edge_rows_found_no_db_blocker",
       "nextAction": "Refresh live measurement, delivery sync, and #28 matrix row together."
     },
     {

@@ -114,7 +114,7 @@ function formatMix(object = {}) {
 
 function statusClass(value) {
   const text = String(value || "").toLowerCase();
-  if (/verified|ready_in_source|public_baseline_seeded|saved_snapshot|complete|available/.test(text)) {
+  if (/verified|ready_in_source|public_baseline_seeded|saved_snapshot|complete|available|no_db_blocker|rows_found|live/.test(text)) {
     return "good-state";
   }
   if (/prepared|review|brief|pending|partial|needs_public_verification|needs_owner/.test(text)) {
@@ -206,6 +206,7 @@ const serviceTitanServiceRows = Object.entries(serviceTitanLeadSummary.countsByS
 const captchaSummary = serviceTitanLeadSummary.captcha || {};
 const captchaCounts = serviceTitanLeadSummary.countsByCaptchaPeriod || {};
 const captchaQuality = serviceTitanLeadSummary.qualityProxyByCaptchaPeriod || {};
+const edgeDelivery = providerMapping.rootCauseSummary?.edgeDelivery || {};
 
 const providerRows = [
   {
@@ -221,6 +222,14 @@ const providerRows = [
       ? `Property ${providerMapping.rootCauseSummary.ga4.propertyId} selected.`
       : `GA4 provider evidence is ${providerMapping.rootCauseSummary?.ga4?.credentialStatus || "pending"} / ${providerMapping.rootCauseSummary?.ga4?.connectionStatus || "pending"} and propertyId remains blank or scope-gated.`,
     nextAction: "Select the GA4 property/web stream containing G-JZ7PY32EVX and verify live delivery.",
+  },
+  {
+    surface: "New Reward Edge",
+    status: edgeDelivery.status || "edge_state_pending",
+    evidence: edgeDelivery.activeVersionId
+      ? `${edgeDelivery.accessStatus || "unknown"} / ${edgeDelivery.deploymentStatus || "unknown"}; active version ${edgeDelivery.activeVersionId}; latest verification ${edgeDelivery.latestVerification?.status || "unknown"}.`
+      : "Read-only edge delivery evidence is pending.",
+    nextAction: edgeDelivery.nextAction || "Verify the canonical apex after any approved edge publish or delivery sync.",
   },
   {
     surface: "GBP",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:19:19.432Z",
+  "generatedAt": "2026-06-05T23:58:02.984Z",
   "evidenceClass": "air_express_performance_over_time_report",
   "secretHandling": "Only aggregate saved visibility metrics, redacted ServiceTitan counts, public marker booleans, and audit statuses are stored. No tokens, credentials, customer PII, raw lead notes, cookies, or raw HTML are stored.",
   "status": "prepared_with_provider_and_delivery_blockers",

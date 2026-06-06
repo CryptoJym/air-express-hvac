@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T23:05:33.427Z",
+  "generatedAt": "2026-06-05T23:57:34.936Z",
   "evidenceClass": "turnstile_lead_path_diagnostic",
   "status": "captcha_delivery_blocker_but_not_full_drop_cause",
   "secretHandling": "Only public endpoint statuses, response header identifiers, missing env-key names, and aggregate lead counts are stored. No secret values, CAPTCHA tokens, cookies, customer PII, raw HTML, raw ServiceTitan payloads, or credentials are stored.",

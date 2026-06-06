@@ -255,7 +255,14 @@ WITH table_availability AS (
     'Website', to_regclass('"Website"') IS NOT NULL,
     'ProviderCredential', to_regclass('"ProviderCredential"') IS NOT NULL,
     'GscConnection', to_regclass('"GscConnection"') IS NOT NULL,
-    'Ga4Connection', to_regclass('"Ga4Connection"') IS NOT NULL
+    'Ga4Connection', to_regclass('"Ga4Connection"') IS NOT NULL,
+    'CloudflareEdgeInstallation', to_regclass('"CloudflareEdgeInstallation"') IS NOT NULL,
+    'CloudflareEdgeArtifactVersion', to_regclass('"CloudflareEdgeArtifactVersion"') IS NOT NULL,
+    'CloudflareEdgeDeployment', to_regclass('"CloudflareEdgeDeployment"') IS NOT NULL,
+    'CloudflareEdgeVerificationRun', to_regclass('"CloudflareEdgeVerificationRun"') IS NOT NULL,
+    'DeploymentPackage', to_regclass('"DeploymentPackage"') IS NOT NULL,
+    'DeploymentPackageReview', to_regclass('"DeploymentPackageReview"') IS NOT NULL,
+    'ArtifactVersion', to_regclass('"ArtifactVersion"') IS NOT NULL
   ) AS data
 ),
 source_summary AS (
@@ -265,14 +272,26 @@ source_summary AS (
       'Website', (SELECT count(*) FROM "Website"),
       'ProviderCredential', (SELECT count(*) FROM "ProviderCredential"),
       'GscConnection', (SELECT count(*) FROM "GscConnection"),
-      'Ga4Connection', (SELECT count(*) FROM "Ga4Connection")
+      'Ga4Connection', (SELECT count(*) FROM "Ga4Connection"),
+      'CloudflareEdgeInstallation', (SELECT count(*) FROM "CloudflareEdgeInstallation"),
+      'CloudflareEdgeArtifactVersion', (SELECT count(*) FROM "CloudflareEdgeArtifactVersion"),
+      'CloudflareEdgeDeployment', (SELECT count(*) FROM "CloudflareEdgeDeployment"),
+      'CloudflareEdgeVerificationRun', (SELECT count(*) FROM "CloudflareEdgeVerificationRun"),
+      'DeploymentPackage', (SELECT count(*) FROM "DeploymentPackage"),
+      'DeploymentPackageReview', (SELECT count(*) FROM "DeploymentPackageReview"),
+      'ArtifactVersion', (SELECT count(*) FROM "ArtifactVersion")
     ),
     'latestUpdatedAt', jsonb_build_object(
       'Client', (SELECT max("updatedAt") FROM "Client"),
       'Website', (SELECT max("updatedAt") FROM "Website"),
       'ProviderCredential', (SELECT max("updatedAt") FROM "ProviderCredential"),
       'GscConnection', (SELECT max("updatedAt") FROM "GscConnection"),
-      'Ga4Connection', (SELECT max("updatedAt") FROM "Ga4Connection")
+      'Ga4Connection', (SELECT max("updatedAt") FROM "Ga4Connection"),
+      'CloudflareEdgeInstallation', (SELECT max("updatedAt") FROM "CloudflareEdgeInstallation"),
+      'CloudflareEdgeDeployment', (SELECT max("updatedAt") FROM "CloudflareEdgeDeployment"),
+      'DeploymentPackage', (SELECT max("updatedAt") FROM "DeploymentPackage"),
+      'DeploymentPackageReview', (SELECT max("updatedAt") FROM "DeploymentPackageReview"),
+      'ArtifactVersion', (SELECT max("updatedAt") FROM "ArtifactVersion")
     )
   ) AS data
 ),
@@ -387,6 +406,204 @@ ga4_connections AS (
   WHERE ga."tenantId" = ${sqlString(KNOWN.tenantId)}
      OR ga."websiteId" IN (${websiteIds})
      OR ga."propertyId" = ${sqlString(KNOWN.ga4MeasurementId)}
+),
+edge_installations AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', ei.id,
+    'tenantId', ei."tenantId",
+    'clientId', ei."clientId",
+    'websiteId', ei."websiteId",
+    'accessStatus', ei."accessStatus"::text,
+    'deploymentStatus', ei."deploymentStatus"::text,
+    'routeMode', ei."routeMode"::text,
+    'workerName', ei."workerName",
+    'workerRoute', ei."workerRoute",
+    'hasOriginFallbackUrl', ei."originFallbackUrl" IS NOT NULL,
+    'originFallbackHost', CASE
+      WHEN ei."originFallbackUrl" ~* '^https?://' THEN substring(ei."originFallbackUrl" from '^https?://([^/]+)')
+      ELSE ''
+    END,
+    'quickHost', ei."quickHost",
+    'activeVersionId', ei."activeVersionId",
+    'packageVersion', ei."packageVersion",
+    'lastPackageGeneratedAt', ei."lastPackageGeneratedAt",
+    'lastDeployedAt', ei."lastDeployedAt",
+    'lastRollbackAt', ei."lastRollbackAt",
+    'lastVerifiedAt', ei."lastVerifiedAt",
+    'hasLastError', ei."lastError" IS NOT NULL,
+    'createdAt', ei."createdAt",
+    'updatedAt', ei."updatedAt"
+  ) ORDER BY ei."updatedAt" DESC), '[]'::jsonb) AS data
+  FROM "CloudflareEdgeInstallation" ei
+  WHERE ei."tenantId" = ${sqlString(KNOWN.tenantId)}
+     OR ei."clientId" = ${sqlString(KNOWN.crmClientId)}
+     OR ei."websiteId" IN (${websiteIds})
+),
+edge_artifact_versions AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', eav.id,
+    'installationId', eav."installationId",
+    'deploymentPackageId', eav."deploymentPackageId",
+    'versionId', eav."versionId",
+    'artifactCount', eav."artifactCount",
+    'manifestType', jsonb_typeof(COALESCE(eav.manifest, '{}'::jsonb)),
+    'manifestKeys', (
+      SELECT COALESCE(jsonb_agg(key ORDER BY key), '[]'::jsonb)
+      FROM jsonb_object_keys(
+        CASE
+          WHEN jsonb_typeof(COALESCE(eav.manifest, '{}'::jsonb)) = 'object' THEN COALESCE(eav.manifest, '{}'::jsonb)
+          ELSE '{}'::jsonb
+        END
+      ) AS key
+    ),
+    'createdAt', eav."createdAt"
+  ) ORDER BY eav."createdAt" DESC), '[]'::jsonb) AS data
+  FROM (
+    SELECT eav.*
+    FROM "CloudflareEdgeArtifactVersion" eav
+    JOIN "CloudflareEdgeInstallation" ei ON ei.id = eav."installationId"
+    WHERE ei."tenantId" = ${sqlString(KNOWN.tenantId)}
+       OR ei."clientId" = ${sqlString(KNOWN.crmClientId)}
+       OR ei."websiteId" IN (${websiteIds})
+    ORDER BY eav."createdAt" DESC
+    LIMIT 20
+  ) eav
+),
+edge_deployments AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', ed.id,
+    'installationId', ed."installationId",
+    'artifactVersionId', ed."artifactVersionId",
+    'deploymentPackageId', ed."deploymentPackageId",
+    'deploymentType', ed."deploymentType"::text,
+    'status', ed.status::text,
+    'hasMessage', ed.message IS NOT NULL,
+    'createdAt', ed."createdAt",
+    'updatedAt', ed."updatedAt"
+  ) ORDER BY ed."createdAt" DESC), '[]'::jsonb) AS data
+  FROM (
+    SELECT ed.*
+    FROM "CloudflareEdgeDeployment" ed
+    JOIN "CloudflareEdgeInstallation" ei ON ei.id = ed."installationId"
+    WHERE ei."tenantId" = ${sqlString(KNOWN.tenantId)}
+       OR ei."clientId" = ${sqlString(KNOWN.crmClientId)}
+       OR ei."websiteId" IN (${websiteIds})
+    ORDER BY ed."createdAt" DESC
+    LIMIT 20
+  ) ed
+),
+edge_verification_runs AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', evr.id,
+    'installationId', evr."installationId",
+    'artifactVersionId', evr."artifactVersionId",
+    'status', evr.status::text,
+    'hasResult', evr.result IS NOT NULL,
+    'resultKeys', (
+      SELECT COALESCE(jsonb_agg(key ORDER BY key), '[]'::jsonb)
+      FROM jsonb_object_keys(
+        CASE
+          WHEN jsonb_typeof(COALESCE(evr.result, '{}'::jsonb)) = 'object' THEN COALESCE(evr.result, '{}'::jsonb)
+          ELSE '{}'::jsonb
+        END
+      ) AS key
+    ),
+    'createdAt', evr."createdAt"
+  ) ORDER BY evr."createdAt" DESC), '[]'::jsonb) AS data
+  FROM (
+    SELECT evr.*
+    FROM "CloudflareEdgeVerificationRun" evr
+    JOIN "CloudflareEdgeInstallation" ei ON ei.id = evr."installationId"
+    WHERE ei."tenantId" = ${sqlString(KNOWN.tenantId)}
+       OR ei."clientId" = ${sqlString(KNOWN.crmClientId)}
+       OR ei."websiteId" IN (${websiteIds})
+    ORDER BY evr."createdAt" DESC
+    LIMIT 20
+  ) evr
+),
+deployment_package_rows AS (
+  SELECT dp.*
+  FROM "DeploymentPackage" dp
+  WHERE dp."tenantId" = ${sqlString(KNOWN.tenantId)}
+     OR dp."clientId" = ${sqlString(KNOWN.crmClientId)}
+  ORDER BY dp."createdAt" DESC
+  LIMIT 20
+),
+deployment_packages AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', dp.id,
+    'tenantId', dp."tenantId",
+    'clientId', dp."clientId",
+    'packageType', dp."packageType"::text,
+    'monthNumber', dp."monthNumber",
+    'status', dp.status::text,
+    'title', dp.title,
+    'hasContent', dp.content IS NOT NULL,
+    'visibilityScanId', dp."visibilityScanId",
+    'seoOptimizationRunId', dp."seoOptimizationRunId",
+    'generatedAt', dp."generatedAt",
+    'deliveredAt', dp."deliveredAt",
+    'hasError', dp.error IS NOT NULL,
+    'createdAt', dp."createdAt",
+    'updatedAt', dp."updatedAt"
+  ) ORDER BY dp."createdAt" DESC), '[]'::jsonb) AS data
+  FROM deployment_package_rows dp
+),
+deployment_package_reviews AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', dpr.id,
+    'packageId', dpr."packageId",
+    'websiteId', dpr."websiteId",
+    'status', dpr.status::text,
+    'deploymentPolicy', dpr."deploymentPolicy"::text,
+    'reviewDeadlineAt', dpr."reviewDeadlineAt",
+    'submittedAt', dpr."submittedAt",
+    'autoSubmittedAt', dpr."autoSubmittedAt",
+    'launchedAt', dpr."launchedAt",
+    'hasLaunchError', dpr."launchError" IS NOT NULL,
+    'createdAt', dpr."createdAt",
+    'updatedAt', dpr."updatedAt"
+  ) ORDER BY dpr."updatedAt" DESC), '[]'::jsonb) AS data
+  FROM (
+    SELECT dpr.*
+    FROM "DeploymentPackageReview" dpr
+    WHERE dpr."tenantId" = ${sqlString(KNOWN.tenantId)}
+       OR dpr."clientId" = ${sqlString(KNOWN.crmClientId)}
+       OR dpr."websiteId" IN (${websiteIds})
+       OR dpr."packageId" IN (SELECT id FROM deployment_package_rows)
+    ORDER BY dpr."updatedAt" DESC
+    LIMIT 20
+  ) dpr
+),
+artifact_versions AS (
+  SELECT COALESCE(jsonb_agg(jsonb_build_object(
+    'id', av.id,
+    'tenantId', av."tenantId",
+    'clientId', av."clientId",
+    'deploymentPackageId', av."deploymentPackageId",
+    'artifactFamily', av."artifactFamily",
+    'artifactPath', av."artifactPath",
+    'version', av.version,
+    'validationStatus', av."validationStatus",
+    'publishStatus', av."publishStatus",
+    'hasStorageRef', av."storageRef" IS NOT NULL,
+    'hasContentSummary', av."contentSummary" IS NOT NULL,
+    'metadataKeys', (
+      SELECT COALESCE(jsonb_agg(key ORDER BY key), '[]'::jsonb)
+      FROM jsonb_object_keys(COALESCE(av.metadata, '{}'::jsonb)) AS key
+    ),
+    'createdAt', av."createdAt",
+    'updatedAt', av."updatedAt"
+  ) ORDER BY av."updatedAt" DESC), '[]'::jsonb) AS data
+  FROM (
+    SELECT av.*
+    FROM "ArtifactVersion" av
+    WHERE av."tenantId" = ${sqlString(KNOWN.tenantId)}
+       OR av."clientId" = ${sqlString(KNOWN.crmClientId)}
+       OR av."deploymentPackageId" IN (SELECT id FROM deployment_package_rows)
+    ORDER BY av."updatedAt" DESC
+    LIMIT 50
+  ) av
 )
 SELECT jsonb_pretty(jsonb_build_object(
   'tableAvailability', (SELECT data FROM table_availability),
@@ -396,7 +613,14 @@ SELECT jsonb_pretty(jsonb_build_object(
     'websites', (SELECT data FROM websites),
     'providerCredentials', (SELECT data FROM provider_credentials),
     'gscConnections', (SELECT data FROM gsc_connections),
-    'ga4Connections', (SELECT data FROM ga4_connections)
+    'ga4Connections', (SELECT data FROM ga4_connections),
+    'edgeInstallations', (SELECT data FROM edge_installations),
+    'edgeArtifactVersions', (SELECT data FROM edge_artifact_versions),
+    'edgeDeployments', (SELECT data FROM edge_deployments),
+    'edgeVerificationRuns', (SELECT data FROM edge_verification_runs),
+    'deploymentPackages', (SELECT data FROM deployment_packages),
+    'deploymentPackageReviews', (SELECT data FROM deployment_package_reviews),
+    'artifactVersions', (SELECT data FROM artifact_versions)
   )
 ));
 ROLLBACK;
@@ -413,14 +637,39 @@ function summarizeLookup(lookup = {}) {
   const providerCredentials = lookup.providerCredentials || [];
   const gscConnections = lookup.gscConnections || [];
   const ga4Connections = lookup.ga4Connections || [];
+  const edgeInstallations = lookup.edgeInstallations || [];
+  const edgeArtifactVersions = lookup.edgeArtifactVersions || [];
+  const edgeDeployments = lookup.edgeDeployments || [];
+  const edgeVerificationRuns = lookup.edgeVerificationRuns || [];
+  const deploymentPackages = lookup.deploymentPackages || [];
+  const deploymentPackageReviews = lookup.deploymentPackageReviews || [];
+  const artifactVersions = lookup.artifactVersions || [];
   return {
     clientsFound: clients.length,
     websitesFound: websites.length,
     providerCredentialsFound: providerCredentials.length,
     gscConnectionsFound: gscConnections.length,
     ga4ConnectionsFound: ga4Connections.length,
+    edgeInstallationsFound: edgeInstallations.length,
+    edgeArtifactVersionsFound: edgeArtifactVersions.length,
+    edgeDeploymentsFound: edgeDeployments.length,
+    edgeVerificationRunsFound: edgeVerificationRuns.length,
+    deploymentPackagesFound: deploymentPackages.length,
+    deploymentPackageReviewsFound: deploymentPackageReviews.length,
+    artifactVersionsFound: artifactVersions.length,
     airExpressRowsFound:
-      clients.length + websites.length + providerCredentials.length + gscConnections.length + ga4Connections.length,
+      clients.length +
+      websites.length +
+      providerCredentials.length +
+      gscConnections.length +
+      ga4Connections.length +
+      edgeInstallations.length +
+      edgeArtifactVersions.length +
+      edgeDeployments.length +
+      edgeVerificationRuns.length +
+      deploymentPackages.length +
+      deploymentPackageReviews.length +
+      artifactVersions.length,
   };
 }
 
@@ -532,6 +781,7 @@ function providerHealth(lookup = emptyLookup()) {
     canonicalWebsiteId: primaryWebsite?.id || "",
     canonicalWebsiteStatus:
       primaryWebsite?.id === KNOWN.liveEdgeWebsiteId ? "verified" : primaryWebsite ? "ambiguous" : "missing",
+    edgeDelivery: edgeDeliveryHealth(lookup),
     providerEmail:
       gscCredential?.providerEmail ||
       gscConnection?.email ||
@@ -572,6 +822,194 @@ function emptyLookup() {
     providerCredentials: [],
     gscConnections: [],
     ga4Connections: [],
+    edgeInstallations: [],
+    edgeArtifactVersions: [],
+    edgeDeployments: [],
+    edgeVerificationRuns: [],
+    deploymentPackages: [],
+    deploymentPackageReviews: [],
+    artifactVersions: [],
+  };
+}
+
+function edgeDeliveryHealth(lookup = emptyLookup()) {
+  const installations = lookup.edgeInstallations || [];
+  const installation =
+    installations.find((row) => row.websiteId === KNOWN.liveEdgeWebsiteId) ||
+    installations.find((row) => row.websiteId === KNOWN.crmIntegrationWebsiteId) ||
+    null;
+  const artifactVersions = lookup.edgeArtifactVersions || [];
+  const deployments = lookup.edgeDeployments || [];
+  const verificationRuns = lookup.edgeVerificationRuns || [];
+  const deploymentPackages = lookup.deploymentPackages || [];
+  const packageReviews = lookup.deploymentPackageReviews || [];
+  const canonicalInstallationId = installation?.id || "";
+  const sameInstallationArtifacts = artifactVersions.filter((row) => row.installationId === canonicalInstallationId);
+  const sameInstallationDeployments = deployments.filter((row) => row.installationId === canonicalInstallationId);
+  const sameInstallationVerifications = verificationRuns.filter((row) => row.installationId === canonicalInstallationId);
+  const activeVersionId = installation?.activeVersionId || "";
+  const activeArtifact = activeVersionId
+    ? sameInstallationArtifacts.find((row) => row.id === activeVersionId || row.versionId === activeVersionId) || null
+    : null;
+  const latestArtifact = sameInstallationArtifacts[0] || null;
+  const latestDeployment = sameInstallationDeployments[0] || null;
+  const latestVerification = sameInstallationVerifications[0] || null;
+  const latestReadyPackage =
+    deploymentPackages.find((row) => String(row.status || "").toUpperCase() === "READY") ||
+    deploymentPackages.find((row) => !row.hasError) ||
+    null;
+  const latestReview = packageReviews[0] || null;
+  const blockers = [];
+
+  if (!installation) {
+    blockers.push({
+      surface: "edge_delivery",
+      status: "blocked_missing_edge_installation",
+      evidence: `No CloudflareEdgeInstallation row matched canonical website ${KNOWN.liveEdgeWebsiteId}.`,
+      nextAction: "Create or reconcile the Air Express edge installation before attempting an edge sync.",
+    });
+  } else {
+    if (installation.websiteId !== KNOWN.liveEdgeWebsiteId) {
+      blockers.push({
+        surface: "edge_delivery",
+        status: "blocked_wrong_edge_website",
+        evidence: `Edge installation ${installation.id} targets ${installation.websiteId}, not canonical website ${KNOWN.liveEdgeWebsiteId}.`,
+        nextAction: "Select or repair the canonical Air Express website id before publishing edge artifacts.",
+      });
+    }
+    if (String(installation.accessStatus || "").toUpperCase() !== "GRANTED") {
+      blockers.push({
+        surface: "edge_delivery",
+        status: "blocked_edge_access_not_granted",
+        evidence: `Edge installation ${installation.id} accessStatus=${installation.accessStatus || "unknown"}.`,
+        nextAction: "Grant or repair Cloudflare edge access in New Reward before publishing.",
+      });
+    }
+    if (!["DEPLOYED", "LIVE", "REDEPLOY_REQUIRED"].includes(String(installation.deploymentStatus || "").toUpperCase())) {
+      blockers.push({
+        surface: "edge_delivery",
+        status: "blocked_edge_not_deployed",
+        evidence: `Edge installation ${installation.id} deploymentStatus=${installation.deploymentStatus || "unknown"}.`,
+        nextAction: "Generate and publish an approved Air Express edge artifact package.",
+      });
+    }
+    if (!activeVersionId) {
+      blockers.push({
+        surface: "edge_artifact",
+        status: "blocked_missing_active_version",
+        evidence: `Edge installation ${installation.id} has no activeVersionId.`,
+        nextAction: "Publish or republish the approved Air Express edge artifact package.",
+      });
+    } else if (!activeArtifact) {
+      blockers.push({
+        surface: "edge_artifact",
+        status: "blocked_active_version_not_found",
+        evidence: `activeVersionId ${activeVersionId} was not present in the sanitized artifact-version lookup.`,
+        nextAction: "Recheck the edge artifact version table, then republish if the active version cannot be resolved.",
+      });
+    }
+    if (latestDeployment && String(latestDeployment.status || "").toUpperCase() === "FAILED") {
+      blockers.push({
+        surface: "edge_deployment",
+        status: "blocked_latest_deployment_failed",
+        evidence: `Latest edge deployment ${latestDeployment.id} failed.`,
+        nextAction: "Review the New Reward edge deployment failure in the app logs, then republish after correcting the cause.",
+      });
+    }
+    if (latestVerification && String(latestVerification.status || "").toUpperCase() === "FAIL") {
+      blockers.push({
+        surface: "edge_verification",
+        status: "blocked_latest_verification_failed",
+        evidence: `Latest edge verification ${latestVerification.id} failed.`,
+        nextAction: "Review the New Reward edge verification run and rerun verification after publishing the expected artifacts.",
+      });
+    }
+  }
+
+  const activeVersionIsLatest = Boolean(
+    activeArtifact &&
+      latestArtifact &&
+      (activeArtifact.id === latestArtifact.id || activeArtifact.versionId === latestArtifact.versionId)
+  );
+
+  return {
+    status: blockers.length ? "edge_delivery_attention_needed" : "edge_rows_found_no_db_blocker",
+    canonicalWebsiteId: installation?.websiteId || "",
+    installationId: installation?.id || "",
+    accessStatus: installation?.accessStatus || "",
+    deploymentStatus: installation?.deploymentStatus || "",
+    routeMode: installation?.routeMode || "",
+    activeVersionId,
+    activeVersionIsLatest,
+    activeArtifact: activeArtifact
+      ? {
+        id: activeArtifact.id,
+        versionId: activeArtifact.versionId,
+        deploymentPackageId: activeArtifact.deploymentPackageId || "",
+        artifactCount: activeArtifact.artifactCount || 0,
+        createdAt: activeArtifact.createdAt || "",
+      }
+      : null,
+    latestArtifact: latestArtifact
+      ? {
+        id: latestArtifact.id,
+        versionId: latestArtifact.versionId,
+        deploymentPackageId: latestArtifact.deploymentPackageId || "",
+        artifactCount: latestArtifact.artifactCount || 0,
+        createdAt: latestArtifact.createdAt || "",
+      }
+      : null,
+    latestDeployment: latestDeployment
+      ? {
+        id: latestDeployment.id,
+        status: latestDeployment.status || "",
+        artifactVersionId: latestDeployment.artifactVersionId || "",
+        deploymentPackageId: latestDeployment.deploymentPackageId || "",
+        createdAt: latestDeployment.createdAt || "",
+        updatedAt: latestDeployment.updatedAt || "",
+      }
+      : null,
+    latestVerification: latestVerification
+      ? {
+        id: latestVerification.id,
+        status: latestVerification.status || "",
+        artifactVersionId: latestVerification.artifactVersionId || "",
+        createdAt: latestVerification.createdAt || "",
+      }
+      : null,
+    latestReadyPackage: latestReadyPackage
+      ? {
+        id: latestReadyPackage.id,
+        status: latestReadyPackage.status || "",
+        packageType: latestReadyPackage.packageType || "",
+        monthNumber: latestReadyPackage.monthNumber || "",
+        title: latestReadyPackage.title || "",
+        generatedAt: latestReadyPackage.generatedAt || "",
+        updatedAt: latestReadyPackage.updatedAt || "",
+      }
+      : null,
+    latestReview: latestReview
+      ? {
+        id: latestReview.id,
+        packageId: latestReview.packageId || "",
+        websiteId: latestReview.websiteId || "",
+        status: latestReview.status || "",
+        launchedAt: latestReview.launchedAt || "",
+        updatedAt: latestReview.updatedAt || "",
+      }
+      : null,
+    counts: {
+      installations: installations.length,
+      artifactVersions: sameInstallationArtifacts.length,
+      deployments: sameInstallationDeployments.length,
+      verificationRuns: sameInstallationVerifications.length,
+      deploymentPackages: deploymentPackages.length,
+      artifactRows: (lookup.artifactVersions || []).length,
+    },
+    blockers,
+    nextAction: blockers.length
+      ? "Resolve the listed edge-delivery database blocker, then rerun npm run verify:owned-site-delivery-sync and npm run verify:live-measurement against the canonical apex."
+      : "The read-only New Reward edge rows do not show an edge access/deployment blocker; because the canonical apex still lacks GA4, publish or republish the approved artifact package through the authenticated New Reward edge delivery UI and verify live HTTP afterward.",
   };
 }
 
@@ -656,7 +1094,7 @@ function main() {
     secretHandling:
       "No database URL, token, encrypted credential blob, provider token, or session material was printed or stored.",
     queryMode:
-      "BEGIN READ ONLY; targeted Client, Website, ProviderCredential, GscConnection, and Ga4Connection lookups; ROLLBACK for each unique configured database candidate.",
+      "BEGIN READ ONLY; targeted Client, Website, ProviderCredential, GscConnection, Ga4Connection, Cloudflare edge delivery, DeploymentPackage, and ArtifactVersion status lookups; ROLLBACK for each unique configured database candidate.",
     knownAirExpressIds: KNOWN,
     tooling: {
       psqlAvailable: psql.ok,

@@ -67,7 +67,7 @@ function slugClass(value) {
 
 function statusClass(value) {
   const text = String(value || "").toLowerCase();
-  if (/verified|connected|saved|available|passed|valid/.test(text)) return "good";
+  if (/verified|connected|saved|available|passed|valid|no_db_blocker|rows_found|live/.test(text)) return "good";
   if (/prepared|pending|partial|inferred|selected/.test(text)) return "warn";
   if (/blocked|revoked|error|missing|unproven|expired|null/.test(text)) return "bad";
   return "neutral";
@@ -154,6 +154,7 @@ const aiByEngine = Array.isArray(snapshotHistory.aiByEngine) ? snapshotHistory.a
 const latestAiWeek = aiByWeek.at(-1) || null;
 const previousAiWeek = aiByWeek.length > 1 ? aiByWeek.at(-2) : null;
 const rootCause = mapping.rootCauseSummary || {};
+const edgeDelivery = rootCause.edgeDelivery || {};
 const includeGbpInReport = historyStatus.gbp?.status !== "not_included";
 const googleScopeLabel = includeGbpInReport
   ? "direct Google and GBP provider access"
@@ -174,6 +175,14 @@ const providerRows = [
       ? "Property selected."
       : "Connected row exists, but propertyId is blank.",
     nextAction: "Select the GA4 property or stream containing G-JZ7PY32EVX.",
+  },
+  {
+    surface: "New Reward Edge",
+    state: edgeDelivery.status || "edge_state_pending",
+    evidence: edgeDelivery.activeVersionId
+      ? `${edgeDelivery.accessStatus || "unknown"} / ${edgeDelivery.deploymentStatus || "unknown"}; active ${edgeDelivery.activeVersionId}; live HTTP still checked separately.`
+      : "Read-only edge state is not available.",
+    nextAction: edgeDelivery.nextAction || "Recheck New Reward edge delivery before claiming canonical GA4 is live.",
   },
   ...(includeGbpInReport
     ? [{
@@ -800,7 +809,7 @@ const html = `<!doctype html>
     </section>
 
     <section class="footer-note">
-      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, canonical live tag delivery, and live CAPTCHA/lead-path health remain the current blockers. The current ServiceTitan API key can pull lead counts; booking and revenue joins are intentionally out of scope for this report. Google Business Profile is outside this refresh. No provider mutation, public send, or untracked production change is performed by this report.
+      Generated ${escapeHtml(generatedAt)} from repo-local evidence. Saved snapshots are not direct live Google API history. Direct GSC/GA4 access, GA4 property selection, canonical live tag delivery, and live CAPTCHA/lead-path health remain the current blockers. Read-only New Reward edge rows show access/deployment state, but live HTTP is the proof gate for canonical GA4. The current ServiceTitan API key can pull lead counts; booking and revenue joins are intentionally out of scope for this report. Google Business Profile is outside this refresh. No provider mutation, public send, or untracked production change is performed by this report.
     </section>
   </main>
 

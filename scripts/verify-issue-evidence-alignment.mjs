@@ -156,13 +156,20 @@ const liveMeasurementDeliveryOpenStates = new Set([
   "fixed_locally_pending_live",
   "partial_live_www_only_canonical_pending",
 ]);
+const edgeDelivery = mappingStatus.rootCauseSummary?.edgeDelivery || {};
 check(
   "#28-live-delivery-alignment",
   liveMeasurementDeliveryOpenStates.has(liveMeasurement.status) &&
     deliverySync.status === "pending_delivery_sync" &&
+    edgeDelivery.status === "edge_rows_found_no_db_blocker" &&
+    edgeDelivery.accessStatus === "GRANTED" &&
+    edgeDelivery.deploymentStatus === "LIVE" &&
+    edgeDelivery.latestDeployment?.status === "LIVE" &&
+    edgeDelivery.latestVerification?.status === "PASS" &&
     includesAll(row28.current_evidence, [liveMeasurement.status, "pending_delivery_sync", "G-JZ7PY32EVX"]) &&
-    includesAll(row28.remaining_blocker, ["canonical", "sync"]),
-  `liveMeasurement.status=${liveMeasurement.status}; deliverySync.status=${deliverySync.status}`,
+    includesAll(row28.current_evidence, ["edge access GRANTED", "latest deployment LIVE", "latest verification PASS"]) &&
+    includesAll(row28.remaining_blocker, ["canonical", "GRANTED/LIVE/PASS", "live HTTP"]),
+  `liveMeasurement.status=${liveMeasurement.status}; deliverySync.status=${deliverySync.status}; edge=${edgeDelivery.status || ""}`,
   "Refresh live measurement, delivery sync, and #28 matrix row together."
 );
 

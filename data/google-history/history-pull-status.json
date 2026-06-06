@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-05T23:18:51.730Z",
+  "generatedAt": "2026-06-06T00:00:03.297Z",
   "account": "newrewardplatform@gmail.com",
   "requested": {
-    "gscStartDate": "2025-02-05",
-    "ga4StartDate": "2020-01-01",
+    "gscStartDate": "2026-01-01",
+    "ga4StartDate": "2026-01-01",
     "gbpStartDate": null,
-    "endDate": "2026-06-03",
+    "endDate": "2026-06-05",
     "explicitGscProperty": "",
     "explicitGa4PropertyId": "",
     "includedGoogleSurfaces": [
@@ -644,7 +644,7 @@
       "id": "post_install",
       "label": "After GA4/lead proof",
       "start": "2026-04-24",
-      "end": "2026-06-03",
+      "end": "2026-06-05",
       "days": 0,
       "gscClicks": 0,
       "gscImpressions": 0,
@@ -1055,7 +1055,7 @@
     }
   },
   "newRewardSnapshotHistory": {
-    "generatedAt": "2026-06-05T23:13:43.399Z",
+    "generatedAt": "2026-06-05T23:57:35.140Z",
     "status": "saved_snapshot_history_available",
     "evidenceClass": "read_only_newreward_saved_snapshot_history",
     "secretHandling": "No database URL, OAuth token, encrypted credential, customer PII, or full AI response text is printed or stored.",

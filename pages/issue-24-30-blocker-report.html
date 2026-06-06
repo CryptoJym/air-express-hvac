@@ -52,7 +52,7 @@
     <h1>Air Express Issue 24-30 Blocker Report</h1>
     <p>Current completion audit for attribution, provider access, live tag delivery, reporting, and ServiceTitan proof lanes.</p>
     <div class="meta">
-      <span class="pill">Generated 2026-06-05T23:20:17.341Z</span>
+      <span class="pill">Generated 2026-06-06T00:00:05.267Z</span>
       <span class="pill">Repo: CryptoJym/air-express-hvac</span>
       <span class="pill">No provider mutations attempted</span>
       <span class="pill">No Air Express production deploy attempted</span>
@@ -79,13 +79,33 @@
         <thead><tr><th>Surface</th><th>Status</th><th>Evidence File</th></tr></thead>
         <tbody>
           <tr><td>Live Measurement</td><td><span class="state partial">partial live www only canonical pending</span></td><td><code>data/live-measurement-path-check.json</code></td></tr>
-          <tr><td>Delivery Sync</td><td><span class="state prepared">pending delivery sync</span></td><td><code>data/owned-site-delivery-sync-check.json</code></td></tr>
+          <tr><td>Delivery Sync</td><td><span class="state complete">pending delivery sync</span></td><td><code>data/owned-site-delivery-sync-check.json</code></td></tr>
+          <tr><td>New Reward Edge</td><td><span class="state complete">edge rows found no db blocker</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
           <tr><td>Google History</td><td><span class="state blocked-state">blocked</span></td><td><code>data/google-history/history-pull-status.json</code></td></tr>
-          <tr><td>New Reward Mapping</td><td><span class="state blocked-state">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
+          <tr><td>New Reward Mapping</td><td><span class="state complete">rows found</span></td><td><code>data/newreward-air-express-provider-readonly-recheck.json</code></td></tr>
           <tr><td>ServiceTitan Export</td><td><span class="state blocked-state">auth ready no export</span></td><td><code>data/servicetitan-export-access-check.json</code></td></tr>
           <tr><td>ServiceTitan Join Probe</td><td><span class="state partial">partial join surfaces readable</span></td><td><code>data/servicetitan-attribution-join-probe.json</code></td></tr>
-          <tr><td>Site Manifest</td><td><span class="state blocked-state">passed</span></td><td><code>data/site-file-manifest.json</code></td></tr>
-          <tr><td>Public Claims</td><td><span class="state blocked-state">passed</span></td><td><code>data/public-claim-register.json</code></td></tr>
+          <tr><td>Site Manifest</td><td><span class="state complete">passed</span></td><td><code>data/site-file-manifest.json</code></td></tr>
+          <tr><td>Public Claims</td><td><span class="state complete">passed</span></td><td><code>data/public-claim-register.json</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>New Reward Edge Delivery State</h2>
+    <p>Read-only New Reward rows are compared against live HTTP checks. If these rows are healthy but live HTTP still lacks GA4, #28 remains a canonical artifact publish/sync problem.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Field</th><th>Read-only Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Canonical Website</td><td>cmorqbs9j001r5nr1h25vosp8</td></tr>
+          <tr><td>Access / Deployment</td><td>GRANTED / LIVE</td></tr>
+          <tr><td>Route Mode</td><td>ZERO_REDIRECT</td></tr>
+          <tr><td>Active Version</td><td>cmpun9s5o000j5mmurn9m3dvk</td></tr>
+          <tr><td>Active Artifact</td><td>675731b8-e9be-4e86-ae71-7f11d5d51e47; 29 artifact(s)</td></tr>
+          <tr><td>Latest Deployment</td><td>LIVE at 2026-06-01T03:23:50.02</td></tr>
+          <tr><td>Latest Verification</td><td>PASS at 2026-06-01T03:24:04.67</td></tr>
+          <tr><td>Latest Ready Package</td><td>READY Month 3: Website Visibility Package - Air Express Heating and Air Conditioning</td></tr>
+          <tr><td>Next Action</td><td>The read-only New Reward edge rows do not show an edge access/deployment blocker; because the canonical apex still lacks GA4, publish or republish the approved artifact package through the authenticated New Reward edge delivery UI and verify live HTTP afterward.</td></tr>
         </tbody>
       </table>
     </div>
@@ -143,11 +163,11 @@
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/28">#28</a></td>
             <td>open</td>
             <td><span class="state partial">partial live www only canonical pending</span></td>
-            <td>npm run verify:live-measurement writes data/live-measurement-path-check.json with status partial_live_www_only_canonical_pending; npm run verify:owned-site-delivery-sync writes data/owned-site-delivery-sync-check.json with status pending_delivery_sync; npm run verify:site-file-manifest writes data/site-file-manifest.json with status passed; docs/air-express-owned-site-delivery-sync-packet.md records P0 homepage and analytics.js delivery requirements plus local-but-not-live blog/first-hot-week-ac-checklist-utah.html; local public page coverage is 120/120; index.html and analytics.js include GA4 G-JZ7PY32EVX; www.airexpressutah.com now serves the approved GA4 source and /analytics.js HTTP 200; canonical airexpressutah.com still serves the older New Reward edge/origin path with no GA4 marker and /analytics.js HTTP 404; Turnstile config is not live/configured on the canonical path and www reports missing Turnstile env keys; intake-form.js prepares guarded generate_lead; contact.html request-estimate.html and schedule-service.html each load /analytics.js intake-form.js and data-intake-form in source</td>
-            <td>Local source restored and tests added; an approved Vercel production deploy made the updated GA4 source reachable on www; dedicated live measurement diagnostic performs public marker checks for apex and www, verifies no duplicate local measurement sources and no unapproved GTM containers, checks all three lead form paths locally, records public Turnstile config state without secrets, and stores no raw HTML; owned-site delivery sync compares local homepage analytics.js llms.txt sitemap.xml and robots.txt against live apex edge hashes/status/markers without storing raw live HTML; site-file manifest verifies required publish artifacts sitemap/local HTML coverage generated blog outputs draft exclusion and local static references; delivery sync packet generated exact stop gates and post-sync commands; repo Gmail and Outlook searches found no approved Air Express GTM container id</td>
-            <td>Canonical apex/New Reward edge sync is still required; Turnstile production env keys are missing from the active Vercel project; approved GTM container id remains unknown</td>
+            <td>npm run verify:live-measurement writes data/live-measurement-path-check.json with status partial_live_www_only_canonical_pending; npm run verify:owned-site-delivery-sync writes data/owned-site-delivery-sync-check.json with status pending_delivery_sync; npm run verify:site-file-manifest writes data/site-file-manifest.json with status passed; data/newreward-air-express-provider-readonly-recheck.json records canonical New Reward edge access GRANTED / deployment LIVE / active version cmpun9s5o000j5mmurn9m3dvk / latest deployment LIVE / latest verification PASS; docs/air-express-owned-site-delivery-sync-packet.md records P0 homepage and analytics.js delivery requirements plus local-but-not-live blog/first-hot-week-ac-checklist-utah.html; local public page coverage is 120/120; index.html and analytics.js include GA4 G-JZ7PY32EVX; www.airexpressutah.com now serves the approved GA4 source and /analytics.js HTTP 200; canonical airexpressutah.com still serves the active New Reward edge artifact with no GA4 marker and /analytics.js HTTP 404; Turnstile config is not live/configured on the canonical path and www reports missing Turnstile env keys; intake-form.js prepares guarded generate_lead; contact.html request-estimate.html and schedule-service.html each load /analytics.js intake-form.js and data-intake-form in source</td>
+            <td>Local source restored and tests added; an approved Vercel production deploy made the updated GA4 source reachable on www; dedicated live measurement diagnostic performs public marker checks for apex and www, verifies no duplicate local measurement sources and no unapproved GTM containers, checks all three lead form paths locally, records public Turnstile config state without secrets, and stores no raw HTML; owned-site delivery sync compares local homepage analytics.js llms.txt sitemap.xml and robots.txt against live apex edge hashes/status/markers without storing raw live HTML; site-file manifest verifies required publish artifacts sitemap/local HTML coverage generated blog outputs draft exclusion and local static references; delivery sync packet generated exact stop gates and post-sync commands; repo Gmail and Outlook searches found no approved Air Express GTM container id; read-only New Reward DB evidence narrows the edge blocker to active artifact publish/republish rather than missing edge access</td>
+            <td>Canonical apex/New Reward edge artifact publish or delivery sync is still required; read-only edge rows are GRANTED/LIVE/PASS but live HTTP still lacks the approved GA4 marker; Turnstile production env keys are missing from the active Vercel project; approved GTM container id remains unknown</td>
             <td>Canonical live homepage exposes exactly one approved GA4 or verified GTM source and lead forms fire one verified generate_lead event without duplicate ServiceTitan records</td>
-            <td>Sync canonical apex/New Reward edge delivery to the verified www/Vercel source or make the verified Vercel host canonical; add approved Turnstile site/secret env keys; if GTM is desired, first verify the exact GTM container id; rerun npm run prepare:delivery-sync-packet, npm run verify:site-file-manifest, npm run verify:owned-site-delivery-sync, and npm run verify:live-measurement before and after delivery</td>
+            <td>Publish/republish the approved Air Express edge artifact or sync canonical apex/New Reward edge delivery to the verified www/Vercel source; add approved Turnstile site/secret env keys; if GTM is desired, first verify the exact GTM container id; rerun npm run prepare:delivery-sync-packet, npm run verify:site-file-manifest, npm run verify:owned-site-delivery-sync, and npm run verify:live-measurement before and after delivery</td>
           </tr>
           <tr>
             <td><a href="https://github.com/CryptoJym/air-express-hvac/issues/29">#29</a></td>
@@ -183,7 +203,7 @@
           <tr><td>#25</td><td>4 / 4</td><td>0</td><td></td></tr>
           <tr><td>#26</td><td>1 / 4</td><td>3</td><td>New Reward SEO workspace route must be rechecked with the james@jamesbrady.org app session and must open without Client not found.</td></tr>
           <tr><td>#27</td><td>1 / 5</td><td>4</td><td>No scoped GSC read token or connected provider/property visibility proof</td></tr>
-          <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Canonical apex/New Reward edge sync or canonical routing repair is required</td></tr>
+          <tr><td>#28</td><td>1 / 4</td><td>3</td><td>Canonical apex/New Reward edge artifact publish/republish or canonical routing repair is required; edge access itself is not the current blocker</td></tr>
           <tr><td>#29</td><td>1 / 5</td><td>4</td><td>No scoped local GSC read token or normalized query/page/device history; saved GSC snapshots are aggregate totals only</td></tr>
           <tr><td>#30</td><td>2 / 4</td><td>2</td><td>Live lead-system health is still blocked by missing Turnstile config and split canonical/www delivery</td></tr>
         </tbody>
@@ -219,7 +239,7 @@
           </tr>
           <tr>
             <td>Air Express paid package hardening</td>
-            <td><span class="state blocked-state">merged live</span></td>
+            <td><span class="state complete">merged live</span></td>
             <td>PR #2880 merged at 0bc7bc3d8b5a5a353f978541fec1ba67da4deb0d with Vercel and Railway production proof; no paid/no-spend campaign canary was run by Codex.</td>
             <td>Confirms a separate Air Express paid-run infrastructure repair shipped, but it does not repair GSC/GA4/GBP access or live Air Express tagging.</td>
             <td>Use as campaign-lock context only; keep #24/#26-#30 driven by their own acceptance evidence.</td>
@@ -240,7 +260,7 @@
           </tr>
           <tr>
             <td>Air Express GSC/GA4 resolver repair</td>
-            <td><span class="state blocked-state">merged live</span></td>
+            <td><span class="state complete">merged live</span></td>
             <td>PR #3834 merged at c83c2f0e859b8165fa1d191f6ed7d0d53ceda75f and production deployment reached success; post-merge Air Express configured DB recheck now returns rows_found for canonical website cmorqbs9j001r5nr1h25vosp8 with expired GSC/GA4 provider rows under newrewardplatform@gmail.com.</td>
             <td>Confirms #25 is complete and remaining Air Express blockers are expired provider rows, Google scopes/property visibility, canonical live delivery sync, and lead-path health rather than resolver code.</td>
             <td>Continue #26 through #30; do not reopen resolver work unless new evidence points back to code.</td>

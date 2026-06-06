@@ -24,6 +24,7 @@ Air Express Google attribution is not blocked because the account or assets are 
 | Local source | `index.html`, `analytics.js`, and lead-form pages include approved GA4 source `G-JZ7PY32EVX`; GA4 source was introduced in commit `6c5f02d` on 2026-04-24. | Repo source has the GA implementation. |
 | Live `www` | `https://www.airexpressutah.com/` has `G-JZ7PY32EVX`; `https://www.airexpressutah.com/analytics.js` is HTTP 200 and has the approved marker. | The Vercel/www path is serving GA correctly. |
 | Live apex | `https://airexpressutah.com/` lacks the approved GA4 marker; `https://airexpressutah.com/analytics.js` is HTTP 404; headers show New Reward edge website `cmorqbs9j001r5nr1h25vosp8`, version `v20260601032350-675731b8-57d4bf`, route mode `ZERO_REDIRECT`. | Canonical apex is stale/split from the `www` Vercel path. |
+| New Reward edge source | Read-only New Reward DB evidence shows canonical edge installation `ctgzwv38vxwunfmzp38t59hl9` for website `cmorqbs9j001r5nr1h25vosp8` is `GRANTED` / `LIVE`; active version `cmpun9s5o000j5mmurn9m3dvk` maps to edge version `v20260601032350-675731b8-57d4bf`; latest deployment is `LIVE`; latest verification is `PASS`. | This narrows #28: edge access/deployment rows are present, but the active canonical artifact still lacks the approved GA4/live `/analytics.js` behavior, so the fix is an authenticated edge artifact publish/republish or approved canonical delivery sync followed by live HTTP verification. |
 
 ## What We Can Fix On Our End
 
@@ -99,7 +100,7 @@ The most likely root cause is not that Air Express never granted access. The bet
 2. New Reward saved some aggregate GSC snapshots.
 3. The current provider credential rows are now revoked/expired.
 4. GA4 property selection was never persisted or has been lost.
-5. Canonical apex is serving an older New Reward edge artifact, while `www` serves the updated GA implementation.
+5. Canonical apex is serving a New Reward edge artifact that is marked active/live in the New Reward source but still lacks the approved GA implementation, while `www` serves the updated GA implementation.
 
 ## Not Done Here
 

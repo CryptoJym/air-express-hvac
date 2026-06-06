@@ -1,6 +1,6 @@
 # Air Express Owned-Site Delivery Sync Packet
 
-Generated: 2026-06-05T22:54:02.825Z
+Generated: 2026-06-05T23:59:59.566Z
 
 Status: prepared evidence packet. No provider mutation, DNS change, Vercel change, Cloudflare change, New Reward edge sync, ServiceTitan action, OAuth consent, public send, public post, or production deploy is performed by this packet.
 
@@ -23,6 +23,25 @@ Move the locally prepared Air Express owned-site artifacts onto the live deliver
 - WWW `/analytics.js` HTTP: `200`; approved GA4 present: `true`.
 - Apex Turnstile configured: `false`; WWW Turnstile configured: `false`.
 - Approved GTM containers found locally: `none`.
+
+## New Reward Edge Read-Only State
+
+| Field | Value |
+| --- | --- |
+| Read-only edge status | edge_rows_found_no_db_blocker |
+| Installation | ctgzwv38vxwunfmzp38t59hl9 |
+| Access / deployment | GRANTED / LIVE |
+| Route mode | ZERO_REDIRECT |
+| Active version | cmpun9s5o000j5mmurn9m3dvk |
+| Active package | 675731b8-e9be-4e86-ae71-7f11d5d51e47 |
+| Artifact count | 29 |
+| Active version latest | true |
+| Latest deployment | LIVE at 2026-06-01T03:23:50.02 |
+| Latest verification | PASS at 2026-06-01T03:24:04.67 |
+| Latest ready package | READY TECHNICAL Month 3: Website Visibility Package - Air Express Heating and Air Conditioning |
+| Latest review | OPEN for package a18eff41-5662-4dea-8fa4-f23380857e5f |
+
+Interpretation: the read-only New Reward source currently shows the canonical edge installation as `GRANTED` / `LIVE`, with active version `cmpun9s5o000j5mmurn9m3dvk`. Live HTTP remains the source of truth for #28, and the canonical apex still lacks the approved GA4 marker, so the safe fix is an authenticated New Reward edge publish/republish or another approved canonical delivery sync followed by live verification.
 
 ## Artifact Sync Matrix
 
