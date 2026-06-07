@@ -22,6 +22,10 @@ Jump to a letter: [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f)
 
 ---
 
+## What HVAC terms should Utah homeowners know first?
+
+If you only learn a few HVAC terms before a quote, start with AFUE, SEER2, heat pump, Manual J, MERV, static pressure, and tonnage. Those terms explain efficiency, sizing, filtration, airflow, and whether the proposed system fits the house. Use this glossary with Air Express service pages for [AC replacement](/ac-replacement.html), [heat pumps](/heat-pump.html), [furnace repair](/furnace-repair.html), and [ductwork](/ductwork.html).
+
 ## A
 
 ### AFUE
@@ -79,7 +83,7 @@ A movable plate inside ductwork that controls how much air flows through a parti
 A heat pump paired with a backup gas furnace, controlled by a smart thermostat that decides which one to use based on outdoor temperature. The heat pump handles mild weather efficiently. The furnace kicks in only when it's cold enough that the heat pump becomes inefficient. Best of both worlds — and our most-recommended setup for Utah Valley homes.
 
 ### Duct
-The metal or flexible tubing that carries conditioned air from your furnace/AC to the rooms in your house. "Supply ducts" deliver conditioned air. "Return ducts" pull room air back to the system. Most Utah homes have 20-40% of their conditioned air leaking out of duct seams before it ever reaches a room.
+The metal or flexible tubing that carries conditioned air from your furnace/AC to the rooms in your house. "Supply ducts" deliver conditioned air. "Return ducts" pull room air back to the system. The [Department of Energy](https://www.energy.gov/energysaver/minimizing-energy-losses-ducts) notes that poorly sealed or insulated ducts can contribute to higher energy bills, especially when ducts run through unconditioned spaces.
 
 ### Ductless Mini-Split
 A heat pump system with no ductwork. Each room (or zone) has its own indoor "head unit" mounted on a wall, all connected to a single outdoor compressor by small refrigerant lines. Common in Utah for cooling additions, finished basements, garages, or houses that were built without central AC.
@@ -154,7 +158,7 @@ The math an HVAC contractor runs to figure out exactly how many BTUs your house 
 ## M
 
 ### MERV
-**Minimum Efficiency Reporting Value.** The rating system for air filters. Higher MERV = catches smaller particles. MERV 8 is the cheap default, catches dust and pollen. MERV 11 catches mold spores and finer dust. MERV 13 catches viruses and most fine particulates. Most modern Utah furnaces handle MERV 11 or 13 just fine despite what older websites claim.
+**Minimum Efficiency Reporting Value.** The rating system for air filters. Higher MERV = catches smaller particles. MERV 8 is a common baseline for dust and pollen. MERV 11 catches finer dust and many smaller particles. MERV 13 can help with smoke and fine particulate filtration when the system can handle the airflow. Do not install a restrictive filter blindly; check equipment requirements and static pressure.
 
 ### Manual J / Manual D / Manual S
 The three calculations a real HVAC contractor uses. **Manual J** sizes the equipment by load. **Manual D** sizes the ductwork. **Manual S** selects the specific equipment. Together they're the only way to install a system that actually works as intended.
@@ -253,3 +257,9 @@ Want to read more before you call? Try:
 - **[HVAC Buying Guide for Utah](/blog/hvac-buying-guide.html)** — what to actually look for in a quote
 - **[What HVAC Costs in Utah](/blog/hvac-cost-guide.html)** — real 2026 price ranges
 - **[Heat Pump vs. Furnace](/blog/heat-pump-vs-furnace-utah.html)** — the honest comparison
+
+Official references worth keeping handy:
+
+- [Department of Energy: Air-Source Heat Pumps](https://www.energy.gov/energysaver/air-source-heat-pumps)
+- [Department of Energy: Minimizing Energy Losses in Ducts](https://www.energy.gov/energysaver/minimizing-energy-losses-ducts)
+- [CPSC: Carbon Monoxide Alarms](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/CO-Alarms)

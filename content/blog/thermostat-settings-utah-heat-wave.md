@@ -20,6 +20,10 @@ Someone sets it lower because the living room feels warm. Someone else raises it
 
 The thermostat matters, but it is not magic. It can help a healthy system run smarter. It cannot overcome a clogged filter, weak blower, dirty outdoor coil, leaking ductwork, or a system that is undersized for the home.
 
+## What thermostat setting helps most during a Utah heat wave?
+
+The best heat-wave setting is the highest comfortable cooling setpoint your home can hold steadily. The [Department of Energy thermostat guidance](https://www.energy.gov/energysaver/articles/thermostats) recommends using warmer away settings for cooling season and warns that setting the AC colder than normal will not cool the home faster. In Utah, pair the schedule with filter, airflow, and afternoon heat-gain checks.
+
 ## Use smaller schedule changes on extreme days
 
 Away setbacks are useful, but on the hottest days a large setback can push the recovery period into the worst part of the afternoon.
@@ -67,4 +71,5 @@ The best heat-wave setting is the one your home can realistically maintain. Star
 Official references worth keeping handy:
 
 - [ENERGY STAR: Smart Thermostats](https://www.energystar.gov/products/smart_thermostats)
+- [Department of Energy: Programmable Thermostats](https://www.energy.gov/energysaver/articles/thermostats)
 - [Department of Energy: Fans for Cooling](https://www.energy.gov/energysaver/fans-cooling)
