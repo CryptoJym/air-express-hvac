@@ -11,7 +11,7 @@ tags:
   - wildfire smoke
   - filtration
   - Utah County
-draft: true
+draft: false
 ---
 
 Smoke days are frustrating because the advice sounds simple - stay inside - but a house is not perfectly sealed. Outdoor air still gets in through doors, bath fans, dryer vents, return leaks, gaps, and normal infiltration.

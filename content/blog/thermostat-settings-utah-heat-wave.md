@@ -11,7 +11,7 @@ tags:
   - energy efficiency
   - heat wave
   - AC maintenance
-draft: true
+draft: false
 ---
 
 During a Utah heat wave, the thermostat becomes the most argued-over device in the house.

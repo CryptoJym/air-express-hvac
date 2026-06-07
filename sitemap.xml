@@ -675,6 +675,18 @@
 
   <!-- BLOG_POSTS_START -->
   <url>
+    <loc>https://airexpressutah.com/blog/thermostat-settings-utah-heat-wave.html</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airexpressutah.com/blog/wildfire-smoke-hvac-filter-utah.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://airexpressutah.com/blog/first-hot-week-ac-checklist-utah.html</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
