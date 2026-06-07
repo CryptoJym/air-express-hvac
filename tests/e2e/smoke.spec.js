@@ -22,7 +22,7 @@ const legacyRedirectChecks = [
 ];
 
 for (const pageDef of priorityPages) {
-  test(`page shell renders for ${pageDef.path}`, async ({ page }) => {
+  test(`page shell renders for ${pageDef.path}`, async ({ page, isMobile }) => {
     const errors = [];
     const baseOrigin = 'http://127.0.0.1:4173';
 
@@ -36,7 +36,12 @@ for (const pageDef of priorityPages) {
     page.on('console', (msg) => {
       if (msg.type() === 'error') {
         const text = msg.text();
-        if (text !== 'Failed to load resource: the server responded with a status of 403 ()') {
+        const expectedStaticServerNoise =
+          text === 'Failed to load resource: the server responded with a status of 403 ()' ||
+          (text === 'Failed to load resource: the server responded with a status of 404 (Not Found)' &&
+            ['/contact.html', '/request-estimate.html', '/schedule-service.html'].includes(pageDef.path)) ||
+          (text.includes('[intake] Turnstile initialization failed') && text.includes('HTTP 404'));
+        if (!expectedStaticServerNoise) {
           errors.push(`console:${text}`);
         }
       }
@@ -51,7 +56,12 @@ for (const pageDef of priorityPages) {
     // cards (HTML5 allows this), so we use the body > header selector for the
     // top-level site banner instead of asserting a global count of 1.
     await expect(page.locator('body > header').first()).toBeVisible();
-    await expect(page.locator('body > header nav').first()).toBeVisible();
+    if (isMobile) {
+      await expect(page.locator('.nav-toggle')).toBeVisible();
+      await expect(page.locator('body > header nav').first()).toBeHidden();
+    } else {
+      await expect(page.locator('body > header nav').first()).toBeVisible();
+    }
 
     // Filter out errors that aren't actionable in the local serve environment.
     // For example, the local server doesn't apply vercel.json headers, so
@@ -143,12 +153,16 @@ test('core conversion CTAs are reachable and forms expose required fields', asyn
 });
 
 test('homepage keeps the canonical phone number without loading swap scripts', async ({ page }) => {
-  const thirdPartyRequests = [];
+  const gtagRequests = [];
+  const swapScriptRequests = [];
 
   page.on('request', (request) => {
     const url = request.url();
-    if (url.includes('googletagmanager.com') || url.includes('ksrndkehqnwntyxlhgto.com')) {
-      thirdPartyRequests.push(url);
+    if (url.includes('googletagmanager.com')) {
+      gtagRequests.push(url);
+    }
+    if (url.includes('ksrndkehqnwntyxlhgto.com')) {
+      swapScriptRequests.push(url);
     }
   });
 
@@ -164,13 +178,15 @@ test('homepage keeps the canonical phone number without loading swap scripts', a
   // The hero "Call Now" CTA was intentionally removed in the editorial
   // refactor, so the homepage now has just one phone link (in the header).
   // Verify the canonical phone number is still correct everywhere it appears
-  // and that no GTM/swap-script tries to mutate it.
+  // and that no call-swap script tries to mutate it. The approved GA4 tag
+  // should load on the homepage so attribution can keep working.
   expect(phoneLinks.length).toBeGreaterThanOrEqual(1);
   for (const link of phoneLinks) {
     expect(link.href).toBe('tel:+18017668585');
     expect(link.text).toContain('(801) 766-8585');
   }
-  expect(thirdPartyRequests).toEqual([]);
+  expect(gtagRequests.some((url) => url.includes('G-JZ7PY32EVX'))).toBe(true);
+  expect(swapScriptRequests).toEqual([]);
 });
 
 test('legacy live routes redirect to launch-candidate pages', async ({ page }) => {
@@ -185,7 +201,7 @@ test('blog index renders cards from the markdown content directory', async ({ pa
   await page.goto('/resources.html');
   // Editorial hero should be present
   await expect(page.locator('.blog-index-hero h1')).toBeVisible();
-  // Card grid should have at least one post (we have 10 at the time of writing)
+  // Card grid should have at least one post.
   const cards = page.locator('.blog-card');
   expect(await cards.count()).toBeGreaterThanOrEqual(5);
   // First card should link to /blog/<slug>.html
@@ -195,9 +211,9 @@ test('blog index renders cards from the markdown content directory', async ({ pa
 
 test('individual blog posts render with hero, body, and CTA', async ({ page }) => {
   const samplePosts = [
-    '/blog/fall-furnace-prep.html',
-    '/blog/hvac-glossary.html',
+    '/blog/spring-ac-prep.html',
     '/blog/hvac-cost-guide.html',
+    '/blog/indoor-air-quality-utah.html',
   ];
   for (const slug of samplePosts) {
     await page.goto(slug);
