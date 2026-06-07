@@ -19,7 +19,7 @@ We get this question every week now, and the answer is more complicated than eit
 
 The utility rebate programs and the federal tax credits want you to believe heat pumps are the obvious future. The HVAC contractors who've been installing gas furnaces for 30 years want you to believe heat pumps are overhyped. Neither is giving you the whole picture.
 
-We install both. We have opinions. Here's what actually matters for a Utah homeowner trying to figure out which one belongs in their house.
+We install both. Air Express works on [heat pumps](/heat-pump.html), [furnaces](/furnace.html), [AC replacement](/ac-replacement.html), and [heating replacement](/heating-replacement.html), so the right recommendation depends on the house, utility setup, ducts, comfort goals, and current incentive proof.
 
 ## The quick version (for people who just want the answer)
 
@@ -45,9 +45,9 @@ We install both. We have opinions. Here's what actually matters for a Utah homeo
 
 For most of our Lehi customers, dual-fuel is the answer. But let's break down why.
 
-## How a heat pump actually works (the short version)
+## How does a heat pump actually work?
 
-An air-source heat pump is just an air conditioner that can run backwards. In summer, it pulls heat out of your house and dumps it outside — same as a regular AC. In winter, it does the opposite: it pulls heat OUT of the cold outdoor air and brings it INSIDE.
+An air-source heat pump is just an air conditioner that can run backwards. In summer, it pulls heat out of your house and dumps it outside — same as a regular AC. In winter, it does the opposite: it pulls heat OUT of the cold outdoor air and brings it INSIDE. The [Department of Energy](https://www.energy.gov/energysaver/air-source-heat-pumps) explains the same core principle: heat pumps transfer heat instead of creating it from combustion.
 
 Yes, even cold outdoor air has heat in it, from a physics standpoint. A modern cold-climate heat pump can still extract useful heat when it's 10°F outside. Older heat pumps from 10+ years ago couldn't do this well, which is where the "heat pumps don't work in cold climates" reputation comes from. Modern ones are different machines.
 
@@ -88,11 +88,11 @@ Before rebates, the heat pump is more expensive than either a furnace OR an AC b
 
 Suddenly heat pumps look much more reasonable. This is why the single most common good-case for a heat pump in Utah is: your AC is dying AND your furnace is getting old.
 
-## The rebates matter more than most people realize
+## Do heat pump rebates matter in Utah?
 
-The federal Inflation Reduction Act includes a 30% tax credit on qualified heat pump installations, capped at $2,000 for most systems. Utah's state and utility rebates stack on top: Dominion Energy offers rebates for dual-fuel systems, Rocky Mountain Power offers rebates for heat pumps, and the state periodically adds more on top of that.
+Rebates and tax credits can materially change the decision, but they must be checked at quote time. The federal home energy upgrade guidance lists heat-pump tax credits and rebate programs, and utility incentives can change by territory, equipment, income eligibility, and install date.
 
-Between all of them, a well-qualified Utah customer can knock $3,000-5,000 off the cost of a heat pump install. That's the difference between "same price as a furnace" and "actually cheaper than a furnace." We walk customers through the current available rebates on every heat pump quote because they change every year and they materially affect the decision.
+We walk customers through current available incentives on every heat-pump quote because they change and they materially affect the decision. Do not count an incentive until the equipment, installer, and eligibility are verified.
 
 ## Cold-climate performance: the thing people worry about
 
@@ -126,3 +126,9 @@ Heat pumps in Utah are legitimately good technology now. They're not a scam and 
 - How long you're staying in the house (matters for payback)
 
 If you want us to come look at what you have and run the actual numbers for your specific house, that's a free visit. We'll tell you what we'd install if it were our own house — same answer we give our own families. Sometimes it's a heat pump. Sometimes it's a furnace. Usually it's a dual-fuel system. Always it's the system that actually makes sense.
+
+Official references worth keeping handy:
+
+- [Department of Energy: Air-Source Heat Pumps](https://www.energy.gov/energysaver/air-source-heat-pumps)
+- [Department of Energy: Heat Pump Systems](https://www.energy.gov/energysaver/heat-pump-systems)
+- [Department of Energy: Home Upgrades](https://www.energy.gov/save/home-upgrades)

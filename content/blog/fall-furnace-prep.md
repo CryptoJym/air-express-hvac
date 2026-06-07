@@ -23,7 +23,11 @@ We've been doing this in Lehi since 1996. We know the rhythm. And we know that a
 
 This is the checklist we actually walk through on a fall tune-up. Not the marketing version with twelve bullet points. The real one — the things that, if you do them in September, will keep your furnace from becoming a crisis in January.
 
-## Swap the filter. For real, not "eventually."
+## What should Utah homeowners check before furnace season?
+
+Before the first cold week, change the filter, test heat mode for a short cycle, check that furnace vents are clear, test carbon monoxide alarms, and make sure supply and return grilles are not blocked. If anything smells unsafe, sounds wrong, or does not heat normally, schedule [furnace maintenance](/furnace-maintenance.html) or [heating repair](/heating-repair.html) before the system becomes urgent.
+
+## What should you check first before furnace season?
 
 The filter is the single thing everyone knows about and almost nobody does on time. Here's what we see when we pull the front panel in October: a filter that should have been changed in June, crusted with dust and pet hair, pulled into a concave dish from being sucked on all summer.
 
@@ -62,7 +66,7 @@ Just walk around your house, find the white PVC pipe coming out of the wall (it'
 
 ## Test your carbon monoxide detector.
 
-Speaking of carbon monoxide: if you don't have a CO detector on every level of your house, stop reading this and go buy some. They're thirty bucks at any hardware store and they will literally save your family's life.
+Speaking of carbon monoxide: if you don't have a CO detector on every level of your house, stop reading this and go buy some. The [U.S. Consumer Product Safety Commission](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/CO-Alarms) recommends CO alarms on each level of the home and outside sleeping areas.
 
 If you already have them, press the test button on each one. If the beep is weak or it doesn't respond at all, replace the batteries or replace the whole unit if it's more than seven years old.
 
@@ -88,11 +92,11 @@ Also know where your main gas shutoff is. It's usually near the gas meter on the
 
 We're not going to pressure you to replace a working furnace. If it's running, it's running.
 
-But here's what we see: furnaces in Utah have a realistic lifespan of 15–20 years. Around year 15, we start seeing the signs — small parts starting to fail, efficiency dropping, repair costs creeping up. By year 20, most systems are running at 60% of their rated efficiency, and you're paying the difference on every utility bill.
+But here's what we see: older furnaces often start needing more parts, more diagnostic time, and more comfort tradeoffs. Around year 15, it is worth comparing repair history, safety condition, comfort, and efficiency before you are forced into a January decision.
 
-If yours is in that zone, the time to plan for replacement is in September or October, when technicians are booked but not slammed, prices haven't spiked, and you can actually shop around. The worst possible time to replace a furnace is the middle of January, when it just failed, it's 12 degrees outside, and you'll take whatever's available.
+If yours is in that zone, the time to plan for replacement is in September or October, when technicians are booked but not slammed and you can actually shop around. The worst possible time to replace a furnace is the middle of January, when it just failed, it's 12 degrees outside, and you'll take whatever's available.
 
-Get a few estimates. Ask what brands the technicians actually install in their own homes. Ask about rebates — Utah has decent ones for high-efficiency systems, and most installers know which ones you qualify for.
+Get a few estimates. Ask what brands the technicians actually install in their own homes. Ask whether current rebates or tax credits apply, and make sure any incentive is verified before you count it in the budget. Air Express can help with [furnace repair](/furnace-repair.html), [heating maintenance](/heating-maintenance.html), and [heating replacement](/heating-replacement.html) planning.
 
 ## The short version
 
@@ -103,8 +107,13 @@ If you do nothing else this fall, do these four things:
 3. **Walk around outside and look at the flue vent.**
 4. **Test your CO detectors.**
 
-That's it. Twenty minutes of your time. It prevents probably 80% of the calls we get in October and November.
+That's it. Twenty minutes of your time. It prevents many of the avoidable calls we get in October and November.
 
 And if something feels off when you run it, call us. We'd rather come out on a warm day and catch a dying igniter before it leaves you in the cold than show up at midnight with a frozen house and a kid in a sleeping bag on the couch.
 
 We've done both. The warm-day version is a lot nicer for everyone.
+
+Official references worth keeping handy:
+
+- [CPSC: Carbon Monoxide Alarms](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center/CO-Alarms)
+- [Department of Energy: Heat Distribution Systems](https://www.energy.gov/energysaver/heat-distribution-systems)

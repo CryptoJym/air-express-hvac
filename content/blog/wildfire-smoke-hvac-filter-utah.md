@@ -20,6 +20,10 @@ Your HVAC system can help, but only if the filter and fan strategy match the hou
 
 For current Utah smoke conditions, start with the [Utah Division of Air Quality wildfire resources](https://deq.utah.gov/air-quality/wildfires), [UtahAir](https://air.utah.gov/), or the [AirNow Fire and Smoke Map](https://fire.airnow.gov/). Those sources tell you when the outdoor air is bad enough that indoor-air choices matter more than usual.
 
+## What should Utah homeowners do with HVAC during wildfire smoke?
+
+During smoke or poor PM2.5 periods, keep outdoor air out as much as safely practical, filter the air your system recirculates, and use room-level filtration where people sleep. The EPA recommends a MERV 13 filter or the highest rating your HVAC system can accommodate during smoke events, but airflow and static pressure still matter.
+
 ## Use the best filter your system can handle
 
 For smoke and fine particulate days, a better pleated filter can help reduce what recirculates through the home. Many modern systems can handle MERV 11, and some can handle MERV 13, especially with a 4-inch media cabinet.
@@ -57,5 +61,6 @@ For Utah homes, the practical stack is simple: the right HVAC filter, controlled
 Official references worth keeping handy:
 
 - [Utah DEQ: Protect Yourself From Wildfire Smoke](https://deq.utah.gov/air-quality/protect-yourself-from-wildfire-smoke)
-- [EPA: Wildfires and Indoor Air Quality](https://www.epa.gov/indoor-air-quality-iaq/wildfires-and-indoor-air-quality-iaq)
-- [AirNow: Be Smoke Ready](https://www.airnow.gov/wildfires/be-smoke-ready)
+- [EPA: Wildfires and Indoor Air Quality](https://www.epa.gov/emergencies-iaq/wildfires-and-indoor-air-quality-iaq)
+- [EPA: Preparing for Smoke and Heat](https://www.epa.gov/wildfire-smoke-course/preparing-smoke-and-heat)
+- [AirNow: Indoor Air Filtration](https://www.airnow.gov/publications/wildfire-guide-factsheets/wildfire-smoke-indoor-air-filtration-factsheet/)
