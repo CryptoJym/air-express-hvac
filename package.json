@@ -20,7 +20,7 @@
     "test:analytics-tracking": "node --test tests/unit/analytics-tracking.test.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.60.0",
     "gray-matter": "^4.0.3",
     "lighthouse": "^12.2.1",
     "marked": "^18.0.0",
