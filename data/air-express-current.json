@@ -6,7 +6,7 @@
   "reportWindow": "2026-06-09 to 2026-06-15",
   "comparisonWindow": "2026-06-02 to 2026-06-08",
   "auditMode": "full_lane_disposition_post_deploy_live_verify",
-  "deliveryState": "prepared_for_review_pages_not_enabled",
+  "deliveryState": "published_live_noindex",
   "scores": {
     "baselineAverage": 67,
     "sourcePreparedAverage": 68.3,
@@ -78,7 +78,7 @@
     {
       "area": "Public reporting",
       "lastWeek": "No Pages-ready reporting layer.",
-      "thisWeek": "Sanitized GitHub Pages workbench prepared locally; Pages enablement pending."
+      "thisWeek": "Sanitized GitHub Pages workbench published; live verification completed."
     }
   ],
   "axisScores": [
@@ -140,4 +140,3 @@
     }
   ]
 }
-

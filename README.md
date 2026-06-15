@@ -11,4 +11,4 @@ Prepared Pages entrypoints:
 - `pages/air-express-weekly-impact-2026-06-15.html`
 - `data/air-express-current.json`
 
-Publication status on 2026-06-15: Pages is not enabled yet for `CryptoJym/air-express-hvac`.
+Publication status on 2026-06-15: Pages is enabled for `CryptoJym/air-express-hvac` from the `gh-pages` branch.
