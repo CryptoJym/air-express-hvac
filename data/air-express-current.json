@@ -1,0 +1,143 @@
+{
+  "client": "Air Express HVAC",
+  "domain": "airexpressutah.com",
+  "canonicalUrl": "https://airexpressutah.com",
+  "preparedAt": "2026-06-15",
+  "reportWindow": "2026-06-09 to 2026-06-15",
+  "comparisonWindow": "2026-06-02 to 2026-06-08",
+  "auditMode": "full_lane_disposition_post_deploy_live_verify",
+  "deliveryState": "prepared_for_review_pages_not_enabled",
+  "scores": {
+    "baselineAverage": 67,
+    "sourcePreparedAverage": 68.3,
+    "postDeployAverage": 70,
+    "nextTargetAverage": 78,
+    "technical": 100,
+    "geo": 100,
+    "aeo": 99.8
+  },
+  "crawl": {
+    "crawledPages": 124,
+    "pageIssues": 0,
+    "artifactDriftRows": 6,
+    "hostNormalizationPass": false
+  },
+  "providerHighlights": [
+    {
+      "source": "GSC",
+      "status": "saved_current_provider_export_with_lag",
+      "value": "41 clicks / 7534 impressions"
+    },
+    {
+      "source": "GA4",
+      "status": "direct_gtag_verified",
+      "value": "1471 sessions / 1326 active users / 5659 events / 0 conversions"
+    },
+    {
+      "source": "Ahrefs",
+      "status": "current_export_post_deploy_recrawl_pending",
+      "value": "Health Score 87 / DR 0.4"
+    },
+    {
+      "source": "Clarity",
+      "status": "tag_and_api_verified_first_rows_pending",
+      "value": "Project x6kyvscnuu"
+    },
+    {
+      "source": "ServiceTitan",
+      "status": "saved_snapshot_fresh_refresh_env_gated",
+      "value": "83 redacted leads Jan 1-Jun 10"
+    },
+    {
+      "source": "IndexNow",
+      "status": "submitted_http_200",
+      "value": "100 URL batch plus 3 changed URLs"
+    }
+  ],
+  "weeklyComparison": [
+    {
+      "area": "Client communication",
+      "lastWeek": "Revenue-push outreach packet and Krista office send path.",
+      "thisWeek": "Client-forward impact report and email draft prepared for review."
+    },
+    {
+      "area": "SEO/GEO system",
+      "lastWeek": "No complete 12-axis Air Express packet.",
+      "thisWeek": "Full dated run packet, scorecard, evidence ledgers, and issue register."
+    },
+    {
+      "area": "Site quality",
+      "lastWeek": "Baseline issues not yet normalized into the new system.",
+      "thisWeek": "Final crawl: 124 pages, 0 page-level issues, technical 100, GEO 100, AEO 99.8."
+    },
+    {
+      "area": "Provider evidence",
+      "lastWeek": "Provider proof not consolidated.",
+      "thisWeek": "GSC/GA4, Ahrefs, Clarity, ServiceTitan, IndexNow states recorded with limits."
+    },
+    {
+      "area": "Public reporting",
+      "lastWeek": "No Pages-ready reporting layer.",
+      "thisWeek": "Sanitized GitHub Pages workbench prepared locally; Pages enablement pending."
+    }
+  ],
+  "axisScores": [
+    {"key": "access", "label": "Access and toolbelt", "score": 79, "status": "partial provider verified"},
+    {"key": "crawl", "label": "Crawl and index", "score": 85, "status": "edge gates open"},
+    {"key": "ia", "label": "IA and links", "score": 82, "status": "source strong"},
+    {"key": "demand", "label": "Demand opportunity", "score": 64, "status": "GSC watchlist ready"},
+    {"key": "content", "label": "Content proof", "score": 85, "status": "page issues cleared"},
+    {"key": "authority", "label": "Authority", "score": 35, "status": "weakest lane"},
+    {"key": "local", "label": "Local entity", "score": 62, "status": "profile readback needed"},
+    {"key": "ai", "label": "AI/GEO", "score": 73, "status": "artifact parity needed"},
+    {"key": "ux", "label": "Performance UX", "score": 76, "status": "mobile proof needed"},
+    {"key": "trust", "label": "Trust quality", "score": 86, "status": "source clean"},
+    {"key": "cro", "label": "CRO behavior", "score": 66, "status": "Clarity rows pending"},
+    {"key": "attribution", "label": "Attribution", "score": 62, "status": "lead proof pending"}
+  ],
+  "actions": [
+    {
+      "priority": 1,
+      "title": "Fix managed edge schema and host normalization",
+      "state": "approval_gated",
+      "impact": "Removes canonical ambiguity and stale schema claims.",
+      "proof": "Canonical HTML and host-normalization audit pass."
+    },
+    {
+      "priority": 2,
+      "title": "Trigger/export Ahrefs post-deploy recrawl",
+      "state": "provider_ui_gated",
+      "impact": "Creates third-party crawl delta after the deployment.",
+      "proof": "Completed Ahrefs crawl export after June 15 deployment."
+    },
+    {
+      "priority": 3,
+      "title": "Decide direct GA4 versus GTM",
+      "state": "decision_needed",
+      "impact": "Removes tracking ambiguity and prevents duplicate firing.",
+      "proof": "Measurement owner recorded with event/key-event readback."
+    },
+    {
+      "priority": 4,
+      "title": "Refresh ServiceTitan lead snapshots",
+      "state": "env_gated",
+      "impact": "Lets reporting connect visibility work to lead snapshots.",
+      "proof": "Redacted lead date/status/source snapshot through current week."
+    },
+    {
+      "priority": 5,
+      "title": "Capture Clarity first usable behavior rows",
+      "state": "ingestion_pending",
+      "impact": "Turns live tracking into CRO decisions.",
+      "proof": "URL/source/session rows show real sessions."
+    },
+    {
+      "priority": 6,
+      "title": "Capture local profile readbacks",
+      "state": "access_gated",
+      "impact": "Validates GBP/Bing/Apple local entity state before edits.",
+      "proof": "Profile categories, services, NAP, reviews, and ownership state recorded."
+    }
+  ]
+}
+

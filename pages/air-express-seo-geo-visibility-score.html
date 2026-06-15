@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Express SEO/GEO Visibility Score</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="../analytics.js" defer></script>
+  <link rel="stylesheet" href="../assets/air-express-report.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="mark">AE</span><span>Air Express Visibility Score</span></div>
+      <nav class="nav">
+        <a href="../index.html">Workspace Home</a>
+        <a href="air-express-weekly-impact-2026-06-15.html">Weekly Impact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="brief">
+        <p class="eyebrow">12-axis visibility workbench</p>
+        <h1>Air Express SEO/GEO visibility score</h1>
+        <p class="lede">Reviewer-first view of the spider graph, provider proof limits, action items, and current gates. This is prepared for GitHub Pages but not published until review.</p>
+        <div class="status-row">
+          <span class="pill good">deploy verified</span>
+          <span class="pill good">IndexNow submitted</span>
+          <span class="pill warn">Ahrefs recrawl pending</span>
+          <span class="pill blocked">edge schema blocked</span>
+        </div>
+      </div>
+      <aside class="panel scorebox">
+        <span class="score" id="postDeployScore">70</span>
+        <span class="score-label">post-deploy conservative score</span>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <article class="metric span-4">
+        <span class="value" id="crawlPages">124</span>
+        <span class="label">crawled pages</span>
+      </article>
+      <article class="metric span-4">
+        <span class="value" id="pageIssues">0</span>
+        <span class="label">page-level issues</span>
+      </article>
+      <article class="metric span-4">
+        <span class="value" id="nextTarget">78</span>
+        <span class="label">next target score</span>
+      </article>
+
+      <article class="panel span-12">
+        <h2>Spider Graph</h2>
+        <div class="radar-wrap">
+          <svg id="radar" viewBox="0 0 420 420" role="img" aria-label="12-axis Air Express visibility score radar chart"></svg>
+          <div class="axis-list" id="axisList"></div>
+        </div>
+      </article>
+
+      <article class="panel span-6">
+        <h2>Proof Ledger</h2>
+        <table id="providerTable">
+          <thead>
+            <tr><th>Source</th><th>Status</th><th>Current value</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+
+      <article class="panel span-6">
+        <h2>Current Gates</h2>
+        <div class="timeline" id="actionList"></div>
+      </article>
+
+      <article class="panel span-12">
+        <h2>Score Interpretation</h2>
+        <p>The static site and page-level SEO/GEO improvements are live, but the score stays conservative because the canonical domain still has managed-edge schema drift, host normalization remains edge-owned, Ahrefs has not completed a post-deploy recrawl, and lead/key-event proof is still open.</p>
+        <div class="callout">Do not treat this as a ranking or revenue lift claim yet. This is a verified operating-position report with provider lag and open proof gates visible.</div>
+      </article>
+    </section>
+
+    <p class="footer">Prepared 2026-06-15 from sanitized report data. Raw provider exports and lead evidence are excluded from this public layer.</p>
+  </main>
+
+  <script>
+    const reportData = {
+      "scores": {"postDeployAverage":70,"nextTargetAverage":78},
+      "crawl": {"crawledPages":124,"pageIssues":0},
+      "axisScores": [
+        {"key":"access","label":"Access and toolbelt","score":79,"status":"partial provider verified"},
+        {"key":"crawl","label":"Crawl and index","score":85,"status":"edge gates open"},
+        {"key":"ia","label":"IA and links","score":82,"status":"source strong"},
+        {"key":"demand","label":"Demand opportunity","score":64,"status":"GSC watchlist ready"},
+        {"key":"content","label":"Content proof","score":85,"status":"page issues cleared"},
+        {"key":"authority","label":"Authority","score":35,"status":"weakest lane"},
+        {"key":"local","label":"Local entity","score":62,"status":"profile readback needed"},
+        {"key":"ai","label":"AI/GEO","score":73,"status":"artifact parity needed"},
+        {"key":"ux","label":"Performance UX","score":76,"status":"mobile proof needed"},
+        {"key":"trust","label":"Trust quality","score":86,"status":"source clean"},
+        {"key":"cro","label":"CRO behavior","score":66,"status":"Clarity rows pending"},
+        {"key":"attribution","label":"Attribution","score":62,"status":"lead proof pending"}
+      ],
+      "providerHighlights": [
+        {"source":"GSC","status":"saved current export","value":"41 clicks / 7534 impressions"},
+        {"source":"GA4","status":"direct gtag verified","value":"1471 sessions / 5659 events / 0 conversions"},
+        {"source":"Ahrefs","status":"recrawl pending","value":"Health Score 87 / DR 0.4"},
+        {"source":"Clarity","status":"first rows pending","value":"Tag and API verified"},
+        {"source":"ServiceTitan","status":"fresh refresh env gated","value":"83 saved redacted leads"},
+        {"source":"IndexNow","status":"submitted","value":"HTTP 200"}
+      ],
+      "actions": [
+        {"priority":1,"title":"Fix managed edge schema and host normalization","state":"approval_gated","impact":"Removes canonical ambiguity and stale schema claims.","proof":"Canonical HTML and host-normalization audit pass."},
+        {"priority":2,"title":"Trigger/export Ahrefs post-deploy recrawl","state":"provider_ui_gated","impact":"Creates third-party crawl delta after deployment.","proof":"Completed Ahrefs crawl export after June 15 deployment."},
+        {"priority":3,"title":"Decide direct GA4 versus GTM","state":"decision_needed","impact":"Removes tracking ambiguity and prevents duplicate firing.","proof":"Measurement owner recorded with event/key-event readback."},
+        {"priority":4,"title":"Refresh ServiceTitan lead snapshots","state":"env_gated","impact":"Connects visibility work to lead snapshots.","proof":"Redacted lead date/status/source snapshot through current week."}
+      ]
+    };
+
+    function point(cx, cy, radius, index, total) {
+      const angle = -Math.PI / 2 + (Math.PI * 2 * index) / total;
+      return [cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius];
+    }
+
+    function renderRadar(data) {
+      const svg = document.getElementById("radar");
+      const axes = data.axisScores;
+      const cx = 210;
+      const cy = 210;
+      const maxR = 150;
+      svg.innerHTML = "";
+
+      [0.25, 0.5, 0.75, 1].forEach((step) => {
+        const pts = axes.map((_, i) => point(cx, cy, maxR * step, i, axes.length).join(",")).join(" ");
+        const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        polygon.setAttribute("points", pts);
+        polygon.setAttribute("fill", "none");
+        polygon.setAttribute("stroke", step === 1 ? "#9fb0c1" : "#d9e1ea");
+        polygon.setAttribute("stroke-width", step === 1 ? "1.4" : "1");
+        svg.appendChild(polygon);
+      });
+
+      axes.forEach((axis, i) => {
+        const [x, y] = point(cx, cy, maxR, i, axes.length);
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", cx);
+        line.setAttribute("y1", cy);
+        line.setAttribute("x2", x);
+        line.setAttribute("y2", y);
+        line.setAttribute("stroke", "#d9e1ea");
+        svg.appendChild(line);
+
+        const [tx, ty] = point(cx, cy, maxR + 28, i, axes.length);
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.textContent = axis.key.toUpperCase();
+        text.setAttribute("x", tx);
+        text.setAttribute("y", ty);
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("font-size", "10");
+        text.setAttribute("fill", "#596879");
+        svg.appendChild(text);
+      });
+
+      const scorePts = axes.map((axis, i) => point(cx, cy, maxR * (axis.score / 100), i, axes.length).join(",")).join(" ");
+      const shape = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      shape.setAttribute("points", scorePts);
+      shape.setAttribute("fill", "rgba(15, 123, 134, 0.24)");
+      shape.setAttribute("stroke", "#0f7b86");
+      shape.setAttribute("stroke-width", "3");
+      svg.appendChild(shape);
+
+      axes.forEach((axis, i) => {
+        const [x, y] = point(cx, cy, maxR * (axis.score / 100), i, axes.length);
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("cx", x);
+        dot.setAttribute("cy", y);
+        dot.setAttribute("r", "4");
+        dot.setAttribute("fill", "#c84e2f");
+        svg.appendChild(dot);
+      });
+    }
+
+    function renderPage(data) {
+      document.getElementById("postDeployScore").textContent = data.scores.postDeployAverage;
+      document.getElementById("nextTarget").textContent = data.scores.nextTargetAverage;
+      document.getElementById("crawlPages").textContent = data.crawl.crawledPages;
+      document.getElementById("pageIssues").textContent = data.crawl.pageIssues;
+      renderRadar(data);
+
+      document.getElementById("axisList").innerHTML = data.axisScores.map((axis) => `
+        <div class="axis-row">
+          <div>
+            <strong>${axis.label}</strong>
+            <div class="bar" style="--score-width:${axis.score}%"><span></span></div>
+            <div class="meta">${axis.status}</div>
+          </div>
+          <strong>${axis.score}</strong>
+        </div>
+      `).join("");
+
+      document.querySelector("#providerTable tbody").innerHTML = data.providerHighlights.map((row) => `
+        <tr><td>${row.source}</td><td>${row.status}</td><td>${row.value}</td></tr>
+      `).join("");
+
+      document.getElementById("actionList").innerHTML = data.actions.map((action) => `
+        <div class="timeline-item">
+          <h3>${action.priority}. ${action.title}</h3>
+          <p class="meta">${action.state}</p>
+          <p>${action.impact}</p>
+          <p><strong>Proof:</strong> ${action.proof}</p>
+        </div>
+      `).join("");
+    }
+
+    renderPage(reportData);
+  </script>
+</body>
+</html>
