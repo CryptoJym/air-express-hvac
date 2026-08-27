@@ -14,6 +14,12 @@ Both handlers are implemented as root `/api` Vercel Edge functions
 To enable `/admin/` for real content editors, you need to do three
 one-time things.
 
+During the Air Express ownership handoff, transfer the existing
+`Air Express HVAC CMS` OAuth app to the `AIREXPRESS96` GitHub account.
+The new owner must accept GitHub's pending transfer. Do not share the
+client secret or create a replacement app unless the owner plans a
+credential rotation.
+
 ## 1. Create a GitHub OAuth App
 
 1. Go to https://github.com/settings/developers → **OAuth Apps** →
@@ -55,16 +61,22 @@ In the Vercel dashboard:
    want them active on an existing deploy without redeploying, use
    **Redeploy** from the Deployments tab.
 
-## 3. Grant yourself access to the repo
+## 3. Grant editor access and keep owner control
 
 Decap CMS uses the logged-in GitHub user's own permissions. The
 `repo` OAuth scope gives the token read/write access to whatever repos
 the authenticated user can already touch. So:
 
 1. Whoever will be editing content needs **write access** to
-   `CryptoJym/air-express-hvac`
+   `AIREXPRESS96/air-express-hvac`
 2. Invite collaborators via **GitHub → Settings → Collaborators** on
    the repo
+
+This repository belongs to a personal GitHub account. A personal
+repository has one owner; collaborators cannot receive an Admin role.
+To give another party repository-transfer authority, the
+`AIREXPRESS96` owner must either transfer the repository to that party
+or move it to an Air Express organization and grant Admin access there.
 
 ## How the flow works end-to-end
 
