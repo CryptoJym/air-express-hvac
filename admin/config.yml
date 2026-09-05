@@ -10,7 +10,7 @@
 
 backend:
   name: github
-  repo: CryptoJym/air-express-hvac
+  repo: AIREXPRESS96/air-express-hvac
   branch: main
   # Point at our own Vercel serverless OAuth proxy. The host is empty
   # on purpose so Decap uses the same origin as the /admin/ page is
